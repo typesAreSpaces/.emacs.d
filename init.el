@@ -458,13 +458,13 @@
                                         ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
   )
 
-(defun consult-grep-current-dir ()
+(defun consult-grep-from-here ()
   "Call `consult-grep' for the current buffer (a single file)."
   (interactive)
   (let ((consult-project-function (lambda (x) "./")))
     (consult-grep)))
 
-(defun consult-find-current-dir ()
+(defun consult-find-from-here ()
   "Call `consult-find' for the current buffer (a single file)."
   (interactive)
   (let ((consult-project-function (lambda (x) "./")))
