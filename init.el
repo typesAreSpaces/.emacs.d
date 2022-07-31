@@ -57,7 +57,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
-; NOTE: init.el is now generated from Emacs.org.  Please edit that file
+; NOTE: init.el is now generated from config.org.  Please edit that file
                                         ;       in Emacs and init.el will be generated automatically!
 
                                         ; You will most likely need to adjust this font size for your system!
@@ -193,7 +193,7 @@
     "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
     "f" '(:ignore t :which-key "edit (f)iles")
     "fa" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))) :which-key "(a)genda")
-    "fe" '((lambda () (interactive) (find-file (expand-file-name "Emacs.org" user-emacs-directory))) :which-key "(e)macs source")
+    "fe" '((lambda () (interactive) (find-file (expand-file-name "config.org" user-emacs-directory))) :which-key "(e)macs source")
     "fw" '((lambda () (interactive) (find-file (expand-file-name (concat seminar-dir "/Reports/finding_certificates_qm_univariate/main.tex")))) :which-key "Current (w)ork")
     "fr" '(:ignore t :which-key "Edit (r)eferences")
     "frp" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))) :which-key "Edit (p)hD references")
@@ -747,7 +747,7 @@
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
-; Automatically tangle our Emacs.org config file when we save it
+; Automatically tangle our config.org config file when we save it
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
                       (expand-file-name user-emacs-directory))
