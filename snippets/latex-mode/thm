@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Theorem Environment
+# key: ;thm
+# condition: 'auto
+# --
+\begin{theorem}
+	$0
+\end{theorem}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: gloss
+# key: ;gloss
+# condition: 'auto
+# --
+`(yasnippet/aux_add_cmd "idxdb.tex" "/home/jose/.local/scripts/add-glossary -p " " -e \'newglossaryentry\{" "\\glsadd\{" (car kill-ring))`

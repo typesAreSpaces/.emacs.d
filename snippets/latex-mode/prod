@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Product
+# key: ;prod
+# condition: 'auto
+# --
+\\prod_{$1}^{$2}{$3}$0

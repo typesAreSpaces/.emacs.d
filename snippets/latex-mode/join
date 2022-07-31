@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Join
+# key: ;join
+# condition: 'auto
+# --
+$1 \\downarrow_{$3} $2 $0

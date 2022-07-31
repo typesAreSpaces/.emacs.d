@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Basic template
+# key: ;template
+# condition: 'auto
+# --
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb}
+
+\title{$1}
+\author{$2}
+\date{${3:\today}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+$4
+\end{abstract}
+
+$0
+
+\end{document}

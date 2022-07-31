@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Combination (n choose k)
+# key: ;comb
+# condition: 'auto
+# --
+{$1 \\choose $2}$0

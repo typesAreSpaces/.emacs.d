@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Squared Parenthesis
+# key: ;[
+# condition: 'auto
+# --
+\\left[$1\\right]$0

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Definition Environment
+# key: ;def
+# condition: 'auto
+# --
+\begin{definition}
+	$0
+\end{definition}

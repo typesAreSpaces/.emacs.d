@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Field
+# key: ;field
+# condition: 'auto
+# --
+\\mathscr{$1}$0

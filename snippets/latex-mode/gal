@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Gal
+# key: ;gal
+# condition: 'auto
+# --
+\\Gal($1)$0

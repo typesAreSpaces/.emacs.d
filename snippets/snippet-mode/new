@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: New snippet
+# key: ;new
+# condition: 'auto
+# --
+# -*- mode: snippet -*-
+# name: $1
+# key: $2
+# condition: 'auto
+# --
+$0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: QUESTION label
+# key: ;question
+# condition: 'auto
+# --
+{{\color{green}[QUESTION]} \footnote{{\color{green}QUESTION:} $1}.} $0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: KEEP label
+# key: ;keep
+# condition: 'auto
+# --
+{{\color{green}[KEEP]} \footnote{{\color{green}KEEP:} Working Here.}.} $0

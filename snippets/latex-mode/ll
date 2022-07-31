@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Less than or Equal to
+# key: ;<=
+# condition: 'auto
+# --
+\\leq $0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Overarrow
+# key: ;oar
+# condition: 'auto
+# --
+\\overrightarrow{$1}$0

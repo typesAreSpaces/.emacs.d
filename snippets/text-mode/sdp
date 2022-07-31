@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: SDP entry for sparse matrix
+# key: ;sdp
+# condition: 'auto
+# --
+* ${1:TITLE}
+$2 = mDIM
+$3 = nBLOCK
+$4 = bLOCKsTRUCT
+$5
+$0

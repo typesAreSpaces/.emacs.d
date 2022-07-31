@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Emacs code block
+# key: ;block
+# --
+
+#+begin_src ${1:emacs-lisp} ${2::tangle $3}
+
+$0
+
+#+end_src

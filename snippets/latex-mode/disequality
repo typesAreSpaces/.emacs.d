@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Disequality
+# key: ;!
+# condition: 'auto
+# --
+\\neq$0

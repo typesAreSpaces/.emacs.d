@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Subseteq
+# key: ;subss
+# condition: 'auto
+# --
+\\subset $0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Automorphism
+# key: ;aut
+# condition: 'auto
+# --
+\\Aut_{$1}{$2}$0

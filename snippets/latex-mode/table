@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: table
+# key: ;table
+# condition: 'auto
+# --
+\begin{table}[${1:htpb}]
+	\centering
+	\caption{${2:caption}}
+	\label{tab:${3:label}}
+	\begin{tabular}{${5:c}}
+	$0${5:$(yasnippet/repeat (- (yasnippet/count-delims-table (string-to-list yas-text) 0) 1) " &")}
+	\end{tabular}
+\end{table}

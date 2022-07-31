@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Corollary Environment
+# key: ;cor
+# condition: 'auto
+# --
+\begin{corollary}
+	$0
+\end{corollary}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Empty Set
+# key: ;emptys
+# condition: 'auto
+# --
+\\emptyset$0

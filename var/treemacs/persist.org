@@ -1,0 +1,39 @@
+* seminar
+** Reports
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports
+** Notes
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Notes
+** Presentations
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Presentations
+** Weifeng Notes
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Weifeng-Notes
+* reading
+** Papers
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Papers
+** Books
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Books
+** Presentations
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Presentations
+** Theses
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Theses
+** Tutorials
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Tutorials
+** Notes
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Notes
+* coding
+** Maple
+ - path :: ~/Documents/GithubProjects/phd-thesis/Software/Maple
+** Mathematica
+ - path :: ~/Documents/GithubProjects/phd-thesis/Software/Mathematica
+** Output
+ - path :: ~/Documents/GithubProjects/phd-thesis/Software/Output
+* thesis
+** Proposal
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Write-Ups/proposal
+** Weekly reports
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Write-Ups/weekly_reports
+* z3
+** src
+ - path :: ~/Documents/GithubProjects/z3/src
+** scripts
+ - path :: ~/Documents/GithubProjects/z3/scripts

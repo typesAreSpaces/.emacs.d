@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Algorithm If
+# key: ;ife
+# condition: 'auto
+# --
+\\uIf{$1}{
+	$2
+}
+\\Else{
+	$3
+}
+$0

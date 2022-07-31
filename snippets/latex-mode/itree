@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Inference in proof tree
+# key: ;itree
+# condition: 'auto
+# --
+\\infer${1:1}[${2:}]{$3}$0

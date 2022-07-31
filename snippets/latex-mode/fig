@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: fig
+# key: ;fig
+# condition: 'auto
+# --
+\begin{figure}[${1:htpb}]
+	\centering
+	\includegraphics[width=${3:0.8}\textwidth]{./figures/$2}
+	\caption{$4}
+	\label{fig:$2}
+\end{figure}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: PreOrder
+# key: ;preord
+# condition: 'auto
+# --
+\\preord($1)$0

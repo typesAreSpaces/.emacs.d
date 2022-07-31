@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Enumerate Environment
+# key: ;enum
+# condition: 'auto
+# --
+\begin{enumerate}
+	\item $0
+\end{enumerate}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Acute accent
+# key: ;ac
+# condition: 'auto
+# --
+\\'{$1}$0

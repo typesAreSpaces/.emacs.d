@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: New frame
+# key: ;frame
+# condition: 'auto
+# --
+\\begin{frame}${1:[fragile]}{$2}
+	$0
+\\end{frame}

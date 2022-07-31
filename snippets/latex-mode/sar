@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Surjective arrow
+# key: ;sar
+# condition: 'auto
+# --
+\\twoheadrightarrow$0

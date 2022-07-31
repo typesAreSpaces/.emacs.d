@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Label
+# key: ;label
+# condition: 'auto
+# --
+\\label{${1:$$(evil-paste-before 1)}} $0

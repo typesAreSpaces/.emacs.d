@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Dots
+# key: ;..
+# condition: 'auto
+# --
+\\dots$0

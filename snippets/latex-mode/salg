@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Sigma algebra
+# key: ;salg
+# condition: 'auto
+# --
+\$${1:\\sigma}\$-algebra

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: zeros
+# key: ;zeros
+# condition: 'auto
+# --
+\\zeros($1)$0

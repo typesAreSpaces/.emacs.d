@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Ring
+# key: ;ring
+# condition: 'auto
+# --
+\\mathcal{$1}$0

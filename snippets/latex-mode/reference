@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Reference
+# key: ;reference
+# condition: 'auto
+# --
+\\ref{${1:$$(evil-paste-before 1)}} $0

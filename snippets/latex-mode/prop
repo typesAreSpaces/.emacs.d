@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Proposition Environment
+# key: ;prop
+# condition: 'auto
+# --
+\begin{proposition}
+	$0
+\end{proposition}

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Notation Environment
+# key: ;notation
+# condition: 'auto
+# --
+\begin{notation}
+	$0
+\end{notation}

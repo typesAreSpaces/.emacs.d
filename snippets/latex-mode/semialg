@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: SemiAlgebraic
+# key: ;semialg
+# condition: 'auto
+# --
+\\semialgebraic($1)$0

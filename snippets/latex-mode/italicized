@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Italicized text
+# key: ;ital
+# condition: 'auto
+# --
+\\emph{$1}$0

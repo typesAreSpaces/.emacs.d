@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Right rule
+# key: ;rrule
+# condition: 'auto
+# --
+$2 \rightarrow_{$1} $3 $0

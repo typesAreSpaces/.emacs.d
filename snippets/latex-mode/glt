@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: glt
+# key: ;glt
+# condition: 'auto
+# --
+\\gls{$1}$0

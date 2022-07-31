@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Umlaut accent
+# key: ;um
+# condition: 'auto
+# --
+\\"{$1}$0

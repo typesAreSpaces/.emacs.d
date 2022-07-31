@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Greater
+# key: ;>=
+# condition: 'auto
+# --
+\\geq $0

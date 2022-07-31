@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Inverse
+# key: ;inv
+# condition: 'auto
+# --
+^{-1}$0

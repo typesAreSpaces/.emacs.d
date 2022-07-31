@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Equation Environment
+# key: ;eq
+# condition: 'auto
+# --
+\begin{equation*} ${2:\label{${3:eq}}}
+	${4:\begin\{split\}
+		$5
+	\end\{split\}}$0
+\end{equation*}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: left arrow
+# key: ;lar
+# condition: 'auto
+# --
+\\leftarrow$0

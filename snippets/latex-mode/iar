@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Injective arrow
+# key: ;iar
+# condition: 'auto
+# --
+\\xhookrightarrow$0

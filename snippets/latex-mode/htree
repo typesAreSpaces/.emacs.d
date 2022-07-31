@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Hypothesis in proof tree
+# key: ;htree
+# condition: 'auto
+# --
+\\hypo{$1}$0

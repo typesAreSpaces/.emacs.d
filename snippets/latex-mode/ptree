@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Start proof
+# key: ;ptree
+# condition: 'auto
+# --
+\\begin{prooftree}
+$0
+\\end{prooftree}

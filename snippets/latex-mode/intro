@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: intro
+# key: ;intro
+# condition: 'auto
+# --
+`(yasnippet/aux_add_cmd "kldb.tex" "/home/jose/.local/scripts/add-knowledge -p " " -e \'index=" "\\intro\{" (car kill-ring))`

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Big-O notation
+# key: ;bigO
+# condition: 'auto
+# --
+\\mathcal{O}($1)$0

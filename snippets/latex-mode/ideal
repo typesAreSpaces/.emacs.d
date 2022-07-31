@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Ideal
+# key: ;ideal
+# condition: 'auto
+# --
+\\mathfrak{$1}$0

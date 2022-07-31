@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Bold text
+# key: ;bold
+# condition: 'auto
+# --
+\\textbf{$1}$0

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Proof Environment
+# key: ;proof
+# condition: 'auto
+# --
+\begin{proof}
+	$0
+\end{proof}

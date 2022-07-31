@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: m-Spec
+# key: ;mspec
+# condition: 'auto
+# --
+\\m-Spec{$1}$0

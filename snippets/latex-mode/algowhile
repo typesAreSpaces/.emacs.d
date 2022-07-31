@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Algorithm While
+# key: ;while
+# condition: 'auto
+# --
+\\While{$1}{
+	$2
+}
+$0

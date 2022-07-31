@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Epsilon
+# key: ;eps
+# condition: 'auto
+# --
+\\epsilon$0

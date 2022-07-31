@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Norm
+# key: ;norm
+# condition: 'auto
+# --
+\\langle $1 \\rangle$0

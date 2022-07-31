@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Example Environment
+# key: ;example
+# condition: 'auto
+# --
+\begin{example}
+	$0
+\end{example}

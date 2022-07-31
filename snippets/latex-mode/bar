@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: bidirectional arrow
+# key: ;bar
+# condition: 'auto
+# --
+\\leftrightarrow$0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Underbar
+# key: ;ubar
+# condition: 'auto
+# --
+\\underbar{\$$1\$}$0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Max
+# key: ;max
+# condition: 'auto
+# --
+\\max($1)$0

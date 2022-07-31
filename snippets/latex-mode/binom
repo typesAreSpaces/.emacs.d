@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Binomial Coefficient
+# key: ;binom
+# condition: 'auto
+# --
+\\binom{$1}{$2}$0

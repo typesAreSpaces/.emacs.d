@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: S measurable
+# key: ;smeasur
+# condition: 'auto
+# --
+\$${1:\\mathcal{S}}\$-measurable

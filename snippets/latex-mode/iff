@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: If and only if
+# key: ;iff
+# condition: 'auto
+# --
+if and only if$0

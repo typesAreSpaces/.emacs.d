@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Integer Numbers
+# key: ;ZZ
+# condition: 'auto
+# --
+\\mathbb{Z}$0

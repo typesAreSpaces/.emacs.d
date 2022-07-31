@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Overbar
+# key: ;obar
+# condition: 'auto
+# --
+\\overbar{$1}$0

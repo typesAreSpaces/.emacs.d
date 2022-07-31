@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Footnote
+# key: ;fnote
+# condition: 'auto
+# --
+\\footnote{$1} $0

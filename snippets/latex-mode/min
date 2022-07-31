@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Min
+# key: ;min
+# condition: 'auto
+# --
+\\min($1)$0

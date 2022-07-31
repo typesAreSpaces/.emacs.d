@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Braces
+# key: ;{
+# condition: 'auto
+# --
+{$1}$0

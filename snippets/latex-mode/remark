@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Remark Environment
+# key: ;remark
+# condition: 'auto
+# --
+\begin{remark}
+	$0
+\end{remark}
