@@ -163,6 +163,8 @@
                           (bookmarks . 10)))
   (dashboard-setup-startup-hook))
 
+(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+
 (set-face-attribute 'default nil :font "Fira Code Retina" :height efs/default-font-size)
 
                                         ; Set the fixed pitch face

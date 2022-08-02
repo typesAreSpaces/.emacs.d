@@ -225,6 +225,8 @@ This section configures basic UI settings that remove unneeded elements to make 
     (setq dashboard-items '((recents  . 10)
                             (bookmarks . 10)))
     (dashboard-setup-startup-hook))
+  
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 #+end_src
 
