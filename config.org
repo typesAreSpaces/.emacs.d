@@ -225,7 +225,7 @@ This section configures basic UI settings that remove unneeded elements to make 
     (setq dashboard-items '((recents  . 10)
                             (bookmarks . 10)))
     (dashboard-setup-startup-hook))
-  
+
   (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 #+end_src
@@ -489,6 +489,33 @@ This Prescient configuration is optimized for use in System Crafters videos and 
     ;; Must be in the :init section of use-package such that the mode gets
     ;; enabled right away. Note that this forces loading the package.
     (marginalia-mode))
+
+#+end_src
+
+** Vertico 
+
+#+begin_src emacs-lisp 
+
+  (use-package vertico
+    :init
+    (vertico-mode))
+
+#+end_src
+
+** Orderless 
+
+#+begin_src emacs-lisp 
+
+  (use-package orderless
+    :init
+    ;; Configure a custom style dispatcher (see the Consult wiki)
+    ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+    ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion)))))
+
+  (setq orderless-matching-styles '(orderless-flex))
 
 #+end_src
 
