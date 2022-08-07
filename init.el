@@ -710,6 +710,9 @@
   (define-key global-map (kbd "C-c s")
     (lambda () (interactive) (mark-whole-buffer) (org-sort-entries nil ?o)))
 
+  (define-key global-map (kbd "C-c d")
+    (lambda () (interactive) (org-todo "DONE")))
+
   (define-key global-map (kbd "C-c c")
     (lambda () (interactive) (org-todo "COMPLETED")))
 
