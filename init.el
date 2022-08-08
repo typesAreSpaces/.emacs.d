@@ -157,10 +157,16 @@
   :ensure t
   :diminish dashboard-mode
   :config
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-set-navigator t)
   (setq dashboard-banner-logo-title "Welcome to Emacs!")
   (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
-  (setq dashboard-items '((recents  . 10)
-                          (bookmarks . 10)))
+  (setq dashboard-items '(
+                          (recents  . 10)
+                          (bookmarks . 10)
+                          (projects . 5)
+                          ))
   (dashboard-setup-startup-hook))
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
