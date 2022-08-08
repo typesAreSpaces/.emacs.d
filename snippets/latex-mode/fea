@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Features
+# key: ;fea
+# condition: 'auto
+# --
+\\Fea($1, $2)$0
