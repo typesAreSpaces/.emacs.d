@@ -817,11 +817,6 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (setq org-log-done 'time)
     (setq org-log-into-drawer t)
 
-    (setq org-agenda-files
-          '((expand-file-name "Org-Files/Tasks.org" user-emacs-directory)
-            (expand-file-name "Org-Files/Habits.org" user-emacs-directory)
-            (expand-file-name "Org-Files/Birthdays.org" user-emacs-directory)))
-
     (require 'org-habit)
     (require 'org-protocol)
     (add-to-list 'org-modules 'org-habit)
