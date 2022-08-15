@@ -245,6 +245,12 @@
   (evil-collection-init)
   (setq forge-add-default-bindings nil))
 
+(use-package evil-numbers
+  :config
+  (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
+  )
+
 (use-package command-log-mode
   :commands command-log-mode)
 
