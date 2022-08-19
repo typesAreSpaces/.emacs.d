@@ -83,25 +83,6 @@ You can also use =M-x auto-package-update-now= to update right now!
 
 #+end_src
 
-* Keep Folders Clean
-
-We use the [[https://github.com/emacscollective/no-littering/blob/master/no-littering.el][no-littering]] package to keep folders where we edit files and the Emacs configuration folder clean!  It knows about a wide variety of variables for built in Emacs features as well as those from community packages so it can be much easier than finding and setting these variables yourself.
-
-#+begin_src emacs-lisp
-
-                                          ; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
-                                          ; reliably, set `user-emacs-directory` before loading no-littering!
-                                          ;(setq user-emacs-directory "~/.cache/emacs")
-
-  (use-package no-littering)
-
-                                          ; no-littering doesn't set this by default so we must place
-                                          ; auto save files in the same path as it uses for sessions
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
-
-#+end_src
-
 * Settings
 
 #+begin_src emacs-lisp
@@ -182,7 +163,6 @@ This section configures basic UI settings that remove unneeded elements to make 
 
   (column-number-mode)
   (setq-default display-line-numbers-type 'visual) 
-  (global-display-line-numbers-mode t)
 
                                           ; Set frame transparency
   (set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
@@ -209,30 +189,6 @@ This section configures basic UI settings that remove unneeded elements to make 
 
   (add-to-list 'auto-mode-alist '("\\.dat\\'" . text-mode))
   (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode))
-
-#+end_src
-
-** Dashboard Configuration
-
-#+begin_src emacs-lisp
-
-  (use-package dashboard
-    :ensure t
-    :diminish dashboard-mode
-    :config
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-set-navigator t)
-    (setq dashboard-banner-logo-title "Welcome to Emacs!")
-    (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
-    (setq dashboard-items '(
-                            (recents  . 10)
-                            (bookmarks . 10)
-                            (projects . 5)
-                            ))
-    (dashboard-setup-startup-hook))
-
-  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 #+end_src
 
@@ -318,18 +274,6 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     (evil-set-initial-state 'messages-buffer-mode 'normal)
     (evil-set-initial-state 'dashboard-mode 'normal))
 
-  (use-package evil-collection
-    :after evil
-    :config
-    (evil-collection-init)
-    (setq forge-add-default-bindings nil))
-
-  (use-package evil-numbers
-    :config
-    (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
-    (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
-    )
-
 #+end_src
 
 * UI Configuration
@@ -371,31 +315,6 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
   (use-package evil-anzu
     :config (global-anzu-mode 1)
     (setq anzu-minimum-input-length 4))
-
-  (use-package doom-modeline
-    :init (doom-modeline-mode 1)
-    :custom (
-             (doom-modeline-height 15)
-             (doom-modeline-enable-word-count t)
-             (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode))))
-
-#+end_src
-
-**** Mode Line
-
-#+begin_src emacs-lisp 
-
-  (setq-default mode-line-format '("%e"
-                                   (:eval
-                                    (if (equal
-                                         (shell-command-to-string
-                                          "ps aux | grep 'mbsync -a' | wc -l | xargs")
-                                         "3\n")
-                                        " Running mbsync " " "))
-                                   "%e" (:eval
-                                         (when (display-graphic-p) (shell-command-to-string
-                                                                    "~/.local/scripts/check_email.sh")))
-                                   (:eval (doom-modeline-format--main))))
 
 #+end_src
 
@@ -482,52 +401,6 @@ This Prescient configuration is optimized for use in System Crafters videos and 
                                           ; Uncomment the following line to have sorting remembered across sessions!
                                           ;  (prescient-persist-mode 1)
     (ivy-prescient-mode 1))
-
-#+end_src
-
-** Marginalia
-
-#+begin_src emacs-lisp 
-
-  (use-package marginalia
-    ;; Either bind `marginalia-cycle` globally or only in the minibuffer
-    :bind (("M-A" . marginalia-cycle)
-           :map minibuffer-local-map
-           ("M-A" . marginalia-cycle))
-
-    ;; The :init configuration is always executed (Not lazy!)
-    :init
-
-    ;; Must be in the :init section of use-package such that the mode gets
-    ;; enabled right away. Note that this forces loading the package.
-    (marginalia-mode))
-
-#+end_src
-
-** Vertico 
-
-#+begin_src emacs-lisp 
-
-  (use-package vertico
-    :init
-    (vertico-mode))
-
-#+end_src
-
-** Orderless 
-
-#+begin_src emacs-lisp 
-
-  (use-package orderless
-    :init
-    ;; Configure a custom style dispatcher (see the Consult wiki)
-    ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
-    ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-    (setq completion-styles '(orderless basic)
-          completion-category-defaults nil
-          completion-category-overrides '((file (styles partial-completion)))))
-
-  (setq orderless-matching-styles '(orderless-flex))
 
 #+end_src
 
@@ -682,20 +555,6 @@ This Prescient configuration is optimized for use in System Crafters videos and 
     (interactive)
     (let ((consult-project-function (lambda (x) "./")))
       (consult-find)))
-
-#+end_src
-
-** Citar
-
-#+begin_src emacs-lisp 
-
-  (use-package citar
-    :bind (("C-c b" . citar-insert-citation)
-           :map minibuffer-local-map
-           ("M-b" . citar-insert-preset))
-    :custom
-    (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
-                          ,(concat phd-thesis-write-ups-dir "/references.bib"))))
 
 #+end_src
 
@@ -984,17 +843,6 @@ Update org-latex-classes
 
 #+end_src
 
-*** Ox Hugo
-
-#+begin_src emacs-lisp 
-
-  (use-package ox-hugo
-    :ensure t
-    :pin melpa
-    :after ox)
-
-#+end_src
-
 *** Nicer Heading Bullets
 
 [[https://github.com/sabof/org-bullets][org-bullets]] replaces the heading stars in =org-mode= buffers with nicer looking characters that you can control.  Another option for this is [[https://github.com/integral-dw/org-superstar-mode][org-superstar-mode]] which we may cover in a later video.
@@ -1113,45 +961,6 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
 
 ** Languages
 
-*** IDE Features with lsp-mode
-
-**** lsp-mode
-
-We use the excellent [[https://emacs-lsp.github.io/lsp-mode/][lsp-mode]] to enable IDE-like functionality for many different programming languages via "language servers" that speak the [[https://microsoft.github.io/language-server-protocol/][Language Server Protocol]].  Before trying to set up =lsp-mode= for a particular language, check out the [[https://emacs-lsp.github.io/lsp-mode/page/languages/][documentation for your language]] so that you can learn which language servers are available and how to install them.
-
-The =lsp-keymap-prefix= setting enables you to define a prefix for where =lsp-mode='s default keybindings will be added.  I *highly recommend* using the prefix to find out what you can do with =lsp-mode= in a buffer.
-
-The =which-key= integration adds helpful descriptions of the various keys so you should be able to learn a lot just by pressing =C-c l= in a =lsp-mode= buffer and trying different things that you find there.
-
-#+begin_src emacs-lisp
-
-  (defun efs/lsp-mode-setup ()
-    (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-    (lsp-headerline-breadcrumb-mode))
-
-  (use-package lsp-mode 
-    :commands (lsp lsp-deferred)
-    :hook (lsp-mode . efs/lsp-mode-setup)
-    :init
-    (setq lsp-keymap-prefix "C-l")
-    :config
-    (lsp-enable-which-key-integration t))
-
-#+end_src
-
-**** lsp-ui
-
-[[https://emacs-lsp.github.io/lsp-ui/][lsp-ui]] is a set of UI enhancements built on top of =lsp-mode= which make Emacs feel even more like an IDE.  Check out the screenshots on the =lsp-ui= homepage (linked at the beginning of this paragraph) to see examples of what it can do.
-
-#+begin_src emacs-lisp
-
-  (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode)
-    :custom
-    (lsp-ui-doc-position 'bottom))
-
-#+end_src
-
 **** tree-sitter
 
 #+begin_src emacs-lisp 
@@ -1188,90 +997,6 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 
 #+end_src
 
-**** treemacs
-
-#+begin_src emacs-lisp
-
-  (use-package treemacs
-    :bind
-    (:map global-map
-          ([f4] . treemacs)
-          ([f5] . treemacs-select-window))
-    :config
-    (setq treemacs-is-never-other-window t))
-
-#+end_src
-
-**** treemacs-evil
-
-#+begin_src emacs-lisp 
-
-  (use-package treemacs-evil
-    :after treemacs evil)
-
-#+end_src
-
-**** lsp-treemacs
-
-[[https://github.com/emacs-lsp/lsp-treemacs][lsp-treemacs]] provides nice tree views for different aspects of your code like symbols in a file, references of a symbol, or diagnostic messages (errors and warnings) that are found in your code.
-
-Try these commands with =M-x=:
-
-- =lsp-treemacs-symbols= - Show a tree view of the symbols in the current file
-- =lsp-treemacs-references= - Show a tree view for the references of the symbol under the cursor
-- =lsp-treemacs-error-list= - Show a tree view for the diagnostic messages in the project
-
-  This package is built on the [[https://github.com/Alexander-Miller/treemacs][treemacs]] package which might be of some interest to you if you like to have a file browser at the left side of your screen in your editor.
-
-  #+begin_src emacs-lisp
-
-    (use-package lsp-treemacs
-      :after lsp)
-
-  #+end_src
-
-**** lsp-ivy
-
-[[https://github.com/emacs-lsp/lsp-ivy][lsp-ivy]] integrates Ivy with =lsp-mode= to make it easy to search for things by name in your code.  When you run these commands, a prompt will appear in the minibuffer allowing you to type part of the name of a symbol in your code.  Results will be populated in the minibuffer so that you can find what you're looking for and jump to that location in the code upon selecting the result.
-
-Try these commands with =M-x=:
-
-- =lsp-ivy-workspace-symbol= - Search for a symbol name in the current project workspace
-- =lsp-ivy-global-workspace-symbol= - Search for a symbol name in all active project workspaces
-
-  #+begin_src emacs-lisp
-
-    (use-package lsp-ivy
-      :after lsp)
-
-  #+end_src
-
-*** Debugging with dap-mode
-
-[[https://emacs-lsp.github.io/dap-mode/][dap-mode]] is an excellent package for bringing rich debugging capabilities to Emacs via the [[https://microsoft.github.io/debug-adapter-protocol/][Debug Adapter Protocol]].  You should check out the [[https://emacs-lsp.github.io/dap-mode/page/configuration/][configuration docs]] to learn how to configure the debugger for your language.  Also make sure to check out the documentation for the debug adapter to see what configuration parameters are available to use for your debug templates!
-
-#+begin_src emacs-lisp
-
-  (use-package dap-mode
-                                          ; Uncomment the config below if you want all UI panes to be hidden by default!
-                                          ; :custom
-                                          ; (lsp-enable-dap-auto-configure nil)
-                                          ; :config
-                                          ; (dap-ui-mode 1)
-    :commands dap-debug
-    :config
-                                          ; Set up Node debugging
-    (require 'dap-node)
-    (dap-node-setup) ; Automatically installs Node debug adapter if needed
-
-                                          ; Bind `C-c l d` to `dap-hydra` for easy access
-    (general-define-key
-     :keymaps 'lsp-mode-map
-     :prefix lsp-keymap-prefix
-     "d" '(dap-hydra t :wk "debugger")))
-
-#+end_src
-
 *** TypeScript
 
 This is a basic configuration for the TypeScript language so that =.ts= files activate =typescript-mode= when opened.  We're also adding a hook to =typescript-mode-hook= to call =lsp-deferred= so that we activate =lsp-mode= to get LSP features every time we edit TypeScript code.
@@ -1295,15 +1020,6 @@ This is a basic configuration for the TypeScript language so that =.ts= files ac
 #+end_src
 
 This will install the [[https://github.com/theia-ide/typescript-language-server][typescript-language-server]] and the TypeScript compiler package.
-
-*** Rust
-
-#+begin_src emacs-lisp 
-
-  (use-package rustic
-    :straight t)
-
-#+end_src
 
 *** C/C++
 
@@ -1331,18 +1047,6 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
   (add-hook 'TeX-mode-hook #'display-fill-column-indicator-mode)
   (add-hook 'LaTeX-mode-hook #'display-fill-column-indicator-mode)
 
-  (use-package lsp-latex
-    :bind (:map lsp-mode-map
-                ("C-l w r" . lsp-workspace-restart)
-                ("C-l w b" . lsp-latex-build))
-    :config
-    (setq lsp-latex-build-executable "latexmk")
-    (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "%f"))
-    (setq lsp-latex-forward-search-after t)
-    (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable "zathura")
-    (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p")))
-
   (defun get-bibtex-from-doi (doi)
     "Get a BibTeX entry from the DOI"
     (interactive "MDOI: ")
@@ -1360,23 +1064,6 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
         (kill-buffer (current-buffer))))
     (insert (decode-coding-string bibtex-entry 'utf-8))
     (bibtex-fill-entry))
-
-#+end_src
-
-**** AUCTex setup
-
-#+begin_src emacs-lisp 
-
-  (use-package tex
-    :ensure auctex
-    :config
-    (setq TeX-auto-save t)
-    (setq TeX-parse-self t)
-    (setq-default TeX-master nil)
-    (setq reftex-ref-macro-prompt nil)
-    (setq font-latex-fontify-script nil))
-
-  (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
 #+end_src
 
@@ -1451,42 +1138,10 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 
 #+end_src
 
-*** Z3 mode
-
-#+begin_src emacs-lisp 
-
-  (use-package z3-mode)
-
-#+end_src
-
 *** TOML mode
 #+begin_src emacs-lisp 
 
   (use-package toml-mode)
-
-#+end_src
-
-** Company Mode
-
-[[http://company-mode.github.io/][Company Mode]] provides a nicer in-buffer completion interface than =completion-at-point= which is more reminiscent of what you would expect from an IDE.  We add a simple configuration to make the keybindings a little more useful (=TAB= now completes the selection and initiates completion at the current location if needed).
-
-We also use [[https://github.com/sebastiencs/company-box][company-box]] to further enhance the look of the completions with icons and better overall presentation.
-
-#+begin_src emacs-lisp
-
-  (use-package company
-    :after lsp-mode
-    :hook (lsp-mode . company-mode)
-    :bind (:map company-active-map
-                ("<tab>" . company-complete-selection))
-    (:map lsp-mode-map
-          ("<tab>" . company-indent-or-complete-common))
-    :custom
-    (company-minimum-prefix-length 1)
-    (company-idle-delay 0.0))
-
-  (use-package company-box
-    :hook (company-mode . company-box-mode))
 
 #+end_src
 
@@ -1514,25 +1169,6 @@ We also use [[https://github.com/sebastiencs/company-box][company-box]] to furth
 
 #+end_src
 
-** Magit
-
-[[https://magit.vc/][Magit]] is the best Git interface I've ever used.  Common Git operations are easy to execute quickly using Magit's command panel system.
-
-#+begin_src emacs-lisp
-
-  (use-package magit
-    :commands magit-status
-    :custom
-    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-
-                                          ; NOTE: Make sure to configure a GitHub token before using this package!
-                                          ; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
-                                          ; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
-  (use-package forge
-    :after magit)
-
-#+end_src
-
 ** Git-gutter
 
 #+begin_src emacs-lisp 
@@ -1550,25 +1186,6 @@ Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=)
 
   (use-package evil-nerd-commenter
     :bind ("M-/" . evilnc-comment-or-uncomment-lines))
-
-#+end_src
-
-** Rainbow mode
-
-#+begin_src emacs-lisp 
-
-  (use-package rainbow-mode)
-
-#+end_src
-
-** Rainbow Delimiters
-
-[[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] is useful in programming modes because it colorizes nested parentheses and brackets according to their nesting depth.  This makes it a lot easier to visually match parentheses in Emacs Lisp code without having to count them yourself.
-
-#+begin_src emacs-lisp
-
-  (use-package rainbow-delimiters
-    :hook (prog-mode . rainbow-delimiters-mode))
 
 #+end_src
 
@@ -1767,44 +1384,6 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
 - =S= - Create a symbolic link to this file
 - =L= - Load an Emacs Lisp file into Emacs
 
-*** Configuration
-
-#+begin_src emacs-lisp
-
-  (use-package dired
-    :ensure nil
-    :commands (dired dired-jump)
-    :bind (("C-x C-j" . dired-jump))
-    :custom ((dired-listing-switches "-agho --group-directories-first"))
-    :config
-    (evil-collection-define-key 'normal 'dired-mode-map
-      "h" 'dired-single-up-directory
-      "l" 'dired-single-buffer))
-
-  (put 'dired-find-alternate-file 'disabled nil)
-
-  (use-package dired-single
-    :commands (dired dired-jump))
-
-  (use-package all-the-icons-dired
-    :hook (dired-mode . all-the-icons-dired-mode))
-
-  (use-package dired-open
-    :commands (dired dired-jump)
-    :config
-                                          ; Doesn't work as expected!
-                                          ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
-    (setq dired-open-extensions '(("png" . "feh")
-                                  ("mkv" . "mpv"))))
-
-  (use-package dired-hide-dotfiles
-    :hook (dired-mode . dired-hide-dotfiles-mode)
-    :config
-    (evil-collection-define-key 'normal 'dired-mode-map
-      "H" 'dired-hide-dotfiles-mode))
-
-#+end_src
-
 * Applications
 
 ** Some App
@@ -1953,119 +1532,5 @@ Additionally, install mu and set it up with the following:
 
 mu init --maildir=~/Mail --my-address=ADDRESS1 --my-address=ADDRESS2
 mu index
-
-#+end_src
-
-#+begin_src emacs-lisp
-
-  (use-package mu4e
-    :ensure nil
-                                          ; :load-path "/usr/share/emacs/site-lisp/mu4e/"
-                                          ; :defer 20 ; Wait until 20 seconds after startup
-    :config
-    (require 'mu4e)
-    (require 'mu4e-org)
-
-                                          ; This is set to 't' to avoid mail syncing issues when using mbsync
-    (setq mu4e-change-filenames-when-moving t)
-
-                                          ; Just plain text
-    (with-eval-after-load "mm-decode"
-      (add-to-list 'mm-discouraged-alternatives "text/html")
-      (add-to-list 'mm-discouraged-alternatives "text/richtext"))
-
-    (defun jcs-view-in-eww (msg)
-      (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
-    (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
-
-    (setq mu4e-update-interval 600)
-    (setq mu4e-get-mail-command "mbsync -a")
-    (setq mu4e-maildir "~/Mail")
-
-    (defun refile-func (msg)
-      (cond
-       ((mu4e-message-contact-field-matches msg :to "kapur@cs.unm.edu")
-        "/unm/Prof. Kapur")
-       ((mu4e-message-contact-field-matches msg :from "kapur@cs.unm.edu")
-        "/unm/Prof. Kapur")
-       ((mu4e-message-contact-field-matches msg :cc "kapur@cs.unm.edu")
-        "/unm/Prof. Kapur")
-       ((mu4e-message-contact-field-matches msg :to "kapur@unm.edu")
-        "/unm/Prof. Kapur")
-       ((mu4e-message-contact-field-matches msg :from "kapur@unm.edu")
-        "/unm/Prof. Kapur")
-       ((mu4e-message-contact-field-matches msg :cc "kapur@unm.edu")
-        "/unm/Prof. Kapur")
-       (t "/unm/Archive")))
-
-    (setq mu4e-contexts
-          (list
-                                          ; School account
-           (make-mu4e-context
-            :name "School"
-            :match-func
-            (lambda (msg)
-              (when msg
-                (string-prefix-p "/unm" (mu4e-message-field msg :maildir))))
-            :vars '((user-mail-address  . "jabelcastellanosjoo@unm.edu")
-                    (user-full-name     . "Jose Abel Castellanos Joo")
-                    (mu4e-drafts-folder . "/unm/Drafts")
-                    (mu4e-sent-folder   . "/unm/Sent")
-                    (mu4e-refile-folder . refile-func)
-                    (mu4e-trash-folder  . "/unm/Trash")
-                    (smtpmail-smtp-server . "smtp.office365.com")
-                    (smtpmail-smtp-service . 587)
-                    (smtpmail-stream-type . starttls)))
-                                          ; School CS department account
-           (make-mu4e-context
-            :name "CS department"
-            :match-func
-            (lambda (msg)
-              (when msg
-                (string-prefix-p "/cs-unm" (mu4e-message-field msg :maildir))))
-            :vars '((user-mail-address  . "jose.castellanosjoo@cs.unm.edu")
-                    (user-full-name     . "Jose Abel Castellanos Joo")
-                    (mu4e-drafts-folder . "/cs-unm/Drafts")
-                                          ;(mu4e-sent-folder   . "/cs-unm/Sent")
-                    (mu4e-refile-folder . "/cs-unm/Inbox")
-                    (mu4e-trash-folder  . "/cs-unm/Trash")
-                    (smtpmail-smtp-server . "snape.cs.unm.edu")
-                    (smtpmail-smtp-service . 1200)
-                    (smtpmail-stream-type . starttls)))))
-
-    (setq mu4e-context-policy 'pick-first)
-
-    (setq mu4e-maildir-shortcuts
-          '(("/unm/Inbox" . ?i)
-            ("/unm/Sent"  . ?s)
-            ("/unm/Trash" . ?t)
-            ("/unm/Drafts". ?d)
-            ("/unm/Prof. Kapur". ?k)
-            ("/unm/Prof. Kapur/Side projects/Seminars/Beihang University". ?b)
-            ("/unm/TA Work/CS 241". ?c)
-            ("/unm/You got a Package!". ?p)
-            ("/unm/Archive". ?a)
-            ("/cs-unm/Inbox". ?I)
-            ("/cs-unm/Trash". ?T)
-            ("/cs-unm/Drafts". ?D))))
-
-  (setq mu4e-use-fancy-chars t)
-  (setq message-send-mail-function 'smtpmail-send-it)
-  (setq mu4e-attachment-dir  "~/Downloads")
-  (setq mu4e-headers-show-threads nil)
-  (setq mu4e-confirm-quit nil)
-  (setq mu4e-headers-results-limit -1)
-  (setq mu4e-compose-signature "Best,\nJose")
-  (setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
-  (setq message-citation-line-function 'message-insert-formatted-citation-line)
-  (setq
-                                          ; Display
-   mu4e-view-show-addresses t
-   mu4e-view-show-images t
-   mu4e-view-image-max-width 800
-   mu4e-hide-index-messages t)
-
-  (use-package org-mime
-    :ensure t)
 
 #+end_src
