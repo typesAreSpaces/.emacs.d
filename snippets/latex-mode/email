@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: email
+# key: ;email
+# condition: 'auto
+# --
+\\href{mailto:$1}{$1}
