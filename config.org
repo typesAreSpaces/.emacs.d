@@ -1,4 +1,4 @@
-#+title: Emacs Configuration
+#+title: Emacs From Scratch Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 
 * Tips for Use
@@ -89,7 +89,7 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 
 #+begin_src emacs-lisp
 
-                                          ; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
+                                          ; NOTE: If you want to move everything out of the ~/.emacs.d folder
                                           ; reliably, set `user-emacs-directory` before loading no-littering!
                                           ;(setq user-emacs-directory "~/.cache/emacs")
 
@@ -106,7 +106,7 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 
 #+begin_src emacs-lisp
 
-                                          ; NOTE: init.el is now generated from config.org.  Please edit that file
+                                          ; NOTE: init.el is now generated from Emacs.org.  Please edit that file
                                           ;       in Emacs and init.el will be generated automatically!
 
                                           ; You will most likely need to adjust this font size for your system!
@@ -220,19 +220,11 @@ This section configures basic UI settings that remove unneeded elements to make 
     :ensure t
     :diminish dashboard-mode
     :config
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-set-navigator t)
     (setq dashboard-banner-logo-title "Welcome to Emacs!")
     (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
-    (setq dashboard-items '(
-                            (recents  . 10)
-                            (bookmarks . 10)
-                            (projects . 5)
-                            ))
+    (setq dashboard-items '((recents  . 10)
+                            (bookmarks . 10)))
     (dashboard-setup-startup-hook))
-
-  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 #+end_src
 
@@ -242,13 +234,13 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 
 #+begin_src emacs-lisp
 
-  (set-face-attribute 'default nil :font "Fira Code Retina" :height efs/default-font-size)
+  (set-face-attribute 'default nil :font "Hack" :height efs/default-font-size)
 
                                           ; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height efs/default-font-size)
+  (set-face-attribute 'fixed-pitch nil :font "Hack" :height efs/default-font-size)
 
                                           ; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "Fira Code Retina" :height efs/default-variable-font-size :weight 'regular)
+  (set-face-attribute 'variable-pitch nil :font "Hack" :height efs/default-variable-font-size :weight 'regular)
 
 #+end_src
 
@@ -280,7 +272,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
       "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
       "f" '(:ignore t :which-key "edit (f)iles")
       "fa" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))) :which-key "(a)genda")
-      "fe" '((lambda () (interactive) (find-file (expand-file-name "config.org" user-emacs-directory))) :which-key "(e)macs source")
+      "fe" '((lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/Emacs.org"))) :which-key "(e)macs source")
       "fw" '((lambda () (interactive) (find-file (expand-file-name (concat seminar-dir "/Reports/finding_certificates_qm_univariate/main.tex")))) :which-key "Current (w)ork")
       "fr" '(:ignore t :which-key "Edit (r)eferences")
       "frp" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))) :which-key "Edit (p)hD references")
@@ -305,7 +297,6 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
     (setq evil-want-C-u-scroll t)
-    (setq evil-want-C-i-jump nil)
     :config
     (evil-mode 1)
     (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
@@ -552,7 +543,7 @@ This Prescient configuration is optimized for use in System Crafters videos and 
 ** Consult
 
 #+begin_src emacs-lisp 
-  
+
   (use-package consult
     :after selectrum
     :straight t
@@ -671,13 +662,13 @@ This Prescient configuration is optimized for use in System Crafters videos and 
                                           ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
     )
 
-  (defun consult-grep-from-here ()
+  (defun consult-grep-current-dir ()
     "Call `consult-grep' for the current buffer (a single file)."
     (interactive)
     (let ((consult-project-function (lambda (x) "./")))
       (consult-grep)))
 
-  (defun consult-find-from-here ()
+  (defun consult-find-current-dir ()
     "Call `consult-find' for the current buffer (a single file)."
     (interactive)
     (let ((consult-project-function (lambda (x) "./")))
@@ -763,7 +754,7 @@ The =efs/org-font-setup= function configures various text faces to tweak the siz
                     (org-level-6 . 1.1)
                     (org-level-7 . 1.1)
                     (org-level-8 . 1.1)))
-      (set-face-attribute (car face) nil :font "Fira Code Retina" :weight 'regular :height (cdr face)))
+      (set-face-attribute (car face) nil :font "Hack" :weight 'regular :height (cdr face)))
 
                                           ; Ensure that anything that should be fixed-pitch in Org files appears that way
     (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -1048,11 +1039,11 @@ You can add more =src= block templates below by copying one of the lines and cha
 
 ** Auto-tangle Configuration Files
 
-This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-config= gets executed each time such a buffer gets saved.  This function checks to see if the file being saved is the config.org file you're looking at right now, and if so, automatically exports the configuration here to the associated output files.
+This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-config= gets executed each time such a buffer gets saved.  This function checks to see if the file being saved is the Emacs.org file you're looking at right now, and if so, automatically exports the configuration here to the associated output files.
 
 #+begin_src emacs-lisp
 
-                                          ; Automatically tangle our config.org config file when we save it
+                                          ; Automatically tangle our Emacs.org config file when we save it
   (defun efs/org-babel-tangle-config ()
     (when (string-equal (file-name-directory (buffer-file-name))
                         (expand-file-name user-emacs-directory))
@@ -1072,7 +1063,7 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
 
   (use-package yasnippet
     :config
-    (setq yas-snippet-dirs `(,(expand-file-name "snippets" user-emacs-directory)))
+    (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
     (setq yas-key-syntaxes '(yas-longest-key-from-whitespace "w_.()" "w_." "w_" "w"))
     (define-key yas-minor-mode-map (kbd "C-g") 'evil-normal-state)
     (define-key yas-keymap (kbd "C-g") 'evil-normal-state)
@@ -1080,7 +1071,7 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
 
   (use-package yasnippet-snippets)
 
-  (load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
+  (load "~/.emacs.d/snippets/yasnippet-scripts.el")
 
 #+end_src
 
@@ -1096,18 +1087,6 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
     (persp-mode-prefix-key (kbd "C-x M-p"))
     :init
     (persp-mode))
-
-#+end_src
-
-** Avy
-
-#+begin_src emacs-lisp 
-
-  (use-package avy
-    :config
-    (setq avy-all-windows 'all-frames)
-    (global-set-key (kbd "C-:") 'avy-goto-char)
-    )
 
 #+end_src
 
@@ -1129,7 +1108,7 @@ The =which-key= integration adds helpful descriptions of the various keys so you
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
     (lsp-headerline-breadcrumb-mode))
 
-  (use-package lsp-mode 
+  (use-package lsp-mode
     :commands (lsp lsp-deferred)
     :hook (lsp-mode . efs/lsp-mode-setup)
     :init
@@ -1190,7 +1169,7 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 
 **** treemacs
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
 
   (use-package treemacs
     :bind
@@ -1202,12 +1181,12 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 
 #+end_src
 
-**** treemacs-evil
+**** treemacs-evil 
 
 #+begin_src emacs-lisp 
 
-  (use-package treemacs-evil
-    :after treemacs evil)
+                                          ;(use-package treemacs-evil
+                                          ;  :after treemacs evil)
 
 #+end_src
 
@@ -1460,6 +1439,7 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 #+end_src
 
 *** TOML mode
+
 #+begin_src emacs-lisp 
 
   (use-package toml-mode)
@@ -1530,15 +1510,6 @@ We also use [[https://github.com/sebastiencs/company-box][company-box]] to furth
                                           ; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
   (use-package forge
     :after magit)
-
-#+end_src
-
-** Git-gutter
-
-#+begin_src emacs-lisp 
-
-                                          ;TODO: https://github.com/emacsorphanage/git-gutter
-                                          ;(use-package git-gutter)
 
 #+end_src
 
@@ -1690,6 +1661,7 @@ The downsides to Eshell are that it can be harder to configure than other packag
 
     #+end_src
 
+
 ** Vterm
 
 #+begin_src emacs-lisp 
@@ -1779,7 +1751,9 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
     :config
     (evil-collection-define-key 'normal 'dired-mode-map
       "h" 'dired-single-up-directory
-      "l" 'dired-single-buffer))
+      "l" 'dired-single-buffer)
+    (setq insert-directory-program "gls" dired-use-ls-dired t)
+    (setq dired-listing-switches "-al --group-directories-first"))
 
   (put 'dired-find-alternate-file 'disabled nil)
 
@@ -1902,7 +1876,7 @@ AuthMechs Login
 PassCmd +"pass school_email"
 Port 993
 SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+CertificateFile /usr/local/etc/openssl@3/cert.pem
 
 IMAPStore unm-remote
 Account unm
@@ -1927,7 +1901,7 @@ AuthMechs Login
 PassCmd +"pass school_work_email"
 Port 993
 SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+CertificateFile /usr/local/etc/openssl@3/cert.pem
 
 IMAPStore cs-unm-remote
 Account cs-unm
@@ -1960,8 +1934,10 @@ mu index
 
   (use-package mu4e
     :ensure nil
-                                          ; :load-path "/usr/share/emacs/site-lisp/mu4e/"
+    :load-path "/usr/local/share/emacs/site-lisp/mu/mu4e/"
                                           ; :defer 20 ; Wait until 20 seconds after startup
+    :init
+    (setq mu4e-mu-binary "/usr/local/bin/mu")
     :config
     (require 'mu4e)
     (require 'mu4e-org)
@@ -2042,7 +2018,6 @@ mu index
             ("/unm/Drafts". ?d)
             ("/unm/Prof. Kapur". ?k)
             ("/unm/Prof. Kapur/Side projects/Seminars/Beihang University". ?b)
-            ("/unm/TA Work/CS 241". ?c)
             ("/unm/You got a Package!". ?p)
             ("/unm/Archive". ?a)
             ("/cs-unm/Inbox". ?I)

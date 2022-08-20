@@ -46,7 +46,7 @@
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
-; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
+; NOTE: If you want to move everything out of the ~/.emacs.d folder
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
                                         ;(setq user-emacs-directory "~/.cache/emacs")
 
@@ -57,7 +57,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
-; NOTE: init.el is now generated from config.org.  Please edit that file
+; NOTE: init.el is now generated from Emacs.org.  Please edit that file
                                         ;       in Emacs and init.el will be generated automatically!
 
                                         ; You will most likely need to adjust this font size for your system!
@@ -157,27 +157,19 @@
   :ensure t
   :diminish dashboard-mode
   :config
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-set-navigator t)
   (setq dashboard-banner-logo-title "Welcome to Emacs!")
   (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
-  (setq dashboard-items '(
-                          (recents  . 10)
-                          (bookmarks . 10)
-                          (projects . 5)
-                          ))
+  (setq dashboard-items '((recents  . 10)
+                          (bookmarks . 10)))
   (dashboard-setup-startup-hook))
 
-(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-
-(set-face-attribute 'default nil :font "Fira Code Retina" :height efs/default-font-size)
+(set-face-attribute 'default nil :font "Hack" :height efs/default-font-size)
 
                                         ; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height efs/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "Hack" :height efs/default-font-size)
 
                                         ; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Fira Code Retina" :height efs/default-variable-font-size :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "Hack" :height efs/default-variable-font-size :weight 'regular)
 
 ; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -201,7 +193,7 @@
     "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
     "f" '(:ignore t :which-key "edit (f)iles")
     "fa" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))) :which-key "(a)genda")
-    "fe" '((lambda () (interactive) (find-file (expand-file-name "config.org" user-emacs-directory))) :which-key "(e)macs source")
+    "fe" '((lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/Emacs.org"))) :which-key "(e)macs source")
     "fw" '((lambda () (interactive) (find-file (expand-file-name (concat seminar-dir "/Reports/finding_certificates_qm_univariate/main.tex")))) :which-key "Current (w)ork")
     "fr" '(:ignore t :which-key "Edit (r)eferences")
     "frp" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))) :which-key "Edit (p)hD references")
@@ -226,7 +218,6 @@
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
@@ -500,13 +491,13 @@
                                         ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
   )
 
-(defun consult-grep-from-here ()
+(defun consult-grep-current-dir ()
   "Call `consult-grep' for the current buffer (a single file)."
   (interactive)
   (let ((consult-project-function (lambda (x) "./")))
     (consult-grep)))
 
-(defun consult-find-from-here ()
+(defun consult-find-current-dir ()
   "Call `consult-find' for the current buffer (a single file)."
   (interactive)
   (let ((consult-project-function (lambda (x) "./")))
@@ -558,7 +549,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Fira Code Retina" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Hack" :weight 'regular :height (cdr face)))
 
                                         ; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -787,7 +778,7 @@
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
-; Automatically tangle our config.org config file when we save it
+; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
                       (expand-file-name user-emacs-directory))
@@ -799,7 +790,7 @@
 
 (use-package yasnippet
   :config
-  (setq yas-snippet-dirs `(,(expand-file-name "snippets" user-emacs-directory)))
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   (setq yas-key-syntaxes '(yas-longest-key-from-whitespace "w_.()" "w_." "w_" "w"))
   (define-key yas-minor-mode-map (kbd "C-g") 'evil-normal-state)
   (define-key yas-keymap (kbd "C-g") 'evil-normal-state)
@@ -807,7 +798,7 @@
 
 (use-package yasnippet-snippets)
 
-(load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
+(load "~/.emacs.d/snippets/yasnippet-scripts.el")
 
 (use-package perspective
   :ensure t
@@ -818,17 +809,11 @@
   :init
   (persp-mode))
 
-(use-package avy
-  :config
-  (setq avy-all-windows 'all-frames)
-  (global-set-key (kbd "C-:") 'avy-goto-char)
-  )
-
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
-(use-package lsp-mode 
+(use-package lsp-mode
   :commands (lsp lsp-deferred)
   :hook (lsp-mode . efs/lsp-mode-setup)
   :init
@@ -879,8 +864,8 @@
   :config
   (setq treemacs-is-never-other-window t))
 
-(use-package treemacs-evil
-  :after treemacs evil)
+;(use-package treemacs-evil
+;  :after treemacs evil)
 
 (use-package lsp-treemacs
   :after lsp)
@@ -1052,9 +1037,6 @@
 (use-package forge
   :after magit)
 
-;TODO: https://github.com/emacsorphanage/git-gutter
-;(use-package git-gutter)
-
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
@@ -1124,7 +1106,9 @@
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
-    "l" 'dired-single-buffer))
+    "l" 'dired-single-buffer)
+  (setq insert-directory-program "gls" dired-use-ls-dired t)
+  (setq dired-listing-switches "-al --group-directories-first"))
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -1187,8 +1171,10 @@
 
 (use-package mu4e
   :ensure nil
-                                        ; :load-path "/usr/share/emacs/site-lisp/mu4e/"
+  :load-path "/usr/local/share/emacs/site-lisp/mu/mu4e/"
                                         ; :defer 20 ; Wait until 20 seconds after startup
+  :init
+  (setq mu4e-mu-binary "/usr/local/bin/mu")
   :config
   (require 'mu4e)
   (require 'mu4e-org)
@@ -1269,7 +1255,6 @@
           ("/unm/Drafts". ?d)
           ("/unm/Prof. Kapur". ?k)
           ("/unm/Prof. Kapur/Side projects/Seminars/Beihang University". ?b)
-          ("/unm/TA Work/CS 241". ?c)
           ("/unm/You got a Package!". ?p)
           ("/unm/Archive". ?a)
           ("/cs-unm/Inbox". ?I)
