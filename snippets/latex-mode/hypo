@@ -3,5 +3,4 @@
 # key: ;hypo
 # condition: 'auto
 # --
-\\hypo{$1}
-$0
+\\hypo{$1}$0
