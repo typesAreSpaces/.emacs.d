@@ -3,4 +3,4 @@
 # key: ;infer
 # condition: 'auto
 # --
-\\infer$1[${2:label}]{$3}$0
+\\infer${1:arity}[${2:label}]{$3}$0
