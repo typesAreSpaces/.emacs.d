@@ -3,6 +3,6 @@
 # key: ;proof
 # condition: 'auto
 # --
-\begin{proof}
+\begin{prooftree}
 	$0
-\end{proof}
+\end{prooftree}
