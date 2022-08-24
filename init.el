@@ -574,6 +574,14 @@
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
 
 (with-eval-after-load 'org
+                                        ; This is needed as of Org 9.2
+  (require 'org-tempo)
+
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python")))
+
+(with-eval-after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
@@ -611,7 +619,7 @@
 
   (setq org-todo-keywords
         '((sequence "GOAL(g)" "REMINDER(r!)" "|")
-          (sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "TODAY" "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL(e)" "|")))
 
@@ -778,14 +786,6 @@
          (TeX-mode . efs/org-mode-visual-fill)
          (LaTeX-mode . efs/org-mode-visual-fill)
          (mu4e-main-mode . efs/org-mode-visual-fill)))
-
-(with-eval-after-load 'org
-                                        ; This is needed as of Org 9.2
-  (require 'org-tempo)
-
-  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 ; Automatically tangle our config.org config file when we save it
 (defun efs/org-babel-tangle-config ()
