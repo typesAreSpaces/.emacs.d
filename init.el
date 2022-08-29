@@ -623,10 +623,6 @@
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL(e)" "|")))
 
-  (setq org-refile-targets
-        '(("Archive.org" :maxlevel . 1)
-          ("Tasks.org" :maxlevel . 1)))
-
                                         ; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
