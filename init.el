@@ -272,17 +272,17 @@
            (doom-modeline-enable-word-count t)
            (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode))))
 
-(setq-default mode-line-format '("%e"
-                                 (:eval
-                                  (if (equal
-                                       (shell-command-to-string
-                                        "ps aux | grep 'mbsync -a' | wc -l | xargs")
-                                       "3\n")
-                                      " Running mbsync " " "))
-                                 "%e" (:eval
-                                       (when (display-graphic-p) (shell-command-to-string
-                                                                  "~/.local/scripts/check_email.sh")))
-                                 (:eval (doom-modeline-format--main))))
+;; (setq-default mode-line-format '("%e"
+;;                                  (:eval
+;;                                   (if (equal
+;;                                        (shell-command-to-string
+;;                                         "ps aux | grep 'mbsync -a' | wc -l | xargs")
+;;                                        "3\n")
+;;                                       " Running mbsync " " "))
+;;                                  "%e" (:eval
+;;                                        (when (display-graphic-p) (shell-command-to-string
+;;                                                                   "~/.local/scripts/check_email.sh")))
+;;                                  (:eval (doom-modeline-format--main))))
 
 (use-package which-key
   :defer 0
