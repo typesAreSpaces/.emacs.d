@@ -1838,12 +1838,11 @@ Dial the GC threshold back down so that garbage collection happens more frequent
 It is necessary to install isync, setup a .mbsyncrc file like the following:
 
 #+begin_src  
-
 IMAPAccount unm
 Host outlook.office365.com
 User jabelcastellanosjoo@unm.edu
-AuthMechs Login
-PassCmd +"pass school_email"
+AuthMechs XOAUTH2
+PassCmd "~/.local/scripts/mail_scripts/mutt_oauth2.py ~/.local/scripts/mail_scripts/jabelcastellanosjoo@unm.edu.tokens"
 Port 993
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -1868,7 +1867,7 @@ IMAPAccount cs-unm
 Host snape.cs.unm.edu
 User jose.castellanosjoo@cs.unm.edu
 AuthMechs Login
-PassCmd +"pass school_work_email"
+PassCmd "pass email/jose.castellanosjoo@cs.unm.edu"
 Port 993
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -1888,7 +1887,6 @@ Patterns *
 Create Both
 Expunge Both
 SyncState *
-
 #+end_src
 
 Additionally, install mu and set it up with the following:
