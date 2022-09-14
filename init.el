@@ -272,17 +272,17 @@
            (doom-modeline-enable-word-count t)
            (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode))))
 
-(setq-default mode-line-format '("%e"
-                                 (:eval
-                                  (if (equal
-                                       (shell-command-to-string
-                                        "ps aux | grep 'mbsync -a' | wc -l | xargs")
-                                       "3\n")
-                                      " Running mbsync " " "))
-                                 "%e" (:eval
-                                       (when (display-graphic-p) (shell-command-to-string
-                                                                  "~/.local/scripts/check_email.sh")))
-                                 (:eval (doom-modeline-format--main))))
+;; (setq-default mode-line-format '("%e"
+;;                                  (:eval
+;;                                   (if (equal
+;;                                        (shell-command-to-string
+;;                                         "ps aux | grep 'mbsync -a' | wc -l | xargs")
+;;                                        "3\n")
+;;                                       " Running mbsync " " "))
+;;                                  "%e" (:eval
+;;                                        (when (display-graphic-p) (shell-command-to-string
+;;                                                                   "~/.local/scripts/check_email.sh")))
+;;                                  (:eval (doom-modeline-format--main))))
 
 (use-package which-key
   :defer 0
@@ -1147,40 +1147,6 @@
 ; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 
-(use-package hide-mode-line)
-
-(defun efs/presentation-setup ()
-  (setq text-scale-mode-amount 3)
-  (hide-mode-line-mode 1)
-  (org-display-inline-images)
-  (text-scale-mode 1))
-
-(defun efs/presentation-end ()
-  (hide-mode-line-mode 0)
-  (text-scale-mode 0))
-
-(use-package org-tree-slide
-  :hook ((org-tree-slide-play . efs/presentation-setup)
-         (org-tree-slide-stop . efs/presentation-end))
-  :custom
-  (org-tree-slide-slide-in-effect t)
-  (org-tree-slide-activate-message "Presentation started!")
-  (org-tree-slide-deactivate-message "Presentation finished!")
-  (org-tree-slide-header t)
-  (org-tree-slide-breadcrumbs " // ")
-  (org-image-actual-width nil))
-
-(use-package simpleclip
-  :config
-  (simpleclip-mode 1))
-
-(use-package markdown-preview-eww
-  :ensure nil
-  :straight (
-             :host github
-             :files ("*.el")
-             :repo "niku/markdown-preview-eww"))
-
 (use-package mu4e
   :ensure nil
                                         ; :load-path "/usr/share/emacs/site-lisp/mu4e/"
@@ -1192,6 +1158,20 @@
                                         ; This is set to 't' to avoid mail syncing issues when using mbsync
   (setq mu4e-change-filenames-when-moving t)
 
+                                        ; SMTP settings
+  (setq sendmail-program "/usr/bin/msmtp"
+        message-sendmail-f-is-evil t
+        message-sendmail-extra-arguments '("--read-envelope-from")
+        send-mail-function 'smtpmail-send-it
+        message-send-mail-function 'message-send-mail-with-sendmail)
+
+  (setq smtpmail-debug-info t)
+  (setq starttls-use-gnutls t)
+
+  (setq mu4e-update-interval 600)
+  (setq mu4e-get-mail-command "mbsync -a")
+  (setq mu4e-maildir "~/Mail")
+
                                         ; Just plain text
   (with-eval-after-load "mm-decode"
     (add-to-list 'mm-discouraged-alternatives "text/html")
@@ -1200,10 +1180,6 @@
   (defun jcs-view-in-eww (msg)
     (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
   (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
-
-  (setq mu4e-update-interval 600)
-  (setq mu4e-get-mail-command "mbsync -a")
-  (setq mu4e-maildir "~/Mail")
 
   (defun refile-func (msg)
     (cond
@@ -1238,6 +1214,7 @@
                   (mu4e-trash-folder  . "/unm/Trash")
                   (smtpmail-smtp-server . "smtp.office365.com")
                   (smtpmail-smtp-service . 587)
+                  (smtpmail-debug-info . t)
                   (smtpmail-stream-type . starttls)))
                                         ; School CS department account
          (make-mu4e-context
@@ -1272,8 +1249,8 @@
           ("/cs-unm/Trash". ?T)
           ("/cs-unm/Drafts". ?D))))
 
+                                        ; UX settings
 (setq mu4e-use-fancy-chars t)
-(setq message-send-mail-function 'smtpmail-send-it)
 (setq mu4e-attachment-dir  "~/Downloads")
 (setq mu4e-headers-show-threads nil)
 (setq mu4e-confirm-quit nil)
@@ -1290,3 +1267,37 @@
 
 (use-package org-mime
   :ensure t)
+
+(use-package hide-mode-line)
+
+(defun efs/presentation-setup ()
+  (setq text-scale-mode-amount 3)
+  (hide-mode-line-mode 1)
+  (org-display-inline-images)
+  (text-scale-mode 1))
+
+(defun efs/presentation-end ()
+  (hide-mode-line-mode 0)
+  (text-scale-mode 0))
+
+(use-package org-tree-slide
+  :hook ((org-tree-slide-play . efs/presentation-setup)
+         (org-tree-slide-stop . efs/presentation-end))
+  :custom
+  (org-tree-slide-slide-in-effect t)
+  (org-tree-slide-activate-message "Presentation started!")
+  (org-tree-slide-deactivate-message "Presentation finished!")
+  (org-tree-slide-header t)
+  (org-tree-slide-breadcrumbs " // ")
+  (org-image-actual-width nil))
+
+(use-package simpleclip
+  :config
+  (simpleclip-mode 1))
+
+(use-package markdown-preview-eww
+  :ensure nil
+  :straight (
+             :host github
+             :files ("*.el")
+             :repo "niku/markdown-preview-eww"))
