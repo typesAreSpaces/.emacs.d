@@ -255,7 +255,7 @@
   :commands command-log-mode)
 
 (use-package doom-themes
-  :init (load-theme 'doom-palenight t))
+  :init (load-theme 'doom-gruvbox t))
 
 (use-package all-the-icons)
 
