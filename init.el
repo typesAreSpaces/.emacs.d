@@ -1268,6 +1268,9 @@
 (use-package org-mime
   :ensure t)
 
+(load (expand-file-name "scripts/mu4e-view-save-all-attachments.el" user-emacs-directory))
+;(define-key mu4e-view-mode-map ">" 'mu4e-view-save-all-attachments)
+
 (use-package hide-mode-line)
 
 (defun efs/presentation-setup ()
