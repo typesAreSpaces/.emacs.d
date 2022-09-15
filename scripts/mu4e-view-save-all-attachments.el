@@ -27,7 +27,7 @@
   (cl-assert (and (eq major-mode 'mu4e-view-mode)
                   (derived-mode-p 'gnus-article-mode)))
   (let* ((msg (mu4e-message-at-point))
-         (id (cleanse-subject (mu4e-message-field msg :subject)))
+         (id (mu4e-message-field msg :subject))
          (attachdir (concat bulk-saved-attachments-dir "/" id))
 	 (parts (mu4e~view-gather-mime-parts))
          (handles '())
