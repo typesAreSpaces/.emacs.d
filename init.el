@@ -48,7 +48,7 @@
 
 ; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
-                                        ;(setq user-emacs-directory "~/.cache/emacs")
+; (setq user-emacs-directory "~/.cache/emacs")
 
 (use-package no-littering)
 
@@ -71,6 +71,10 @@
 (defvar ta-org-files-dir 
   (concat phd-thesis-dir
           "/Documents/Semesters/Fall/2022/TA-CS-241/Org-Files"))
+(defvar maxdiff-org-files-dir 
+  (concat phd-thesis-dir
+          "/Documents/Side-Projects/MaxDiffProject/org"))
+
 (defvar phd-thesis-write-ups-dir
   (concat phd-thesis-dir
           "/Documents/Write-Ups"))
@@ -88,6 +92,9 @@
 (defvar seminar-org-files-dir (concat seminar-dir "/Org-Files"))
 (defvar ta-tasks-mail 
   (concat ta-org-files-dir "/current_tasks.org"))
+
+(defvar maxdiff-agenda-mail
+  (concat maxdiff-org-files-dir "/agenda.org"))
 
 (defvar research-tasks-mail 
   (concat phd-thesis-org-files-dir "/research_tasks.org"))
@@ -692,7 +699,8 @@
                    (org-agenda-files org-agenda-files)))))))
 
   (setq org-capture-templates
-        `(("m" "Email Capture")
+        `(
+          ("m" "Email Capture")
           ("mr" "Research Tasks" entry
            (file+olp research-tasks-mail "EMAIL")
            "** TODO Check this email %a"
@@ -716,7 +724,13 @@
           ("mt" "TA Tasks" entry
            (file+olp ta-tasks-mail "EMAIL")
            "** TODO Check this email %a"
-           :immediate-finish t)))
+           :immediate-finish t)
+          ("mm" "MaxDiff Agenda" entry
+           (file+olp maxdiff-agenda-mail "EMAIL")
+           "** TODO Check this email %a"
+           :immediate-finish t)
+          )
+        )
 
   (define-key global-map (kbd "C-c s")
     (lambda () (interactive) (mark-whole-buffer) (org-sort-entries nil ?o)))
@@ -1269,7 +1283,7 @@
   :ensure t)
 
 (load (expand-file-name "scripts/mu4e-view-save-all-attachments.el" user-emacs-directory))
-;(define-key mu4e-view-mode-map ">" 'mu4e-view-save-all-attachments)
+                                        ;(define-key mu4e-view-mode-map ">" 'mu4e-view-save-all-attachments)
 
 (use-package hide-mode-line)
 
