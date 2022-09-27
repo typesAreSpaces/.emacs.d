@@ -3,4 +3,4 @@
 # key: ;date
 # condition: 'auto
 # --
-`(format-time-string "%Y-%m-%d")`
+`(format-time-string "%Y-%m-%d")` $0

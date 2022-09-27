@@ -3,6 +3,6 @@
 # key: ;proof
 # condition: 'auto
 # --
-\begin{proof}
+\begin{${1:$$(yas-choose-value '("proof" "prooftree"))}}
 	$0
-\end{proof}
+\end{$1}

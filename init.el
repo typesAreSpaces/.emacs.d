@@ -61,6 +61,10 @@
 (defvar ta-org-files-dir 
   (concat phd-thesis-dir
           "/Documents/Semesters/Fall/2022/TA-CS-241/Org-Files"))
+(defvar maxdiff-org-files-dir 
+  (concat phd-thesis-dir
+          "/Documents/Side-Projects/MaxDiffProject/org"))
+
 (defvar phd-thesis-write-ups-dir
   (concat phd-thesis-dir
           "/Documents/Write-Ups"))
@@ -78,6 +82,9 @@
 (defvar seminar-org-files-dir (concat seminar-dir "/Org-Files"))
 (defvar ta-tasks-mail 
   (concat ta-org-files-dir "/current_tasks.org"))
+
+(defvar maxdiff-agenda-mail
+  (concat maxdiff-org-files-dir "/agenda.org"))
 
 (defvar research-tasks-mail 
   (concat phd-thesis-org-files-dir "/research_tasks.org"))
@@ -478,6 +485,14 @@
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
 
 (with-eval-after-load 'org
+                                        ; This is needed as of Org 9.2
+  (require 'org-tempo)
+
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python")))
+
+(with-eval-after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
@@ -515,13 +530,9 @@
 
   (setq org-todo-keywords
         '((sequence "GOAL(g)" "REMINDER(r!)" "|")
-          (sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "TODAY" "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL(e)" "|")))
-
-  (setq org-refile-targets
-        '(("Archive.org" :maxlevel . 1)
-          ("Tasks.org" :maxlevel . 1)))
 
                                         ; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -592,7 +603,8 @@
                    (org-agenda-files org-agenda-files)))))))
 
   (setq org-capture-templates
-        `(("m" "Email Capture")
+        `(
+          ("m" "Email Capture")
           ("mr" "Research Tasks" entry
            (file+olp research-tasks-mail "EMAIL")
            "** TODO Check this email %a"
@@ -616,7 +628,13 @@
           ("mt" "TA Tasks" entry
            (file+olp ta-tasks-mail "EMAIL")
            "** TODO Check this email %a"
-           :immediate-finish t)))
+           :immediate-finish t)
+          ("mm" "MaxDiff Agenda" entry
+           (file+olp maxdiff-agenda-mail "EMAIL")
+           "** TODO Check this email %a"
+           :immediate-finish t)
+          )
+        )
 
   (define-key global-map (kbd "C-c s")
     (lambda () (interactive) (mark-whole-buffer) (org-sort-entries nil ?o)))
@@ -677,14 +695,6 @@
          (TeX-mode . efs/org-mode-visual-fill)
          (LaTeX-mode . efs/org-mode-visual-fill)
          (mu4e-main-mode . efs/org-mode-visual-fill)))
-
-(with-eval-after-load 'org
-                                        ; This is needed as of Org 9.2
-  (require 'org-tempo)
-
-  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 ; Automatically tangle our config.org config file when we save it
 (defun efs/org-babel-tangle-config ()
