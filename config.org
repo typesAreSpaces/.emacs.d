@@ -2009,6 +2009,7 @@ mu index
             ("/unm/Drafts". ?d)
             ("/unm/Prof. Kapur". ?k)
             ("/unm/Prof. Kapur/Side projects/Seminars/Beihang University". ?b)
+            ("/unm/Prof. Kapur/Side projects/MaxDiff Extension". ?m)
             ("/unm/TA Work/CS 241". ?c)
             ("/unm/You got a Package!". ?p)
             ("/unm/Archive". ?a)
