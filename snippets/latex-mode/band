@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Big Conjunction
-# key: ;bigland
+# key: ;band
 # condition: 'auto
 # --
 \\bigwedge_{$1}^{$2}{$3}$0
