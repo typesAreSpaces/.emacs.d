@@ -73,7 +73,7 @@
           "/Documents/Semesters/Fall/2022/TA-CS-241/Org-Files"))
 (defvar maxdiff-org-files-dir 
   (concat phd-thesis-dir
-          "/Documents/Side-Projects/MaxDiffProject/Documents/org"))
+          "/Documents/Side-Projects/MaxDiff/Documents/org"))
 
 (defvar phd-thesis-write-ups-dir
   (concat phd-thesis-dir
