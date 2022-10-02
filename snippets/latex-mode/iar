@@ -3,4 +3,4 @@
 # key: ;iar
 # condition: 'auto
 # --
-\\xhookrightarrow$0
+\\xhookrightarrow{$1}$0
