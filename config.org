@@ -122,7 +122,7 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
             "/Documents/Semesters/Fall/2022/TA-CS-241/Org-Files"))
   (defvar maxdiff-org-files-dir 
     (concat phd-thesis-dir
-            "/Documents/Side-Projects/MaxDiffProject/org"))
+            "/Documents/Side-Projects/MaxDiffProject/Documents/org"))
 
   (defvar phd-thesis-write-ups-dir
     (concat phd-thesis-dir
