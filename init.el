@@ -256,11 +256,6 @@
   :config
   (ivy-mode 1))
 
-(use-package ivy-rich
-  :after ivy
-  :init
-  (ivy-rich-mode 1))
-
 (use-package flx)
 
 (setq ivy-initial-inputs-alist nil)
