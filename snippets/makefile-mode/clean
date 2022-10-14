@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: clean
+# key: ;clean
+# condition: 'auto
+# --
+clean:
+	${1:rm -r ${2:\$(${3:OUTDIR})}}
+$0

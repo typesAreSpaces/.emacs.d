@@ -48,7 +48,7 @@
 
 ; NOTE: If you want to move everything out of the ~/.emacs.d folder
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
-                                        ;(setq user-emacs-directory "~/.cache/emacs")
+; (setq user-emacs-directory "~/.cache/emacs")
 
 (use-package no-littering)
 
@@ -71,6 +71,10 @@
 (defvar ta-org-files-dir 
   (concat phd-thesis-dir
           "/Documents/Semesters/Fall/2022/TA-CS-241/Org-Files"))
+(defvar maxdiff-org-files-dir 
+  (concat phd-thesis-dir
+          "/Documents/Side-Projects/MaxDiff/Documents/org"))
+
 (defvar phd-thesis-write-ups-dir
   (concat phd-thesis-dir
           "/Documents/Write-Ups"))
@@ -88,6 +92,9 @@
 (defvar seminar-org-files-dir (concat seminar-dir "/Org-Files"))
 (defvar ta-tasks-mail 
   (concat ta-org-files-dir "/current_tasks.org"))
+
+(defvar maxdiff-agenda-mail
+  (concat maxdiff-org-files-dir "/agenda.org"))
 
 (defvar research-tasks-mail 
   (concat phd-thesis-org-files-dir "/research_tasks.org"))
@@ -263,17 +270,17 @@
            (doom-modeline-enable-word-count t)
            (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode))))
 
-(setq-default mode-line-format '("%e"
-                                 (:eval
-                                  (if (equal
-                                       (shell-command-to-string
-                                        "ps aux | grep 'mbsync -a' | wc -l | xargs")
-                                       "3\n")
-                                      " Running mbsync " " "))
-                                 "%e" (:eval
-                                       (when (display-graphic-p) (shell-command-to-string
-                                                                  "~/.local/scripts/check_email.sh")))
-                                 (:eval (doom-modeline-format--main))))
+;; (setq-default mode-line-format '("%e"
+;;                                  (:eval
+;;                                   (if (equal
+;;                                        (shell-command-to-string
+;;                                         "ps aux | grep 'mbsync -a' | wc -l | xargs")
+;;                                        "3\n")
+;;                                       " Running mbsync " " "))
+;;                                  "%e" (:eval
+;;                                        (when (display-graphic-p) (shell-command-to-string
+;;                                                                   "~/.local/scripts/check_email.sh")))
+;;                                  (:eval (doom-modeline-format--main))))
 
 (use-package which-key
   :defer 0
@@ -565,6 +572,14 @@
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
 
 (with-eval-after-load 'org
+                                        ; This is needed as of Org 9.2
+  (require 'org-tempo)
+
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python")))
+
+(with-eval-after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
@@ -602,13 +617,9 @@
 
   (setq org-todo-keywords
         '((sequence "GOAL(g)" "REMINDER(r!)" "|")
-          (sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "TODAY" "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL(e)" "|")))
-
-  (setq org-refile-targets
-        '(("Archive.org" :maxlevel . 1)
-          ("Tasks.org" :maxlevel . 1)))
 
                                         ; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -679,7 +690,8 @@
                    (org-agenda-files org-agenda-files)))))))
 
   (setq org-capture-templates
-        `(("m" "Email Capture")
+        `(
+          ("m" "Email Capture")
           ("mr" "Research Tasks" entry
            (file+olp research-tasks-mail "EMAIL")
            "** TODO Check this email %a"
@@ -703,7 +715,13 @@
           ("mt" "TA Tasks" entry
            (file+olp ta-tasks-mail "EMAIL")
            "** TODO Check this email %a"
-           :immediate-finish t)))
+           :immediate-finish t)
+          ("mm" "MaxDiff Agenda" entry
+           (file+olp maxdiff-agenda-mail "EMAIL")
+           "** TODO Check this email %a"
+           :immediate-finish t)
+          )
+        )
 
   (define-key global-map (kbd "C-c s")
     (lambda () (interactive) (mark-whole-buffer) (org-sort-entries nil ?o)))
@@ -770,15 +788,7 @@
          (LaTeX-mode . efs/org-mode-visual-fill)
          (mu4e-main-mode . efs/org-mode-visual-fill)))
 
-(with-eval-after-load 'org
-                                        ; This is needed as of Org 9.2
-  (require 'org-tempo)
-
-  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("py" . "src python")))
-
-; Automatically tangle our Emacs.org config file when we save it
+; Automatically tangle our config.org config file when we save it
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
                       (expand-file-name user-emacs-directory))
@@ -1135,40 +1145,6 @@
 ; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 
-(use-package hide-mode-line)
-
-(defun efs/presentation-setup ()
-  (setq text-scale-mode-amount 3)
-  (hide-mode-line-mode 1)
-  (org-display-inline-images)
-  (text-scale-mode 1))
-
-(defun efs/presentation-end ()
-  (hide-mode-line-mode 0)
-  (text-scale-mode 0))
-
-(use-package org-tree-slide
-  :hook ((org-tree-slide-play . efs/presentation-setup)
-         (org-tree-slide-stop . efs/presentation-end))
-  :custom
-  (org-tree-slide-slide-in-effect t)
-  (org-tree-slide-activate-message "Presentation started!")
-  (org-tree-slide-deactivate-message "Presentation finished!")
-  (org-tree-slide-header t)
-  (org-tree-slide-breadcrumbs " // ")
-  (org-image-actual-width nil))
-
-(use-package simpleclip
-  :config
-  (simpleclip-mode 1))
-
-(use-package markdown-preview-eww
-  :ensure nil
-  :straight (
-             :host github
-             :files ("*.el")
-             :repo "niku/markdown-preview-eww"))
-
 (use-package mu4e
   :ensure nil
   :load-path "/usr/local/share/emacs/site-lisp/mu/mu4e/"
@@ -1182,6 +1158,20 @@
                                         ; This is set to 't' to avoid mail syncing issues when using mbsync
   (setq mu4e-change-filenames-when-moving t)
 
+                                        ; SMTP settings
+  (setq sendmail-program "/usr/bin/msmtp"
+        message-sendmail-f-is-evil t
+        message-sendmail-extra-arguments '("--read-envelope-from")
+        send-mail-function 'smtpmail-send-it
+        message-send-mail-function 'message-send-mail-with-sendmail)
+
+  (setq smtpmail-debug-info t)
+  (setq starttls-use-gnutls t)
+
+  (setq mu4e-update-interval 600)
+  (setq mu4e-get-mail-command "mbsync -a")
+  (setq mu4e-maildir "~/Mail")
+
                                         ; Just plain text
   (with-eval-after-load "mm-decode"
     (add-to-list 'mm-discouraged-alternatives "text/html")
@@ -1190,10 +1180,6 @@
   (defun jcs-view-in-eww (msg)
     (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
   (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
-
-  (setq mu4e-update-interval 600)
-  (setq mu4e-get-mail-command "mbsync -a")
-  (setq mu4e-maildir "~/Mail")
 
   (defun refile-func (msg)
     (cond
@@ -1228,6 +1214,7 @@
                   (mu4e-trash-folder  . "/unm/Trash")
                   (smtpmail-smtp-server . "smtp.office365.com")
                   (smtpmail-smtp-service . 587)
+                  (smtpmail-debug-info . t)
                   (smtpmail-stream-type . starttls)))
                                         ; School CS department account
          (make-mu4e-context
@@ -1255,14 +1242,16 @@
           ("/unm/Drafts". ?d)
           ("/unm/Prof. Kapur". ?k)
           ("/unm/Prof. Kapur/Side projects/Seminars/Beihang University". ?b)
+          ("/unm/Prof. Kapur/Side projects/MaxDiff Extension". ?m)
+          ("/unm/TA Work/CS 241". ?c)
           ("/unm/You got a Package!". ?p)
           ("/unm/Archive". ?a)
           ("/cs-unm/Inbox". ?I)
           ("/cs-unm/Trash". ?T)
           ("/cs-unm/Drafts". ?D))))
 
+                                        ; UX settings
 (setq mu4e-use-fancy-chars t)
-(setq message-send-mail-function 'smtpmail-send-it)
 (setq mu4e-attachment-dir  "~/Downloads")
 (setq mu4e-headers-show-threads nil)
 (setq mu4e-confirm-quit nil)
@@ -1279,3 +1268,40 @@
 
 (use-package org-mime
   :ensure t)
+
+(load (expand-file-name "scripts/mu4e-view-save-all-attachments.el" user-emacs-directory))
+                                        ;(define-key mu4e-view-mode-map ">" 'mu4e-view-save-all-attachments)
+
+(use-package hide-mode-line)
+
+(defun efs/presentation-setup ()
+  (setq text-scale-mode-amount 3)
+  (hide-mode-line-mode 1)
+  (org-display-inline-images)
+  (text-scale-mode 1))
+
+(defun efs/presentation-end ()
+  (hide-mode-line-mode 0)
+  (text-scale-mode 0))
+
+(use-package org-tree-slide
+  :hook ((org-tree-slide-play . efs/presentation-setup)
+         (org-tree-slide-stop . efs/presentation-end))
+  :custom
+  (org-tree-slide-slide-in-effect t)
+  (org-tree-slide-activate-message "Presentation started!")
+  (org-tree-slide-deactivate-message "Presentation finished!")
+  (org-tree-slide-header t)
+  (org-tree-slide-breadcrumbs " // ")
+  (org-image-actual-width nil))
+
+(use-package simpleclip
+  :config
+  (simpleclip-mode 1))
+
+(use-package markdown-preview-eww
+  :ensure nil
+  :straight (
+             :host github
+             :files ("*.el")
+             :repo "niku/markdown-preview-eww"))

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: infer
+# key: ;infer
+# condition: 'auto
+# --
+\\infer${1:arity}[${2:label}]{$3}$0
