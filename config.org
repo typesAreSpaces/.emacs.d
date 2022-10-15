@@ -91,7 +91,7 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 
                                           ; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
                                           ; reliably, set `user-emacs-directory` before loading no-littering!
-  ; (setq user-emacs-directory "~/.cache/emacs")
+                                          ; (setq user-emacs-directory "~/.cache/emacs")
 
   (use-package no-littering)
 
@@ -123,6 +123,9 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
   (defvar maxdiff-org-files-dir 
     (concat phd-thesis-dir
             "/Documents/Side-Projects/MaxDiff/Documents/org"))
+  (defvar maxdiff-write-ups-dir 
+    (concat phd-thesis-dir
+            "/Documents/Side-Projects/MaxDiff/Documents/notes"))
 
   (defvar phd-thesis-write-ups-dir
     (concat phd-thesis-dir
@@ -702,6 +705,7 @@ This Prescient configuration is optimized for use in System Crafters videos and 
            ("M-b" . citar-insert-preset))
     :custom
     (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
+                          ,(concat maxdiff-write-ups-dir "/references.bib")
                           ,(concat phd-thesis-write-ups-dir "/references.bib"))))
 
 #+end_src

@@ -48,7 +48,7 @@
 
 ; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
-; (setq user-emacs-directory "~/.cache/emacs")
+                                        ; (setq user-emacs-directory "~/.cache/emacs")
 
 (use-package no-littering)
 
@@ -74,6 +74,9 @@
 (defvar maxdiff-org-files-dir 
   (concat phd-thesis-dir
           "/Documents/Side-Projects/MaxDiff/Documents/org"))
+(defvar maxdiff-write-ups-dir 
+  (concat phd-thesis-dir
+          "/Documents/Side-Projects/MaxDiff/Documents/notes"))
 
 (defvar phd-thesis-write-ups-dir
   (concat phd-thesis-dir
@@ -525,6 +528,7 @@
          ("M-b" . citar-insert-preset))
   :custom
   (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
+                        ,(concat maxdiff-write-ups-dir "/references.bib")
                         ,(concat phd-thesis-write-ups-dir "/references.bib"))))
 
 (use-package helpful
