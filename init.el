@@ -48,7 +48,7 @@
 
 ; NOTE: If you want to move everything out of the ~/.emacs.d folder
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
-; (setq user-emacs-directory "~/.cache/emacs")
+                                        ; (setq user-emacs-directory "~/.cache/emacs")
 
 (use-package no-littering)
 
@@ -74,6 +74,9 @@
 (defvar maxdiff-org-files-dir 
   (concat phd-thesis-dir
           "/Documents/Side-Projects/MaxDiff/Documents/org"))
+(defvar maxdiff-write-ups-dir 
+  (concat phd-thesis-dir
+          "/Documents/Side-Projects/MaxDiff/Documents/notes"))
 
 (defvar phd-thesis-write-ups-dir
   (concat phd-thesis-dir
@@ -516,6 +519,7 @@
          ("M-b" . citar-insert-preset))
   :custom
   (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
+                        ,(concat maxdiff-write-ups-dir "/references.bib")
                         ,(concat phd-thesis-write-ups-dir "/references.bib"))))
 
 (use-package helpful
@@ -883,6 +887,11 @@
 (use-package lsp-ivy
   :after lsp)
 
+(use-package tree-sitter
+  :ensure t)
+(use-package tree-sitter-langs
+  :ensure t)
+
 (use-package dap-mode
                                         ; Uncomment the config below if you want all UI panes to be hidden by default!
                                         ; :custom
@@ -1005,6 +1014,11 @@
 (use-package z3-mode)
 
 (use-package toml-mode)
+
+(use-package lean4-mode
+  :straight (lean4-mode :type git :host github :repo "leanprover/lean4-mode")
+  ; to defer loading the package until required
+  :commands (lean4-mode))
 
 (use-package company
   :after lsp-mode

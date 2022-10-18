@@ -91,7 +91,7 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 
                                           ; NOTE: If you want to move everything out of the ~/.emacs.d folder
                                           ; reliably, set `user-emacs-directory` before loading no-littering!
-  ; (setq user-emacs-directory "~/.cache/emacs")
+                                          ; (setq user-emacs-directory "~/.cache/emacs")
 
   (use-package no-littering)
 
@@ -123,6 +123,9 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
   (defvar maxdiff-org-files-dir 
     (concat phd-thesis-dir
             "/Documents/Side-Projects/MaxDiff/Documents/org"))
+  (defvar maxdiff-write-ups-dir 
+    (concat phd-thesis-dir
+            "/Documents/Side-Projects/MaxDiff/Documents/notes"))
 
   (defvar phd-thesis-write-ups-dir
     (concat phd-thesis-dir
@@ -693,6 +696,7 @@ This Prescient configuration is optimized for use in System Crafters videos and 
            ("M-b" . citar-insert-preset))
     :custom
     (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
+                          ,(concat maxdiff-write-ups-dir "/references.bib")
                           ,(concat phd-thesis-write-ups-dir "/references.bib"))))
 
 #+end_src
@@ -1235,6 +1239,15 @@ Try these commands with =M-x=:
 
   #+end_src
 
+*** Tree-sitter
+
+#+begin_src emacs-lisp 
+  (use-package tree-sitter
+    :ensure t)
+  (use-package tree-sitter-langs
+    :ensure t)
+#+end_src
+
 *** Debugging with dap-mode
 
 [[https://emacs-lsp.github.io/dap-mode/][dap-mode]] is an excellent package for bringing rich debugging capabilities to Emacs via the [[https://microsoft.github.io/debug-adapter-protocol/][Debug Adapter Protocol]].  You should check out the [[https://emacs-lsp.github.io/dap-mode/page/configuration/][configuration docs]] to learn how to configure the debugger for your language.  Also make sure to check out the documentation for the debug adapter to see what configuration parameters are available to use for your debug templates!
@@ -1454,6 +1467,15 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 
   (use-package toml-mode)
 
+#+end_src
+
+*** Lean
+
+#+begin_src emacs-lisp 
+  (use-package lean4-mode
+    :straight (lean4-mode :type git :host github :repo "leanprover/lean4-mode")
+    ; to defer loading the package until required
+    :commands (lean4-mode))
 #+end_src
 
 ** Company Mode
