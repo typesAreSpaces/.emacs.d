@@ -1035,7 +1035,7 @@
 
 (use-package lean4-mode
   :straight (lean4-mode :type git :host github :repo "leanprover/lean4-mode")
-  ; to defer loading the package until required
+                                        ; to defer loading the package until required
   :commands (lean4-mode))
 
 (use-package company
@@ -1313,7 +1313,9 @@
 
 (defun efs/presentation-end ()
   (hide-mode-line-mode 0)
-  (text-scale-mode 0))
+  (text-scale-mode 0)
+  (efs/org-mode-setup)
+  (efs/org-mode-visual-fill))
 
 (use-package org-tree-slide
   :hook ((org-tree-slide-play . efs/presentation-setup)
