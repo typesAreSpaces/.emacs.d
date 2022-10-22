@@ -208,6 +208,9 @@
     "fr" '(:ignore t :which-key "Edit (r)eferences")
     "frp" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))) :which-key "Edit (p)hD references")
     "frs" '((lambda () (interactive) (find-file (expand-file-name (concat scc-reports-dir "/references.bib")))) :which-key "Edit (s)CC references")
+    "p" '(:ignore t :which-key "Presentation")
+    "pp" '(org-tree-slide-move-previous-tree :which-key "Previous slide")
+    "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide")
     "s"  '(shell-command :which-key "(s)hell command")
     "t"  '(:ignore t :which-key "(t)oggles")
     "tt" '(counsel-load-theme :which-key "Choose (t)heme")
@@ -1017,7 +1020,7 @@
 
 (use-package lean4-mode
   :straight (lean4-mode :type git :host github :repo "leanprover/lean4-mode")
-  ; to defer loading the package until required
+                                        ; to defer loading the package until required
   :commands (lean4-mode))
 
 (use-package company
@@ -1266,7 +1269,7 @@
 
                                         ; UX settings
 (setq mu4e-use-fancy-chars t)
-(setq mu4e-attachment-dir  "~/Downloads")
+(setq mu4e-attachment-dir  "~/tosend")
 (setq mu4e-headers-show-threads nil)
 (setq mu4e-confirm-quit nil)
 (setq mu4e-headers-results-limit -1)
@@ -1296,7 +1299,9 @@
 
 (defun efs/presentation-end ()
   (hide-mode-line-mode 0)
-  (text-scale-mode 0))
+  (text-scale-mode 0)
+  (efs/org-mode-setup)
+  (efs/org-mode-visual-fill))
 
 (use-package org-tree-slide
   :hook ((org-tree-slide-play . efs/presentation-setup)
