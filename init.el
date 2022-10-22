@@ -1283,7 +1283,7 @@
 
                                         ; UX settings
 (setq mu4e-use-fancy-chars t)
-(setq mu4e-attachment-dir  "~/Downloads")
+(setq mu4e-attachment-dir  "~/tosend")
 (setq mu4e-headers-show-threads nil)
 (setq mu4e-confirm-quit nil)
 (setq mu4e-headers-results-limit -1)
