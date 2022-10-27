@@ -181,13 +181,13 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-(set-face-attribute 'default nil :font "Fira Code Retina" :height efs/default-font-size)
+(set-face-attribute 'default nil :font "Hack Nerd Font Mono" :height efs/default-font-size)
 
                                         ; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height efs/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "Hack Nerd Font Mono" :height efs/default-font-size)
 
                                         ; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Fira Code Retina" :height efs/default-variable-font-size :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "Hack Nerd Font Mono" :height efs/default-variable-font-size :weight 'regular)
 
 ; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -572,7 +572,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Fira Code Retina" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Hack Nerd Font Mono" :weight 'regular :height (cdr face)))
 
                                         ; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -1177,131 +1177,6 @@
 
 ; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
-
-(use-package mu4e
-  :ensure nil
-                                        ; :load-path "/usr/share/emacs/site-lisp/mu4e/"
-                                        ; :defer 20 ; Wait until 20 seconds after startup
-  :config
-  (require 'mu4e)
-  (require 'mu4e-org)
-
-                                        ; This is set to 't' to avoid mail syncing issues when using mbsync
-  (setq mu4e-change-filenames-when-moving t)
-
-                                        ; SMTP settings
-  (setq sendmail-program "/usr/bin/msmtp"
-        message-sendmail-f-is-evil t
-        message-sendmail-extra-arguments '("--read-envelope-from")
-        send-mail-function 'smtpmail-send-it
-        message-send-mail-function 'message-send-mail-with-sendmail)
-
-  (setq smtpmail-debug-info t)
-  (setq starttls-use-gnutls t)
-
-  (setq mu4e-update-interval 600)
-  (setq mu4e-get-mail-command "mbsync -a")
-  (setq mu4e-maildir "~/Mail")
-
-                                        ; Just plain text
-  (with-eval-after-load "mm-decode"
-    (add-to-list 'mm-discouraged-alternatives "text/html")
-    (add-to-list 'mm-discouraged-alternatives "text/richtext"))
-
-  (defun jcs-view-in-eww (msg)
-    (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
-  (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
-
-  (defun refile-func (msg)
-    (cond
-     ((mu4e-message-contact-field-matches msg :to "kapur@cs.unm.edu")
-      "/unm/Prof. Kapur")
-     ((mu4e-message-contact-field-matches msg :from "kapur@cs.unm.edu")
-      "/unm/Prof. Kapur")
-     ((mu4e-message-contact-field-matches msg :cc "kapur@cs.unm.edu")
-      "/unm/Prof. Kapur")
-     ((mu4e-message-contact-field-matches msg :to "kapur@unm.edu")
-      "/unm/Prof. Kapur")
-     ((mu4e-message-contact-field-matches msg :from "kapur@unm.edu")
-      "/unm/Prof. Kapur")
-     ((mu4e-message-contact-field-matches msg :cc "kapur@unm.edu")
-      "/unm/Prof. Kapur")
-     (t "/unm/Archive")))
-
-  (setq mu4e-contexts
-        (list
-                                        ; School account
-         (make-mu4e-context
-          :name "School"
-          :match-func
-          (lambda (msg)
-            (when msg
-              (string-prefix-p "/unm" (mu4e-message-field msg :maildir))))
-          :vars '((user-mail-address  . "jabelcastellanosjoo@unm.edu")
-                  (user-full-name     . "Jose Abel Castellanos Joo")
-                  (mu4e-drafts-folder . "/unm/Drafts")
-                  (mu4e-sent-folder   . "/unm/Sent")
-                  (mu4e-refile-folder . refile-func)
-                  (mu4e-trash-folder  . "/unm/Trash")
-                  (smtpmail-smtp-server . "smtp.office365.com")
-                  (smtpmail-smtp-service . 587)
-                  (smtpmail-debug-info . t)
-                  (smtpmail-stream-type . starttls)))
-                                        ; School CS department account
-         (make-mu4e-context
-          :name "CS department"
-          :match-func
-          (lambda (msg)
-            (when msg
-              (string-prefix-p "/cs-unm" (mu4e-message-field msg :maildir))))
-          :vars '((user-mail-address  . "jose.castellanosjoo@cs.unm.edu")
-                  (user-full-name     . "Jose Abel Castellanos Joo")
-                  (mu4e-drafts-folder . "/cs-unm/Drafts")
-                                        ;(mu4e-sent-folder   . "/cs-unm/Sent")
-                  (mu4e-refile-folder . "/cs-unm/Inbox")
-                  (mu4e-trash-folder  . "/cs-unm/Trash")
-                  (smtpmail-smtp-server . "snape.cs.unm.edu")
-                  (smtpmail-smtp-service . 1200)
-                  (smtpmail-stream-type . starttls)))))
-
-  (setq mu4e-context-policy 'pick-first)
-
-  (setq mu4e-maildir-shortcuts
-        '(("/unm/Inbox" . ?i)
-          ("/unm/Sent"  . ?s)
-          ("/unm/Trash" . ?t)
-          ("/unm/Drafts". ?d)
-          ("/unm/Prof. Kapur". ?k)
-          ("/unm/Prof. Kapur/Side projects/Seminars/Beihang University". ?b)
-          ("/unm/Prof. Kapur/Side projects/MaxDiff Extension". ?m)
-          ("/unm/TA Work/CS 241". ?c)
-          ("/unm/You got a Package!". ?p)
-          ("/unm/Archive". ?a)
-          ("/cs-unm/Inbox". ?I)
-          ("/cs-unm/Trash". ?T)
-          ("/cs-unm/Drafts". ?D))))
-
-                                        ; UX settings
-(setq mu4e-use-fancy-chars t)
-(setq mu4e-attachment-dir  "~/tosend")
-(setq mu4e-headers-show-threads nil)
-(setq mu4e-confirm-quit nil)
-(setq mu4e-headers-results-limit -1)
-(setq mu4e-compose-signature "Best,\nJose")
-(setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
-(setq message-citation-line-function 'message-insert-formatted-citation-line)
-(setq
-                                        ; Display
- mu4e-view-show-addresses t
- mu4e-view-show-images t
- mu4e-view-image-max-width 800
- mu4e-hide-index-messages t)
-
-(use-package org-mime
-  :ensure t)
-
-(load (expand-file-name "scripts/mu4e-view-save-all-attachments.el" user-emacs-directory))
-                                        ;(define-key mu4e-view-mode-map ">" 'mu4e-view-save-all-attachments)
 
 (use-package hide-mode-line)
 
