@@ -1178,6 +1178,35 @@
 ; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 
+(use-package hide-mode-line)
+
+(defun efs/presentation-setup ()
+  (setq text-scale-mode-amount 3)
+  (hide-mode-line-mode 1)
+  (org-display-inline-images)
+  (text-scale-mode 1))
+
+(defun efs/presentation-end ()
+  (hide-mode-line-mode 0)
+  (text-scale-mode 0)
+  (efs/org-mode-setup)
+  (efs/org-mode-visual-fill))
+
+(use-package org-tree-slide
+  :hook ((org-tree-slide-play . efs/presentation-setup)
+         (org-tree-slide-stop . efs/presentation-end))
+  :custom
+  (org-tree-slide-slide-in-effect t)
+  (org-tree-slide-activate-message "Presentation started!")
+  (org-tree-slide-deactivate-message "Presentation finished!")
+  (org-tree-slide-header t)
+  (org-tree-slide-breadcrumbs " // ")
+  (org-image-actual-width nil))
+
+(use-package simpleclip
+  :config
+  (simpleclip-mode 1))
+
 (use-package mu4e
   :ensure nil
                                         ; :load-path "/usr/share/emacs/site-lisp/mu4e/"
@@ -1301,36 +1330,6 @@
   :ensure t)
 
 (load (expand-file-name "scripts/mu4e-view-save-all-attachments.el" user-emacs-directory))
-                                        ;(define-key mu4e-view-mode-map ">" 'mu4e-view-save-all-attachments)
-
-(use-package hide-mode-line)
-
-(defun efs/presentation-setup ()
-  (setq text-scale-mode-amount 3)
-  (hide-mode-line-mode 1)
-  (org-display-inline-images)
-  (text-scale-mode 1))
-
-(defun efs/presentation-end ()
-  (hide-mode-line-mode 0)
-  (text-scale-mode 0)
-  (efs/org-mode-setup)
-  (efs/org-mode-visual-fill))
-
-(use-package org-tree-slide
-  :hook ((org-tree-slide-play . efs/presentation-setup)
-         (org-tree-slide-stop . efs/presentation-end))
-  :custom
-  (org-tree-slide-slide-in-effect t)
-  (org-tree-slide-activate-message "Presentation started!")
-  (org-tree-slide-deactivate-message "Presentation finished!")
-  (org-tree-slide-header t)
-  (org-tree-slide-breadcrumbs " // ")
-  (org-image-actual-width nil))
-
-(use-package simpleclip
-  :config
-  (simpleclip-mode 1))
 
 (use-package markdown-preview-eww
   :ensure nil
