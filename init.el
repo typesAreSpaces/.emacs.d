@@ -209,7 +209,7 @@
     "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
     "f" '(:ignore t :which-key "edit (f)iles")
     "fa" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))) :which-key "(a)genda")
-    "fe" '((lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/config.org"))) :which-key "(e)macs source")
+    "fe" '((lambda () (interactive) (find-file (expand-file-name "config.org" user-emacs-directory))) :which-key "(e)macs source")
     "fw" '((lambda () (interactive) (find-file (expand-file-name (concat seminar-dir "/Reports/finding_certificates_qm_univariate/main.tex")))) :which-key "Current (w)ork")
     "fr" '(:ignore t :which-key "Edit (r)eferences")
     "frp" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))) :which-key "Edit (p)hD references")
@@ -813,7 +813,7 @@
 
 (use-package yasnippet
   :config
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (setq yas-snippet-dirs `(,(expand-file-name "snippets" user-emacs-directory)))
   (setq yas-key-syntaxes '(yas-longest-key-from-whitespace "w_.()" "w_." "w_" "w"))
   (define-key yas-minor-mode-map (kbd "C-g") 'evil-normal-state)
   (define-key yas-keymap (kbd "C-g") 'evil-normal-state)
@@ -821,7 +821,7 @@
 
 (use-package yasnippet-snippets)
 
-(load "~/.emacs.d/snippets/yasnippet-scripts.el")
+(load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
 
 (use-package perspective
   :ensure t
