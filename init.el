@@ -50,12 +50,15 @@
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
                                         ; (setq user-emacs-directory "~/.cache/emacs")
 
-(use-package no-littering)
+
+(when (not (version< emacs-version "26.3"))
+  (use-package no-littering))
 
                                         ; no-littering doesn't set this by default so we must place
                                         ; auto save files in the same path as it uses for sessions
-(setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+(when (not (version< emacs-version "26.3")))
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 ; NOTE: init.el is now generated from config.org.  Please edit that file
                                         ;       in Emacs and init.el will be generated automatically!
