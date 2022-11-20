@@ -138,7 +138,8 @@
 
 (column-number-mode)
 (setq-default display-line-numbers-type 'visual) 
-(global-display-line-numbers-mode t)
+(when (not (version< emacs-version "26.3"))
+  (global-display-line-numbers-mode t))
 
                                         ; Set frame transparency
 (set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
@@ -168,20 +169,21 @@
 
 (defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
 
-(use-package dashboard
-  :ensure t
-  :diminish dashboard-mode
-  :config
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-set-navigator t)
-  (setq dashboard-banner-logo-title "Welcome to Emacs!")
-  (when (file-exists-p dashboard-logo-path)
-    (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png"))
-  (setq dashboard-items '((recents  . 10)
-                          (bookmarks . 10)
-                          (projects . 5)))
-  (dashboard-setup-startup-hook))
+(when (not (version< emacs-version "26.1"))
+  (use-package dashboard
+    :ensure t
+    :diminish dashboard-mode
+    :config
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-set-navigator t)
+    (setq dashboard-banner-logo-title "Welcome to Emacs!")
+    (when (file-exists-p dashboard-logo-path)
+      (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png"))
+    (setq dashboard-items '((recents  . 10)
+                            (bookmarks . 10)
+                            (projects . 5)))
+    (dashboard-setup-startup-hook)))
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
@@ -256,17 +258,17 @@
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init)
-  (setq forge-add-default-bindings nil))
+(when (not (version< emacs-version "26.3"))
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init)
+    (setq forge-add-default-bindings nil)))
 
 (use-package evil-numbers
   :config
   (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
-  (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
-  )
+  (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
 
 (use-package command-log-mode
   :commands command-log-mode)
@@ -282,12 +284,13 @@
   :config (global-anzu-mode 1)
   (setq anzu-minimum-input-length 4))
 
-(use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :custom (
-           (doom-modeline-height 15)
-           (doom-modeline-enable-word-count t)
-           (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode))))
+(when (not (version< emacs-version "26.3"))
+  (use-package doom-modeline
+    :init (doom-modeline-mode 1)
+    :custom (
+             (doom-modeline-height 15)
+             (doom-modeline-enable-word-count t)
+             (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode)))))
 
 ;; (setq-default mode-line-format '("%e"
 ;;                                  (:eval
@@ -380,14 +383,15 @@
     :init
     (vertico-mode)))
 
-(use-package orderless
-  :init
-  ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
-  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-  (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
+(when (not (version< emacs-version "26.1"))
+  (use-package orderless
+    :init
+    ;; Configure a custom style dispatcher (see the Consult wiki)
+    ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+    ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion))))))
 
 (setq orderless-matching-styles '(orderless-flex))
 
@@ -792,10 +796,11 @@
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-(use-package ox-hugo
-  :ensure t
-  :pin melpa
-  :after ox)
+(when (not (version< emacs-version "26.3"))
+  (use-package ox-hugo
+    :ensure t
+    :pin melpa
+    :after ox))
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
@@ -855,18 +860,20 @@
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
-(use-package lsp-mode 
-  :commands (lsp lsp-deferred)
-  :hook (lsp-mode . efs/lsp-mode-setup)
-  :init
-  (setq lsp-keymap-prefix "C-l")
-  :config
-  (lsp-enable-which-key-integration t))
+(when (not (version< emacs-version "26.1"))
+  (use-package lsp-mode 
+    :commands (lsp lsp-deferred)
+    :hook (lsp-mode . efs/lsp-mode-setup)
+    :init
+    (setq lsp-keymap-prefix "C-l")
+    :config
+    (lsp-enable-which-key-integration t)))
 
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-position 'bottom))
+(when (not (version< emacs-version "26.1"))
+  (use-package lsp-ui
+    :hook (lsp-mode . lsp-ui-mode)
+    :custom
+    (lsp-ui-doc-position 'bottom)))
 
 ; :hook (
                                         ; (org-mode TeX-mode LaTeX-mode typescript-mode
@@ -900,40 +907,45 @@
                                  :files ("langs/*.el" "langs/queries"))
     :after tree-sitter))
 
-(use-package treemacs
-  :bind
-  (:map global-map
-        ([f4] . treemacs)
-        ([f5] . treemacs-select-window))
-  :config
-  (setq treemacs-is-never-other-window t))
+(when (not (version< emacs-version "26.1"))
+  (use-package treemacs
+    :bind
+    (:map global-map
+          ([f4] . treemacs)
+          ([f5] . treemacs-select-window))
+    :config
+    (setq treemacs-is-never-other-window t)))
 
-(use-package treemacs-evil
-  :after treemacs evil)
+(when (not (version< emacs-version "26.1"))
+  (use-package treemacs-evil
+    :after treemacs evil))
 
-(use-package lsp-treemacs
-  :after lsp)
+(when (not (version< emacs-version "26.1"))
+  (use-package lsp-treemacs
+    :after lsp))
 
-(use-package lsp-ivy
-  :after lsp)
+(when (not (version< emacs-version "26.1"))
+  (use-package lsp-ivy
+    :after lsp))
 
-(use-package dap-mode
+(when (not (version< emacs-version "26.1"))
+  (use-package dap-mode
                                         ; Uncomment the config below if you want all UI panes to be hidden by default!
                                         ; :custom
                                         ; (lsp-enable-dap-auto-configure nil)
                                         ; :config
                                         ; (dap-ui-mode 1)
-  :commands dap-debug
-  :config
+    :commands dap-debug
+    :config
                                         ; Set up Node debugging
-  (require 'dap-node)
-  (dap-node-setup) ; Automatically installs Node debug adapter if needed
+    (require 'dap-node)
+    (dap-node-setup) ; Automatically installs Node debug adapter if needed
 
                                         ; Bind `C-c l d` to `dap-hydra` for easy access
-  (general-define-key
-   :keymaps 'lsp-mode-map
-   :prefix lsp-keymap-prefix
-   "d" '(dap-hydra t :wk "debugger")))
+    (general-define-key
+     :keymaps 'lsp-mode-map
+     :prefix lsp-keymap-prefix
+     "d" '(dap-hydra t :wk "debugger"))))
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
@@ -960,17 +972,18 @@
 (add-hook 'TeX-mode-hook #'display-fill-column-indicator-mode)
 (add-hook 'LaTeX-mode-hook #'display-fill-column-indicator-mode)
 
-(use-package lsp-latex
-  :bind (:map lsp-mode-map
-              ("C-l w r" . lsp-workspace-restart)
-              ("C-l w b" . lsp-latex-build))
-  :config
-  (setq lsp-latex-build-executable "latexmk")
-  (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "%f"))
-  (setq lsp-latex-forward-search-after t)
-  (setq lsp-latex-build-on-save t)
-  (setq lsp-latex-forward-search-executable "zathura")
-  (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p")))
+(when (not (version< emacs-version "26.1"))
+  (use-package lsp-latex
+    :bind (:map lsp-mode-map
+                ("C-l w r" . lsp-workspace-restart)
+                ("C-l w b" . lsp-latex-build))
+    :config
+    (setq lsp-latex-build-executable "latexmk")
+    (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "%f"))
+    (setq lsp-latex-forward-search-after t)
+    (setq lsp-latex-build-on-save t)
+    (setq lsp-latex-forward-search-executable "zathura")
+    (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
@@ -990,14 +1003,15 @@
   (insert (decode-coding-string bibtex-entry 'utf-8))
   (bibtex-fill-entry))
 
-(use-package tex
-  :ensure auctex
-  :config
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq-default TeX-master nil)
-  (setq reftex-ref-macro-prompt nil)
-  (setq font-latex-fontify-script nil))
+(when (not (version< emacs-version "26.3"))
+  (use-package tex
+    :ensure auctex
+    :config
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t)
+    (setq-default TeX-master nil)
+    (setq reftex-ref-macro-prompt nil)
+    (setq font-latex-fontify-script nil)))
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
@@ -1056,8 +1070,9 @@
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+(when (not (version< emacs-version "26"))
+  (use-package company-box
+    :hook (company-mode . company-box-mode)))
 
 (use-package projectile
   :diminish projectile-mode
@@ -1075,16 +1090,18 @@
   :after projectile
   :config (counsel-projectile-mode))
 
-(use-package magit
-  :commands magit-status
-  :custom
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+(when (not (version< emacs-version "26.3"))
+  (use-package magit
+    :commands magit-status
+    :custom
+    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)))
 
                                         ; NOTE: Make sure to configure a GitHub token before using this package!
                                         ; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
                                         ; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
-(use-package forge
-  :after magit)
+(when (not (version< emacs-version "26.3"))
+  (use-package forge
+    :after magit))
 
 ;TODO: https://github.com/emacsorphanage/git-gutter
 ;(use-package git-gutter)
@@ -1092,7 +1109,8 @@
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
-(use-package rainbow-mode)
+(when (not (version< emacs-version "26.3"))
+  (use-package rainbow-mode))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -1156,17 +1174,19 @@
   :bind (("C-x C-j" . dired-jump))
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-single-up-directory
-    "l" 'dired-single-buffer))
+  (when (not (version< emacs-version "26.3"))
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "h" 'dired-single-up-directory
+      "l" 'dired-single-buffer)))
 
 (put 'dired-find-alternate-file 'disabled nil)
 
 (use-package dired-single
   :commands (dired dired-jump))
 
-(use-package all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode))
+(when (not (version< emacs-version "26.1"))
+  (use-package all-the-icons-dired
+    :hook (dired-mode . all-the-icons-dired-mode)))
 
 (use-package dired-open
   :commands (dired dired-jump)
