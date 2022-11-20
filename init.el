@@ -602,7 +602,8 @@
   (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
   (when (not (version< emacs-version "26.3"))
     (set-face-attribute 'line-number nil :inherit 'fixed-pitch))
-  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+  (when (not (version< emacs-version "26.3"))
+    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)))
 
 (when (not (version< (org-version) "9.2"))
   (with-eval-after-load 'org

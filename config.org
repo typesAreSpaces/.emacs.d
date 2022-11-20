@@ -807,7 +807,8 @@ The =efs/org-font-setup= function configures various text faces to tweak the siz
     (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
     (when (not (version< emacs-version "26.3"))
       (set-face-attribute 'line-number nil :inherit 'fixed-pitch))
-    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+    (when (not (version< emacs-version "26.3"))
+      (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)))
 
 #+end_src
 
