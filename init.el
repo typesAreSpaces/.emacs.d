@@ -1208,9 +1208,16 @@
   :config
   (simpleclip-mode 1))
 
+(use-package markdown-preview-eww
+  :ensure nil
+  :straight (
+             :host github
+             :files ("*.el")
+             :repo "niku/markdown-preview-eww"))
+
 (use-package mu4e
   :ensure nil
-                                        ; :load-path "/usr/share/emacs/site-lisp/mu4e/"
+  :load-path "/usr/share/emacs/site-lisp/mu4e/"
                                         ; :defer 20 ; Wait until 20 seconds after startup
   :config
   (require 'mu4e)
@@ -1331,10 +1338,3 @@
   :ensure t)
 
 (load (expand-file-name "scripts/mu4e-view-save-all-attachments.el" user-emacs-directory))
-
-(use-package markdown-preview-eww
-  :ensure nil
-  :straight (
-             :host github
-             :files ("*.el")
-             :repo "niku/markdown-preview-eww"))

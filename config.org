@@ -1910,6 +1910,19 @@ Dial the GC threshold back down so that garbage collection happens more frequent
 
 #+end_src
 
+** Markdown-EWW preview
+
+#+begin_src emacs-lisp 
+
+  (use-package markdown-preview-eww
+    :ensure nil
+    :straight (
+               :host github
+               :files ("*.el")
+               :repo "niku/markdown-preview-eww"))
+
+#+end_src
+
 ** Managing Mail with mu4e
 
 It is necessary to install isync, setup a .mbsyncrc file like the following:
@@ -1966,7 +1979,7 @@ Expunge Both
 SyncState *
 #+end_src
 
-Additionally, install mu and set it up with the following:
+Additionally, install mu using your package manager and set it up with the following:
 
 #+begin_src
 
@@ -1975,11 +1988,13 @@ mu index
 
 #+end_src
 
+mu4e comes included with mu. Search the path your package manager used to installed it and use it to change :load-path in the following block:
+
 #+begin_src emacs-lisp
 
   (use-package mu4e
     :ensure nil
-                                          ; :load-path "/usr/share/emacs/site-lisp/mu4e/"
+    :load-path "/usr/share/emacs/site-lisp/mu4e/"
                                           ; :defer 20 ; Wait until 20 seconds after startup
     :config
     (require 'mu4e)
@@ -2100,18 +2115,5 @@ mu index
     :ensure t)
 
   (load (expand-file-name "scripts/mu4e-view-save-all-attachments.el" user-emacs-directory))
-#+end_src
-
-** Markdown-EWW preview
-
-#+begin_src emacs-lisp 
-
-  (use-package markdown-preview-eww
-    :ensure nil
-    :straight (
-               :host github
-               :files ("*.el")
-               :repo "niku/markdown-preview-eww"))
-
 #+end_src
 
