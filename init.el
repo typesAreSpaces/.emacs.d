@@ -867,30 +867,32 @@
                                         ; maplev-mode c-mode c++-mode python-mode rustic-mode)
                                         ;. tree-sitter-hl-mode))
 
-(use-package tree-sitter
-  :straight (tree-sitter :type git
-                         :host github
-                         :repo "ubolonton/emacs-tree-sitter"
-                         :files ("lisp/*.el"))
-  :hook ((latex-mode python-mode rustic-mode) . tree-sitter-hl-mode)
-  :config
-  (add-to-list 'tree-sitter-major-mode-language-alist '(rustic-mode . rust))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(TeX-mode . latex))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(LaTeX-mode . latex))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(latex-mode . latex))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(bibtex-mode . bibtex))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(org-mode . org))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(c-mode . c))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(cpp-mode . cpp))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(python-mode . python))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-mode . typescript)))
+(when (fboundp 'module-load)
+  (use-package tree-sitter
+    :straight (tree-sitter :type git
+                           :host github
+                           :repo "ubolonton/emacs-tree-sitter"
+                           :files ("lisp/*.el"))
+    :hook ((latex-mode python-mode rustic-mode) . tree-sitter-hl-mode)
+    :config
+    (add-to-list 'tree-sitter-major-mode-language-alist '(rustic-mode . rust))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(TeX-mode . latex))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(LaTeX-mode . latex))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(latex-mode . latex))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(bibtex-mode . bibtex))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(org-mode . org))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(c-mode . c))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(cpp-mode . cpp))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(python-mode . python))
+    (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-mode . typescript))))
 
-(use-package tree-sitter-langs
-  :straight (tree-sitter-langs :type git
-                               :host github
-                               :repo "ubolonton/emacs-tree-sitter"
-                               :files ("langs/*.el" "langs/queries"))
-  :after tree-sitter)
+(when (fboundp 'module-load)
+  (use-package tree-sitter-langs
+    :straight (tree-sitter-langs :type git
+                                 :host github
+                                 :repo "ubolonton/emacs-tree-sitter"
+                                 :files ("langs/*.el" "langs/queries"))
+    :after tree-sitter))
 
 (use-package treemacs
   :bind
