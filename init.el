@@ -320,10 +320,11 @@
   :config
   (ivy-mode 1))
 
-(use-package ivy-rich
-  :after ivy
-  :init
-  (ivy-rich-mode 1))
+(when (not (version< emacs-version "27.1"))
+  (use-package ivy-rich
+    :after ivy
+    :init
+    (ivy-rich-mode 1)))
 
 (use-package flx)
 
@@ -335,14 +336,15 @@
 (setq ivy-re-builders-alist
       '((t . ivy--regex-fuzzy)))
 
-(use-package counsel
-  :bind (("C-M-j" . 'counsel-switch-buffer)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history))
-  :custom
-  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-  :config
-  (counsel-mode 1))
+(when (not (version< emacs-version "27.1"))
+  (use-package counsel
+    :bind (("C-M-j" . 'counsel-switch-buffer)
+           :map minibuffer-local-map
+           ("C-r" . 'counsel-minibuffer-history))
+    :custom
+    (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+    :config
+    (counsel-mode 1)))
 
 (use-package ivy-prescient
   :after counsel
@@ -353,22 +355,24 @@
                                         ;  (prescient-persist-mode 1)
   (ivy-prescient-mode 1))
 
-(use-package marginalia
-  ;; Either bind `marginalia-cycle` globally or only in the minibuffer
-  :bind (("M-A" . marginalia-cycle)
-         :map minibuffer-local-map
-         ("M-A" . marginalia-cycle))
+(when (not (version< emacs-version "27.1"))
+  (use-package marginalia
+    ;; Either bind `marginalia-cycle` globally or only in the minibuffer
+    :bind (("M-A" . marginalia-cycle)
+           :map minibuffer-local-map
+           ("M-A" . marginalia-cycle))
 
-  ;; The :init configuration is always executed (Not lazy!)
-  :init
+    ;; The :init configuration is always executed (Not lazy!)
+    :init
 
-  ;; Must be in the :init section of use-package such that the mode gets
-  ;; enabled right away. Note that this forces loading the package.
-  (marginalia-mode))
+    ;; Must be in the :init section of use-package such that the mode gets
+    ;; enabled right away. Note that this forces loading the package.
+    (marginalia-mode)))
 
-(use-package vertico
-  :init
-  (vertico-mode))
+(when (not (version< emacs-version "27.1"))
+  (use-package vertico
+    :init
+    (vertico-mode)))
 
 (use-package orderless
   :init
@@ -523,14 +527,15 @@
   (let ((consult-project-function (lambda (x) "./")))
     (consult-find)))
 
-(use-package citar
-  :bind (("C-c b" . citar-insert-citation)
-         :map minibuffer-local-map
-         ("M-b" . citar-insert-preset))
-  :custom
-  (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
-                        ,(concat maxdiff-write-ups-dir "/references.bib")
-                        ,(concat phd-thesis-write-ups-dir "/references.bib"))))
+(when (not (version< emacs-version "27.1"))
+  (use-package citar
+    :bind (("C-c b" . citar-insert-citation)
+           :map minibuffer-local-map
+           ("M-b" . citar-insert-preset))
+    :custom
+    (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
+                          ,(concat maxdiff-write-ups-dir "/references.bib")
+                          ,(concat phd-thesis-write-ups-dir "/references.bib")))))
 
 (use-package helpful
   :commands (helpful-callable helpful-variable helpful-command helpful-key)
@@ -585,7 +590,7 @@
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
 
-(when (not (version< emacs-version "26.3"))
+(when (not (version< (org-version) "9.2"))
   (with-eval-after-load 'org
                                         ; This is needed as of Org 9.2
     (require 'org-tempo)

@@ -451,10 +451,11 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     :config
     (ivy-mode 1))
 
-  (use-package ivy-rich
-    :after ivy
-    :init
-    (ivy-rich-mode 1))
+  (when (not (version< emacs-version "27.1"))
+    (use-package ivy-rich
+      :after ivy
+      :init
+      (ivy-rich-mode 1)))
 
   (use-package flx)
 
@@ -466,14 +467,15 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
   (setq ivy-re-builders-alist
         '((t . ivy--regex-fuzzy)))
 
-  (use-package counsel
-    :bind (("C-M-j" . 'counsel-switch-buffer)
-           :map minibuffer-local-map
-           ("C-r" . 'counsel-minibuffer-history))
-    :custom
-    (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-    :config
-    (counsel-mode 1))
+  (when (not (version< emacs-version "27.1"))
+    (use-package counsel
+      :bind (("C-M-j" . 'counsel-switch-buffer)
+             :map minibuffer-local-map
+             ("C-r" . 'counsel-minibuffer-history))
+      :custom
+      (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+      :config
+      (counsel-mode 1)))
 
 #+end_src
 
@@ -500,18 +502,19 @@ This Prescient configuration is optimized for use in System Crafters videos and 
 
 #+begin_src emacs-lisp 
 
-  (use-package marginalia
-    ;; Either bind `marginalia-cycle` globally or only in the minibuffer
-    :bind (("M-A" . marginalia-cycle)
-           :map minibuffer-local-map
-           ("M-A" . marginalia-cycle))
+  (when (not (version< emacs-version "27.1"))
+    (use-package marginalia
+      ;; Either bind `marginalia-cycle` globally or only in the minibuffer
+      :bind (("M-A" . marginalia-cycle)
+             :map minibuffer-local-map
+             ("M-A" . marginalia-cycle))
 
-    ;; The :init configuration is always executed (Not lazy!)
-    :init
+      ;; The :init configuration is always executed (Not lazy!)
+      :init
 
-    ;; Must be in the :init section of use-package such that the mode gets
-    ;; enabled right away. Note that this forces loading the package.
-    (marginalia-mode))
+      ;; Must be in the :init section of use-package such that the mode gets
+      ;; enabled right away. Note that this forces loading the package.
+      (marginalia-mode)))
 
 #+end_src
 
@@ -519,9 +522,10 @@ This Prescient configuration is optimized for use in System Crafters videos and 
 
 #+begin_src emacs-lisp 
 
-  (use-package vertico
-    :init
-    (vertico-mode))
+  (when (not (version< emacs-version "27.1"))
+    (use-package vertico
+      :init
+      (vertico-mode)))
 
 #+end_src
 
@@ -700,14 +704,15 @@ This Prescient configuration is optimized for use in System Crafters videos and 
 
 #+begin_src emacs-lisp 
 
-  (use-package citar
-    :bind (("C-c b" . citar-insert-citation)
-           :map minibuffer-local-map
-           ("M-b" . citar-insert-preset))
-    :custom
-    (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
-                          ,(concat maxdiff-write-ups-dir "/references.bib")
-                          ,(concat phd-thesis-write-ups-dir "/references.bib"))))
+  (when (not (version< emacs-version "27.1"))
+    (use-package citar
+      :bind (("C-c b" . citar-insert-citation)
+             :map minibuffer-local-map
+             ("M-b" . citar-insert-preset))
+      :custom
+      (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
+                            ,(concat maxdiff-write-ups-dir "/references.bib")
+                            ,(concat phd-thesis-write-ups-dir "/references.bib")))))
 
 #+end_src
 
@@ -800,7 +805,7 @@ You can add more =src= block templates below by copying one of the lines and cha
 
 #+begin_src emacs-lisp
 
-  (when (not (version< emacs-version "26.3"))
+  (when (not (version< (org-version) "9.2"))
     (with-eval-after-load 'org
                                           ; This is needed as of Org 9.2
       (require 'org-tempo)
@@ -809,7 +814,7 @@ You can add more =src= block templates below by copying one of the lines and cha
       (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
       (add-to-list 'org-structure-template-alist '("py" . "src python"))))
 
-    #+end_src
+#+end_src
 
 ** Configure Babel Languages
 
