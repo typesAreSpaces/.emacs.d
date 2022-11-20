@@ -1269,15 +1269,6 @@ Try these commands with =M-x=:
 
   #+end_src
 
-*** Tree-sitter
-
-#+begin_src emacs-lisp 
-  (use-package tree-sitter
-    :ensure t)
-  (use-package tree-sitter-langs
-    :ensure t)
-#+end_src
-
 *** Debugging with dap-mode
 
 [[https://emacs-lsp.github.io/dap-mode/][dap-mode]] is an excellent package for bringing rich debugging capabilities to Emacs via the [[https://microsoft.github.io/debug-adapter-protocol/][Debug Adapter Protocol]].  You should check out the [[https://emacs-lsp.github.io/dap-mode/page/configuration/][configuration docs]] to learn how to configure the debugger for your language.  Also make sure to check out the documentation for the debug adapter to see what configuration parameters are available to use for your debug templates!

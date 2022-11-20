@@ -911,11 +911,6 @@
 (use-package lsp-ivy
   :after lsp)
 
-(use-package tree-sitter
-  :ensure t)
-(use-package tree-sitter-langs
-  :ensure t)
-
 (use-package dap-mode
                                         ; Uncomment the config below if you want all UI panes to be hidden by default!
                                         ; :custom
