@@ -395,98 +395,101 @@
 
 (setq orderless-matching-styles '(orderless-flex))
 
-(use-package selectrum
-  :straight t
-  :config
-  (selectrum-mode +1))
+(when (not (version< emacs-version "26.3"))
+  (use-package selectrum
+    :straight t
+    :config
+    (selectrum-mode +1)))
 
-(use-package selectrum-prescient
-  :straight t
-  :after selectrum
-  :config
-  (selectrum-prescient-mode +1)
-  (prescient-persist-mode +1))
+(when (not (version< emacs-version "26.3"))
+  (use-package selectrum-prescient
+    :straight t
+    :after selectrum
+    :config
+    (selectrum-prescient-mode +1)
+    (prescient-persist-mode +1)))
 
-(use-package consult
-  :after selectrum
-  :straight t
+(when (not (version< emacs-version "26.3"))
+  (use-package consult
+    :after selectrum
+    :straight t
                                         ; Replace bindings. Lazily loaded due by `use-package'.
-  :bind (; C-x bindings (ctl-x-map)
-         ("C-x M-:" . consult-complex-command)     ; orig. repeat-complex-command
-         ("C-x 4 b" . consult-buffer-other-window) ; orig. switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ; orig. switch-to-buffer-other-frame
-         ("C-x r b" . consult-bookmark)            ; orig. bookmark-jump
-         ("C-x p b" . consult-project-buffer)      ; orig. project-switch-to-buffer
+    :bind (; C-x bindings (ctl-x-map)
+           ("C-x M-:" . consult-complex-command)     ; orig. repeat-complex-command
+           ("C-x 4 b" . consult-buffer-other-window) ; orig. switch-to-buffer-other-window
+           ("C-x 5 b" . consult-buffer-other-frame)  ; orig. switch-to-buffer-other-frame
+           ("C-x r b" . consult-bookmark)            ; orig. bookmark-jump
+           ("C-x p b" . consult-project-buffer)      ; orig. project-switch-to-buffer
                                         ; Custom M-# bindings for fast register access
-         ("M-#" . consult-register-load)
-         ("M-'" . consult-register-store)          ; orig. abbrev-prefix-mark (unrelated)
-         ("C-M-#" . consult-register)
+           ("M-#" . consult-register-load)
+           ("M-'" . consult-register-store)          ; orig. abbrev-prefix-mark (unrelated)
+           ("C-M-#" . consult-register)
                                         ; Other custom bindings
-         ("M-y" . consult-yank-pop)                ; orig. yank-pop
-         ("<help> a" . consult-apropos)            ; orig. apropos-command
+           ("M-y" . consult-yank-pop)                ; orig. yank-pop
+           ("<help> a" . consult-apropos)            ; orig. apropos-command
                                         ; M-g bindings (goto-map)
-         ("M-g e" . consult-compile-error)
-         ("M-g f" . consult-flymake)               ; Alternative: consult-flycheck
-         ("M-g g" . consult-goto-line)             ; orig. goto-line
-         ("M-g M-g" . consult-goto-line)           ; orig. goto-line
-         ("M-g o" . consult-outline)               ; Alternative: consult-org-heading
-         ("M-g m" . consult-mark)
-         ("M-g k" . consult-global-mark)
-         ("M-g i" . consult-imenu)
-         ("M-g I" . consult-imenu-multi)
+           ("M-g e" . consult-compile-error)
+           ("M-g f" . consult-flymake)               ; Alternative: consult-flycheck
+           ("M-g g" . consult-goto-line)             ; orig. goto-line
+           ("M-g M-g" . consult-goto-line)           ; orig. goto-line
+           ("M-g o" . consult-outline)               ; Alternative: consult-org-heading
+           ("M-g m" . consult-mark)
+           ("M-g k" . consult-global-mark)
+           ("M-g i" . consult-imenu)
+           ("M-g I" . consult-imenu-multi)
                                         ; M-s bindings (search-map)
-         ("M-s G" . consult-git-grep)
-         ("M-s r" . consult-ripgrep)
-         ("M-s L" . consult-line-multi)
-         ("M-s m" . consult-multi-occur)
-         ("M-s k" . consult-keep-lines)
-         ("M-s u" . consult-focus-lines)
+           ("M-s G" . consult-git-grep)
+           ("M-s r" . consult-ripgrep)
+           ("M-s L" . consult-line-multi)
+           ("M-s m" . consult-multi-occur)
+           ("M-s k" . consult-keep-lines)
+           ("M-s u" . consult-focus-lines)
                                         ; C-c bindings
-         ("C-c C-b" . consult-buffer)                ; orig. switch-to-buffer
-         ("C-c C-l" . consult-line)
-         ("C-c C-f" . consult-find)
-         ("C-c D" . consult-locate)
-         ("C-c h" . consult-history)
-         ("C-c m" . consult-mode-command)
-         ("C-c k" . consult-kmacro)
-         ("C-c C-g" . consult-grep)
+           ("C-c C-b" . consult-buffer)                ; orig. switch-to-buffer
+           ("C-c C-l" . consult-line)
+           ("C-c C-f" . consult-find)
+           ("C-c D" . consult-locate)
+           ("C-c h" . consult-history)
+           ("C-c m" . consult-mode-command)
+           ("C-c k" . consult-kmacro)
+           ("C-c C-g" . consult-grep)
                                         ; Isearch integration
-         ("M-s e" . consult-isearch-history)
-         :map isearch-mode-map
-         ("M-e" . consult-isearch-history)         ; orig. isearch-edit-string
-         ("M-s e" . consult-isearch-history)       ; orig. isearch-edit-string
-         ("M-s l" . consult-line)                  ; needed by consult-line to detect isearch
-         ("M-s L" . consult-line-multi)            ; needed by consult-line to detect isearch
+           ("M-s e" . consult-isearch-history)
+           :map isearch-mode-map
+           ("M-e" . consult-isearch-history)         ; orig. isearch-edit-string
+           ("M-s e" . consult-isearch-history)       ; orig. isearch-edit-string
+           ("M-s l" . consult-line)                  ; needed by consult-line to detect isearch
+           ("M-s L" . consult-line-multi)            ; needed by consult-line to detect isearch
                                         ; Minibuffer history
-         :map minibuffer-local-map
-         ("M-s" . consult-history)                 ; orig. next-matching-history-element
-         ("M-r" . consult-history))                ; orig. previous-matching-history-element
+           :map minibuffer-local-map
+           ("M-s" . consult-history)                 ; orig. next-matching-history-element
+           ("M-r" . consult-history))                ; orig. previous-matching-history-element
 
                                         ; Enable automatic preview at point in the *Completions* buffer. This is
                                         ; relevant when you use the default completion UI.
-  :hook (completion-list-mode . consult-preview-at-point-mode)
+    :hook (completion-list-mode . consult-preview-at-point-mode)
 
                                         ; The :init configuration is always executed (Not lazy)
-  :init
+    :init
 
                                         ; Optionally configure the register formatting. This improves the register
                                         ; preview for `consult-register', `consult-register-load',
                                         ; `consult-register-store' and the Emacs built-ins.
-  (setq register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
+    (setq register-preview-delay 0.5
+          register-preview-function #'consult-register-format)
 
                                         ; Optionally tweak the register preview window.
                                         ; This adds thin lines, sorting and hides the mode line of the window.
-  (advice-add #'register-preview :override #'consult-register-window)
+    (advice-add #'register-preview :override #'consult-register-window)
 
                                         ; Use Consult to select xref locations with preview
-  (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
+    (setq xref-show-xrefs-function #'consult-xref
+          xref-show-definitions-function #'consult-xref)
 
                                         ; Configure other variables and modes in the :config section,
                                         ; after lazily loading the package.
-  :config
-  (setq consult-project-root-function (lambda () (project-root (project-current))))
+    :config
+    (setq consult-project-root-function (lambda () (project-root (project-current))))
                                         ; Optionally configure preview. The default value
                                         ; is 'any, such that any key triggers the preview.
                                         ; (setq consult-preview-key 'any)
@@ -494,18 +497,18 @@
                                         ; (setq consult-preview-key (list (kbd "<S-down>") (kbd "<S-up>")))
                                         ; For some commands and buffer sources it is useful to configure the
                                         ; :preview-key on a per-command basis using the `consult-customize' macro.
-  (consult-customize
-   consult-theme
-   :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep
-   consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark consult--source-recent-file
-   consult--source-project-recent-file
-   :preview-key (kbd "M-."))
+    (consult-customize
+     consult-theme
+     :preview-key '(:debounce 0.2 any)
+     consult-ripgrep consult-git-grep consult-grep
+     consult-bookmark consult-recent-file consult-xref
+     consult--source-bookmark consult--source-recent-file
+     consult--source-project-recent-file
+     :preview-key (kbd "M-."))
 
                                         ; Optionally configure the narrowing key.
                                         ; Both < and C-+ work reasonably well.
-  (setq consult-narrow-key "<") ; (kbd "C-+")
+    (setq consult-narrow-key "<") ; (kbd "C-+")
 
                                         ; Optionally make narrowing help available in the minibuffer.
                                         ; You may want to use `embark-prefix-help-command' or which-key instead.
@@ -523,7 +526,7 @@
                                         ; (setq consult-project-function (lambda (_) (vc-root-dir)))
                                         ; 4. locate-dominating-file
                                         ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-  )
+    )) 
 
 (defun consult-grep-from-here ()
   "Call `consult-grep' for the current buffer (a single file)."
@@ -597,7 +600,8 @@
   (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
-  (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+  (when (not (version< emacs-version "26.3"))
+    (set-face-attribute 'line-number nil :inherit 'fixed-pitch))
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
 
 (when (not (version< (org-version) "9.2"))
