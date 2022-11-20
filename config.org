@@ -226,6 +226,8 @@ This section configures basic UI settings that remove unneeded elements to make 
 
 #+begin_src emacs-lisp
 
+  (defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+
   (use-package dashboard
     :ensure t
     :diminish dashboard-mode
@@ -234,7 +236,8 @@ This section configures basic UI settings that remove unneeded elements to make 
     (setq dashboard-set-file-icons t)
     (setq dashboard-set-navigator t)
     (setq dashboard-banner-logo-title "Welcome to Emacs!")
-    (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+    (when (file-exists-p dashboard-logo-path)
+      (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png"))
     (setq dashboard-items '((recents  . 10)
                             (bookmarks . 10)
                             (projects . 5)))
@@ -1992,10 +1995,16 @@ mu4e comes included with mu. Search the path your package manager used to instal
 
 #+begin_src emacs-lisp
 
-  (when (file-exists-p "/usr/share/emacs/site-lisp/mu4e/mu4e.el")
+  (defvar efs/mu4e-path "/usr/share/emacs/site-lisp/mu4e/")
+
+#+end_src
+
+#+begin_src emacs-lisp
+
+  (when (file-exists-p (concat efs/mu4e-path "mu4e.el"))
     (use-package mu4e
       :ensure nil
-      :load-path "/usr/share/emacs/site-lisp/mu4e/"
+      :load-path (lambda () (expand-file-name efs/mu4e-path))
                                           ; :defer 20 ; Wait until 20 seconds after startup
       :config
       (require 'mu4e)

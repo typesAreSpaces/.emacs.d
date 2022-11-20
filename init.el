@@ -163,6 +163,8 @@
 (add-to-list 'auto-mode-alist '("\\.dat\\'" . text-mode))
 (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode))
 
+(defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+
 (use-package dashboard
   :ensure t
   :diminish dashboard-mode
@@ -171,7 +173,8 @@
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-navigator t)
   (setq dashboard-banner-logo-title "Welcome to Emacs!")
-  (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+  (when (file-exists-p dashboard-logo-path)
+    (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png"))
   (setq dashboard-items '((recents  . 10)
                           (bookmarks . 10)
                           (projects . 5)))
@@ -1215,10 +1218,12 @@
              :files ("*.el")
              :repo "niku/markdown-preview-eww"))
 
-(when (file-exists-p "/usr/share/emacs/site-lisp/mu4e/mu4e.el")
+(defvar efs/mu4e-path "/usr/share/emacs/site-lisp/mu4e/")
+
+(when (file-exists-p (concat efs/mu4e-path "mu4e.el"))
   (use-package mu4e
     :ensure nil
-    :load-path "/usr/share/emacs/site-lisp/mu4e/"
+    :load-path (lambda () (expand-file-name efs/mu4e-path))
                                         ; :defer 20 ; Wait until 20 seconds after startup
     :config
     (require 'mu4e)
