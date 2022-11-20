@@ -169,17 +169,19 @@
 
 (defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
 
+(use-package all-the-icons)
+
 (when (not (version< emacs-version "26.1"))
   (use-package dashboard
     :ensure t
-    :diminish dashboard-mode
     :config
+    (setq dashboard-center-content t)
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
     (setq dashboard-set-navigator t)
     (setq dashboard-banner-logo-title "Welcome to Emacs!")
     (when (file-exists-p dashboard-logo-path)
-      (setq dashboard-startup-banner "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png"))
+      (setq dashboard-startup-banner dashboard-logo-path))
     (setq dashboard-items '((recents  . 10)
                             (bookmarks . 10)
                             (projects . 5)))
@@ -275,8 +277,6 @@
 
 (use-package doom-themes
   :init (load-theme 'doom-gruvbox t))
-
-(use-package all-the-icons)
 
 (use-package anzu)
 
