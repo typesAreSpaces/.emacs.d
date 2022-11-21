@@ -189,13 +189,29 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-(set-face-attribute 'default nil :font "Fira Code" :height efs/default-font-size)
+(defun font-candidate (&rest fonts)
+  "Return the first available font."
+  (--first (find-font (font-spec :name it)) fonts))
+
+(defvar efs/my-font (font-candidate "Fira Code"))
+
+(when (not (null efs/my-font))
+  (set-face-attribute 'default nil
+                      :font efs/my-font
+                      :height efs/default-font-size))
 
                                         ; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Fira Code" :height efs/default-font-size)
+(when (not (null efs/my-font))
+  (set-face-attribute 'fixed-pitch nil
+                      :font efs/my-font
+                      :height efs/default-font-size))
 
                                         ; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Fira Code" :height efs/default-variable-font-size :weight 'regular)
+(when (not (null efs/my-font))
+  (set-face-attribute 'variable-pitch nil
+                      :font efs/my-font
+                      :height efs/default-variable-font-size
+                      :weight 'regular))
 
 ; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
