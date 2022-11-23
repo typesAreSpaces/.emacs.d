@@ -1202,6 +1202,8 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+
 (use-package dired-single
   :commands (dired dired-jump))
 
