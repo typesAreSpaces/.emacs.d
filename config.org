@@ -252,6 +252,8 @@ This section configures basic UI settings that remove unneeded elements to make 
 
   (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
+  (with-eval-after-load 'dashboard (dashboard-refresh-buffer))
+
 #+end_src
 
 ** Font Configuration

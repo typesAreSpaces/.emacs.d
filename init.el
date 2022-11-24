@@ -189,6 +189,8 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
+(with-eval-after-load 'dashboard (dashboard-refresh-buffer))
+
 (defun font-candidate (&rest fonts)
   "Return the first available font."
   (--first (find-font (font-spec :name it)) fonts))
