@@ -188,6 +188,7 @@
     (dashboard-setup-startup-hook)))
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+(dashboard-refresh-buffer)
 
 (defun font-candidate (&rest fonts)
   "Return the first available font."
