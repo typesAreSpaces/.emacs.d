@@ -167,6 +167,22 @@
 (add-to-list 'auto-mode-alist '("\\.dat\\'" . text-mode))
 (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode))
 
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+                                        ; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/Documents/GithubProjects")
+    (setq projectile-project-search-path '("~/Documents/GithubProjects")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+  :after projectile
+  :config (counsel-projectile-mode))
+
 (defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
 
 (use-package all-the-icons)
@@ -1096,22 +1112,6 @@
 (when (not (version< emacs-version "26"))
   (use-package company-box
     :hook (company-mode . company-box-mode)))
-
-(use-package projectile
-  :diminish projectile-mode
-  :config (projectile-mode)
-  :custom ((projectile-completion-system 'ivy))
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :init
-                                        ; NOTE: Set this to the folder where you keep your Git repos!
-  (when (file-directory-p "~/Documents/GithubProjects")
-    (setq projectile-project-search-path '("~/Documents/GithubProjects")))
-  (setq projectile-switch-project-action #'projectile-dired))
-
-(use-package counsel-projectile
-  :after projectile
-  :config (counsel-projectile-mode))
 
 (when (not (version< emacs-version "26.3"))
   (use-package magit
