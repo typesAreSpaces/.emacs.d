@@ -251,7 +251,8 @@ This section configures basic UI settings that remove unneeded elements to make 
       (dashboard-setup-startup-hook)))
 
   (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-  (dashboard-refresh-buffer)
+
+  (with-eval-after-load 'dashboard (dashboard-refresh-buffer))
 
 #+end_src
 
