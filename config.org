@@ -226,30 +226,6 @@ This section configures basic UI settings that remove unneeded elements to make 
 
 #+end_src
 
-** Projectile
-
-[[https://projectile.mx/][Projectile]] is a project management library for Emacs which makes it a lot easier to navigate around code projects for various languages.  Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
-
-#+begin_src emacs-lisp
-
-  (use-package projectile
-    :diminish projectile-mode
-    :config (projectile-mode)
-    :custom ((projectile-completion-system 'ivy))
-    :bind-keymap
-    ("C-c p" . projectile-command-map)
-    :init
-                                          ; NOTE: Set this to the folder where you keep your Git repos!
-    (when (file-directory-p "~/Documents/GithubProjects")
-      (setq projectile-project-search-path '("~/Documents/GithubProjects")))
-    (setq projectile-switch-project-action #'projectile-dired))
-
-  (use-package counsel-projectile
-    :after projectile
-    :config (counsel-projectile-mode))
-
-#+end_src
-
 ** Dashboard Configuration
 
 #+begin_src emacs-lisp
@@ -260,6 +236,7 @@ This section configures basic UI settings that remove unneeded elements to make 
 
   (when (not (version< emacs-version "26.1"))
     (use-package dashboard
+      :after (projectile)
       :ensure t
       :config
       (setq dashboard-center-content t)
@@ -1576,6 +1553,30 @@ We also use [[https://github.com/sebastiencs/company-box][company-box]] to furth
   (when (not (version< emacs-version "26"))
     (use-package company-box
       :hook (company-mode . company-box-mode)))
+
+#+end_src
+
+** Projectile
+
+[[https://projectile.mx/][Projectile]] is a project management library for Emacs which makes it a lot easier to navigate around code projects for various languages.  Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
+
+#+begin_src emacs-lisp
+
+  (use-package projectile
+    :diminish projectile-mode
+    :config (projectile-mode)
+    :custom ((projectile-completion-system 'ivy))
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :init
+                                          ; NOTE: Set this to the folder where you keep your Git repos!
+    (when (file-directory-p "~/Documents/GithubProjects")
+      (setq projectile-project-search-path '("~/Documents/GithubProjects")))
+    (setq projectile-switch-project-action #'projectile-dired))
+
+  (use-package counsel-projectile
+    :after projectile
+    :config (counsel-projectile-mode))
 
 #+end_src
 
