@@ -232,13 +232,9 @@
                       :weight 'regular))
 
 ; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-i") 'evil-jump-forward)
-(global-set-key (kbd "C-o") 'evil-jump-backward)
 (global-set-key [(control x) (k)] 'kill-buffer)
 
 (use-package general
-  :after evil
   :config
   (general-create-definer efs/leader-keys
     :keymaps '(normal insert visual emacs)
@@ -247,7 +243,6 @@
 
   (efs/leader-keys 
     "e" '(:ignore t :which-key "(e)dit buffer")
-    "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
     "ei"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
     "ey" '(simpleclip-copy :which-key "clipboard (y)ank")
     "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
@@ -276,36 +271,6 @@
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
 
-(use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
-  :config
-  (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
-                                        ; Use visual line motions even outside of visual-line-mode buffers
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-  (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
-
-(when (not (version< emacs-version "26.3"))
-  (use-package evil-collection
-    :after evil
-    :config
-    (evil-collection-init)
-    (setq forge-add-default-bindings nil)))
-
-(use-package evil-numbers
-  :config
-  (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
-  (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
-
 (use-package command-log-mode
   :commands command-log-mode)
 
@@ -313,10 +278,6 @@
   :init (load-theme 'doom-gruvbox t))
 
 (use-package anzu)
-
-(use-package evil-anzu
-  :config (global-anzu-mode 1)
-  (setq anzu-minimum-input-length 4))
 
 (when (not (version< emacs-version "26.3"))
   (use-package doom-modeline
@@ -872,8 +833,6 @@
   :config
   (setq yas-snippet-dirs `(,(expand-file-name "snippets" user-emacs-directory)))
   (setq yas-key-syntaxes '(yas-longest-key-from-whitespace "w_.()" "w_." "w_" "w"))
-  (define-key yas-minor-mode-map (kbd "C-g") 'evil-normal-state)
-  (define-key yas-keymap (kbd "C-g") 'evil-normal-state)
   (yas-global-mode 1))
 
 (use-package yasnippet-snippets)
@@ -954,10 +913,6 @@
           ([f5] . treemacs-select-window))
     :config
     (setq treemacs-is-never-other-window t)))
-
-(when (not (version< emacs-version "26.1"))
-  (use-package treemacs-evil
-    :after treemacs evil))
 
 (when (not (version< emacs-version "26.1"))
   (use-package lsp-treemacs
@@ -1129,9 +1084,6 @@
 ;TODO: https://github.com/emacsorphanage/git-gutter
 ;(use-package git-gutter)
 
-(use-package evil-nerd-commenter
-  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
-
 (when (not (version< emacs-version "26.3"))
   (use-package rainbow-mode))
 
@@ -1162,9 +1114,6 @@
   (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
 
                                         ; Bind some useful keys for evil-mode
-  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
-  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
-  (evil-normalize-keymaps)
 
   (setq eshell-history-size         10000
         eshell-buffer-maximum-lines 10000
@@ -1195,12 +1144,7 @@
   :ensure nil
   :commands (dired dired-jump)
   :bind (("C-x C-j" . dired-jump))
-  :custom ((dired-listing-switches "-agho --group-directories-first"))
-  :config
-  (when (not (version< emacs-version "26.3"))
-    (evil-collection-define-key 'normal 'dired-mode-map
-      "h" 'dired-single-up-directory
-      "l" 'dired-single-buffer)))
+  :custom ((dired-listing-switches "-agho --group-directories-first")))
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -1222,10 +1166,7 @@
                                 ("mkv" . "mpv"))))
 
 (use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode)
-  :config
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "H" 'dired-hide-dotfiles-mode))
+  :hook (dired-mode . dired-hide-dotfiles-mode))
 
 ; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
