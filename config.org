@@ -199,10 +199,10 @@ This section configures basic UI settings that remove unneeded elements to make 
     (global-display-line-numbers-mode t))
 
                                           ; Set frame transparency
-  ;(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-  ;(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-  ;(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-  ;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+                                          ;(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
+                                          ;(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
+                                          ;(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+                                          ;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
                                           ; Disable line numbers for some modes
   (dolist (mode '(org-mode-hook
@@ -315,27 +315,20 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 
 ** Keybinding Configuration
 
-This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil-mode]] for a Vi-like modal editing experience.  [[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with which-key.  [[https://github.com/emacs-evil/evil-collection][evil-collection]] is used to automatically configure various Emacs modes with Vi-like keybindings for evil-mode.
+[[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with which-key. 
 
 #+begin_src emacs-lisp
 
                                           ; Make ESC quit prompts
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-  (global-set-key (kbd "C-i") 'evil-jump-forward)
-  (global-set-key (kbd "C-o") 'evil-jump-backward)
   (global-set-key [(control x) (k)] 'kill-buffer)
 
   (use-package general
-    :after evil
     :config
     (general-create-definer efs/leader-keys
-      :keymaps '(normal insert visual emacs)
-      :prefix "SPC"
-      :global-prefix "C-SPC")
+      :prefix "C-c C-SPC")
 
     (efs/leader-keys 
       "e" '(:ignore t :which-key "(e)dit buffer")
-      "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
       "ei"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
       "ey" '(simpleclip-copy :which-key "clipboard (y)ank")
       "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
@@ -363,35 +356,6 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
       "w" '(:ignore t :which-key "(w)indows related")
       "wu" '(winner-undo :which-key "Winner (u)ndo")
       "wr" '(winner-redo :which-key "Winner (r)edo")))
-
-  (use-package evil
-    :init
-    (setq evil-want-integration t)
-    (setq evil-want-keybinding nil)
-    (setq evil-want-C-u-scroll t)
-    :config
-    (evil-mode 1)
-    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
-                                          ; Use visual line motions even outside of visual-line-mode buffers
-    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-    (evil-set-initial-state 'messages-buffer-mode 'normal)
-    (evil-set-initial-state 'dashboard-mode 'normal))
-
-  (when (not (version< emacs-version "26.3"))
-    (use-package evil-collection
-      :after evil
-      :config
-      (evil-collection-init)
-      (setq forge-add-default-bindings nil)))
-
-  (use-package evil-numbers
-    :config
-    (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
-    (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
 
 #+end_src
 
@@ -428,10 +392,6 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 #+begin_src emacs-lisp
 
   (use-package anzu)
-
-  (use-package evil-anzu
-    :config (global-anzu-mode 1)
-    (setq anzu-minimum-input-length 4))
 
   (when (not (version< emacs-version "26.3"))
     (use-package doom-modeline
@@ -1153,8 +1113,6 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
     :config
     (setq yas-snippet-dirs `(,(expand-file-name "snippets" user-emacs-directory)))
     (setq yas-key-syntaxes '(yas-longest-key-from-whitespace "w_.()" "w_." "w_" "w"))
-    (define-key yas-minor-mode-map (kbd "C-g") 'evil-normal-state)
-    (define-key yas-keymap (kbd "C-g") 'evil-normal-state)
     (yas-global-mode 1))
 
   (use-package yasnippet-snippets)
@@ -1271,16 +1229,6 @@ The =which-key= integration adds helpful descriptions of the various keys so you
             ([f5] . treemacs-select-window))
       :config
       (setq treemacs-is-never-other-window t)))
-
-#+end_src
-
-**** treemacs-evil 
-
-#+begin_src emacs-lisp 
-
-  (when (not (version< emacs-version "26.1"))
-    (use-package treemacs-evil
-      :after treemacs evil))
 
 #+end_src
 
@@ -1600,17 +1548,6 @@ We also use [[https://github.com/sebastiencs/company-box][company-box]] to furth
 
 #+end_src
 
-** Commenting
-
-Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=) doesn't always comment things in the way you might expect so we use [[https://github.com/redguardtoo/evil-nerd-commenter][evil-nerd-commenter]] to provide a more familiar behavior.  I've bound it to =M-/= since other editors sometimes use this binding but you could also replace Emacs' =M-;= binding with this command.
-
-#+begin_src emacs-lisp
-
-  (use-package evil-nerd-commenter
-    :bind ("M-/" . evilnc-comment-or-uncomment-lines))
-
-#+end_src
-
 ** Rainbow mode
 
 #+begin_src emacs-lisp 
@@ -1638,8 +1575,6 @@ Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=)
 =term-mode= is a built-in terminal emulator in Emacs.  Because it is written in Emacs Lisp, you can start using it immediately with very little configuration.  If you are on Linux or macOS, =term-mode= is a great choice to get started because it supports fairly complex terminal applications (=htop=, =vim=, etc) and works pretty reliably.  However, because it is written in Emacs Lisp, it can be slower than other options like =vterm=.  The speed will only be an issue if you regularly run console apps with a lot of output.
 
 One important thing to understand is =line-mode= versus =char-mode=.  =line-mode= enables you to use normal Emacs keybindings while moving around in the terminal buffer while =char-mode= sends most of your keypresses to the underlying terminal.  While using =term-mode=, you will want to be in =char-mode= for any terminal applications that have their own keybindings.  If you're just in your usual shell, =line-mode= is sufficient and feels more integrated with Emacs.
-
-With =evil-collection= installed, you will automatically switch to =char-mode= when you enter Evil's insert mode (press =i=).  You will automatically be switched back to =line-mode= when you enter Evil's normal mode (press =ESC=).
 
 Run a terminal with =M-x term!=
 
@@ -1724,9 +1659,6 @@ The downsides to Eshell are that it can be harder to configure than other packag
         (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
 
                                               ; Bind some useful keys for evil-mode
-        (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
-        (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
-        (evil-normalize-keymaps)
 
         (setq eshell-history-size         10000
               eshell-buffer-maximum-lines 10000
@@ -1835,12 +1767,7 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
     :ensure nil
     :commands (dired dired-jump)
     :bind (("C-x C-j" . dired-jump))
-    :custom ((dired-listing-switches "-agho --group-directories-first"))
-    :config
-    (when (not (version< emacs-version "26.3"))
-      (evil-collection-define-key 'normal 'dired-mode-map
-        "h" 'dired-single-up-directory
-        "l" 'dired-single-buffer)))
+    :custom ((dired-listing-switches "-agho --group-directories-first")))
 
   (put 'dired-find-alternate-file 'disabled nil)
 
@@ -1862,10 +1789,7 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
                                   ("mkv" . "mpv"))))
 
   (use-package dired-hide-dotfiles
-    :hook (dired-mode . dired-hide-dotfiles-mode)
-    :config
-    (evil-collection-define-key 'normal 'dired-mode-map
-      "H" 'dired-hide-dotfiles-mode))
+    :hook (dired-mode . dired-hide-dotfiles-mode))
 
 #+end_src
 

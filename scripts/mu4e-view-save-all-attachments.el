@@ -10,8 +10,8 @@
 ;; Suggested keybinding
 ;;  mnemnonic: > is to redirect the files to output everything.
 
-;(define-key mu4e-view-mode-map (kbd ">") 'mu4e-view-save-all-attachments)
-(define-key evil-normal-state-map (kbd ">") 'mu4e-view-save-all-attachments)
+(define-key mu4e-view-mode-map (kbd ">") 'mu4e-view-save-all-attachments)
+;(define-key evil-normal-state-map (kbd ">") 'mu4e-view-save-all-attachments)
 
 (defvar bulk-saved-attachments-dir mu4e-attachment-dir)
 
