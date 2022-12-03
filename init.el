@@ -237,9 +237,7 @@
 (use-package general
   :config
   (general-create-definer efs/leader-keys
-    :keymaps '(normal insert visual emacs)
-    :prefix "SPC"
-    :global-prefix "C-SPC")
+    :prefix "C-c C-SPC")
 
   (efs/leader-keys 
     "e" '(:ignore t :which-key "(e)dit buffer")
