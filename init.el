@@ -183,7 +183,7 @@
   :after projectile
   :config (counsel-projectile-mode))
 
-(defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+(defvar dashboard-logo-path "~/Pictures/Wallpapers/480px-EmacsIcon.svg.png")
 
 (use-package all-the-icons)
 

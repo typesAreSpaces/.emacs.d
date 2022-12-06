@@ -254,7 +254,7 @@ This section configures basic UI settings that remove unneeded elements to make 
 
 #+begin_src emacs-lisp
 
-  (defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+  (defvar dashboard-logo-path "~/Pictures/Wallpapers/480px-EmacsIcon.svg.png")
 
   (use-package all-the-icons)
 
