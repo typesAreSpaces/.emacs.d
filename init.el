@@ -1139,6 +1139,9 @@
 
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
+(setq insert-directory-program "gls" dired-use-ls-dired t)
+(setq dired-listing-switches "-al --group-directories-first")
+
 (use-package dired-single
   :commands (dired dired-jump))
 
