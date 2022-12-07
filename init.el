@@ -1082,7 +1082,7 @@
   (add-to-list 'auto-mode-alist '("\\.m\\'" . wolfram-mode))
   (add-to-list 'auto-mode-alist '("\\.wl\\'" . wolfram-mode)))
 
-(use-package z3-mode)
+;(use-package z3-mode)
 
 (use-package toml-mode)
 

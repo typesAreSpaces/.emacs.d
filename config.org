@@ -1533,7 +1533,7 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 
 #+begin_src emacs-lisp 
 
-  (use-package z3-mode)
+  ;(use-package z3-mode)
 
 #+end_src
 
