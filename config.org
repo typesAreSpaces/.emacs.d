@@ -1490,14 +1490,6 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 
 #+end_src
 
-*** Z3 mode
-
-#+begin_src emacs-lisp 
-
-  (use-package z3-mode)
-
-#+end_src
-
 *** TOML mode
 #+begin_src emacs-lisp 
 
