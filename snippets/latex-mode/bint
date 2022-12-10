@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Big Intersection'
+# key: ;bint
+# condition: 'auto
+# --
+\\bigcap_{$1}^{$2}{$3}$0

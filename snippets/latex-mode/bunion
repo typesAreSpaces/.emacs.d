@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Big Union'
+# key: ;bunion
+# condition: 'auto
+# --
+\\bigcup_{$1}^{$2}{$3}$0
