@@ -183,7 +183,7 @@
   :after projectile
   :config (counsel-projectile-mode))
 
-(defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+(defvar dashboard-logo-path "~/Pictures/Wallpapers/480px-EmacsIcon.svg.png")
 
 (use-package all-the-icons)
 
@@ -1035,8 +1035,6 @@
   (setq wolfram-path "~/.Mathematica")
   (add-to-list 'auto-mode-alist '("\\.m\\'" . wolfram-mode))
   (add-to-list 'auto-mode-alist '("\\.wl\\'" . wolfram-mode)))
-
-(use-package z3-mode)
 
 (use-package toml-mode)
 
