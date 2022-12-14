@@ -246,6 +246,7 @@
     :global-prefix "C-SPC")
 
   (efs/leader-keys 
+    "c" '(org-capture nil :which-key "(o)rg-capture")
     "e" '(:ignore t :which-key "(e)dit buffer")
     "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
     "ei"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
@@ -271,7 +272,6 @@
     "lp" '((lambda () (interactive) (yasnippet/goto-parent-file)) :which-key "Goto (p)arent")
     "lf" '((lambda () (interactive) (LaTeX-fill-buffer nil)) :which-key "Latex (f)ill buffer")
     "lF" '((lambda () (interactive) (lsp-latex-forward-search)) :which-key "Latex (f)orward search")
-    "o" '(org-capture nil :which-key "(o)rg-capture")
     "w" '(:ignore t :which-key "(w)indows related")
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
@@ -685,7 +685,7 @@
   (setq org-habit-graph-column 60)
 
   (setq org-todo-keywords
-        '((sequence "GOAL(g)" "REMINDER(r!)" "EXTERNAL" "|")
+        '((sequence "GOAL(g)" "REMINDER(r!)" "EXTERNAL" "IDEA" "|")
           (sequence "TODAY" "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL(e)" "|")))
