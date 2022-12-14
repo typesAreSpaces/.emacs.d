@@ -686,7 +686,7 @@
 
   (setq org-todo-keywords
         '((sequence "GOAL(g)" "REMINDER(r!)" "EXTERNAL" "IDEA" "|")
-          (sequence "TODAY" "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "TODAY" "LATER" "NEXT(n)" "TODO(t)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL(e)" "|")))
 
