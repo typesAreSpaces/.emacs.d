@@ -68,7 +68,7 @@
 (defvar efs/default-variable-font-size 160)
 
                                         ; Make frame transparency overridable
-(defvar efs/frame-transparency '(90 . 90))
+(defvar efs/frame-transparency '(95 . 95))
 
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
 (defvar ta-org-files-dir 
@@ -142,10 +142,10 @@
   (global-display-line-numbers-mode t))
 
                                         ; Set frame transparency
-                                        ;(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-                                        ;(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-                                        ;(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-                                        ;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
+(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
                                         ; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
