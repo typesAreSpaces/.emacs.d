@@ -445,7 +445,7 @@
 
 (when (not (version< emacs-version "26.3"))
   (use-package consult
-    :after vertico
+    :after selectrum
     :straight t
                                         ; Replace bindings. Lazily loaded due by `use-package'.
     :bind (; C-x bindings (ctl-x-map)
@@ -673,7 +673,7 @@
           ("\\.x?html?\\'" . default)
           ("\\.pdf\\'" . "zathura %s")))
 
-  (setq org-ellipsis " ▾")
+  (setq org-ellipsis "⇓")
 
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
@@ -1017,6 +1017,8 @@
                 ("C-l w r" . lsp-workspace-restart)
                 ("C-l w b" . lsp-latex-build))
     :config
+                                        ; (setq lsp-completion-provider :none)
+                                        ; (setq auto-complete-mode -1)
     (setq lsp-latex-build-executable "latexmk")
     (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "%f"))
     (setq lsp-latex-forward-search-after t)
