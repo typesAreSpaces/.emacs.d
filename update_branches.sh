@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-brach=$(git rev-parse --abbrev-ref HEAD)
+branch=$(git rev-parse --abbrev-ref HEAD)
 git checkout main
 git pull
 git checkout cs-unm-machine
