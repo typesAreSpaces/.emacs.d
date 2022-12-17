@@ -327,35 +327,66 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 	  (general-create-definer efs/leader-keys
 	    :prefix "C-c C-SPC")
 
-	  (efs/leader-keys 
-	    "e" '(:ignore t :which-key "(e)dit buffer")
-	    "ei"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
-	    "ey" '(simpleclip-copy :which-key "clipboard (y)ank")
-	    "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
-	    "f" '(:ignore t :which-key "edit (f)iles")
-	    "fa" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))) :which-key "(a)genda")
-	    "fe" '((lambda () (interactive) (find-file (expand-file-name "config.org" user-emacs-directory))) :which-key "(e)macs source")
-	    "fw" '((lambda () (interactive) (find-file (expand-file-name (concat seminar-dir "/Reports/finding_certificates_qm_univariate/main.tex")))) :which-key "Current (w)ork")
-	    "fr" '(:ignore t :which-key "Edit (r)eferences")
-	    "frp" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))) :which-key "Edit (p)hD references")
-	    "frs" '((lambda () (interactive) (find-file (expand-file-name (concat scc-reports-dir "/references.bib")))) :which-key "Edit (s)CC references")
-	    "p" '(:ignore t :which-key "Presentation")
-	    "pp" '(org-tree-slide-move-previous-tree :which-key "Previous slide")
-	    "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide")
-	    "s"  '(shell-command :which-key "(s)hell command")
-	    "t"  '(:ignore t :which-key "(t)oggles")
-	    "tt" '(counsel-load-theme :which-key "Choose (t)heme")
-	    "g" '(magit-status :which-key "Ma(g)it status")
-	    "d" '(dired-jump :which-key "(d)ired jump")
-	    "m" '(mu4e :which-key "(m)u4e")
-	    "l" '(:ignore t :which-key "(l)atex related")
-	    "lp" '((lambda () (interactive) (yasnippet/goto-parent-file)) :which-key "Goto (p)arent")
-	    "lf" '((lambda () (interactive) (LaTeX-fill-buffer nil)) :which-key "Latex (f)ill buffer")
-	    "lF" '((lambda () (interactive) (lsp-latex-forward-search)) :which-key "Latex (f)orward search")
-	    "o" '(org-capture nil :which-key "(o)rg-capture")
-	    "w" '(:ignore t :which-key "(w)indows related")
-	    "wu" '(winner-undo :which-key "Winner (u)ndo")
-	    "wr" '(winner-redo :which-key "Winner (r)edo")))    
+    (efs/leader-keys 
+      "c" '(org-capture nil :which-key "(o)rg-capture")
+      "e" '(:ignore t :which-key "(e)dit buffer")
+      "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
+      "ei"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
+      "ey" '(simpleclip-copy :which-key "clipboard (y)ank")
+      "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
+      "f" '(:ignore t :which-key "edit (f)iles")
+      "fa" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))) :which-key "(a)genda")
+      "fe" '((lambda () (interactive) (find-file (expand-file-name "config.org" user-emacs-directory))) :which-key "(e)macs source")
+      "fw" '((lambda () (interactive) (find-file (expand-file-name (concat seminar-dir "/Reports/finding_certificates_qm_univariate/main.tex")))) :which-key "Current (w)ork")
+      "fr" '(:ignore t :which-key "Edit (r)eferences")
+      "frp" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))) :which-key "Edit (p)hD references")
+      "frs" '((lambda () (interactive) (find-file (expand-file-name (concat scc-reports-dir "/references.bib")))) :which-key "Edit (s)CC references")
+      "p" '(:ignore t :which-key "Presentation")
+      "pp" '(org-tree-slide-move-previous-tree :which-key "Previous slide")
+      "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide")
+      "s"  '(shell-command :which-key "(s)hell command")
+      "t"  '(:ignore t :which-key "(t)oggles")
+      "tt" '(counsel-load-theme :which-key "Choose (t)heme")
+      "g" '(magit-status :which-key "Ma(g)it status")
+      "d" '(dired-jump :which-key "(d)ired jump")
+      "m" '(mu4e :which-key "(m)u4e")
+      "l" '(:ignore t :which-key "(l)atex related")
+      "lp" '((lambda () (interactive) (yasnippet/goto-parent-file)) :which-key "Goto (p)arent")
+      "lf" '((lambda () (interactive) (LaTeX-fill-buffer nil)) :which-key "Latex (f)ill buffer")
+      "lF" '((lambda () (interactive) (lsp-latex-forward-search)) :which-key "Latex (f)orward search")
+      "w" '(:ignore t :which-key "(w)indows related")
+      "wu" '(winner-undo :which-key "Winner (u)ndo")
+      "wr" '(winner-redo :which-key "Winner (r)edo")))
+
+  (use-package evil
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-want-C-i-jump nil)
+    :config
+    (evil-mode 1)
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+                                          ; Use visual line motions even outside of visual-line-mode buffers
+    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+    (evil-set-initial-state 'messages-buffer-mode 'normal)
+    (evil-set-initial-state 'dashboard-mode 'normal))
+
+  (when (not (version< emacs-version "26.3"))
+    (use-package evil-collection
+      :after evil
+      :config
+      (evil-collection-init)
+      (setq forge-add-default-bindings nil)))
+
+  (use-package evil-numbers
+    :config
+    (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+    (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
 
 #+end_src
 
@@ -870,7 +901,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
             ("\\.x?html?\\'" . default)
             ("\\.pdf\\'" . "zathura %s")))
 
-    (setq org-ellipsis " ▾")
+    (setq org-ellipsis "⇓")
 
     (setq org-agenda-start-with-log-mode t)
     (setq org-log-done 'time)
@@ -882,8 +913,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (setq org-habit-graph-column 60)
 
     (setq org-todo-keywords
-          '((sequence "GOAL(g)" "REMINDER(r!)" "|")
-            (sequence "TODAY" "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          '((sequence "GOAL(g)" "REMINDER(r!)" "EXTERNAL" "IDEA" "|")
+            (sequence "TODAY" "NEXT(n)" "TODO(t)" "LATER" "|" "DONE(d!)")
             (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
             (sequence "EMAIL(e)" "|")))
 
@@ -1130,7 +1161,7 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
     :bind (("C-x k" . persp-kill-buffer*)
            ("C-x C-b" . persp-ivy-switch-buffer))
     :custom
-    (persp-mode-prefix-key (kbd "C-x M-p"))
+    (persp-mode-prefix-key (kbd "M-p"))
     :init
     (persp-mode))
 
@@ -1374,6 +1405,8 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
                   ("C-l w r" . lsp-workspace-restart)
                   ("C-l w b" . lsp-latex-build))
       :config
+                                          ; (setq lsp-completion-provider :none)
+                                          ; (setq auto-complete-mode -1)
       (setq lsp-latex-build-executable "latexmk")
       (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "%f"))
       (setq lsp-latex-forward-search-after t)
