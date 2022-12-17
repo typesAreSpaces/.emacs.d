@@ -885,7 +885,7 @@
   :bind (("C-x k" . persp-kill-buffer*)
          ("C-x C-b" . persp-ivy-switch-buffer))
   :custom
-  (persp-mode-prefix-key (kbd "C-x M-p"))
+  (persp-mode-prefix-key (kbd "C-x C-a"))
   :init
   (persp-mode))
 
