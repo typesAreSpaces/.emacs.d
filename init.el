@@ -68,7 +68,7 @@
 (defvar efs/default-variable-font-size 160)
 
                                         ; Make frame transparency overridable
-(defvar efs/frame-transparency '(90 . 90))
+(defvar efs/frame-transparency '(95 . 95))
 
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
 (defvar ta-org-files-dir 
@@ -142,10 +142,10 @@
   (global-display-line-numbers-mode t))
 
                                         ; Set frame transparency
-                                        ;(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-                                        ;(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-                                        ;(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-                                        ;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
+(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
                                         ; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
@@ -630,7 +630,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "open -a Preview %s")))
+          ("\\.pdf\\'" . "zathura %s")))
 
   (setq org-ellipsis "⇓")
 
@@ -970,7 +970,7 @@
     (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "%f"))
     (setq lsp-latex-forward-search-after t)
     (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable "open -a Preview")
+    (setq lsp-latex-forward-search-executable "zathura")
     (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))))
 
 (defun get-bibtex-from-doi (doi)
