@@ -630,7 +630,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "/opt/homebrew/bin/zathura %s")))
+          ("\\.pdf\\'" . "zathura %s")))
 
   (setq org-ellipsis "⇓")
 
@@ -919,7 +919,7 @@
     (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "%f"))
     (setq lsp-latex-forward-search-after t)
     (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/zathura")
+    (setq lsp-latex-forward-search-executable "zathura")
     (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))))
 
 (defun get-bibtex-from-doi (doi)
