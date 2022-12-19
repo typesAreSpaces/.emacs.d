@@ -1156,6 +1156,8 @@
     :ensure nil
     :load-path (lambda () (expand-file-name efs/mu4e-path))
                                         ; :defer 20 ; Wait until 20 seconds after startup
+    :init
+    (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
     :config
     (require 'mu4e)
     (require 'mu4e-org)
