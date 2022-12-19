@@ -670,7 +670,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "/Applications/Skim.app/Contents/SharedSupport/displayline %s")))
+          ("\\.pdf\\'" . "open -a Skim %s")))
 
   (setq org-ellipsis "⇓")
 
