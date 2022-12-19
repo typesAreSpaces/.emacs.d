@@ -630,7 +630,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "zathura %s")))
+          ("\\.pdf\\'" . "/Applications/Skim.app/Contents/SharedSupport/displayline %s")))
 
   (setq org-ellipsis "⇓")
 
@@ -919,8 +919,8 @@
     (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "%f"))
     (setq lsp-latex-forward-search-after t)
     (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable "zathura")
-    (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))))
+    (setq lsp-latex-forward-search-executable "/Applications/Skim.app/Contents/SharedSupport/displayline")
+    (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
