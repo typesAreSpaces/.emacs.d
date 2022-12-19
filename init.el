@@ -211,7 +211,8 @@
   "Return the first available font."
   (--first (find-font (font-spec :name it)) fonts))
 
-(defvar efs/my-font (font-candidate "Hack"))
+                                        ;(defvar efs/my-font (font-candidate "Hack"))
+(defvar efs/my-font "Hack")
 
 (when (not (null efs/my-font))
   (set-face-attribute 'default nil
@@ -1208,7 +1209,7 @@
              :files ("*.el")
              :repo "niku/markdown-preview-eww"))
 
-(defvar efs/mu4e-path "/usr/local/share/emacs/site-lisp/mu/mu4e/")
+(defvar efs/mu4e-path "/opt/homebrew/share/emacs/site-lisp/mu/mu4e/")
 
 (when (file-exists-p (concat efs/mu4e-path "mu4e.el"))
   (use-package mu4e
@@ -1223,7 +1224,7 @@
     (setq mu4e-change-filenames-when-moving t)
 
                                         ; SMTP settings
-    (setq sendmail-program "/usr/bin/msmtp"
+    (setq sendmail-program "/opt/homebrew/bin/msmtp"
           message-sendmail-f-is-evil t
           message-sendmail-extra-arguments '("--read-envelope-from")
           send-mail-function 'smtpmail-send-it
