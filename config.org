@@ -170,6 +170,41 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 
 This section configures basic UI settings that remove unneeded elements to make Emacs look a lot more minimal and modern.  If you're just getting started in Emacs, the menu bar might be helpful so you can remove the =(menu-bar-mode -1)= line if you'd like to still see that.
 
+In order to start up a daemon, use the following command
+#+begin_src 
+
+launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist  
+launchctl unload -w ~/Library/LaunchAgents/.emacs-daemon.plist  
+launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist  
+
+#+end_src
+
+The content of .emacs-daemon.plist is
+
+#+begin_src
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+ <plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>gnu.emacs.daemon</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/emacs</string>
+    <string>--with-profile=jose</string>
+    <string>--daemon</string>
+  </array>
+ <key>RunAtLoad</key>
+ <true/>
+ <key>ServiceDescription</key>
+ <string>Gnu Emacs Daemon</string>
+</dict>
+</plist>
+
+#+end_src
+
 #+begin_src emacs-lisp
 
   (setq inhibit-startup-message t)
@@ -908,7 +943,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
             (directory . emacs)
             ("\\.mm\\'" . default)
             ("\\.x?html?\\'" . default)
-            ("\\.pdf\\'" . "zathura %s")))
+            ("\\.pdf\\'" . "/Applications/Skim.app/Contents/SharedSupport/displayline %s")))
 
     (setq org-ellipsis "⇓")
 
@@ -1341,6 +1376,11 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
 
 *** Latex
 
+To setup Skim use select Skim > Preferences...
+- Preset: Custom
+- Command: emacsclient
+- Arguments: -s jose --no-wait +%line "%file"
+
 #+begin_src emacs-lisp 
 
   (add-hook 'TeX-mode-hook 'lsp)
@@ -1368,8 +1408,8 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
       (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "%f"))
       (setq lsp-latex-forward-search-after t)
       (setq lsp-latex-build-on-save t)
-      (setq lsp-latex-forward-search-executable "zathura")
-      (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))))
+      (setq lsp-latex-forward-search-executable "/Applications/Skim.app/Contents/SharedSupport/displayline")
+      (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
 
   (defun get-bibtex-from-doi (doi)
     "Get a BibTeX entry from the DOI"
