@@ -73,7 +73,7 @@
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
 (defvar ta-org-files-dir 
   (concat phd-thesis-dir
-          "/Documents/Semesters/Fall/2022/TA-CS-241/Org-Files"))
+          "/Documents/Semesters/Fall/2023/TA-CS-357/Org-Files"))
 (defvar maxdiff-org-files-dir 
   (concat phd-thesis-dir
           "/Documents/Side-Projects/MaxDiff/Documents/org"))
@@ -1253,7 +1253,7 @@
             ("/unm/Prof. Kapur". ?k)
             ("/unm/Prof. Kapur/Side projects/Seminars/Beihang University". ?b)
             ("/unm/Prof. Kapur/Side projects/MaxDiff Extension". ?m)
-            ("/unm/TA Work/CS 241". ?c)
+            ("/unm/TA Work/CS 357". ?c)
             ("/unm/You got a Package!". ?p)
             ("/unm/Archive". ?a)
             ("/cs-unm/Inbox". ?I)
