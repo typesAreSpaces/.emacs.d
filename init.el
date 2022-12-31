@@ -68,7 +68,7 @@
 (defvar efs/default-variable-font-size 160)
 
                                         ; Make frame transparency overridable
-(defvar efs/frame-transparency '(95 . 95))
+(defvar efs/frame-transparency '(100 . 100))
 
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
 (defvar ta-org-files-dir 
