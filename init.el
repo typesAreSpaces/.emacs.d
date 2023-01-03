@@ -114,6 +114,8 @@
   (concat phd-thesis-org-files-dir "/school_tasks.org"))
 (defvar seminar-tasks-mail 
   (concat seminar-org-files-dir "/seminar_tasks.org"))
+(defvar seminar-meetings
+  (concat seminar-org-files-dir "/meeting_notes.org"))
 
 (setq inhibit-startup-message t)
 
@@ -706,35 +708,37 @@
 
   (setq org-capture-templates
         `(
-          ("m" "Email Capture")
-          ("mr" "Research Tasks" entry
+          ("e" "Email Capture")
+          ("er" "Research Tasks" entry
            (file+olp research-tasks-mail "EMAIL")
            "** TODO Check this email %a"
            :immediate-finish t)
-          ("ml" "Lunch Tasks" entry
+          ("el" "Lunch Tasks" entry
            (file+olp lunch-tasks-mail "EMAIL")
            "** TODO Check this email %a"
            :immediate-finish t)
-          ("ms" "SCC Project Tasks" entry
-           (file+olp scc-tasks-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("mc" "School Tasks" entry
+          ("es" "S..")
+          ("esc" "School Tasks" entry
            (file+olp school-tasks-mail "EMAIL")
            "** TODO Check this email %a"
            :immediate-finish t)
-          ("me" "Seminar Tasks" entry
+          ("est" "Seminar Tasks" entry
            (file+olp seminar-tasks-mail "EMAIL")
            "** TODO Check this email %a"
            :immediate-finish t)
-          ("mt" "TA Tasks" entry
+          ("esm" "Seminar Meetings" plain
+           (file+function seminar-meetings (lambda () (goto-line 5)))
+           "%a"
+           :prepend t
+           :immediate-finish t)
+          ("et" "TA Tasks" entry
            (file+olp ta-tasks-mail "EMAIL")
            "** TODO Check this email %a"
            :immediate-finish t)
-          ("mm" "MaxDiff Agenda" entry
+          ("em" "MaxDiff Agenda" entry
            (file+olp maxdiff-agenda-mail "EMAIL")
            "** TODO Check this email %a"
-           :immediate-finish t)
+           :immediate-finish t) 
           )
         )
 
