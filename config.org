@@ -285,32 +285,23 @@ This section configures basic UI settings that remove unneeded elements to make 
 I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://fonts.google.com/specimen/Cantarell][Cantarell]] fonts for this configuration which will more than likely need to be installed on your machine.  Both can usually be found in the various Linux distro package managers or downloaded from the links above.
 
 #+begin_src emacs-lisp
+    (defun frame-font-setup
+        (&rest ...)
+      ;; (remove-hook 'focus-in-hook #'frame-font-setup)
+      (unless (assoc 'font default-frame-alist)
+        (let* ((font-family (catch 'break
+                              (dolist (font-family
+                                       '("Fira Code"
+                                         "Hack"
+                                         "Consolas"))
+                                (when (member font-family (font-family-list))
+                                  (throw 'break font-family)))))
+               (font (when font-family (format "%s-18" font-family))))
+          (when font
+            (add-to-list 'default-frame-alist (cons 'font font))
+            (set-frame-font font t t)))))
 
-  (defun font-candidate (&rest fonts)
-    "Return the first available font."
-    (--first (find-font (font-spec :name it)) fonts))
-
-  (defvar efs/my-font (font-candidate "Fira Code"))
-
-  (when (not (null efs/my-font))
-    (set-face-attribute 'default nil
-                        :font efs/my-font
-                        :height efs/default-font-size))
-
-                                          ; Set the fixed pitch face
-  (when (not (null efs/my-font))
-    (set-face-attribute 'fixed-pitch nil
-                        :font efs/my-font
-                        :height efs/default-font-size))
-
-                                          ; Set the variable pitch face
-  (when (not (null efs/my-font))
-    (set-face-attribute 'variable-pitch nil
-                        :font efs/my-font
-                        :height efs/default-variable-font-size
-                        :weight 'regular))
-
-
+    (add-hook 'focus-in-hook #'frame-font-setup)
 #+end_src
 
 ** Keybinding Configuration
@@ -1050,6 +1041,13 @@ Update org-latex-classes
 We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]] to center =org-mode= buffers for a more pleasing writing experience as it centers the contents of the buffer horizontally to seem more like you are editing a document.  This is really a matter of personal preference so you can remove the block below if you don't like the behavior.
 
 #+begin_src emacs-lisp
+
+  (defun fill-buffer ()
+    (interactive)
+    (save-excursion
+      (save-restriction
+        (widen)
+        (fill-region (point-min) (point-max)))))
 
   (defun efs/org-mode-visual-fill ()
     (setq visual-fill-column-width 100
