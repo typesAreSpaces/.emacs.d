@@ -207,30 +207,23 @@
 
 (with-eval-after-load 'dashboard (dashboard-refresh-buffer))
 
-(defun font-candidate (&rest fonts)
-  "Return the first available font."
-  (--first (find-font (font-spec :name it)) fonts))
+(defun frame-font-setup
+    (&rest ...)
+  ;; (remove-hook 'focus-in-hook #'frame-font-setup)
+  (unless (assoc 'font default-frame-alist)
+    (let* ((font-family (catch 'break
+                          (dolist (font-family
+                                   '("Fira Code"
+                                     "Hack"
+                                     "Consolas"))
+                            (when (member font-family (font-family-list))
+                              (throw 'break font-family)))))
+           (font (when font-family (format "%s-18" font-family))))
+      (when font
+        (add-to-list 'default-frame-alist (cons 'font font))
+        (set-frame-font font t t)))))
 
-                                        ;(defvar efs/my-font (font-candidate "Hack"))
-(defvar efs/my-font "Hack")
-
-(when (not (null efs/my-font))
-  (set-face-attribute 'default nil
-                      :font efs/my-font
-                      :height efs/default-font-size))
-
-                                        ; Set the fixed pitch face
-(when (not (null efs/my-font))
-  (set-face-attribute 'fixed-pitch nil
-                      :font efs/my-font
-                      :height efs/default-font-size))
-
-                                        ; Set the variable pitch face
-(when (not (null efs/my-font))
-  (set-face-attribute 'variable-pitch nil
-                      :font efs/my-font
-                      :height efs/default-variable-font-size
-                      :weight 'regular))
+(add-hook 'focus-in-hook #'frame-font-setup)
 
 ; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -794,6 +787,13 @@
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+(defun fill-buffer ()
+  (interactive)
+  (save-excursion
+    (save-restriction
+      (widen)
+      (fill-region (point-min) (point-max)))))
 
 (defun efs/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
