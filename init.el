@@ -1246,14 +1246,14 @@
     (setq mu4e-get-mail-command "mbsync -a")
     (setq mu4e-maildir "~/Mail")
 
-    ; Just plain text
-    ;; (with-eval-after-load "mm-decode"
-    ;;   (add-to-list 'mm-discouraged-alternatives "text/html")
-    ;;   (add-to-list 'mm-discouraged-alternatives "text/richtext"))
+                                        ; Just plain text
+    (with-eval-after-load "mm-decode"
+      (add-to-list 'mm-discouraged-alternatives "text/html")
+      (add-to-list 'mm-discouraged-alternatives "text/richtext"))
 
-    ;; (defun jcs-view-in-eww (msg)
-    ;;   (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
-    ;; (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
+    (defun jcs-view-in-eww (msg)
+      (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
+    (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
 
     (defun refile-func (msg)
       (cond
