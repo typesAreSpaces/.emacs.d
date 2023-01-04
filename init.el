@@ -46,7 +46,7 @@
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
-; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
+; NOTE: If you want to move everything out of the ~/.emacs.d folder
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
                                         ; (setq user-emacs-directory "~/.cache/emacs")
 
@@ -60,7 +60,7 @@
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
-; NOTE: init.el is now generated from config.org.  Please edit that file
+; NOTE: init.el is now generated from Emacs.org.  Please edit that file
                                         ;       in Emacs and init.el will be generated automatically!
 
                                         ; You will most likely need to adjust this font size for your system!
@@ -68,7 +68,7 @@
 (defvar efs/default-variable-font-size 160)
 
                                         ; Make frame transparency overridable
-(defvar efs/frame-transparency '(90 . 90))
+(defvar efs/frame-transparency '(100 . 100))
 
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
 (defvar ta-org-files-dir 
@@ -185,7 +185,7 @@
   :after projectile
   :config (counsel-projectile-mode))
 
-(defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+(defvar dashboard-logo-path "~/Pictures/Wallpapers/480px-EmacsIcon.svg.png")
 
 (use-package all-the-icons)
 
@@ -264,6 +264,35 @@
     "w" '(:ignore t :which-key "(w)indows related")
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
+
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+                                        ; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
+
+(when (not (version< emacs-version "26.3"))
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init)
+    (setq forge-add-default-bindings nil)))
+
+(use-package evil-numbers
+  :config
+  (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
 
 (use-package command-log-mode
   :commands command-log-mode)
@@ -517,13 +546,13 @@
                                         ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
     )) 
 
-(defun consult-grep-from-here ()
+(defun consult-grep-current-dir ()
   "Call `consult-grep' for the current buffer (a single file)."
   (interactive)
   (let ((consult-project-function (lambda (x) "./")))
     (consult-grep)))
 
-(defun consult-find-from-here ()
+(defun consult-find-current-dir ()
   "Call `consult-find' for the current buffer (a single file)."
   (interactive)
   (let ((consult-project-function (lambda (x) "./")))
@@ -577,7 +606,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Fira Code" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Hack" :weight 'regular :height (cdr face)))
 
                                         ; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -626,7 +655,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "zathura %s")))
+          ("\\.pdf\\'" . "open -a Skim %s")))
 
   (setq org-ellipsis "⇓")
 
@@ -771,7 +800,7 @@
          (LaTeX-mode . efs/org-mode-visual-fill)
          (mu4e-main-mode . efs/org-mode-visual-fill)))
 
-; Automatically tangle our config.org config file when we save it
+; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
                       (expand-file-name user-emacs-directory))
@@ -799,12 +828,6 @@
   (persp-mode-prefix-key (kbd "M-p"))
   :init
   (persp-mode))
-
-(use-package avy
-  :config
-  (setq avy-all-windows 'all-frames)
-  (global-set-key (kbd "C-:") 'avy-goto-char)
-  )
 
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
@@ -930,8 +953,8 @@
     (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "-cd" "%f"))
     (setq lsp-latex-forward-search-after t)
     (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable "zathura")
-    (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))))
+    (setq lsp-latex-forward-search-executable "/Applications/Skim.app/Contents/SharedSupport/displayline")
+    (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
@@ -1033,8 +1056,8 @@
   (use-package forge
     :after magit))
 
-;TODO: https://github.com/emacsorphanage/git-gutter
-;(use-package git-gutter)
+(use-package evil-nerd-commenter
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (when (not (version< emacs-version "26.3"))
   (use-package rainbow-mode))
@@ -1102,6 +1125,9 @@
 
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
+(setq insert-directory-program "gls" dired-use-ls-dired t)
+(setq dired-listing-switches "-al --group-directories-first")
+
 (use-package dired-single
   :commands (dired dired-jump))
 
@@ -1159,13 +1185,15 @@
              :files ("*.el")
              :repo "niku/markdown-preview-eww"))
 
-(defvar efs/mu4e-path "/usr/share/emacs/site-lisp/mu4e/")
+(defvar efs/mu4e-path "/opt/homebrew/share/emacs/site-lisp/mu/mu4e/")
 
 (when (file-exists-p (concat efs/mu4e-path "mu4e.el"))
   (use-package mu4e
     :ensure nil
     :load-path (lambda () (expand-file-name efs/mu4e-path))
                                         ; :defer 20 ; Wait until 20 seconds after startup
+    :init
+    (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
     :config
     (require 'mu4e)
     (require 'mu4e-org)
@@ -1174,7 +1202,7 @@
     (setq mu4e-change-filenames-when-moving t)
 
                                         ; SMTP settings
-    (setq sendmail-program "/usr/bin/msmtp"
+    (setq sendmail-program "/opt/homebrew/bin/msmtp"
           message-sendmail-f-is-evil t
           message-sendmail-extra-arguments '("--read-envelope-from")
           send-mail-function 'smtpmail-send-it
