@@ -328,6 +328,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
       "c" '(org-capture nil :which-key "(o)rg-capture")
       "e" '(:ignore t :which-key "(e)dit buffer")
       "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
+      "ef"  '(fill-buffer :which-key "(f)ill buffer")
       "ei"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
       "ey" '(simpleclip-copy :which-key "clipboard (y)ank")
       "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
