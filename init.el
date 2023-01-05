@@ -228,9 +228,14 @@
 (add-hook 'focus-in-hook #'frame-font-setup)
 
 ; Make ESC quit prompts
+(defun persp-exit ()
+  (interactive)
+  (prog1 (persp-state-save "~/.emacs-session") (save-buffers-kill-terminal)))
+
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "C-i") 'evil-jump-forward)
 (global-set-key (kbd "C-o") 'evil-jump-backward)
+(global-set-key (kbd "C-x c") 'persp-exit)
 (global-set-key [(control x) (k)] 'kill-buffer)
 
 (use-package general
