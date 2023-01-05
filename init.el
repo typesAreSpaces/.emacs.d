@@ -230,7 +230,7 @@
 ; Make ESC quit prompts
 (defun persp-exit ()
   (interactive)
-  (prog1 (persp-state-save "~/.emacs-session") (save-buffers-kill-terminal)))
+  (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "C-i") 'evil-jump-forward)
