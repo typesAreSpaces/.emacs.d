@@ -119,10 +119,10 @@
 
 (setq inhibit-startup-message t)
 
-(scroll-bar-mode -1)               ; Disable visible scrollbar
+;(scroll-bar-mode -1)               ; Disable visible scrollbar
 (tool-bar-mode -1)                 ; Disable the toolbar
 (tooltip-mode -1)                  ; Disable tooltips
-(set-fringe-mode 10)               ; Give some breathing room
+;(set-fringe-mode 10)               ; Give some breathing room
 
 (menu-bar-mode -1)                 ; Disable the menu bar
 (winner-mode 1)                    ; Enable winner mode
@@ -193,7 +193,7 @@
   (use-package dashboard
     :ensure t
     :config
-    (setq dashboard-center-content t)
+    ;(setq dashboard-center-content t)
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
     (setq dashboard-set-navigator t)
