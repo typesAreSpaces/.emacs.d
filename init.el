@@ -73,7 +73,7 @@
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
 (defvar ta-org-files-dir 
   (concat phd-thesis-dir
-          "/Documents/Semesters/Spring/2023/TA-CS-357/Org-Files"))
+          "/Documents/Semesters/2023/Spring/TA-CS-357/Org-Files"))
 (defvar maxdiff-org-files-dir 
   (concat phd-thesis-dir
           "/Documents/Side-Projects/MaxDiff/Documents/org"))
