@@ -269,8 +269,8 @@
     "m" '(mu4e :which-key "(m)u4e")
     "l" '(:ignore t :which-key "(l)atex related")
     "lp" '((lambda () (interactive) (yasnippet/goto-parent-file)) :which-key "Goto (p)arent")
-    "lf" '((lambda () (interactive) (LaTeX-fill-buffer nil)) :which-key "Latex (f)ill buffer")
-    "lF" '((lambda () (interactive) (lsp-latex-forward-search)) :which-key "Latex (f)orward search")
+    "lF" '((lambda () (interactive) (LaTeX-fill-buffer nil)) :which-key "Latex (F)ill buffer")
+    "lf" '((lambda () (interactive) (lsp-latex-forward-search)) :which-key "Latex (f)orward search")
     "w" '(:ignore t :which-key "(w)indows related")
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
@@ -774,12 +774,12 @@
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
-(use-package visual-fill-column
-  :hook ((org-mode . efs/org-mode-visual-fill)
-         (markdown-mode . efs/org-mode-visual-fill)
-         (TeX-mode . efs/org-mode-visual-fill)
-         (LaTeX-mode . efs/org-mode-visual-fill)
-         (mu4e-main-mode . efs/org-mode-visual-fill)))
+;; (use-package visual-fill-column
+;;   :hook ((org-mode . efs/org-mode-visual-fill)
+;;          (markdown-mode . efs/org-mode-visual-fill)
+;;          (TeX-mode . efs/org-mode-visual-fill)
+;;          (LaTeX-mode . efs/org-mode-visual-fill)
+;;          (mu4e-main-mode . efs/org-mode-visual-fill)))
 
 ; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
