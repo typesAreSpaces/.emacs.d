@@ -60,7 +60,7 @@
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
-; NOTE: init.el is now generated from Emacs.org.  Please edit that file
+; NOTE: init.el is now generated from config.org.  Please edit that file
                                         ;       in Emacs and init.el will be generated automatically!
 
                                         ; You will most likely need to adjust this font size for your system!
@@ -230,7 +230,7 @@
 ; Make ESC quit prompts
 (defun persp-exit ()
   (interactive)
-  (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
+  (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session-mac") (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "C-i") 'evil-jump-forward)
