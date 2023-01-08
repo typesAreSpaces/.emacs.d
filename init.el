@@ -73,7 +73,7 @@
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
 (defvar ta-org-files-dir 
   (concat phd-thesis-dir
-          "/Documents/Semesters/Spring/2023/TA-CS-357/Org-Files"))
+          "/Documents/Semesters/2023/Spring/TA-CS-357/Org-Files"))
 (defvar maxdiff-org-files-dir 
   (concat phd-thesis-dir
           "/Documents/Side-Projects/MaxDiff/Documents/org"))
@@ -119,10 +119,10 @@
 
 (setq inhibit-startup-message t)
 
-;(scroll-bar-mode -1)               ; Disable visible scrollbar
+(scroll-bar-mode -1)               ; Disable visible scrollbar
 (tool-bar-mode -1)                 ; Disable the toolbar
 (tooltip-mode -1)                  ; Disable tooltips
-;(set-fringe-mode 10)               ; Give some breathing room
+(set-fringe-mode 10)               ; Give some breathing room
 
 (menu-bar-mode -1)                 ; Disable the menu bar
 (winner-mode 1)                    ; Enable winner mode
@@ -804,12 +804,12 @@
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
-;; (use-package visual-fill-column
-;;   :hook ((org-mode . efs/org-mode-visual-fill)
-;;          (markdown-mode . efs/org-mode-visual-fill)
-;;          (TeX-mode . efs/org-mode-visual-fill)
-;;          (LaTeX-mode . efs/org-mode-visual-fill)
-;;          (mu4e-main-mode . efs/org-mode-visual-fill)))
+(use-package visual-fill-column
+  :hook ((org-mode . efs/org-mode-visual-fill)
+         (markdown-mode . efs/org-mode-visual-fill)
+         (TeX-mode . efs/org-mode-visual-fill)
+         (LaTeX-mode . efs/org-mode-visual-fill)
+         (mu4e-main-mode . efs/org-mode-visual-fill)))
 
 ; Automatically tangle our config.org config file when we save it
 (defun efs/org-babel-tangle-config ()
