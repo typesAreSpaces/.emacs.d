@@ -170,9 +170,10 @@
 (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode))
 
 (use-package projectile
+  :after orderless
   :diminish projectile-mode
   :config (projectile-mode)
-  :custom ((projectile-completion-system 'ivy))
+  :custom ((projectile-completion-system 'orderless))
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
@@ -343,58 +344,7 @@
   (which-key-mode)
   (setq which-key-idle-delay 1))
 
-(use-package ivy
-  :diminish
-  :bind (
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
-  :config
-  (ivy-mode 1))
-
-(when (not (version< emacs-version "27.1"))
-  (use-package ivy-rich
-    :after ivy
-    :init
-    (ivy-rich-mode 1)))
-
 (use-package flx)
-
-(setq ivy-initial-inputs-alist nil)
-
-(setq ivy-re-builders-alist
-      '((t . ivy--regex-plus)))
-
-(setq ivy-re-builders-alist
-      '((t . ivy--regex-fuzzy)))
-
-(when (not (version< emacs-version "27.1"))
-  (use-package counsel
-    :bind (("C-M-j" . 'counsel-switch-buffer)
-           :map minibuffer-local-map
-           ("C-r" . 'counsel-minibuffer-history))
-    :custom
-    (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-    :config
-    (counsel-mode 1)))
-
-(use-package ivy-prescient
-  :after counsel
-  :custom
-  (ivy-prescient-enable-filtering nil)
-  :config
-                                        ; Uncomment the following line to have sorting remembered across sessions!
-                                        ;  (prescient-persist-mode 1)
-  (ivy-prescient-mode 1))
 
 (when (not (version< emacs-version "27.1"))
   (use-package marginalia
@@ -442,6 +392,10 @@
 
 (when (not (version< emacs-version "27.1"))
   (use-package vertico
+    :bind (:map vertico-map
+                ("RET" . vertico-directory-enter)
+                ("DEL" . vertico-directory-delete-char)
+                ("C-h" . vertico-directory-delete-word))
     :init
     (vertico-mode)))
 
@@ -858,7 +812,6 @@
 (use-package perspective
   :ensure t
   :bind (("C-x k" . persp-kill-buffer*)
-                                        ;("C-x C-b" . persp-ivy-switch-buffer))
          ("C-x C-b" . consult-buffer))
   :custom
   (persp-mode-prefix-key (kbd "M-p"))
@@ -937,10 +890,6 @@
 
 (when (not (version< emacs-version "26.1"))
   (use-package lsp-treemacs
-    :after lsp))
-
-(when (not (version< emacs-version "26.1"))
-  (use-package lsp-ivy
     :after lsp))
 
 (when (not (version< emacs-version "26.1"))
