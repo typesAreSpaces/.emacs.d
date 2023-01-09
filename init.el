@@ -170,9 +170,10 @@
 (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode))
 
 (use-package projectile
+  :after orderless
   :diminish projectile-mode
   :config (projectile-mode)
-  :custom ((projectile-completion-system 'ivy))
+  :custom ((projectile-completion-system 'orderless))
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
@@ -180,10 +181,6 @@
   (when (file-directory-p "~/Documents/GithubProjects")
     (setq projectile-project-search-path '("~/Documents/GithubProjects")))
   (setq projectile-switch-project-action #'projectile-dired))
-
-(use-package counsel-projectile
-  :after projectile
-  :config (counsel-projectile-mode))
 
 (defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
 
@@ -193,7 +190,7 @@
   (use-package dashboard
     :ensure t
     :config
-    ;(setq dashboard-center-content t)
+                                        ;(setq dashboard-center-content t)
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
     (setq dashboard-set-navigator t)
@@ -266,7 +263,7 @@
     "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide")
     "s"  '(shell-command :which-key "(s)hell command")
     "t"  '(:ignore t :which-key "(t)oggles")
-    "tt" '(counsel-load-theme :which-key "Choose (t)heme")
+    "tt" '(load-theme :which-key "Choose (t)heme")
     "g" '(magit-status :which-key "Ma(g)it status")
     "d" '(dired-jump :which-key "(d)ired jump")
     "m" '(mu4e :which-key "(m)u4e")
@@ -347,58 +344,7 @@
   (which-key-mode)
   (setq which-key-idle-delay 1))
 
-(use-package ivy
-  :diminish
-  :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
-  :config
-  (ivy-mode 1))
-
-(when (not (version< emacs-version "27.1"))
-  (use-package ivy-rich
-    :after ivy
-    :init
-    (ivy-rich-mode 1)))
-
 (use-package flx)
-
-(setq ivy-initial-inputs-alist nil)
-
-(setq ivy-re-builders-alist
-      '((t . ivy--regex-plus)))
-
-(setq ivy-re-builders-alist
-      '((t . ivy--regex-fuzzy)))
-
-(when (not (version< emacs-version "27.1"))
-  (use-package counsel
-    :bind (("C-M-j" . 'counsel-switch-buffer)
-           :map minibuffer-local-map
-           ("C-r" . 'counsel-minibuffer-history))
-    :custom
-    (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-    :config
-    (counsel-mode 1)))
-
-(use-package ivy-prescient
-  :after counsel
-  :custom
-  (ivy-prescient-enable-filtering nil)
-  :config
-                                        ; Uncomment the following line to have sorting remembered across sessions!
-                                        ;  (prescient-persist-mode 1)
-  (ivy-prescient-mode 1))
 
 (when (not (version< emacs-version "27.1"))
   (use-package marginalia
@@ -414,13 +360,48 @@
     ;; enabled right away. Note that this forces loading the package.
     (marginalia-mode)))
 
+(use-package embark
+  :ensure t
+  :bind
+  (("C-." . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  :init
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (require 'embark)
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :ensure t ; only need to install it, embark loads it after consult if found
+  :after (embark consult)
+  :demand t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode)
+  :init
+  (with-eval-after-load 'embark
+    (require 'embark-consult)))
+
+(use-package wgrep)
+
 (when (not (version< emacs-version "27.1"))
   (use-package vertico
+    :bind (:map vertico-map
+                ("RET" . vertico-directory-enter)
+                ("DEL" . vertico-directory-delete-char)
+                ("C-h" . vertico-directory-delete-word))
     :init
     (vertico-mode)))
 
 (when (not (version< emacs-version "26.1"))
   (use-package orderless
+    :demand t
     :init
     ;; Configure a custom style dispatcher (see the Consult wiki)
     ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
@@ -432,22 +413,8 @@
 (setq orderless-matching-styles '(orderless-flex))
 
 (when (not (version< emacs-version "26.3"))
-  (use-package selectrum
-    :straight t
-    :config
-    (selectrum-mode +1)))
-
-(when (not (version< emacs-version "26.3"))
-  (use-package selectrum-prescient
-    :straight t
-    :after selectrum
-    :config
-    (selectrum-prescient-mode +1)
-    (prescient-persist-mode +1)))
-
-(when (not (version< emacs-version "26.3"))
   (use-package consult
-    :after selectrum
+    :after (vertico perspective)
     :straight t
                                         ; Replace bindings. Lazily loaded due by `use-package'.
     :bind (; C-x bindings (ctl-x-map)
@@ -482,7 +449,7 @@
            ("M-s u" . consult-focus-lines)
                                         ; C-c bindings
            ("C-c C-b" . consult-buffer)                ; orig. switch-to-buffer
-           ("C-c C-l" . consult-line)
+           ("C-s"     . consult-line)
            ("C-c C-f" . consult-find)
            ("C-c D" . consult-locate)
            ("C-c h" . consult-history)
@@ -525,6 +492,8 @@
                                         ; Configure other variables and modes in the :config section,
                                         ; after lazily loading the package.
     :config
+    (consult-customize consult--source-buffer :hidden t :default nil)
+    (add-to-list 'consult-buffer-sources persp-consult-source)
     (setq consult-project-root-function (lambda () (project-root (project-current))))
                                         ; Optionally configure preview. The default value
                                         ; is 'any, such that any key triggers the preview.
@@ -843,7 +812,7 @@
 (use-package perspective
   :ensure t
   :bind (("C-x k" . persp-kill-buffer*)
-         ("C-x C-b" . persp-ivy-switch-buffer))
+         ("C-x C-b" . consult-buffer))
   :custom
   (persp-mode-prefix-key (kbd "M-p"))
   :init
@@ -921,10 +890,6 @@
 
 (when (not (version< emacs-version "26.1"))
   (use-package lsp-treemacs
-    :after lsp))
-
-(when (not (version< emacs-version "26.1"))
-  (use-package lsp-ivy
     :after lsp))
 
 (when (not (version< emacs-version "26.1"))
