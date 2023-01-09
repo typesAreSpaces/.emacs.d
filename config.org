@@ -6,7 +6,6 @@
 In this document I've added links in many places that lead you to documentation for the various packages we use.  If you're looking at this file in Emacs, you can put your cursor on a link and press =C-c C-o= or run =M-x org-open-at-point= to open the link in your web browser.
 
 * Package System Setup
-
 ** Straight.el setup
 
 #+begin_src emacs-lisp
@@ -80,6 +79,17 @@ You can also use =M-x auto-package-update-now= to update right now!
              gcs-done))
 
   (add-hook 'emacs-startup-hook #'efs/display-startup-time)
+
+#+end_src
+
+** Runtime Performance
+
+Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
+
+#+begin_src emacs-lisp
+
+                                          ; Make gc pauses faster by decreasing the threshold.
+  (setq gc-cons-threshold (* 2 1000 1000))
 
 #+end_src
 
@@ -190,8 +200,8 @@ This section configures basic UI settings that remove unneeded elements to make 
   (save-place-mode 1)
   (setq use-dialog-box nil)
 
-                                          ; Set up the visible bell
-  (setq visible-bell t)
+
+  (setq visible-bell t)              ; Set up the visible bell
 
   (column-number-mode)
   (setq-default display-line-numbers-type 'visual) 
@@ -223,27 +233,6 @@ This section configures basic UI settings that remove unneeded elements to make 
 
   (add-to-list 'auto-mode-alist '("\\.dat\\'" . text-mode))
   (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode))
-
-#+end_src
-
-** Projectile
-
-[[https://projectile.mx/][Projectile]] is a project management library for Emacs which makes it a lot easier to navigate around code projects for various languages.  Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
-
-#+begin_src emacs-lisp
-
-  (use-package projectile
-    :after orderless
-    :diminish projectile-mode
-    :config (projectile-mode)
-    :custom ((projectile-completion-system 'orderless))
-    :bind-keymap
-    ("C-c p" . projectile-command-map)
-    :init
-                                          ; NOTE: Set this to the folder where you keep your Git repos!
-    (when (file-directory-p "~/Documents/GithubProjects")
-      (setq projectile-project-search-path '("~/Documents/GithubProjects")))
-    (setq projectile-switch-project-action #'projectile-dired))
 
 #+end_src
 
@@ -391,7 +380,6 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 #+end_src
 
 * UI Configuration
-
 ** Command Log Mode
 
 [[https://github.com/lewang/command-log-mode][command-log-mode]] is useful for displaying a panel showing each key binding you use in a panel on the right side of the frame.  Great for live streams and screencasts!
@@ -1055,6 +1043,26 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
 #+end_src
 
 * Development
+** Projectile
+
+[[https://projectile.mx/][Projectile]] is a project management library for Emacs which makes it a lot easier to navigate around code projects for various languages.  Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
+
+#+begin_src emacs-lisp
+
+  (use-package projectile
+    :after orderless
+    :diminish projectile-mode
+    :config (projectile-mode)
+    :custom ((projectile-completion-system 'orderless))
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :init
+                                          ; NOTE: Set this to the folder where you keep your Git repos!
+    (when (file-directory-p "~/Documents/GithubProjects")
+      (setq projectile-project-search-path '("~/Documents/GithubProjects")))
+    (setq projectile-switch-project-action #'projectile-dired))
+
+#+end_src
 
 ** Yasnippet setup
 
@@ -1499,15 +1507,6 @@ We also use [[https://github.com/sebastiencs/company-box][company-box]] to furth
 
 #+end_src
 
-** Git-gutter
-
-#+begin_src emacs-lisp 
-
-                                          ;TODO: https://github.com/emacsorphanage/git-gutter
-                                          ;(use-package git-gutter)
-
-#+end_src
-
 ** Commenting
 
 Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=) doesn't always comment things in the way you might expect so we use [[https://github.com/redguardtoo/evil-nerd-commenter][evil-nerd-commenter]] to provide a more familiar behavior.  I've bound it to =M-/= since other editors sometimes use this binding but you could also replace Emacs' =M-;= binding with this command.
@@ -1528,7 +1527,7 @@ Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=)
 
 #+end_src
 
-** Rainbow Delimiters
+** Rainbow delimiters
 
 [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] is useful in programming modes because it colorizes nested parentheses and brackets according to their nesting depth.  This makes it a lot easier to visually match parentheses in Emacs Lisp code without having to count them yourself.
 
@@ -1540,7 +1539,6 @@ Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=)
 #+end_src
 
 * Terminals
-
 ** term-mode
 
 =term-mode= is a built-in terminal emulator in Emacs.  Because it is written in Emacs Lisp, you can start using it immediately with very little configuration.  If you are on Linux or macOS, =term-mode= is a great choice to get started because it supports fairly complex terminal applications (=htop=, =vim=, etc) and works pretty reliably.  However, because it is written in Emacs Lisp, it can be slower than other options like =vterm=.  The speed will only be an issue if you regularly run console apps with a lot of output.
@@ -1603,7 +1601,7 @@ The =eterm-256color= package enhances the output of =term-mode= to enable handli
 
   #+end_src
 
-** Eshell
+** eshell
 
 [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html#Contributors-to-Eshell][Eshell]] is Emacs' own shell implementation written in Emacs Lisp.  It provides you with a cross-platform implementation (even on Windows!) of the common GNU utilities you would find on Linux and macOS (=ls=, =rm=, =mv=, =grep=, etc).  It also allows you to call Emacs Lisp functions directly from the shell and you can even set up aliases (like aliasing =vim= to =find-file=).  Eshell is also an Emacs Lisp REPL which allows you to evaluate full expressions at the shell.
 
@@ -1657,7 +1655,7 @@ The downsides to Eshell are that it can be harder to configure than other packag
 
     #+end_src
 
-** Vterm
+** vterm
 
 #+begin_src emacs-lisp 
 
@@ -1671,7 +1669,6 @@ The downsides to Eshell are that it can be harder to configure than other packag
 #+end_src
 
 * File Management
-
 ** Dired
 
 Dired is a built-in file manager for Emacs that does some pretty amazing things!  Here are some key bindings you should try out:
@@ -1777,7 +1774,6 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
 #+end_src
 
 * Applications
-
 ** Some App
 
 This is an example of configuring another non-Emacs application using org-mode.  Not only do we write out the configuration at =.config/some-app/config=, we also compute the value that gets stored in this configuration from the Emacs Lisp block above it.
@@ -1794,17 +1790,6 @@ This is an example of configuring another non-Emacs application using org-mode. 
 #+begin_src conf :tangle no :noweb yes
 
   value=<<the-value()>>
-
-#+end_src
-
-** Runtime Performance
-
-Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
-
-#+begin_src emacs-lisp
-
-                                          ; Make gc pauses faster by decreasing the threshold.
-  (setq gc-cons-threshold (* 2 1000 1000))
 
 #+end_src
 
