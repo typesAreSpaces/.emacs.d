@@ -46,6 +46,9 @@
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
+; Make gc pauses faster by decreasing the threshold.
+(setq gc-cons-threshold (* 2 1000 1000))
+
 ; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
                                         ; (setq user-emacs-directory "~/.cache/emacs")
@@ -135,8 +138,8 @@
 (save-place-mode 1)
 (setq use-dialog-box nil)
 
-                                        ; Set up the visible bell
-(setq visible-bell t)
+
+(setq visible-bell t)              ; Set up the visible bell
 
 (column-number-mode)
 (setq-default display-line-numbers-type 'visual) 
@@ -168,19 +171,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.dat\\'" . text-mode))
 (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode))
-
-(use-package projectile
-  :after orderless
-  :diminish projectile-mode
-  :config (projectile-mode)
-  :custom ((projectile-completion-system 'orderless))
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :init
-                                        ; NOTE: Set this to the folder where you keep your Git repos!
-  (when (file-directory-p "~/Documents/GithubProjects")
-    (setq projectile-project-search-path '("~/Documents/GithubProjects")))
-  (setq projectile-switch-project-action #'projectile-dired))
 
 (defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
 
@@ -790,6 +780,19 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
+(use-package projectile
+  :after orderless
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'orderless))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+                                        ; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/Documents/GithubProjects")
+    (setq projectile-project-search-path '("~/Documents/GithubProjects")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
 (use-package yasnippet
   :config
   (setq yas-snippet-dirs `(,(expand-file-name "snippets" user-emacs-directory)))
@@ -1038,9 +1041,6 @@
   (use-package forge
     :after magit))
 
-;TODO: https://github.com/emacsorphanage/git-gutter
-;(use-package git-gutter)
-
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
@@ -1127,9 +1127,6 @@
 
 (use-package dired-hide-dotfiles
   :hook (dired-mode . dired-hide-dotfiles-mode))
-
-; Make gc pauses faster by decreasing the threshold.
-(setq gc-cons-threshold (* 2 1000 1000))
 
 (use-package hide-mode-line)
 
