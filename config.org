@@ -233,9 +233,10 @@ This section configures basic UI settings that remove unneeded elements to make 
 #+begin_src emacs-lisp
 
   (use-package projectile
+    :after orderless
     :diminish projectile-mode
     :config (projectile-mode)
-    :custom ((projectile-completion-system 'ivy))
+    :custom ((projectile-completion-system 'orderless))
     :bind-keymap
     ("C-c p" . projectile-command-map)
     :init
@@ -243,10 +244,6 @@ This section configures basic UI settings that remove unneeded elements to make 
     (when (file-directory-p "~/Documents/GithubProjects")
       (setq projectile-project-search-path '("~/Documents/GithubProjects")))
     (setq projectile-switch-project-action #'projectile-dired))
-
-  (use-package counsel-projectile
-    :after projectile
-    :config (counsel-projectile-mode))
 
 #+end_src
 
@@ -262,7 +259,7 @@ This section configures basic UI settings that remove unneeded elements to make 
     (use-package dashboard
       :ensure t
       :config
-      ;(setq dashboard-center-content t)
+                                          ;(setq dashboard-center-content t)
       (setq dashboard-set-heading-icons t)
       (setq dashboard-set-file-icons t)
       (setq dashboard-set-navigator t)
@@ -346,7 +343,7 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
       "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide")
       "s"  '(shell-command :which-key "(s)hell command")
       "t"  '(:ignore t :which-key "(t)oggles")
-      "tt" '(counsel-load-theme :which-key "Choose (t)heme")
+      "tt" '(load-theme :which-key "Choose (t)heme")
       "g" '(magit-status :which-key "Ma(g)it status")
       "d" '(dired-jump :which-key "(d)ired jump")
       "m" '(mu4e :which-key "(m)u4e")
@@ -467,76 +464,11 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 
 #+end_src
 
-** Ivy and Counsel
-
-[[https://oremacs.com/swiper/][Ivy]] is an excellent completion framework for Emacs.  It provides a minimal yet powerful selection menu that appears when you open files, switch buffers, and for many other tasks in Emacs.  Counsel is a customized set of commands to replace `find-file` with `counsel-find-file`, etc which provide useful commands for each of the default completion commands.
-
-[[https://github.com/Yevgnen/ivy-rich][ivy-rich]] adds extra columns to a few of the Counsel commands to provide more information about each item.
+** Flx
 
 #+begin_src emacs-lisp
-
-  (use-package ivy
-    :diminish
-    :bind (("C-s" . swiper)
-           :map ivy-minibuffer-map
-           ("TAB" . ivy-alt-done)
-           ("C-l" . ivy-alt-done)
-           ("C-j" . ivy-next-line)
-           ("C-k" . ivy-previous-line)
-           :map ivy-switch-buffer-map
-           ("C-k" . ivy-previous-line)
-           ("C-l" . ivy-done)
-           ("C-d" . ivy-switch-buffer-kill)
-           :map ivy-reverse-i-search-map
-           ("C-k" . ivy-previous-line)
-           ("C-d" . ivy-reverse-i-search-kill))
-    :config
-    (ivy-mode 1))
-
-  (when (not (version< emacs-version "27.1"))
-    (use-package ivy-rich
-      :after ivy
-      :init
-      (ivy-rich-mode 1)))
 
   (use-package flx)
-
-  (setq ivy-initial-inputs-alist nil)
-
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-plus)))
-
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-fuzzy)))
-
-  (when (not (version< emacs-version "27.1"))
-    (use-package counsel
-      :bind (("C-M-j" . 'counsel-switch-buffer)
-             :map minibuffer-local-map
-             ("C-r" . 'counsel-minibuffer-history))
-      :custom
-      (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-      :config
-      (counsel-mode 1)))
-
-#+end_src
-
-*** Improved Candidate Sorting with prescient.el
-
-prescient.el provides some helpful behavior for sorting Ivy completion candidates based on how recently or frequently you select them.  This can be especially helpful when using =M-x= to run commands that you don't have bound to a key but still need to access occasionally.
-
-This Prescient configuration is optimized for use in System Crafters videos and streams, check out the [[https://youtu.be/T9kygXveEz0][video on prescient.el]] for more details on how to configure it!
-
-#+begin_src emacs-lisp
-
-  (use-package ivy-prescient
-    :after counsel
-    :custom
-    (ivy-prescient-enable-filtering nil)
-    :config
-                                          ; Uncomment the following line to have sorting remembered across sessions!
-                                          ;  (prescient-persist-mode 1)
-    (ivy-prescient-mode 1))
 
 #+end_src
 
@@ -560,12 +492,52 @@ This Prescient configuration is optimized for use in System Crafters videos and 
 
 #+end_src
 
+** Embark
+
+#+begin_src emacs-lisp 
+
+  (use-package embark
+    :ensure t
+    :bind
+    (("C-." . embark-act)         ;; pick some comfortable binding
+     ("C-;" . embark-dwim)        ;; good alternative: M-.
+     ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+    :init
+    ;; Optionally replace the key help with a completing-read interface
+    (setq prefix-help-command #'embark-prefix-help-command)
+    :config
+    ;; Hide the mode line of the Embark live/completions buffers
+    (require 'embark)
+    (add-to-list 'display-buffer-alist
+                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                   nil
+                   (window-parameters (mode-line-format . none)))))
+
+  ;; Consult users will also want the embark-consult package.
+  (use-package embark-consult
+    :ensure t ; only need to install it, embark loads it after consult if found
+    :after (embark consult)
+    :demand t
+    :hook
+    (embark-collect-mode . consult-preview-at-point-mode)
+    :init
+    (with-eval-after-load 'embark
+      (require 'embark-consult)))
+
+  (use-package wgrep)
+
+#+end_src
+
 ** Vertico 
 
 #+begin_src emacs-lisp 
 
   (when (not (version< emacs-version "27.1"))
     (use-package vertico
+      :bind (:map vertico-map
+                  ("RET" . vertico-directory-enter)
+                  ("DEL" . vertico-directory-delete-char)
+                  ("C-h" . vertico-directory-delete-word))
       :init
       (vertico-mode)))
 
@@ -577,6 +549,7 @@ This Prescient configuration is optimized for use in System Crafters videos and 
 
   (when (not (version< emacs-version "26.1"))
     (use-package orderless
+      :demand t
       :init
       ;; Configure a custom style dispatcher (see the Consult wiki)
       ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
@@ -589,33 +562,13 @@ This Prescient configuration is optimized for use in System Crafters videos and 
 
 #+end_src
 
-** Selectrum
-
-#+begin_src emacs-lisp 
-
-  (when (not (version< emacs-version "26.3"))
-    (use-package selectrum
-      :straight t
-      :config
-      (selectrum-mode +1)))
-
-  (when (not (version< emacs-version "26.3"))
-    (use-package selectrum-prescient
-      :straight t
-      :after selectrum
-      :config
-      (selectrum-prescient-mode +1)
-      (prescient-persist-mode +1)))
-
-#+end_src
-
 ** Consult
 
 #+begin_src emacs-lisp 
-  
+
   (when (not (version< emacs-version "26.3"))
     (use-package consult
-      :after selectrum
+      :after (vertico perspective)
       :straight t
                                           ; Replace bindings. Lazily loaded due by `use-package'.
       :bind (; C-x bindings (ctl-x-map)
@@ -650,7 +603,7 @@ This Prescient configuration is optimized for use in System Crafters videos and 
              ("M-s u" . consult-focus-lines)
                                           ; C-c bindings
              ("C-c C-b" . consult-buffer)                ; orig. switch-to-buffer
-             ("C-c C-l" . consult-line)
+             ("C-s"     . consult-line)
              ("C-c C-f" . consult-find)
              ("C-c D" . consult-locate)
              ("C-c h" . consult-history)
@@ -693,6 +646,8 @@ This Prescient configuration is optimized for use in System Crafters videos and 
                                           ; Configure other variables and modes in the :config section,
                                           ; after lazily loading the package.
       :config
+      (consult-customize consult--source-buffer :hidden t :default nil)
+      (add-to-list 'consult-buffer-sources persp-consult-source)
       (setq consult-project-root-function (lambda () (project-root (project-current))))
                                           ; Optionally configure preview. The default value
                                           ; is 'any, such that any key triggers the preview.
@@ -1117,7 +1072,7 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
   (use-package perspective
     :ensure t
     :bind (("C-x k" . persp-kill-buffer*)
-           ("C-x C-b" . persp-ivy-switch-buffer))
+           ("C-x C-b" . consult-buffer))
     :custom
     (persp-mode-prefix-key (kbd "M-p"))
     :init
@@ -1259,23 +1214,6 @@ Try these commands with =M-x=:
 
     (when (not (version< emacs-version "26.1"))
       (use-package lsp-treemacs
-        :after lsp))
-
-  #+end_src
-
-**** lsp-ivy
-
-[[https://github.com/emacs-lsp/lsp-ivy][lsp-ivy]] integrates Ivy with =lsp-mode= to make it easy to search for things by name in your code.  When you run these commands, a prompt will appear in the minibuffer allowing you to type part of the name of a symbol in your code.  Results will be populated in the minibuffer so that you can find what you're looking for and jump to that location in the code upon selecting the result.
-
-Try these commands with =M-x=:
-
-- =lsp-ivy-workspace-symbol= - Search for a symbol name in the current project workspace
-- =lsp-ivy-global-workspace-symbol= - Search for a symbol name in all active project workspaces
-
-  #+begin_src emacs-lisp
-
-    (when (not (version< emacs-version "26.1"))
-      (use-package lsp-ivy
         :after lsp))
 
   #+end_src
