@@ -194,7 +194,7 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-(with-eval-after-load 'dashboard (dashboard-refresh-buffer))
+;(with-eval-after-load 'dashboard (dashboard-refresh-buffer))
 
 (defun frame-font-setup
     (&rest ...)
@@ -220,7 +220,7 @@
   (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-i") 'evil-jump-forward)
+;(global-set-key (kbd "C-i") 'evil-jump-forward)
 (global-set-key (kbd "C-o") 'evil-jump-backward)
 (global-set-key (kbd "C-x c") 'persp-exit)
 (global-set-key [(control x) (k)] 'kill-buffer)
@@ -632,6 +632,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
+          ("\\.nb?\\'" . "Mathematica %s")
           ("\\.pdf\\'" . "zathura %s")))
 
   (setq org-ellipsis "⇓")

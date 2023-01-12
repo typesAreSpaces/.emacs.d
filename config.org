@@ -302,7 +302,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-  (global-set-key (kbd "C-i") 'evil-jump-forward)
+  ;(global-set-key (kbd "C-i") 'evil-jump-forward)
   (global-set-key (kbd "C-o") 'evil-jump-backward)
   (global-set-key (kbd "C-x c") 'persp-exit)
   (global-set-key [(control x) (k)] 'kill-buffer)
@@ -849,6 +849,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
             (directory . emacs)
             ("\\.mm\\'" . default)
             ("\\.x?html?\\'" . default)
+            ("\\.nb?\\'" . "Mathematica %s")
             ("\\.pdf\\'" . "zathura %s")))
 
     (setq org-ellipsis "⇓")
