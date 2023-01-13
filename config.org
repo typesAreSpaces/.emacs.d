@@ -847,8 +847,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
             (directory . emacs)
             ("\\.mm\\'" . default)
             ("\\.x?html?\\'" . default)
-            ("\\.pdf\\'" . "open -a Skim %s")))
-            ("\\.nb?\\'" . "Mathematica %s")
+            ("\\.pdf\\'" . "open -a Skim %s")
+            ("\\.nb?\\'" . "Mathematica %s")))
 
     (setq org-ellipsis "⇓")
 

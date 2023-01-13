@@ -49,7 +49,7 @@
 ; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 
-; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
+; NOTE: If you want to move everything out of the ~/.emacs.d folder
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
                                         ; (setq user-emacs-directory "~/.cache/emacs")
 
@@ -194,7 +194,7 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-;(with-eval-after-load 'dashboard (dashboard-refresh-buffer))
+(with-eval-after-load 'dashboard (dashboard-refresh-buffer))
 
 (defun frame-font-setup
     (&rest ...)
@@ -628,8 +628,8 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "open -a Skim %s")))
-          ("\\.nb?\\'" . "Mathematica %s")
+          ("\\.pdf\\'" . "open -a Skim %s")
+          ("\\.nb?\\'" . "Mathematica %s")))
 
   (setq org-ellipsis "⇓")
 
@@ -815,6 +815,12 @@
   (persp-mode-prefix-key (kbd "M-p"))
   :init
   (persp-mode))
+
+(use-package avy
+  :config
+  (setq avy-all-windows 'all-frames)
+  (global-set-key (kbd "C-:") 'avy-goto-char)
+  )
 
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
