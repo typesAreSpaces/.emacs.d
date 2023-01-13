@@ -23,7 +23,7 @@ In this document I've added links in many places that lead you to documentation 
         (eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
 
-#+end_src 
+#+end_src
 
 Emacs has a built in package manager but it doesn't make it easy to automatically install packages on a new system the first time you pull down your configuration.  [[https://github.com/jwiegley/use-package][use-package]] is a really helpful package used in this configuration to make it a lot easier to automate the installation and configuration of everything else we use.
 
@@ -129,13 +129,13 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
   (defvar efs/frame-transparency '(100 . 100))
 
   (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
-  (defvar ta-org-files-dir 
+  (defvar ta-org-files-dir
     (concat phd-thesis-dir
             "/Documents/Semesters/2023/Spring/TA-CS-357/Org-Files"))
-  (defvar maxdiff-org-files-dir 
+  (defvar maxdiff-org-files-dir
     (concat phd-thesis-dir
             "/Documents/Side-Projects/MaxDiff/Documents/org"))
-  (defvar maxdiff-write-ups-dir 
+  (defvar maxdiff-write-ups-dir
     (concat phd-thesis-dir
             "/Documents/Side-Projects/MaxDiff/Documents/notes"))
 
@@ -146,7 +146,7 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
     (concat phd-thesis-dir
             "/Documents/Org-Files"))
 
-  (defvar scc-dir 
+  (defvar scc-dir
     (concat phd-thesis-dir
             "/Documents/Side-Projects/kapur-nsf-proposal"))
   (defvar scc-reports-dir (concat scc-dir "/Reports"))
@@ -154,23 +154,23 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 
   (defvar seminar-dir (concat phd-thesis-dir "/Documents/Seminars/BeihangUniversity-Fall2021"))
   (defvar seminar-org-files-dir (concat seminar-dir "/Org-Files"))
-  (defvar ta-tasks-mail 
+  (defvar ta-tasks-mail
     (concat ta-org-files-dir "/current_tasks.org"))
 
   (defvar maxdiff-agenda-mail
     (concat maxdiff-org-files-dir "/agenda.org"))
 
-  (defvar research-tasks-mail 
+  (defvar research-tasks-mail
     (concat phd-thesis-org-files-dir "/research_tasks.org"))
-  (defvar lunch-tasks-mail 
+  (defvar lunch-tasks-mail
     (concat phd-thesis-org-files-dir "/lunch_tasks.org"))
-  (defvar side-tasks-mail 
+  (defvar side-tasks-mail
     (concat phd-thesis-org-files-dir "/side_tasks.org"))
-  (defvar scc-tasks-mail 
+  (defvar scc-tasks-mail
     (concat scc-org-files-dir "/scc_tasks.org"))
-  (defvar school-tasks-mail 
+  (defvar school-tasks-mail
     (concat phd-thesis-org-files-dir "/school_tasks.org"))
-  (defvar seminar-tasks-mail 
+  (defvar seminar-tasks-mail
     (concat seminar-org-files-dir "/seminar_tasks.org"))
   (defvar seminar-meetings
     (concat seminar-org-files-dir "/meeting_notes.org"))
@@ -239,7 +239,7 @@ The content of .emacs-daemon.plist is
   (setq visible-bell t)              ; Set up the visible bell
 
   (column-number-mode)
-  (setq-default display-line-numbers-type 'visual) 
+  (setq-default display-line-numbers-type 'visual)
   (when (not (version< emacs-version "26.3"))
     (global-display-line-numbers-mode t))
 
@@ -337,7 +337,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session-mac") (save-buffers-kill-terminal)))
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-  (global-set-key (kbd "C-i") 'evil-jump-forward)
+                                          ;(global-set-key (kbd "C-i") 'evil-jump-forward)
   (global-set-key (kbd "C-o") 'evil-jump-backward)
   (global-set-key (kbd "C-x c") 'persp-exit)
   (global-set-key [(control x) (k)] 'kill-buffer)
@@ -350,7 +350,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
       :prefix "SPC"
       :global-prefix "C-SPC")
 
-    (efs/leader-keys 
+    (efs/leader-keys
       "c" '(org-capture nil :which-key "(o)rg-capture")
       "e" '(:ignore t :which-key "(e)dit buffer")
       "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
@@ -463,7 +463,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 
 **** Mode Line
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   ;; (setq-default mode-line-format '("%e"
   ;;                                  (:eval
@@ -504,7 +504,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 
 ** Marginalia
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (when (not (version< emacs-version "27.1"))
     (use-package marginalia
@@ -524,43 +524,43 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 
 ** Embark
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
-  (use-package embark
-    :ensure t
-    :bind
-    (("C-." . embark-act)         ;; pick some comfortable binding
-     ("C-;" . embark-dwim)        ;; good alternative: M-.
-     ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-    :init
-    ;; Optionally replace the key help with a completing-read interface
-    (setq prefix-help-command #'embark-prefix-help-command)
-    :config
-    ;; Hide the mode line of the Embark live/completions buffers
-    (require 'embark)
-    (add-to-list 'display-buffer-alist
-                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                   nil
-                   (window-parameters (mode-line-format . none)))))
+  (when (not (version< emacs-version "26.1"))
+    (use-package embark
+      :ensure t
+      :bind
+      (("C-." . embark-act)         ;; pick some comfortable binding
+       ("C-;" . embark-dwim)        ;; good alternative: M-.
+       ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+      :init
+      ;; Optionally replace the key help with a completing-read interface
+      (setq prefix-help-command #'embark-prefix-help-command)
+      :config
+      ;; Hide the mode line of the Embark live/completions buffers
+      (require 'embark)
+      (add-to-list 'display-buffer-alist
+                   '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                     nil
+                     (window-parameters (mode-line-format . none))))))
 
   ;; Consult users will also want the embark-consult package.
-  (use-package embark-consult
-    :ensure t ; only need to install it, embark loads it after consult if found
-    :after (embark consult)
-    :demand t
-    :hook
-    (embark-collect-mode . consult-preview-at-point-mode)
-    :init
-    (with-eval-after-load 'embark
-      (require 'embark-consult)))
-
-  (use-package wgrep)
+  (when (not (version< emacs-version "27.1"))
+    (use-package embark-consult
+      :ensure t ; only need to install it, embark loads it after consult if found
+      :after (embark consult)
+      :demand t
+      :hook
+      (embark-collect-mode . consult-preview-at-point-mode)
+      :init
+      (with-eval-after-load 'embark
+        (require 'embark-consult))))
 
 #+end_src
 
-** Vertico 
+** Vertico
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (when (not (version< emacs-version "27.1"))
     (use-package vertico
@@ -573,9 +573,9 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 
 #+end_src
 
-** Orderless 
+** Orderless
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (when (not (version< emacs-version "26.1"))
     (use-package orderless
@@ -594,7 +594,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 
 ** Consult
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (when (not (version< emacs-version "26.3"))
     (use-package consult
@@ -715,7 +715,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
                                           ; (setq consult-project-function (lambda (_) (vc-root-dir)))
                                           ; 4. locate-dominating-file
                                           ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-      )) 
+      ))
 
   (defun consult-grep-current-dir ()
     "Call `consult-grep' for the current buffer (a single file)."
@@ -733,7 +733,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 
 ** Citar
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (when (not (version< emacs-version "27.1"))
     (use-package citar
@@ -885,6 +885,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
             ("\\.mm\\'" . default)
             ("\\.x?html?\\'" . default)
             ("\\.pdf\\'" . "open -a Skim %s")))
+            ("\\.nb?\\'" . "Mathematica %s")
 
     (setq org-ellipsis "⇓")
 
@@ -955,7 +956,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
             ("em" "MaxDiff Agenda" entry
              (file+olp maxdiff-agenda-mail "EMAIL")
              "** TODO Check this email %a"
-             :immediate-finish t) 
+             :immediate-finish t)
             )
           )
 
@@ -978,7 +979,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
 
 Update org-latex-classes
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (unless (boundp 'org-latex-classes)
     (setq org-latex-classes nil))
@@ -1009,7 +1010,7 @@ Update org-latex-classes
 
 *** Ox Hugo
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (when (not (version< emacs-version "26.3"))
     (use-package ox-hugo
@@ -1132,6 +1133,18 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
 
 #+end_src
 
+** Avy
+
+#+begin_src emacs-lisp
+
+  (use-package avy
+    :config
+    (setq avy-all-windows 'all-frames)
+    (global-set-key (kbd "C-:") 'avy-goto-char)
+    )
+
+#+end_src
+
 ** Languages
 
 *** IDE Features with lsp-mode
@@ -1151,7 +1164,7 @@ The =which-key= integration adds helpful descriptions of the various keys so you
     (lsp-headerline-breadcrumb-mode))
 
   (when (not (version< emacs-version "26.1"))
-    (use-package lsp-mode 
+    (use-package lsp-mode
       :commands (lsp lsp-deferred)
       :hook (lsp-mode . efs/lsp-mode-setup)
       :init
@@ -1177,7 +1190,7 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 
 **** tree-sitter
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
                                           ; :hook (
                                           ; (org-mode TeX-mode LaTeX-mode typescript-mode
@@ -1230,7 +1243,7 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 
 **** treemacs-evil 
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (when (not (version< emacs-version "26.1"))
     (use-package treemacs-evil
@@ -1311,7 +1324,7 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
 
 *** Rust
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (use-package rustic
     :straight t)
@@ -1368,14 +1381,14 @@ To setup Skim use select Skim > Preferences...
     "Get a BibTeX entry from the DOI"
     (interactive "MDOI: ")
     (let ((url-mime-accept-string "text/bibliography;style=bibtex"))
-      (with-current-buffer 
-          (url-retrieve-synchronously 
-           (format "http://dx.doi.org/%s" 
+      (with-current-buffer
+          (url-retrieve-synchronously
+           (format "http://dx.doi.org/%s"
                    (replace-regexp-in-string "http://dx.doi.org/" "" doi)))
         (switch-to-buffer (current-buffer))
         (goto-char (point-max))
-        (setq bibtex-entry 
-              (buffer-substring 
+        (setq bibtex-entry
+              (buffer-substring
                (string-match "@" (buffer-string))
                (point)))
         (kill-buffer (current-buffer))))
@@ -1386,7 +1399,7 @@ To setup Skim use select Skim > Preferences...
 
 **** AUCTex setup
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (when (not (version< emacs-version "26.3"))
     (use-package tex
@@ -1452,17 +1465,19 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 
 #+begin_src emacs-lisp
 
-  (defvar maplev-package "/home/jose/maple/toolbox/maplev/maplev-3.0.4.tar")
-  (if (file-exists-p maplev-package) (package-install-file maplev-package))
-
-  (add-to-list 'auto-mode-alist '("\\.mpl\\'" . maplev-mode))
-  (add-to-list 'auto-mode-alist '("\\.mm\\'" . maplev-mode))
+  (use-package maplev
+    :straight (maplev :type git
+                      :host github
+                      :repo "JoeRiel/maplev")
+    :config
+    (add-to-list 'auto-mode-alist '("\\.mpl\\'" . maplev-mode))
+    (add-to-list 'auto-mode-alist '("\\.mm\\'" . maplev-mode)))
 
 #+end_src
 
 *** Mathematica mode
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (use-package wolfram-mode
     :config
@@ -1475,7 +1490,7 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 
 *** TOML mode
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (use-package toml-mode)
 
@@ -1483,11 +1498,21 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 
 *** Lean
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
+
   (use-package lean4-mode
     :straight (lean4-mode :type git :host github :repo "leanprover/lean4-mode")
                                           ; to defer loading the package until required
     :commands (lean4-mode))
+
+#+end_src
+
+*** Racket
+
+#+begin_src emacs-lisp
+
+  (use-package racket-mode)
+
 #+end_src
 
 ** Company Mode
@@ -1549,7 +1574,7 @@ Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=)
 
 ** Rainbow mode
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (when (not (version< emacs-version "26.3"))
     (use-package rainbow-mode))
@@ -1686,13 +1711,13 @@ The downsides to Eshell are that it can be harder to configure than other packag
 
 ** vterm
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (use-package vterm
     :commands vterm
     :config
-    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")  
-    (setq vterm-shell "zsh")                      
+    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+    (setq vterm-shell "zsh")
     (setq vterm-max-scrollback 10000))
 
 #+end_src
@@ -1868,7 +1893,7 @@ This is an example of configuring another non-Emacs application using org-mode. 
 
 ** Markdown-EWW preview
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 
   (use-package markdown-preview-eww
     :ensure nil
