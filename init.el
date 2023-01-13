@@ -74,13 +74,13 @@
 (defvar efs/frame-transparency '(90 . 90))
 
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
-(defvar ta-org-files-dir 
+(defvar ta-org-files-dir
   (concat phd-thesis-dir
           "/Documents/Semesters/2023/Spring/TA-CS-357/Org-Files"))
-(defvar maxdiff-org-files-dir 
+(defvar maxdiff-org-files-dir
   (concat phd-thesis-dir
           "/Documents/Side-Projects/MaxDiff/Documents/org"))
-(defvar maxdiff-write-ups-dir 
+(defvar maxdiff-write-ups-dir
   (concat phd-thesis-dir
           "/Documents/Side-Projects/MaxDiff/Documents/notes"))
 
@@ -91,7 +91,7 @@
   (concat phd-thesis-dir
           "/Documents/Org-Files"))
 
-(defvar scc-dir 
+(defvar scc-dir
   (concat phd-thesis-dir
           "/Documents/Side-Projects/kapur-nsf-proposal"))
 (defvar scc-reports-dir (concat scc-dir "/Reports"))
@@ -99,23 +99,23 @@
 
 (defvar seminar-dir (concat phd-thesis-dir "/Documents/Seminars/BeihangUniversity-Fall2021"))
 (defvar seminar-org-files-dir (concat seminar-dir "/Org-Files"))
-(defvar ta-tasks-mail 
+(defvar ta-tasks-mail
   (concat ta-org-files-dir "/current_tasks.org"))
 
 (defvar maxdiff-agenda-mail
   (concat maxdiff-org-files-dir "/agenda.org"))
 
-(defvar research-tasks-mail 
+(defvar research-tasks-mail
   (concat phd-thesis-org-files-dir "/research_tasks.org"))
-(defvar lunch-tasks-mail 
+(defvar lunch-tasks-mail
   (concat phd-thesis-org-files-dir "/lunch_tasks.org"))
-(defvar side-tasks-mail 
+(defvar side-tasks-mail
   (concat phd-thesis-org-files-dir "/side_tasks.org"))
-(defvar scc-tasks-mail 
+(defvar scc-tasks-mail
   (concat scc-org-files-dir "/scc_tasks.org"))
-(defvar school-tasks-mail 
+(defvar school-tasks-mail
   (concat phd-thesis-org-files-dir "/school_tasks.org"))
-(defvar seminar-tasks-mail 
+(defvar seminar-tasks-mail
   (concat seminar-org-files-dir "/seminar_tasks.org"))
 (defvar seminar-meetings
   (concat seminar-org-files-dir "/meeting_notes.org"))
@@ -142,7 +142,7 @@
 (setq visible-bell t)              ; Set up the visible bell
 
 (column-number-mode)
-(setq-default display-line-numbers-type 'visual) 
+(setq-default display-line-numbers-type 'visual)
 (when (not (version< emacs-version "26.3"))
   (global-display-line-numbers-mode t))
 
@@ -220,7 +220,7 @@
   (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-;(global-set-key (kbd "C-i") 'evil-jump-forward)
+                                        ;(global-set-key (kbd "C-i") 'evil-jump-forward)
 (global-set-key (kbd "C-o") 'evil-jump-backward)
 (global-set-key (kbd "C-x c") 'persp-exit)
 (global-set-key [(control x) (k)] 'kill-buffer)
@@ -233,7 +233,7 @@
     :prefix "SPC"
     :global-prefix "C-SPC")
 
-  (efs/leader-keys 
+  (efs/leader-keys
     "c" '(org-capture nil :which-key "(o)rg-capture")
     "e" '(:ignore t :which-key "(e)dit buffer")
     "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
@@ -350,35 +350,35 @@
     ;; enabled right away. Note that this forces loading the package.
     (marginalia-mode)))
 
-(use-package embark
-  :ensure t
-  :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-  :init
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command)
-  :config
-  ;; Hide the mode line of the Embark live/completions buffers
-  (require 'embark)
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
+(when (not (version< emacs-version "26.1"))
+  (use-package embark
+    :ensure t
+    :bind
+    (("C-." . embark-act)         ;; pick some comfortable binding
+     ("C-;" . embark-dwim)        ;; good alternative: M-.
+     ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+    :init
+    ;; Optionally replace the key help with a completing-read interface
+    (setq prefix-help-command #'embark-prefix-help-command)
+    :config
+    ;; Hide the mode line of the Embark live/completions buffers
+    (require 'embark)
+    (add-to-list 'display-buffer-alist
+                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                   nil
+                   (window-parameters (mode-line-format . none))))))
 
 ;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-  :ensure t ; only need to install it, embark loads it after consult if found
-  :after (embark consult)
-  :demand t
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode)
-  :init
-  (with-eval-after-load 'embark
-    (require 'embark-consult)))
-
-(use-package wgrep)
+(when (not (version< emacs-version "27.1"))
+  (use-package embark-consult
+    :ensure t ; only need to install it, embark loads it after consult if found
+    :after (embark consult)
+    :demand t
+    :hook
+    (embark-collect-mode . consult-preview-at-point-mode)
+    :init
+    (with-eval-after-load 'embark
+      (require 'embark-consult))))
 
 (when (not (version< emacs-version "27.1"))
   (use-package vertico
@@ -521,7 +521,7 @@
                                         ; (setq consult-project-function (lambda (_) (vc-root-dir)))
                                         ; 4. locate-dominating-file
                                         ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-    )) 
+    ))
 
 (defun consult-grep-from-here ()
   "Call `consult-grep' for the current buffer (a single file)."
@@ -704,7 +704,7 @@
           ("em" "MaxDiff Agenda" entry
            (file+olp maxdiff-agenda-mail "EMAIL")
            "** TODO Check this email %a"
-           :immediate-finish t) 
+           :immediate-finish t)
           )
         )
 
@@ -833,7 +833,7 @@
   (lsp-headerline-breadcrumb-mode))
 
 (when (not (version< emacs-version "26.1"))
-  (use-package lsp-mode 
+  (use-package lsp-mode
     :commands (lsp lsp-deferred)
     :hook (lsp-mode . efs/lsp-mode-setup)
     :init
@@ -959,14 +959,14 @@
   "Get a BibTeX entry from the DOI"
   (interactive "MDOI: ")
   (let ((url-mime-accept-string "text/bibliography;style=bibtex"))
-    (with-current-buffer 
-        (url-retrieve-synchronously 
-         (format "http://dx.doi.org/%s" 
+    (with-current-buffer
+        (url-retrieve-synchronously
+         (format "http://dx.doi.org/%s"
                  (replace-regexp-in-string "http://dx.doi.org/" "" doi)))
       (switch-to-buffer (current-buffer))
       (goto-char (point-max))
-      (setq bibtex-entry 
-            (buffer-substring 
+      (setq bibtex-entry
+            (buffer-substring
              (string-match "@" (buffer-string))
              (point)))
       (kill-buffer (current-buffer))))
@@ -1007,11 +1007,13 @@
   :config
   (pyvenv-mode 1))
 
-(defvar maplev-package "/home/jose/maple/toolbox/maplev/maplev-3.0.4.tar")
-(if (file-exists-p maplev-package) (package-install-file maplev-package))
-
-(add-to-list 'auto-mode-alist '("\\.mpl\\'" . maplev-mode))
-(add-to-list 'auto-mode-alist '("\\.mm\\'" . maplev-mode))
+(use-package maplev
+  :straight (maplev :type git
+                    :host github
+                    :repo "JoeRiel/maplev")
+  :config
+  (add-to-list 'auto-mode-alist '("\\.mpl\\'" . maplev-mode))
+  (add-to-list 'auto-mode-alist '("\\.mm\\'" . maplev-mode)))
 
 (use-package wolfram-mode
   :config
@@ -1026,6 +1028,8 @@
   :straight (lean4-mode :type git :host github :repo "leanprover/lean4-mode")
                                         ; to defer loading the package until required
   :commands (lean4-mode))
+
+(use-package racket-mode)
 
 (use-package company
   :after lsp-mode
@@ -1113,8 +1117,8 @@
 (use-package vterm
   :commands vterm
   :config
-  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")  
-  (setq vterm-shell "zsh")                      
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+  (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
 
 (use-package dired
