@@ -1890,7 +1890,7 @@ mu4e comes included with mu. Search the path your package manager used to instal
 
       (setq mu4e-update-interval 600)
       (setq mu4e-get-mail-command "mbsync -a")
-      (setq mu4e-maildir "~/Mail")
+      (setq mu4e-root-maildir "~/Mail")
 
                                           ; Just plain text
       (with-eval-after-load "mm-decode"
