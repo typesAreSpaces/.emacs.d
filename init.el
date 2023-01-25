@@ -194,7 +194,7 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-;(with-eval-after-load 'dashboard (dashboard-refresh-buffer))
+(with-eval-after-load 'dashboard (dashboard-refresh-buffer))
 
 (defun frame-font-setup
     (&rest ...)
@@ -1195,7 +1195,7 @@
 
     (setq mu4e-update-interval 600)
     (setq mu4e-get-mail-command "mbsync -a")
-    (setq mu4e-maildir "~/Mail")
+    (setq mu4e-root-maildir "~/Mail")
 
                                         ; Just plain text
     (with-eval-after-load "mm-decode"
