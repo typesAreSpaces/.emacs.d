@@ -398,9 +398,9 @@
     ;;       orderless-component-separator #'orderless-escapable-split-on-space)
     (setq completion-styles '(orderless basic)
           completion-category-defaults nil
-          completion-category-overrides '((file (styles partial-completion))))))
-
-(setq orderless-matching-styles '(orderless-flex))
+          completion-category-overrides '((file (styles partial-completion))))
+    :config
+    (setq orderless-matching-styles '(orderless-flex))))
 
 (when (not (version< emacs-version "26.3"))
   (use-package consult
