@@ -3,4 +3,4 @@
 # key: ;input
 # condition: 'auto
 # --
-`(yasnippet/input (car kill-ring))`
+${1:$$(when (and yas-modified-p yas-moving-away-p) (yasnippet/input yas-text))}
