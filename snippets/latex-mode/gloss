@@ -3,4 +3,4 @@
 # key: ;gloss
 # condition: 'auto
 # --
-`(yasnippet/aux_add_cmd "idxdb.tex" "~/.local/scripts/add-glossary -p " " -e \'newglossaryentry\{" "\\glsadd\{" (car kill-ring))`
+\\${1:$$(when (and yas-modified-p yas-moving-away-p) (yasnippet/aux_add_cmd "idxdb.tex" "~/.local/scripts/add-glossary -p " " -e \'newglossaryentry\{" "\\glsadd\{" yas-text))}
