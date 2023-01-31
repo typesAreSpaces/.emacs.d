@@ -3,4 +3,4 @@
 # key: ;min
 # condition: 'auto
 # --
-\\min($1)$0
+\\min${1:$$(yas-choose-value '("(" "\\\\{"))}$2${1:$(cond ((equal yas-text "(") ")") ((equal yas-text "\\\\{") "\\\\}"))}$0
