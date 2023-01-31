@@ -1016,7 +1016,38 @@
                                         ; to defer loading the package until required
   :commands (lean4-mode))
 
-(use-package racket-mode)
+;(use-package racket-mode)
+(setq scheme-program-name "/usr/bin/racket")
+(setq auto-mode-alist
+      (cons '("\\.rkt\\'" . scheme-mode)
+            auto-mode-alist))
+
+(defun run-scheme2 ()
+  "Run scheme-program-name and disable geiser-mode."
+  (interactive)
+  (split-window-right)
+  (geiser-mode -1)
+  (windmove-right)
+  (run-scheme scheme-program-name))
+
+(defun run-scheme3 ()
+  "Run scheme-program-name and disable geiser-mode."
+  (interactive)
+  (split-window-right)
+  (windmove-right)
+  (run-scheme scheme-program-name))
+
+(use-package haskell-mode
+  :mode "\\.hs\\'"
+                                        ;:hook (haskell-mode . lsp-deferred)
+  :config
+  (setq haskell-program-name "/usr/bin/ghci")
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  ;; Choose indentation mode (the latter requires haskell-mode >= 2.5):
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+  ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  )
+(use-package lsp-haskell)
 
 (use-package company
   :after lsp-mode
