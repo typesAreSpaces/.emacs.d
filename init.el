@@ -1030,7 +1030,7 @@
   :commands (lean4-mode))
 
 ;(use-package racket-mode)
-(setq scheme-program-name "/usr/bin/racket")
+(setq scheme-program-name "racket")
 (setq auto-mode-alist
       (cons '("\\.rkt\\'" . scheme-mode)
             auto-mode-alist))
