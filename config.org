@@ -313,8 +313,8 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 	    :prefix "C-c C-SPC")
 
     (efs/leader-keys
-      "c" '(org-capture nil :which-key "(o)rg-capture")
-      "b" '(:ignore t :which-key "(e)dit buffer")
+      "c" '(org-capture nil :which-key "org-(c)apture")
+      "b" '(:ignore t :which-key "edit (b)uffer")
       "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
       "bf"  '(fill-buffer :which-key "(f)ill buffer")
       "bi"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
