@@ -314,12 +314,12 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 
     (efs/leader-keys
       "c" '(org-capture nil :which-key "(o)rg-capture")
-      "e" '(:ignore t :which-key "(e)dit buffer")
-      "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
-      "ef"  '(fill-buffer :which-key "(f)ill buffer")
-      "ei"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
-      "ey" '(simpleclip-copy :which-key "clipboard (y)ank")
-      "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
+      "b" '(:ignore t :which-key "(e)dit buffer")
+      "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
+      "bf"  '(fill-buffer :which-key "(f)ill buffer")
+      "bi"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
+      "by" '(simpleclip-copy :which-key "clipboard (y)ank")
+      "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
       "f" '(:ignore t :which-key "edit (f)iles")
       "fa" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))) :which-key "(a)genda")
       "fe" '((lambda () (interactive) (find-file (expand-file-name "config.org" user-emacs-directory))) :which-key "(e)macs source")
@@ -918,21 +918,23 @@ This section contains the basic configuration for =org-mode= plus the configurat
             )
           )
 
-    (define-key global-map (kbd "C-c s")
-      (lambda () (interactive) (mark-whole-buffer) (org-sort-entries nil ?o)))
-
     (define-key global-map (kbd "C-c c")
       (lambda () (interactive) (org-todo "COMPLETED")))
 
     (define-key global-map (kbd "C-c t")
       (lambda () (interactive) (org-todo "TODO")))
 
-    (defun auto/SortTODO ()
-      (when (and buffer-file-name (string-match ".*/todolist.org" (buffer-file-name)))
-        (setq unread-command-events (listify-key-sequence "\C-c s"))))
-
     (efs/org-font-setup))
 
+  (defun org-sort-buffer ()
+    "Sort all entries in the current buffer, recursively."
+    (interactive)
+    (org-map-entries (lambda ()
+                       (condition-case x
+                           (org-sort-entries nil ?o)
+                         (user-error))))) 
+  (define-key global-map (kbd "C-c s")
+    (lambda () (interactive) (org-sort-buffer)))
 #+end_src
 
 Update org-latex-classes
