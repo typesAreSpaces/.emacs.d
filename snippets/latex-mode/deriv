@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Derivate
+# key: ;deriv
+# condition: 'auto
+# --
+\\frac{d}{dx}$0
