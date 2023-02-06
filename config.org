@@ -971,10 +971,12 @@ This section contains the basic configuration for =org-mode= plus the configurat
   (defun org-sort-buffer ()
     "Sort all entries in the current buffer, recursively."
     (interactive)
+    (mark-whole-buffer)
+    (org-sort-entries nil ?o)
     (org-map-entries (lambda ()
                        (condition-case x
                            (org-sort-entries nil ?o)
-                         (user-error))))) 
+                         (user-error)))))
   (define-key global-map (kbd "C-c s")
     (lambda () (interactive) (org-sort-buffer)))
 #+end_src
@@ -1538,7 +1540,7 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 
 Install a language server to enable lsp. For example, [[https://formulae.brew.sh/formula/haskell-language-server][=brew install haskell-language-server=]].
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package haskell-mode
     :mode "\\.hs\\'"
                                           ;:hook (haskell-mode . lsp-deferred)
