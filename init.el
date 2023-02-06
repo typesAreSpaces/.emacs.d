@@ -720,10 +720,12 @@
 (defun org-sort-buffer ()
   "Sort all entries in the current buffer, recursively."
   (interactive)
+  (mark-whole-buffer)
+  (org-sort-entries nil ?o)
   (org-map-entries (lambda ()
                      (condition-case x
                          (org-sort-entries nil ?o)
-                       (user-error))))) 
+                       (user-error)))))
 (define-key global-map (kbd "C-c s")
   (lambda () (interactive) (org-sort-buffer)))
 
