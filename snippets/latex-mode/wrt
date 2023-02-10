@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: with respect to
-# key: ;wrt
-# condition: 'auto
-# --
-with respect to $0

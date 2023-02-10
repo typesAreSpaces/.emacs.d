@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: conjecture
-# key: ;conjecture
-# condition: 'auto
-# --
-\begin{conjecture}
-	$0
-\end{conjecture}

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: kl
-# key: ;kl
-# condition: 'auto
-# --
-\\kl{$1}$0

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Subindex
-# key: ;_
-# condition: 'auto
-# --
-_{$1}$0

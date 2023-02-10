@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Universal Quantifier
-# key: ;qall
-# condition: 'auto
-# --
-\\qall{$1}{$2}$0

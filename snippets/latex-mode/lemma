@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: Lemma Environment
-# key: ;lemma
-# condition: 'auto
-# --
-\begin{lemma}
-	$0
-\end{lemma}

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: TODO label
-# key: ;todo
-# condition: 'auto
-# --
-{{\color{red}[TODO]} \footnote{{\color{red}TODO:} $1}.} $0

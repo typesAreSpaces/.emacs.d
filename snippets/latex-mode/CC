@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Complex Numbers
-# key: ;CC
-# condition: 'auto
-# --
-\\mathbb{C}$0

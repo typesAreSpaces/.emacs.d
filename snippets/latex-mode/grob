@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Groebner
-# key: ;grob
-# condition: 'auto
-# --
-Gr\"obner $0

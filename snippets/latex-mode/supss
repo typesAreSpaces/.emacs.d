@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Supseteq
-# key: ;supss
-# condition: 'auto
-# --
-\\supset $0

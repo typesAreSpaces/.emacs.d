@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Max
-# key: ;max
-# condition: 'auto
-# --
-\\max${1:$$(yas-choose-value '("(" "\\\\{"))}$2${1:$(cond ((equal yas-text "(") ")") ((equal yas-text "\\\\{") "\\\\}"))}$0

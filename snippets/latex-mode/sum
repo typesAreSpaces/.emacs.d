@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Sum
-# key: ;sum
-# condition: 'auto
-# --
-\\sum_{$1}^{$2}{$3}$0

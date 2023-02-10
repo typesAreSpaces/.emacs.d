@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Algorithmic Statement
-# key: ;cmd
-# condition: 'auto
-# --
-$0\\;

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Single Line Comment
-# key: ;scomment
-# condition: 'auto
-# --
-\\tcp{$1}$0

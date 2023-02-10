@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: gloss
-# key: ;gloss
-# condition: 'auto
-# --
-\\${1:$$(when (and yas-modified-p yas-moving-away-p) (yasnippet/aux_add_cmd "idxdb.tex" "~/.local/scripts/add-glossary -p " " -e \'newglossaryentry\{" "\\glsadd\{" yas-text))}

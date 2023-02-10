@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Existential Quantifier
-# key: ;qex
-# condition: 'auto
-# --
-\\qex{$1}{$2}$0
