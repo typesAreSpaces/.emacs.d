@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: new class
+# key: ;class
+# condition: 'auto
+# --
+class ${1:Name} where
+      $0

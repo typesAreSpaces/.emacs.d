@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: data
+# key: ;data
+# condition: 'auto
+# --
+data ${1:Type} = $2

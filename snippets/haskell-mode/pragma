@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: pragma
+# key: ;prag
+# condition: 'auto
+# --
+{-# ${1:PRAGMA} #-}
