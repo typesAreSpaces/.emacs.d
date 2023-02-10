@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Power
-# key: ;pow
-# condition: 'auto
-# --
-^{$1}$0

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Algorithm Return
-# key: ;ret
-# condition: 'auto
-# --
-\\Return $0

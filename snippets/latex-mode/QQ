@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Rational Numbers
-# key: ;QQ
-# condition: 'auto
-# --
-\\mathbb{Q}$0

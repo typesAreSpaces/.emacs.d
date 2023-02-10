@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: texorpdfstring
-# key: ;texpdfstring
-# condition: 'auto
-# --
-\\texorpdfstring{\$$1\$}{$2} $0

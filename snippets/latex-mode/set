@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Set
-# key: ;set
-# condition: 'auto
-# --
-\\set{$1${2: \mid $3}}$0

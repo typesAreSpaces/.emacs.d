@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: Algorithm Single If Statement
-# key: ;ifs
-# condition: 'auto
-# --
-\\uIf{$1}{
-  $2
-}
-$0

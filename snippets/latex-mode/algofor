@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: Algorithm For
-# key: ;for
-# condition: 'auto
-# --
-\\For{$1}{
-	$2
-}
-$0

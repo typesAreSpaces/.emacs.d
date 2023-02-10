@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Natural Numbers
-# key: ;NN
-# condition: 'auto
-# --
-\\mathbb{N}$0

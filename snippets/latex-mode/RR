@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Real Numbers
-# key: ;RR
-# condition: 'auto
-# --
-\\mathbb{R}$0
