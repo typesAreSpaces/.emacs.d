@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Text
-# key: ;text
-# condition: 'auto
-# --
-\\text{ $1 } $0

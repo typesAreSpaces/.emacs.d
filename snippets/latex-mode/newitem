@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: New Item
-# key: ;>>
-# condition: 'auto
-# --
-\item $0

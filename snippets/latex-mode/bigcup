@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Big Union
-# key: ;bigcup
-# condition: 'auto
-# --
-\\bigcup_{$1}^{$2}{$3}$0

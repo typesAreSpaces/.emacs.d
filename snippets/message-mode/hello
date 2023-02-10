@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: hello
-# key: ;hello
-# condition: 'auto
-# --
-Hello ${1:`(yasnippet/mu4e-get-names)`},
-
-$0

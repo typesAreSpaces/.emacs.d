@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: Piecewise function
-# key: ;piecewise
-# condition: 'auto
-# --
-\begin{cases}
-  $1 & $2 \\\\
-  $3 & $4 \\\\
-\end{cases}

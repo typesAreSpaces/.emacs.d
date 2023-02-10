@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Sequence of symbols
-# key: ;seq
-# condition: 'auto
-# --
-$1_1$2 ${3:$1_2$2 }\\dots${4:$2 $1_{$5}}$0

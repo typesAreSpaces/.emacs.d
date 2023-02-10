@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Backslash
-# key: ;\\
-# condition: 'auto
-# --
-\\textbackslash$0

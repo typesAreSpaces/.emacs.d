@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Grave accent
-# key: ;gr
-# condition: 'auto
-# --
-\\\`{$1}$0

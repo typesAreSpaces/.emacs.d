@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: hypo
-# key: ;hypo
-# condition: 'auto
-# --
-\\hypo{$1}$0
