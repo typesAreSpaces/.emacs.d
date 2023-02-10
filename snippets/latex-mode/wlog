@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: without loss of generality
-# key: ;wlog
-# condition: 'auto
-# --
-without loss of generality $0

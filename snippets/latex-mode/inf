@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Infinity
-# key: ;oo
-# condition: 'auto
-# --
-\\infty$0

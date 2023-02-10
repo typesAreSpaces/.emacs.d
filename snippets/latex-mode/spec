@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Spec
-# key: ;spec
-# condition: 'auto
-# --
-\\spec{$1}$0

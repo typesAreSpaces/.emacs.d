@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: input
-# key: ;input
-# condition: 'auto
-# --
-${1:$$(when (and yas-modified-p yas-moving-away-p) (yasnippet/input yas-text))}

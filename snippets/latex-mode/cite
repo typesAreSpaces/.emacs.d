@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Cite (optional: current item on + register)
-# key: ;cite
-# condition: 'auto
-# --
-\\cite{${1:$$(evil-paste-before 1)}} $0

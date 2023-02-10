@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Absolute value
-# key: ;abs
-# condition: 'auto
-# --
-|$1|$0

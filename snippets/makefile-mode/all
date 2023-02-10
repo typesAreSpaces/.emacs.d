@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: all
-# key: ;all
-# condition: 'auto
-# --
-all:
-        $0

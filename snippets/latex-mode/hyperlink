@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: hyperlink
-# key: ;hyper
-# condition: 'auto
-# --
-\hyperlink{$1}{\beamerskipbutton{$2}} $0
