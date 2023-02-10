@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: color
-# key: ;color
-# condition: 'auto
-# --
-{\color{$1} $2} $0

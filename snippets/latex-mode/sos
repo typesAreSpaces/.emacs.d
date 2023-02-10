@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Sums of squares
-# key: ;sos
-# condition: 'auto
-# --
-\\sum{$1}^2$0

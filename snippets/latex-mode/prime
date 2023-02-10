@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: prime
-# key: ;prime
-# condition: 'auto
-# --
-`(yasnippet/repeat (car kill-ring) "\\prime")`

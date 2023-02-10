@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Ord
-# key: ;ord
-# condition: 'auto
-# --
-\\ord_{$1}($2)$0

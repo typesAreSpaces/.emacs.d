@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: onslide
-# key: ;onslide
-# condition: 'auto
-# --
-\\onslide<$1->$0

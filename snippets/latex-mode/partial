@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Partial wrt ...
-# key: ;partial
-# condition: 'auto
-# --
-\\frac{\partial}{\partial $1}$0

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Left rule
-# key: ;lrule
-# condition: 'auto
-# --
-$2 \leftarrow_{$1} $3 $0

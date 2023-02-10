@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: QuadMod
-# key: ;quadmod
-# condition: 'auto
-# --
-\\quadmod($1)$0

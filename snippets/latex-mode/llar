@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Left arrow
-# key: ;Lar
-# condition: 'auto
-# --
-\\Leftarrow$0 

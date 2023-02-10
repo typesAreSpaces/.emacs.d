@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Inline Math
-# key: ;;
-# condition: 'auto
-# --
-$$1$$0
