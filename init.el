@@ -49,7 +49,7 @@
 ; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 
-; NOTE: If you want to move everything out of the ~/.emacs.d folder
+; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
                                         ; reliably, set `user-emacs-directory` before loading no-littering!
                                         ; (setq user-emacs-directory "~/.cache/emacs")
 
@@ -217,7 +217,7 @@
 ; Make ESC quit prompts
 (defun persp-exit ()
   (interactive)
-  (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session-mac") (save-buffers-kill-terminal)))
+  (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
                                         ;(global-set-key (kbd "C-i") 'evil-jump-forward)
@@ -516,13 +516,13 @@
                                         ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
     ))
 
-(defun consult-grep-current-dir ()
+(defun consult-grep-from-here ()
   "Call `consult-grep' for the current buffer (a single file)."
   (interactive)
   (let ((consult-project-function (lambda (x) "./")))
     (consult-grep)))
 
-(defun consult-find-current-dir ()
+(defun consult-find-from-here ()
   "Call `consult-find' for the current buffer (a single file)."
   (interactive)
   (let ((consult-project-function (lambda (x) "./")))
@@ -576,7 +576,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Hack" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Fira Code" :weight 'regular :height (cdr face)))
 
                                         ; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -625,8 +625,8 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "open -a Skim %s")
-          ("\\.nb?\\'" . "Mathematica %s")))
+          ("\\.nb?\\'" . "Mathematica %s")
+          ("\\.pdf\\'" . "zathura %s")))
 
   (setq org-ellipsis "⇓")
 
@@ -776,7 +776,7 @@
          (LaTeX-mode . efs/org-mode-visual-fill)
          (mu4e-main-mode . efs/org-mode-visual-fill)))
 
-; Automatically tangle our Emacs.org config file when we save it
+; Automatically tangle our config.org config file when we save it
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
                       (expand-file-name user-emacs-directory))
@@ -944,8 +944,8 @@
     (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "-cd" "%f"))
     (setq lsp-latex-forward-search-after t)
     (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable "/Applications/Skim.app/Contents/SharedSupport/displayline")
-    (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
+    (setq lsp-latex-forward-search-executable "zathura")
+    (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
@@ -1022,7 +1022,7 @@
   :commands (lean4-mode))
 
 ;(use-package racket-mode)
-(setq scheme-program-name "racket")
+(setq scheme-program-name "/usr/bin/racket")
 (setq auto-mode-alist
       (cons '("\\.rkt\\'" . scheme-mode)
             auto-mode-alist))
@@ -1151,9 +1151,6 @@
 
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
-(setq insert-directory-program "gls" dired-use-ls-dired t)
-(setq dired-listing-switches "-al --group-directories-first")
-
 (use-package dired-single
   :commands (dired dired-jump))
 
@@ -1208,15 +1205,13 @@
              :files ("*.el")
              :repo "niku/markdown-preview-eww"))
 
-(defvar efs/mu4e-path "/opt/homebrew/share/emacs/site-lisp/mu/mu4e/")
+(defvar efs/mu4e-path "/usr/share/emacs/site-lisp/mu4e/")
 
 (when (file-exists-p (concat efs/mu4e-path "mu4e.el"))
   (use-package mu4e
     :ensure nil
     :load-path (lambda () (expand-file-name efs/mu4e-path))
                                         ; :defer 20 ; Wait until 20 seconds after startup
-    :init
-    (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
     :config
     (require 'mu4e)
     (require 'mu4e-org)
@@ -1225,7 +1220,7 @@
     (setq mu4e-change-filenames-when-moving t)
 
                                         ; SMTP settings
-    (setq sendmail-program "/opt/homebrew/bin/msmtp"
+    (setq sendmail-program "/usr/bin/msmtp"
           message-sendmail-f-is-evil t
           message-sendmail-extra-arguments '("--read-envelope-from")
           send-mail-function 'smtpmail-send-it
