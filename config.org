@@ -99,7 +99,7 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 
 #+begin_src emacs-lisp
 
-                                          ; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
+                                          ; NOTE: If you want to move everything out of the ~/.emacs.d folder
                                           ; reliably, set `user-emacs-directory` before loading no-littering!
                                           ; (setq user-emacs-directory "~/.cache/emacs")
 
@@ -179,6 +179,41 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 * Basic UI Configuration
 
 This section configures basic UI settings that remove unneeded elements to make Emacs look a lot more minimal and modern.  If you're just getting started in Emacs, the menu bar might be helpful so you can remove the =(menu-bar-mode -1)= line if you'd like to still see that.
+
+In order to start up a daemon, use the following command
+#+begin_src 
+
+launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist  
+launchctl unload -w ~/Library/LaunchAgents/.emacs-daemon.plist  
+launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist  
+
+#+end_src
+
+The content of .emacs-daemon.plist is
+
+#+begin_src
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+ <plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>gnu.emacs.daemon</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/emacs</string>
+    <string>--with-profile=jose</string>
+    <string>--daemon</string>
+  </array>
+ <key>RunAtLoad</key>
+ <true/>
+ <key>ServiceDescription</key>
+ <string>Gnu Emacs Daemon</string>
+</dict>
+</plist>
+
+#+end_src
 
 #+begin_src emacs-lisp
 
@@ -299,7 +334,7 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
                                           ; Make ESC quit prompts
   (defun persp-exit ()
     (interactive)
-    (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
+    (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session-mac") (save-buffers-kill-terminal)))
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
                                           ;(global-set-key (kbd "C-i") 'evil-jump-forward)
@@ -645,13 +680,13 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
                                           ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
       ))
 
-  (defun consult-grep-from-here ()
+  (defun consult-grep-current-dir ()
     "Call `consult-grep' for the current buffer (a single file)."
     (interactive)
     (let ((consult-project-function (lambda (x) "./")))
       (consult-grep)))
 
-  (defun consult-find-from-here ()
+  (defun consult-find-current-dir ()
     "Call `consult-find' for the current buffer (a single file)."
     (interactive)
     (let ((consult-project-function (lambda (x) "./")))
@@ -739,7 +774,7 @@ The =efs/org-font-setup= function configures various text faces to tweak the siz
                     (org-level-6 . 1.1)
                     (org-level-7 . 1.1)
                     (org-level-8 . 1.1)))
-      (set-face-attribute (car face) nil :font "Fira Code" :weight 'regular :height (cdr face)))
+      (set-face-attribute (car face) nil :font "Hack" :weight 'regular :height (cdr face)))
 
                                           ; Ensure that anything that should be fixed-pitch in Org files appears that way
     (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -812,8 +847,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
             (directory . emacs)
             ("\\.mm\\'" . default)
             ("\\.x?html?\\'" . default)
-            ("\\.nb?\\'" . "Mathematica %s")
-            ("\\.pdf\\'" . "zathura %s")))
+            ("\\.pdf\\'" . "open -a Skim %s")
+            ("\\.nb?\\'" . "Mathematica %s")))
 
     (setq org-ellipsis "⇓")
 
@@ -994,11 +1029,11 @@ We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]
 
 ** Auto-tangle Configuration Files
 
-This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-config= gets executed each time such a buffer gets saved.  This function checks to see if the file being saved is the config.org file you're looking at right now, and if so, automatically exports the configuration here to the associated output files.
+This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-config= gets executed each time such a buffer gets saved.  This function checks to see if the file being saved is the Emacs.org file you're looking at right now, and if so, automatically exports the configuration here to the associated output files.
 
 #+begin_src emacs-lisp
 
-                                          ; Automatically tangle our config.org config file when we save it
+                                          ; Automatically tangle our Emacs.org config file when we save it
   (defun efs/org-babel-tangle-config ()
     (when (string-equal (file-name-directory (buffer-file-name))
                         (expand-file-name user-emacs-directory))
@@ -1158,7 +1193,7 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 
 **** treemacs
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
 
   (when (not (version< emacs-version "26.1"))
     (use-package treemacs
@@ -1171,7 +1206,7 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 
 #+end_src
 
-**** treemacs-evil
+**** treemacs-evil 
 
 #+begin_src emacs-lisp
 
@@ -1272,7 +1307,12 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
 
 *** Latex
 
-#+begin_src emacs-lisp
+To setup Skim use select Skim > Preferences...
+- Preset: Custom
+- Command: emacsclient
+- Arguments: -s jose --no-wait +%line "%file"
+
+#+begin_src emacs-lisp 
 
   (add-hook 'TeX-mode-hook 'lsp)
   (add-hook 'LaTeX-mode-hook 'lsp)
@@ -1299,8 +1339,8 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
       (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "-cd" "%f"))
       (setq lsp-latex-forward-search-after t)
       (setq lsp-latex-build-on-save t)
-      (setq lsp-latex-forward-search-executable "zathura")
-      (setq lsp-latex-forward-search-args '("--synctex-forward" "%l:1:%f" "%p"))))
+      (setq lsp-latex-forward-search-executable "/Applications/Skim.app/Contents/SharedSupport/displayline")
+      (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
 
   (defun get-bibtex-from-doi (doi)
     "Get a BibTeX entry from the DOI"
@@ -1436,7 +1476,7 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 
 #+begin_src emacs-lisp
                                           ;(use-package racket-mode)
-  (setq scheme-program-name "/usr/bin/racket")
+  (setq scheme-program-name "racket")
   (setq auto-mode-alist
         (cons '("\\.rkt\\'" . scheme-mode)
               auto-mode-alist))
@@ -1743,6 +1783,9 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
 
   (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
+  (setq insert-directory-program "gls" dired-use-ls-dired t)
+  (setq dired-listing-switches "-al --group-directories-first")
+
   (use-package dired-single
     :commands (dired dired-jump))
 
@@ -1839,58 +1882,16 @@ This is an example of configuring another non-Emacs application using org-mode. 
 
 ** Managing Mail with mu4e
 
-It is necessary to install isync, setup a .mbsyncrc file like the following:
+Follow the following [[https://macowners.club/posts/email-emacs-mu4e-macos/][post]] to setup credential file in ~/.maildir/certificates. It is necessary to install isync. Use the brew package manager and follow xukai92 suggestion in this [[https://github.com/moriyoshi/cyrus-sasl-xoauth2/issues/9][git issue]], i.e. use 
 
 #+begin_src
-IMAPAccount unm
-Host outlook.office365.com
-User jabelcastellanosjoo@unm.edu
-AuthMechs XOAUTH2
-PassCmd "~/.local/scripts/mail_scripts/mutt_oauth2.py ~/.local/scripts/mail_scripts/jabelcastellanosjoo@unm.edu.tokens"
-Port 993
-SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+HOMEBREW_EDITOR=nvim brew edit isync
+#+end_src
 
-IMAPStore unm-remote
-Account unm
+to remove url, sha256 entries, change the head entry with  https://github.com/xukai92/isync.git and recompile isync using 
 
-MaildirStore unm-local
-Path ~/Mail/unm/
-Inbox ~/Mail/unm/Inbox
-SubFolders Verbatim
-
-Channel unm
-Far :unm-remote:
-Near :unm-local:
-Patterns *
-Create Both
-Expunge Both
-SyncState *
-
-IMAPAccount cs-unm
-Host snape.cs.unm.edu
-User jose.castellanosjoo@cs.unm.edu
-AuthMechs Login
-PassCmd "pass email/jose.castellanosjoo@cs.unm.edu"
-Port 993
-SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-IMAPStore cs-unm-remote
-Account cs-unm
-
-MaildirStore cs-unm-local
-Path ~/Mail/cs-unm/
-Inbox ~/Mail/cs-unm/Inbox
-SubFolders Verbatim
-
-Channel cs-unm
-Far :cs-unm-remote:
-Near :cs-unm-local:
-Patterns *
-Create Both
-Expunge Both
-SyncState *
+#+begin_src 
+brew reinstall isync --build
 #+end_src
 
 Additionally, install mu using your package manager and set it up with the following:
@@ -1906,7 +1907,7 @@ mu4e comes included with mu. Search the path your package manager used to instal
 
 #+begin_src emacs-lisp
 
-  (defvar efs/mu4e-path "/usr/share/emacs/site-lisp/mu4e/")
+  (defvar efs/mu4e-path "/opt/homebrew/share/emacs/site-lisp/mu/mu4e/")
 
 #+end_src
 
@@ -1917,6 +1918,8 @@ mu4e comes included with mu. Search the path your package manager used to instal
       :ensure nil
       :load-path (lambda () (expand-file-name efs/mu4e-path))
                                           ; :defer 20 ; Wait until 20 seconds after startup
+      :init
+      (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
       :config
       (require 'mu4e)
       (require 'mu4e-org)
@@ -1925,7 +1928,7 @@ mu4e comes included with mu. Search the path your package manager used to instal
       (setq mu4e-change-filenames-when-moving t)
 
                                           ; SMTP settings
-      (setq sendmail-program "/usr/bin/msmtp"
+      (setq sendmail-program "/opt/homebrew/bin/msmtp"
             message-sendmail-f-is-evil t
             message-sendmail-extra-arguments '("--read-envelope-from")
             send-mail-function 'smtpmail-send-it
