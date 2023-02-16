@@ -194,8 +194,6 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-(with-eval-after-load 'dashboard (dashboard-refresh-buffer))
-
 (defun frame-font-setup
     (&rest ...)
   ;; (remove-hook 'focus-in-hook #'frame-font-setup)
@@ -389,7 +387,7 @@
     ;; Configure a custom style dispatcher (see the Consult wiki)
     ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
     ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-    (setq completion-styles '(orderless basic)
+    (setq completion-styles '(basic substring partial-completion orderless)
           completion-category-defaults nil
           completion-category-overrides '((file (styles partial-completion))))
     :config
