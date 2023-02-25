@@ -256,7 +256,9 @@
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
 
-(use-package better-jumper)
+(use-package better-jumper
+  :config
+  (better-jumper-mode +1))
 
 (use-package command-log-mode
   :commands command-log-mode)
@@ -327,7 +329,7 @@
                    nil
                    (window-parameters (mode-line-format . none))))))
 
-; Consult users will also want the embark-consult package.
+                                        ; Consult users will also want the embark-consult package.
 (when (not (version< emacs-version "27.1"))
   (use-package embark-consult
     :ensure t ; only need to install it, embark loads it after consult if found
