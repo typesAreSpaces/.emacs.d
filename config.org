@@ -334,9 +334,6 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
     (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session-mac") (save-buffers-kill-terminal)))
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-                                          ;(global-set-key (kbd "C-i") 'evil-jump-forward)
-  (global-set-key (kbd "C-o") 'evil-jump-backward)
-  (global-set-key (kbd "C-x c") 'persp-exit)
   (global-set-key [(control x) (k)] 'kill-buffer)
 
   (use-package general
@@ -375,6 +372,8 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
       "w" '(:ignore t :which-key "(w)indows related")
       "wu" '(winner-undo :which-key "Winner (u)ndo")
       "wr" '(winner-redo :which-key "Winner (r)edo")))
+
+  (use-package better-jumper)
 
 #+end_src
 
@@ -504,7 +503,7 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
                      nil
                      (window-parameters (mode-line-format . none))))))
 
-  ;; Consult users will also want the embark-consult package.
+  ; Consult users will also want the embark-consult package.
   (when (not (version< emacs-version "27.1"))
     (use-package embark-consult
       :ensure t ; only need to install it, embark loads it after consult if found
@@ -937,6 +936,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
                        (condition-case x
                            (org-sort-entries nil ?o)
                          (user-error)))))
+
   (define-key global-map (kbd "C-c s")
     (lambda () (interactive) (org-sort-buffer)))
 #+end_src
@@ -1772,7 +1772,7 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
 
   (use-package dired
     :ensure nil
-    :commands (dired dired-jump)
+    :commands (dired dired-jump evil)
     :bind (("C-x C-j" . dired-jump))
     :custom ((dired-listing-switches "-agho --group-directories-first")))
 
