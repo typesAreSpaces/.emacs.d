@@ -260,10 +260,16 @@
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
 
-(use-package better-jumper)
+(use-package better-jumper
+  :after evil
+  :config
+  (better-jumper-mode +1)
+  (define-key evil-motion-state-map (kbd "C-i")
+    'better-jumper-jump-forward)
+  (define-key evil-motion-state-map (kbd "C-o")
+    'better-jumper-jump-backward))
 
 (use-package evil
-  :after better-jumper
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -274,10 +280,6 @@
     'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h")
     'evil-delete-backward-char-and-join)
-  (define-key evil-insert-state-map (kbd "C-i")
-    'better-jumper-jump-forward)
-  (define-key evil-insert-state-map (kbd "C-o")
-    'better-jumper-jump-backward)
                                         ; Use visual line motions even outside of visual-line-mode buffers
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
@@ -372,7 +374,7 @@
                    nil
                    (window-parameters (mode-line-format . none))))))
 
-; Consult users will also want the embark-consult package.
+                                        ; Consult users will also want the embark-consult package.
 (when (not (version< emacs-version "27.1"))
   (use-package embark-consult
     :ensure t ; only need to install it, embark loads it after consult if found
@@ -1098,7 +1100,7 @@
     :after magit))
 
 (use-package evil-nerd-commenter
-:after evil
+  :after evil
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (when (not (version< emacs-version "26.3"))
