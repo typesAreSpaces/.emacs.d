@@ -139,8 +139,7 @@
 (save-place-mode 1)
 (setq use-dialog-box nil)
 
-
-(setq visible-bell t)              ; Set up the visible bell
+(setq ring-bell-function 'ignore)
 
 (column-number-mode)
 (setq-default display-line-numbers-type 'visual)
