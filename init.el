@@ -298,8 +298,11 @@
 
 (use-package better-jumper
   :config
-  (global-set-key (kbd "C-o") 'better-jumper-jump-backward)
-  (global-set-key (kbd "C-i") 'better-jumper-jump-forward))
+  (better-jumper-mode +1)
+  ; TODO: Fix these bindings and/or check more documentation
+  ; Currently these are not working as expected
+  (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
+  (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward))
 
 (use-package god-mode
   :init
