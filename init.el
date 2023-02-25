@@ -217,9 +217,6 @@
   (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-                                        ;(global-set-key (kbd "C-i") 'evil-jump-forward)
-(global-set-key (kbd "C-o") 'evil-jump-backward)
-(global-set-key (kbd "C-x c") 'persp-exit)
 (global-set-key [(control x) (k)] 'kill-buffer)
 
 (use-package general
@@ -262,17 +259,24 @@
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
 
+(use-package better-jumper)
+
 (use-package evil
+  :after better-jumper
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
   :config
   (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
+  (define-key evil-insert-state-map (kbd "C-g")
+    'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h")
+    'evil-delete-backward-char-and-join)
+  (define-key evil-insert-state-map (kbd "C-i")
+    'better-jumper-jump-forward)
+  (define-key evil-insert-state-map (kbd "C-o")
+    'better-jumper-jump-backward)
                                         ; Use visual line motions even outside of visual-line-mode buffers
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
@@ -288,6 +292,7 @@
     (setq forge-add-default-bindings nil)))
 
 (use-package evil-numbers
+  :after evil
   :config
   (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
   (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
@@ -301,6 +306,7 @@
 (use-package anzu)
 
 (use-package evil-anzu
+  :after evil
   :config (global-anzu-mode 1)
   (setq anzu-minimum-input-length 4))
 
@@ -365,7 +371,7 @@
                    nil
                    (window-parameters (mode-line-format . none))))))
 
-;; Consult users will also want the embark-consult package.
+; Consult users will also want the embark-consult package.
 (when (not (version< emacs-version "27.1"))
   (use-package embark-consult
     :ensure t ; only need to install it, embark loads it after consult if found
@@ -722,6 +728,7 @@
                      (condition-case x
                          (org-sort-entries nil ?o)
                        (user-error)))))
+
 (define-key global-map (kbd "C-c s")
   (lambda () (interactive) (org-sort-buffer)))
 
@@ -1093,6 +1100,7 @@
     :after magit))
 
 (use-package evil-nerd-commenter
+:after evil
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (when (not (version< emacs-version "26.3"))
@@ -1156,7 +1164,7 @@
 
 (use-package dired
   :ensure nil
-  :commands (dired dired-jump)
+  :commands (dired dired-jump evil)
   :bind (("C-x C-j" . dired-jump))
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
