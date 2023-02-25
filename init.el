@@ -131,6 +131,10 @@
 (winner-mode 1)                    ; Enable winner mode
 (setq winner-dont-bind-my-keys t)
 
+(defun indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
 (server-start)                     ; Start server
 (setq process-connection-type nil) ; Use pipes
 (setq history-length 25)
@@ -217,20 +221,17 @@
   (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-                                        ;(global-set-key (kbd "C-i") 'evil-jump-forward)
-(global-set-key (kbd "C-o") 'evil-jump-backward)
 (global-set-key (kbd "C-x c") 'persp-exit)
 (global-set-key [(control x) (k)] 'kill-buffer)
 
-(use-package general
-  :config
-  (general-create-definer efs/leader-keys
-    :prefix "C-c C-SPC")
+      (use-package general
+	:config
+	(general-create-definer efs/leader-keys
+	  :prefix "C-c SPC")
 
   (efs/leader-keys
     "c" '(org-capture nil :which-key "org-(c)apture")
     "b" '(:ignore t :which-key "edit (b)uffer")
-    "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
     "bf"  '(fill-buffer :which-key "(f)ill buffer")
     "bi"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
     "by" '(simpleclip-copy :which-key "clipboard (y)ank")
@@ -258,36 +259,6 @@
     "w" '(:ignore t :which-key "(w)indows related")
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
-
-(use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
-  :config
-  (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
-                                        ; Use visual line motions even outside of visual-line-mode buffers
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-  (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
-
-(when (not (version< emacs-version "26.3"))
-  (use-package evil-collection
-    :after evil
-    :config
-    (evil-collection-init)
-    (setq forge-add-default-bindings nil)))
-
-(use-package evil-numbers
-  :config
-  (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
-  (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
 
 (use-package command-log-mode
   :commands command-log-mode)
@@ -322,7 +293,22 @@
   :diminish which-key-mode
   :config
   (which-key-mode)
-  (setq which-key-idle-delay 1))
+  (setq which-key-idle-delay 1)
+  (which-key-enable-god-mode-support))
+
+(use-package god-mode
+  :init
+  (god-mode)
+  :config
+  (global-set-key (kbd "s-g") #'god-mode-all)
+  (define-key god-local-mode-map (kbd "i") #'god-local-mode)
+  (global-set-key
+   (kbd "C-g")
+   (lambda () (interactive) (prog1 (god-local-mode) (keyboard-quit))))
+  (setq god-mode-alist '((nil . "C-") ("g" . "M-") ("G" . "C-M-")))
+  (setq god-mode-enable-function-key-translation nil)
+  (setq god-exempt-major-modes nil)
+  (setq god-exempt-predicates nil))
 
 (use-package flx)
 
@@ -1079,9 +1065,6 @@
   (use-package forge
     :after magit))
 
-(use-package evil-nerd-commenter
-  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
-
 (when (not (version< emacs-version "26.3"))
   (use-package rainbow-mode))
 
@@ -1139,32 +1122,32 @@
   (setq vterm-max-scrollback 10000))
 
 (use-package dired
-  :ensure nil
-  :commands (dired dired-jump)
-  :bind (("C-x C-j" . dired-jump))
-  :custom ((dired-listing-switches "-agho --group-directories-first")))
+      :ensure nil
+      :commands (dired dired-jump)
+      :bind (("C-x C-j" . dired-jump))
+      :custom ((dired-listing-switches "-agho --group-directories-first")))
 
-(put 'dired-find-alternate-file 'disabled nil)
+    (put 'dired-find-alternate-file 'disabled nil)
 
-(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+    (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 (use-package dired-single
   :commands (dired dired-jump))
 
-(when (not (version< emacs-version "26.1"))
-  (use-package all-the-icons-dired
-    :hook (dired-mode . all-the-icons-dired-mode)))
+    (when (not (version< emacs-version "26.1"))
+      (use-package all-the-icons-dired
+        :hook (dired-mode . all-the-icons-dired-mode)))
 
-(use-package dired-open
-  :commands (dired dired-jump)
-  :config
-                                        ; Doesn't work as expected!
-                                        ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
-  (setq dired-open-extensions '(("png" . "feh")
-                                ("mkv" . "mpv"))))
+    (use-package dired-open
+      :commands (dired dired-jump)
+      :config
+                                            ; Doesn't work as expected!
+                                            ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
+      (setq dired-open-extensions '(("png" . "feh")
+                                    ("mkv" . "mpv"))))
 
-(use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode))
+    (use-package dired-hide-dotfiles
+      :hook (dired-mode . dired-hide-dotfiles-mode))
 
 (use-package hide-mode-line)
 

@@ -193,6 +193,10 @@ This section configures basic UI settings that remove unneeded elements to make 
   (winner-mode 1)                    ; Enable winner mode
   (setq winner-dont-bind-my-keys t)
 
+  (defun indent-buffer ()
+    (interactive)
+    (indent-region (point-min) (point-max)))
+
   (server-start)                     ; Start server
   (setq process-connection-type nil) ; Use pipes
   (setq history-length 25)
@@ -299,20 +303,17 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
     (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-                                          ;(global-set-key (kbd "C-i") 'evil-jump-forward)
-  (global-set-key (kbd "C-o") 'evil-jump-backward)
   (global-set-key (kbd "C-x c") 'persp-exit)
   (global-set-key [(control x) (k)] 'kill-buffer)
 
 	(use-package general
 	  :config
 	  (general-create-definer efs/leader-keys
-	    :prefix "C-c C-SPC")
+	    :prefix "C-c SPC")
 
     (efs/leader-keys
       "c" '(org-capture nil :which-key "org-(c)apture")
       "b" '(:ignore t :which-key "edit (b)uffer")
-      "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
       "bf"  '(fill-buffer :which-key "(f)ill buffer")
       "bi"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
       "by" '(simpleclip-copy :which-key "clipboard (y)ank")
@@ -340,37 +341,6 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
       "w" '(:ignore t :which-key "(w)indows related")
       "wu" '(winner-undo :which-key "Winner (u)ndo")
       "wr" '(winner-redo :which-key "Winner (r)edo")))
-
-  (use-package evil
-    :init
-    (setq evil-want-integration t)
-    (setq evil-want-keybinding nil)
-    (setq evil-want-C-u-scroll t)
-    (setq evil-want-C-i-jump nil)
-    :config
-    (evil-mode 1)
-    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
-                                          ; Use visual line motions even outside of visual-line-mode buffers
-    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-    (evil-set-initial-state 'messages-buffer-mode 'normal)
-    (evil-set-initial-state 'dashboard-mode 'normal))
-
-  (when (not (version< emacs-version "26.3"))
-    (use-package evil-collection
-      :after evil
-      :config
-      (evil-collection-init)
-      (setq forge-add-default-bindings nil)))
-
-  (use-package evil-numbers
-    :config
-    (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
-    (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
-
 #+end_src
 
 * UI Configuration
@@ -440,13 +410,31 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 
 #+begin_src emacs-lisp
 
-  (use-package which-key
-    :defer 0
-    :diminish which-key-mode
-    :config
-    (which-key-mode)
-    (setq which-key-idle-delay 1))
+    (use-package which-key
+      :defer 0
+      :diminish which-key-mode
+      :config
+      (which-key-mode)
+      (setq which-key-idle-delay 1)
+      (which-key-enable-god-mode-support))
 
+#+end_src
+
+** God mode
+#+begin_src emacs-lisp
+  (use-package god-mode
+    :init
+    (god-mode)
+    :config
+    (global-set-key (kbd "s-g") #'god-mode-all)
+    (define-key god-local-mode-map (kbd "i") #'god-local-mode)
+    (global-set-key
+     (kbd "C-g")
+     (lambda () (interactive) (prog1 (god-local-mode) (keyboard-quit))))
+    (setq god-mode-alist '((nil . "C-") ("g" . "M-") ("G" . "C-M-")))
+    (setq god-mode-enable-function-key-translation nil)
+    (setq god-exempt-major-modes nil)
+    (setq god-exempt-predicates nil))
 #+end_src
 
 ** Flx
@@ -1198,16 +1186,6 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 
 #+end_src
 
-**** treemacs-evil
-
-#+begin_src emacs-lisp
-
-  (when (not (version< emacs-version "26.1"))
-    (use-package treemacs-evil
-      :after treemacs evil))
-
-#+end_src
-
 **** lsp-treemacs
 
 [[https://github.com/emacs-lsp/lsp-treemacs][lsp-treemacs]] provides nice tree views for different aspects of your code like symbols in a file, references of a symbol, or diagnostic messages (errors and warnings) that are found in your code.
@@ -1551,13 +1529,6 @@ We also use [[https://github.com/sebastiencs/company-box][company-box]] to furth
 ** Commenting
 
 Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=) doesn't always comment things in the way you might expect so we use [[https://github.com/redguardtoo/evil-nerd-commenter][evil-nerd-commenter]] to provide a more familiar behavior.  I've bound it to =M-/= since other editors sometimes use this binding but you could also replace Emacs' =M-;= binding with this command.
-
-#+begin_src emacs-lisp
-
-  (use-package evil-nerd-commenter
-    :bind ("M-/" . evilnc-comment-or-uncomment-lines))
-
-#+end_src
 
 ** Rainbow mode
 
