@@ -206,6 +206,22 @@ This section configures basic UI settings that remove unneeded elements to make 
 
   (setq ring-bell-function 'ignore)
 
+    ;; Window navigation
+  (require 'cl)
+  (defun ignore-error-wrapper (fn)
+    "Funtion return new function that ignore errors.
+       The function wraps a function with `ignore-errors' macro."
+    (lexical-let ((fn fn))
+      (lambda ()
+        (interactive)
+        (ignore-errors
+          (funcall fn)))))
+
+  (global-set-key (kbd "C-x C-h") (ignore-error-wrapper 'windmove-left))
+  (global-set-key (kbd "C-x C-l") (ignore-error-wrapper 'windmove-right))
+  (global-set-key (kbd "C-x C-k") (ignore-error-wrapper 'windmove-up))
+  (global-set-key (kbd "C-x C-j") (ignore-error-wrapper 'windmove-down))
+
   (column-number-mode)
   (setq-default display-line-numbers-type 'visual)
   (when (not (version< emacs-version "26.3"))
