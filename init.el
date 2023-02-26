@@ -264,7 +264,7 @@
   :commands command-log-mode)
 
 (use-package doom-themes
-  :init (load-theme 'doom-gruvbox t))
+  :init (load-theme 'doom-molokai t))
 
 (use-package anzu)
 
@@ -297,6 +297,7 @@
   (which-key-enable-god-mode-support))
 
 (use-package better-jumper
+  :after god-mode
   :config
   (better-jumper-mode +1)
   ; TODO: Fix these bindings and/or check more documentation
