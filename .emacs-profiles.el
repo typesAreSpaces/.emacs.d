@@ -2,6 +2,8 @@
                (server-name . "jose")))
  ("jose" . ((user-emacs-directory . "~/.config/jose-emacs")
             (server-name . "jose")))
+ ("god-layer" . ((user-emacs-directory . "~/.config/god-layer")
+            (server-name . "god-layer")))
  ("doom" . ((user-emacs-directory . "~/.config/emacs")
             (server-name . "doom")
             (env . (("DOOMDIR" . "~/.config/doom")))))
