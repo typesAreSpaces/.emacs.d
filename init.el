@@ -97,7 +97,9 @@
 (defvar scc-reports-dir (concat scc-dir "/Reports"))
 (defvar scc-org-files-dir (concat scc-dir "/Org-Files"))
 
-(defvar seminar-dir (concat phd-thesis-dir "/Documents/Seminars/BeihangUniversity-Fall2021"))
+(defvar seminar-dir
+  (concat phd-thesis-dir
+          "/Documents/Seminars/BeihangUniversity-Fall2021"))
 (defvar seminar-org-files-dir (concat seminar-dir "/Org-Files"))
 (defvar ta-tasks-mail
   (concat ta-org-files-dir "/current_tasks.org"))
@@ -237,7 +239,6 @@
   (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-x c") 'persp-exit)
 (global-set-key [(control x) (k)] 'kill-buffer)
 
 (use-package general
@@ -246,19 +247,40 @@
     :prefix "C-c SPC")
 
   (efs/leader-keys
-    "c" '(org-capture nil :which-key "org-(c)apture")
+    "o" '(:ignore t :which-key "(o)rg")
+    "or" '(org-meta-return nil :which-key "org-(r)eturn")
+    "oc" '(org-capture nil :which-key "org-(c)apture")
     "b" '(:ignore t :which-key "edit (b)uffer")
     "bf"  '(fill-buffer :which-key "(f)ill buffer")
-    "bi"  '((lambda () (interactive) (indent-region (point-min) (point-max))) :which-key "(i)ndent buffer")
+    "bi"  '((lambda () (interactive)
+              (indent-region (point-min) (point-max)))
+            :which-key "(i)ndent buffer")
     "by" '(simpleclip-copy :which-key "clipboard (y)ank")
     "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
     "f" '(:ignore t :which-key "edit (f)iles")
-    "fa" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))) :which-key "(a)genda")
-    "fe" '((lambda () (interactive) (find-file (expand-file-name "config.org" user-emacs-directory))) :which-key "(e)macs source")
-    "fw" '((lambda () (interactive) (find-file (expand-file-name (concat seminar-dir "/Reports/finding_certificates_qm_univariate/main.tex")))) :which-key "Current (w)ork")
+    "fa" '((lambda () (interactive)
+             (find-file
+              (expand-file-name (concat phd-thesis-org-files-dir "/main.org"))))
+           :which-key "(a)genda")
+    "fe" '((lambda () (interactive)
+             (find-file
+              (expand-file-name "config.org" user-emacs-directory)))
+           :which-key "(e)macs source")
+    "fw" '((lambda () (interactive)
+             (find-file
+              (expand-file-name
+               (concat seminar-dir
+                       "/Reports/finding_certificates_qm_univariate/main.tex"))))
+           :which-key "Current (w)ork")
     "fr" '(:ignore t :which-key "Edit (r)eferences")
-    "frp" '((lambda () (interactive) (find-file (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))) :which-key "Edit (p)hD references")
-    "frs" '((lambda () (interactive) (find-file (expand-file-name (concat scc-reports-dir "/references.bib")))) :which-key "Edit (s)CC references")
+    "frp" '((lambda () (interactive)
+              (find-file
+               (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib"))))
+            :which-key "Edit (p)hD references")
+    "frs" '((lambda () (interactive)
+              (find-file
+               (expand-file-name (concat scc-reports-dir "/references.bib"))))
+            :which-key "Edit (s)CC references")
     "p" '(:ignore t :which-key "Presentation")
     "pp" '(org-tree-slide-move-previous-tree :which-key "Previous slide")
     "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide")
@@ -269,9 +291,15 @@
     "d" '(dired-jump :which-key "(d)ired jump")
     "m" '(mu4e :which-key "(m)u4e")
     "l" '(:ignore t :which-key "(l)atex related")
-    "lp" '((lambda () (interactive) (yasnippet/goto-parent-file)) :which-key "Goto (p)arent")
-    "lF" '((lambda () (interactive) (LaTeX-fill-buffer nil)) :which-key "Latex (F)ill buffer")
-    "lf" '((lambda () (interactive) (lsp-latex-forward-search)) :which-key "Latex (f)orward search")
+    "lp" '((lambda () (interactive)
+             (yasnippet/goto-parent-file))
+           :which-key "Goto (p)arent")
+    "lF" '((lambda () (interactive)
+             (LaTeX-fill-buffer nil))
+           :which-key "Latex (F)ill buffer")
+    "lf" '((lambda () (interactive)
+             (lsp-latex-forward-search))
+           :which-key "Latex (f)orward search")
     "w" '(:ignore t :which-key "(w)indows related")
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
@@ -369,7 +397,7 @@
                    nil
                    (window-parameters (mode-line-format . none))))))
 
-;; Consult users will also want the embark-consult package.
+                                        ; Consult users will also want the embark-consult package.
 (when (not (version< emacs-version "27.1"))
   (use-package embark-consult
     :ensure t ; only need to install it, embark loads it after consult if found
@@ -726,6 +754,7 @@
                      (condition-case x
                          (org-sort-entries nil ?o)
                        (user-error)))))
+
 (define-key global-map (kbd "C-c s")
   (lambda () (interactive) (org-sort-buffer)))
 
@@ -829,8 +858,7 @@
 (use-package avy
   :config
   (setq avy-all-windows 'all-frames)
-  (global-set-key (kbd "C-:") 'avy-goto-char)
-  )
+  (global-set-key (kbd "C-:") 'avy-goto-char))
 
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
@@ -949,7 +977,8 @@
                                         ; (setq lsp-completion-provider :none)
                                         ; (setq auto-complete-mode -1)
     (setq lsp-latex-build-executable "latexmk")
-    (setq lsp-latex-build-args '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "-cd" "%f"))
+    (setq lsp-latex-build-args
+          '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "-cd" "%f"))
     (setq lsp-latex-forward-search-after t)
     (setq lsp-latex-build-on-save t)
     (setq lsp-latex-forward-search-executable "zathura")
@@ -1148,7 +1177,7 @@
 
 (use-package dired
   :ensure nil
-  :commands (dired dired-jump)
+  :commands (dired dired-jump evil)
   :bind (("C-x C-j" . dired-jump))
   :custom ((dired-listing-switches "-agho --group-directories-first")))
 
