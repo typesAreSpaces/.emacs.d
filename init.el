@@ -291,7 +291,7 @@
   :after evil
   :config
   (better-jumper-mode +1)
-  (define-key evil-motion-state-map (kbd "C-i")
+  (define-key evil-motion-state-map (kbd "C-u")
     'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-o")
     'better-jumper-jump-backward))
