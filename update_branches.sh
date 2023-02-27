@@ -24,3 +24,8 @@ git pull
 git merge macos -m 'Update no-evil-layer-macos branch'
 git push
 git checkout $branch
+git checkout god-layer
+git pull
+git merge main -m 'Update god-layer'
+git push
+
