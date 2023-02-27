@@ -740,7 +740,7 @@
     (lambda () (interactive) (org-todo "TODO")))
 
   (define-key org-mode-map (kbd "C-c C-RET")
-    (lambda () (interactive) (org-meta-return)))
+    'org-meta-return)
 
   (define-key org-mode-map (kbd "C-c s")
     (lambda () (interactive) (org-sort-buffer)))
