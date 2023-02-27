@@ -747,7 +747,7 @@
   (define-key org-mode-map (kbd "C-c t")
     (lambda () (interactive) (org-todo "TODO")))
 
-  (define-key org-mode-map (kbd "C-c RET")
+  (define-key org-mode-map (kbd "C-c C-RET")
     (lambda () (interactive) (org-meta-return)))
 
   (define-key org-mode-map (kbd "C-c s")
