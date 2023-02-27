@@ -35,8 +35,4 @@ git merge main -m 'Update god-layer branch'
 git push
 
 git checkout $branch
-git checkout god-layer
-git pull
-git merge main -m 'Update god-layer'
-git push
 
