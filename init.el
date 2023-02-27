@@ -739,7 +739,9 @@
   (define-key org-mode-map (kbd "C-c t")
     (lambda () (interactive) (org-todo "TODO")))
 
-  (define-key org-mode-map (kbd "C-c C-RET")
+  (define-key org-mode-map (kbd "C-c C-<return>")
+    'org-meta-return)
+  (define-key org-mode-map (kbd "C-c RET")
     'org-meta-return)
 
   (define-key org-mode-map (kbd "C-c s")
