@@ -232,7 +232,6 @@
 
   (efs/leader-keys
     "o" '(:ignore t :which-key "(o)rg")
-    "or" '(org-meta-return nil :which-key "org-(r)eturn")
     "oc" '(org-capture nil :which-key "org-(c)apture")
     "b" '(:ignore t :which-key "edit (b)uffer")
     "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
@@ -743,11 +742,17 @@
           )
         )
 
-  (define-key global-map (kbd "C-c c")
+  (define-key org-mode-map (kbd "C-c c")
     (lambda () (interactive) (org-todo "COMPLETED")))
 
-  (define-key global-map (kbd "C-c t")
+  (define-key org-mode-map (kbd "C-c t")
     (lambda () (interactive) (org-todo "TODO")))
+
+  (define-key org-mode-map (kbd "C-c RET")
+    (lambda () (interactive) (org-meta-return)))
+
+  (define-key org-mode-map (kbd "C-c s")
+    (lambda () (interactive) (org-sort-buffer)))
 
   (efs/org-font-setup))
 
@@ -760,9 +765,6 @@
                      (condition-case x
                          (org-sort-entries nil ?o)
                        (user-error)))))
-
-(define-key global-map (kbd "C-c s")
-  (lambda () (interactive) (org-sort-buffer)))
 
 (unless (boundp 'org-latex-classes)
   (setq org-latex-classes nil))
