@@ -38,3 +38,5 @@
  - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Semesters/2023/Spring/TA-CS-357/cs357-ta-materials
 ** Office hours
  - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Semesters/2023/Spring/TA-CS-357/Meetings/office_hours
+** Recitations
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Semesters/2023/Spring/TA-CS-357/Presentations/recitations
