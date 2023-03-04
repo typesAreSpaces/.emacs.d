@@ -672,7 +672,7 @@
 
   (setq org-todo-keywords
         '((sequence "EXTERNAL" "|")
-          (sequence "GOAL" "IDEA" "OBSERVATION" "|")
+          (sequence "GOAL" "IDEA" "OBSERVATION" "|" "OK")
           (sequence "TODAY" "TODO" "LATER" "|" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
@@ -782,6 +782,30 @@
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(use-package org-roam
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/Documents/GithubProjects/phd-thesis/Documents/Misc")
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n")
+      :unnarrowed t)
+     ("l" "lecture" plain
+      (file "~/Documents/GithubProjects/phd-thesis/Documents/Misc/Templates/lecture.org")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n")
+      :unnarrowed t)
+     ("m" "meeting" plain
+      (file "~/Documents/GithubProjects/phd-thesis/Documents/Misc/Templates/meeting.org")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n")
+      :unnarrowed t)))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup))
 
 (when (not (version< emacs-version "26.3"))
   (use-package ox-hugo
