@@ -743,15 +743,16 @@
 
   (define-key org-mode-map (kbd "C-c c")
     (lambda () (interactive) (org-todo "COMPLETED")))
-
   (define-key org-mode-map (kbd "C-c t")
     (lambda () (interactive) (org-todo "TODO")))
-
+  (define-key org-mode-map (kbd "C-c i")
+    (lambda () (interactive) (org-todo "IDEA")))
+  (define-key org-mode-map (kbd "C-c o")
+    (lambda () (interactive) (org-todo "OK")))
   (define-key org-mode-map (kbd "C-c C-<return>")
     'org-meta-return)
   (define-key org-mode-map (kbd "C-c RET")
     'org-meta-return)
-
   (define-key org-mode-map (kbd "C-c s")
     (lambda () (interactive) (org-sort-buffer)))
 
