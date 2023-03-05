@@ -227,6 +227,10 @@
     :prefix "C-c C-SPC")
 
   (efs/leader-keys
+    "r" '(:ignore t :which-key "bookma(r)k")
+    "rs" '(bookmark-set :which-key "bookmark (s)et")
+    "rj" '(bookmark-jump :which-key "bookmark (j)ump")
+    "rd" '(bookmark-jump :which-key "bookmark (d)elete")
     "o" '(:ignore t :which-key "(o)rg")
     "oc" '(org-capture nil :which-key "org-(c)apture")
     "b" '(:ignore t :which-key "edit (b)uffer")
@@ -701,6 +705,8 @@
     (lambda () (interactive) (org-todo "COMPLETED")))
   (define-key org-mode-map (kbd "C-c t")
     (lambda () (interactive) (org-todo "TODO")))
+  (define-key org-mode-map (kbd "C-c k")
+    (lambda () (interactive) (org-todo "CANC")))
   (define-key org-mode-map (kbd "C-c i")
     (lambda () (interactive) (org-todo "IDEA")))
   (define-key org-mode-map (kbd "C-c o")
