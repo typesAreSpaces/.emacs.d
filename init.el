@@ -764,6 +764,9 @@
 
   (efs/org-font-setup))
 
+(use-package org-mime
+  :ensure t) 
+
 (defun org-sort-buffer ()
   "Sort all entries in the current buffer, recursively."
   (interactive)
@@ -821,6 +824,7 @@
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
+         ("C-c n s" . org-roam-db-sync)
          :map org-mode-map
          ("C-M-i" . completion-at-point))
   :config
@@ -1409,25 +1413,24 @@
             ("/unm/Archive". ?a)
             ("/cs-unm/Inbox". ?I)
             ("/cs-unm/Trash". ?T)
-            ("/cs-unm/Drafts". ?D)))))
-
+            ("/cs-unm/Drafts". ?D)))
                                         ; UX settings
-(setq mu4e-use-fancy-chars t)
-(setq mu4e-attachment-dir  "~/tosend")
-(setq mu4e-headers-show-threads nil)
-(setq mu4e-confirm-quit nil)
-(setq mu4e-headers-results-limit -1)
-(setq mu4e-compose-signature "Best,\nJose")
-(setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
-(setq message-citation-line-function 'message-insert-formatted-citation-line)
-(setq
+    (setq mu4e-use-fancy-chars t)
+    (setq mu4e-attachment-dir  "~/tosend")
+    (setq mu4e-headers-show-threads nil)
+    (setq mu4e-confirm-quit nil)
+    (setq mu4e-headers-results-limit -1)
+    (setq mu4e-compose-signature "Best,\nJose")
+    (setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
+    (setq message-citation-line-function 'message-insert-formatted-citation-line)
                                         ; Display
- mu4e-view-show-addresses t
- mu4e-view-show-images t
- mu4e-view-image-max-width 800
- mu4e-hide-index-messages t)
-
-(use-package org-mime
-  :ensure t)
-
-(load (expand-file-name "scripts/mu4e-view-save-all-attachments.el" user-emacs-directory))
+    (setq
+     mu4e-view-show-addresses t
+     mu4e-view-show-images t
+     mu4e-view-image-max-width 800
+     mu4e-hide-index-messages t)
+    (with-eval-after-load 'mu4e
+      (load
+       (expand-file-name
+        "scripts/mu4e-view-save-all-attachments.el"
+        user-emacs-directory)))))
