@@ -790,6 +790,7 @@
   (setq org-roam-v2-ack t)
   :custom
   (org-roam-directory "~/Documents/GithubProjects/phd-thesis/Documents/Misc")
+  (org-roam-completion-everywhere t)
   (org-roam-capture-templates
    '(("d" "default" plain
       "%?"
@@ -805,7 +806,9 @@
       :unnarrowed t)))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert))
+         ("C-c n i" . org-roam-node-insert)
+         :map org-mode-map
+         ("C-M-i" . completion-at-point))
   :config
   (org-roam-setup))
 
