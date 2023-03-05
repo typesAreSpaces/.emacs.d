@@ -890,7 +890,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (setq org-todo-keywords
           '((sequence "EXTERNAL" "|")
             (sequence "GOAL" "IDEA" "OBSERVATION" "|" "OK")
-            (sequence "TODAY" "TODO" "LATER" "|" "COMPLETED(c)" "CANC(k@)")
+            (sequence "TODAY" "LATER" "|")
+            (sequence "TODO" "|" "COMPLETED(c)" "CANC(k@)")
             (sequence "EMAIL" "|")))
 
                                           ; Save Org buffers after refiling!
@@ -974,7 +975,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (org-map-entries (lambda ()
                        (condition-case x
                            (org-sort-entries nil ?o)
-                         (user-error))))) 
+                         (user-error)))))
 #+end_src
 
 Update org-latex-classes
@@ -1010,7 +1011,7 @@ Update org-latex-classes
 
 *** Org roam
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package org-roam
     :init
     (setq org-roam-v2-ack t)
