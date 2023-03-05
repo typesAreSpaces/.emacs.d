@@ -682,7 +682,8 @@
   (setq org-todo-keywords
         '((sequence "EXTERNAL" "|")
           (sequence "GOAL" "IDEA" "OBSERVATION" "|" "OK")
-          (sequence "TODAY" "TODO" "LATER" "|" "COMPLETED(c)" "CANC(k@)")
+          (sequence "TODAY" "LATER" "|")
+          (sequence "TODO" "|" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
                                         ; Save Org buffers after refiling!
