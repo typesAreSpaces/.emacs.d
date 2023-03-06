@@ -259,6 +259,7 @@
               (indent-region (point-min) (point-max)))
             :which-key "(i)ndent buffer")
     "by" '(simpleclip-copy :which-key "clipboard (y)ank")
+    "bs" '(insert-snake :which-key "insert (s)nake")
     "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
     "f" '(:ignore t :which-key "edit (f)iles")
     "fa" '((lambda () (interactive)
@@ -1285,6 +1286,16 @@
 
 (use-package dired-hide-dotfiles
   :hook (dired-mode . dired-hide-dotfiles-mode))
+
+(defun snakify (input)
+  (replace-regexp-in-string
+   " "
+   "_"
+   (downcase input)))
+
+(defun insert-snake ()
+  (interactive)
+  (insert (snakify (car kill-ring))))
 
 (use-package hide-mode-line)
 
