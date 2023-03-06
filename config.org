@@ -322,6 +322,7 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
                 (indent-region (point-min) (point-max)))
               :which-key "(i)ndent buffer")
       "by" '(simpleclip-copy :which-key "clipboard (y)ank")
+      "bs" '(insert-snake :which-key "insert (s)nake")
       "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
       "f" '(:ignore t :which-key "edit (f)iles")
       "fa" '((lambda () (interactive)
@@ -1023,46 +1024,46 @@ Update org-latex-classes
 Taken from https://kitchingroup.cheme.cmu.edu/blog/2015/07/10/Drag-images-and-files-onto-org-mode-and-insert-a-link-to-them/
 
 #+begin_src emacs-lisp 
-(defun my-dnd-func (event)
-  (interactive "e")
-  (goto-char (nth 1 (event-start event)))
-  (x-focus-frame nil)
-  (let* ((payload (car (last event)))
-         (type (car payload))
-         (fname (cadr payload))
-         (img-regexp "\\(png\\|jp[e]?g\\)\\>"))
-    (cond
-     ;; insert image link
-     ((and  (eq 'drag-n-drop (car event))
-            (eq 'file type)
-            (string-match img-regexp fname))
-      (insert (format "[[%s]]" fname))
-      (org-display-inline-images t t))
-     ;; insert image link with caption
-     ((and  (eq 'C-drag-n-drop (car event))
-            (eq 'file type)
-            (string-match img-regexp fname))
-      (insert "#+ATTR_ORG: :width 300\n")
-      (insert (concat  "#+CAPTION: " (read-input "Caption: ") "\n"))
-      (insert (format "[[%s]]" fname))
-      (org-display-inline-images t t))
-     ;; C-drag-n-drop to open a file
-     ((and  (eq 'C-drag-n-drop (car event))
-            (eq 'file type))
-      (find-file fname))
-     ((and (eq 'M-drag-n-drop (car event))
-           (eq 'file type))
-      (insert (format "[[attachfile:%s]]" fname)))
-     ;; regular drag and drop on file
-     ((eq 'file type)
-      (insert (format "[[%s]]\n" fname)))
-     (t
-      (error "I am not equipped for dnd on %s" payload)))))
+  (defun my-dnd-func (event)
+    (interactive "e")
+    (goto-char (nth 1 (event-start event)))
+    (x-focus-frame nil)
+    (let* ((payload (car (last event)))
+           (type (car payload))
+           (fname (cadr payload))
+           (img-regexp "\\(png\\|jp[e]?g\\)\\>"))
+      (cond
+       ;; insert image link
+       ((and  (eq 'drag-n-drop (car event))
+              (eq 'file type)
+              (string-match img-regexp fname))
+        (insert (format "[[%s]]" fname))
+        (org-display-inline-images t t))
+       ;; insert image link with caption
+       ((and  (eq 'C-drag-n-drop (car event))
+              (eq 'file type)
+              (string-match img-regexp fname))
+        (insert "#+ATTR_ORG: :width 300\n")
+        (insert (concat  "#+CAPTION: " (read-input "Caption: ") "\n"))
+        (insert (format "[[%s]]" fname))
+        (org-display-inline-images t t))
+       ;; C-drag-n-drop to open a file
+       ((and  (eq 'C-drag-n-drop (car event))
+              (eq 'file type))
+        (find-file fname))
+       ((and (eq 'M-drag-n-drop (car event))
+             (eq 'file type))
+        (insert (format "[[attachfile:%s]]" fname)))
+       ;; regular drag and drop on file
+       ((eq 'file type)
+        (insert (format "[[%s]]\n" fname)))
+       (t
+        (error "I am not equipped for dnd on %s" payload)))))
 
 
-(define-key org-mode-map (kbd "<drag-n-drop>") 'my-dnd-func)
-(define-key org-mode-map (kbd "<C-drag-n-drop>") 'my-dnd-func)
-(define-key org-mode-map (kbd "<M-drag-n-drop>") 'my-dnd-func)
+  (define-key org-mode-map (kbd "<drag-n-drop>") 'my-dnd-func)
+  (define-key org-mode-map (kbd "<C-drag-n-drop>") 'my-dnd-func)
+  (define-key org-mode-map (kbd "<M-drag-n-drop>") 'my-dnd-func)
 #+end_src
 
 *** Org roam
@@ -1952,6 +1953,18 @@ This is an example of configuring another non-Emacs application using org-mode. 
 
 #+end_src
 
+** Scripts
+#+begin_src emacs-lisp 
+  (defun snakify (input)
+    (replace-regexp-in-string
+     " "
+     "_"
+     (downcase input)))
+
+  (defun insert-snake ()
+    (interactive)
+    (insert (snakify (car kill-ring))))
+#+end_src
 ** Presentation mode with org-tree-slide
 
 #+begin_src emacs-lisp
