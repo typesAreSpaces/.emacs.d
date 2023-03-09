@@ -11,7 +11,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-; Initialize package sources
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -22,7 +21,6 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-                                        ; Initialize use-package on non-Linux platforms
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
@@ -34,7 +32,6 @@
   (auto-package-update-hide-results t)
   (auto-package-update-delete-old-versions t))
 
-; The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
 
 (defun efs/display-startup-time ()
@@ -46,32 +43,14 @@
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
-; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
-
-; NOTE: If you want to move everything out of the (expand-file-name user-emacs-directory) folder
-                                        ; reliably, set `user-emacs-directory` before loading no-littering!
-                                        ; (setq user-emacs-directory "~/.cache/emacs")
-
 
 (when (not (version< emacs-version "26.3"))
   (use-package no-littering))
 
-                                        ; no-littering doesn't set this by default so we must place
-                                        ; auto save files in the same path as it uses for sessions
 (when (not (version< emacs-version "26.3"))
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
-
-; NOTE: init.el is now generated from config.org.  Please edit that file
-                                        ;       in Emacs and init.el will be generated automatically!
-
-                                        ; You will most likely need to adjust this font size for your system!
-(defvar efs/default-font-size 160)
-(defvar efs/default-variable-font-size 160)
-
-                                        ; Make frame transparency overridable
-(defvar efs/frame-transparency '(100 . 100))
 
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
 (defvar ta-org-files-dir
@@ -121,6 +100,10 @@
   (concat seminar-org-files-dir "/seminar_tasks.org"))
 (defvar seminar-meetings
   (concat seminar-org-files-dir "/meeting_notes.org"))
+
+(defvar efs/default-font-size 160)
+(defvar efs/default-variable-font-size 160)
+(defvar efs/frame-transparency '(100 . 100))
 
 (setq inhibit-startup-message t)
 
@@ -213,7 +196,6 @@
 
 (add-hook 'focus-in-hook #'frame-font-setup)
 
-; Make ESC quit prompts
 (defun persp-exit ()
   (interactive)
   (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
@@ -290,15 +272,36 @@
     "wr" '(winner-redo :which-key "Winner (r)edo")))
 
 (use-package better-jumper
-  :after evil
+  :after (evil god-mode)
   :config
   (better-jumper-mode +1)
+                                        ; TODO: Fix these bindings and/or check more documentation
+                                        ; Currently these are not working as expected
+  (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
+  (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-u")
     'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-o")
     'better-jumper-jump-backward))
 
+(use-package god-mode
+  :config
+  (global-set-key (kbd "s-g") #'god-mode-all)
+  (define-key god-local-mode-map (kbd "i") #'god-local-mode)
+  (global-set-key
+   (kbd "C-g")
+   (lambda () (interactive) (prog1 (god-local-mode) (keyboard-escape-quit))))
+  (setq god-mode-alist '((nil . "C-") ("g" . "M-") ("G" . "C-M-")))
+  (setq god-mode-enable-function-key-translation nil)
+  (setq god-exempt-major-modes nil)
+  (setq god-exempt-predicates nil))
+
+(use-package evil-god-state)
+
+(use-package diminish)
+
 (use-package evil
+  :after (god-mode evil-god-state diminish)
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -309,12 +312,21 @@
     'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h")
     'evil-delete-backward-char-and-join)
-                                        ; Use visual line motions even outside of visual-line-mode buffers
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
+  (evil-set-initial-state 'dashboard-mode 'normal)
+  (evil-define-key
+    'normal global-map ","
+    'evil-execute-in-god-state)
+  (add-hook 'evil-god-state-entry-hook
+            (lambda () (diminish 'god-local-mode)))
+  (add-hook 'evil-god-state-exit-hook
+            (lambda () (diminish-undo 'god-local-mode)))
+  (evil-define-key
+    'god global-map [escape]
+    'evil-god-state-bail))
 
 (when (not (version< emacs-version "26.3"))
   (use-package evil-collection
@@ -343,26 +355,16 @@
     :custom (
              (doom-modeline-height 15)
              (doom-modeline-enable-word-count t)
-             (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode)))))
-
-;; (setq-default mode-line-format '("%e"
-;;                                  (:eval
-;;                                   (if (equal
-;;                                        (shell-command-to-string
-;;                                         "ps aux | grep 'mbsync -a' | wc -l | xargs")
-;;                                        "3\n")
-;;                                       " Running mbsync " " "))
-;;                                  "%e" (:eval
-;;                                        (when (display-graphic-p) (shell-command-to-string
-;;                                                                   "~/.local/scripts/check_email.sh")))
-;;                                  (:eval (doom-modeline-format--main))))
+             (doom-modeline-continuous-word-count-modes
+              '(markdown-mode gfm-mode org-mode text-mode)))))
 
 (use-package which-key
   :defer 0
   :diminish which-key-mode
   :config
   (which-key-mode)
-  (setq which-key-idle-delay 1))
+  (setq which-key-idle-delay 1)
+  (which-key-enable-god-mode-support))
 
 (use-package flx)
 
@@ -375,7 +377,6 @@
 
     ;; The :init configuration is always executed (Not lazy!)
     :init
-
     ;; Must be in the :init section of use-package such that the mode gets
     ;; enabled right away. Note that this forces loading the package.
     (marginalia-mode)))
@@ -398,7 +399,6 @@
                    nil
                    (window-parameters (mode-line-format . none))))))
 
-                                        ; Consult users will also want the embark-consult package.
 (when (not (version< emacs-version "27.1"))
   (use-package embark-consult
     :ensure t ; only need to install it, embark loads it after consult if found
@@ -435,7 +435,6 @@
 (when (not (version< emacs-version "26.3"))
   (use-package consult
     :after (vertico perspective)
-    :straight t
                                         ; Replace bindings. Lazily loaded due by `use-package'.
     :bind (; C-x bindings (ctl-x-map)
            ("C-x M-:" . consult-complex-command)     ; orig. repeat-complex-command
@@ -488,21 +487,15 @@
            ("M-s" . consult-history)                 ; orig. next-matching-history-element
            ("M-r" . consult-history))                ; orig. previous-matching-history-element
 
-                                        ; Enable automatic preview at point in the *Completions* buffer. This is
-                                        ; relevant when you use the default completion UI.
     :hook (completion-list-mode . consult-preview-at-point-mode)
 
                                         ; The :init configuration is always executed (Not lazy)
     :init
-
-                                        ; Optionally configure the register formatting. This improves the register
                                         ; preview for `consult-register', `consult-register-load',
                                         ; `consult-register-store' and the Emacs built-ins.
     (setq register-preview-delay 0.5
           register-preview-function #'consult-register-format)
 
-                                        ; Optionally tweak the register preview window.
-                                        ; This adds thin lines, sorting and hides the mode line of the window.
     (advice-add #'register-preview :override #'consult-register-window)
 
                                         ; Use Consult to select xref locations with preview
@@ -614,7 +607,6 @@
                   (org-level-8 . 1.1)))
     (set-face-attribute (car face) nil :font "Fira Code" :weight 'regular :height (cdr face)))
 
-                                        ; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
   (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
@@ -735,8 +727,7 @@
            (file+olp maxdiff-agenda-mail "EMAIL")
            "** TODO Check this email %a"
            :immediate-finish t)
-          )
-        )
+          ))
 
   (define-key org-mode-map (kbd "C-c c")
     (lambda () (interactive) (org-todo "COMPLETED")))
@@ -855,11 +846,9 @@
          (LaTeX-mode . efs/org-mode-visual-fill)
          (mu4e-main-mode . efs/org-mode-visual-fill)))
 
-; Automatically tangle our config.org config file when we save it
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
                       (expand-file-name user-emacs-directory))
-                                        ; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
@@ -921,17 +910,8 @@
     :custom
     (lsp-ui-doc-position 'bottom)))
 
-; :hook (
-                                        ; (org-mode TeX-mode LaTeX-mode typescript-mode
-                                        ; maplev-mode c-mode c++-mode python-mode rustic-mode)
-                                        ;. tree-sitter-hl-mode))
-
 (when (fboundp 'module-load)
   (use-package tree-sitter
-    :straight (tree-sitter :type git
-                           :host github
-                           :repo "ubolonton/emacs-tree-sitter"
-                           :files ("lisp/*.el"))
     :hook ((latex-mode python-mode rustic-mode) . tree-sitter-hl-mode)
     :config
     (add-to-list 'tree-sitter-major-mode-language-alist '(rustic-mode . rust))
@@ -947,10 +927,6 @@
 
 (when (fboundp 'module-load)
   (use-package tree-sitter-langs
-    :straight (tree-sitter-langs :type git
-                                 :host github
-                                 :repo "ubolonton/emacs-tree-sitter"
-                                 :files ("langs/*.el" "langs/queries"))
     :after tree-sitter))
 
 (when (not (version< emacs-version "26.1"))
@@ -968,7 +944,6 @@
 
 (when (not (version< emacs-version "26.1"))
   (use-package dap-mode
-                                        ; Uncomment the config below if you want all UI panes to be hidden by default!
                                         ; :custom
                                         ; (lsp-enable-dap-auto-configure nil)
                                         ; :config
@@ -991,8 +966,7 @@
   :config
   (setq typescript-indent-level 2))
 
-(use-package rustic
-  :straight t)
+(use-package rustic)
 
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
@@ -1060,7 +1034,6 @@
   :ensure t
   :hook (python-mode . lsp-deferred)
   :custom
-                                        ; NOTE: Set these if Python 3 is called "python3" on your system!
   (python-shell-interpreter "python3")
   (dap-python-executable "python3")
   (dap-python-debugger 'debugpy)
@@ -1096,11 +1069,11 @@
 (use-package toml-mode)
 
 (use-package lean4-mode
-  :straight (lean4-mode :type git :host github :repo "leanprover/lean4-mode")
-                                        ; to defer loading the package until required
+  :straight (lean4-mode :type git
+                        :host github
+                        :repo "leanprover/lean4-mode")
   :commands (lean4-mode))
 
-;(use-package racket-mode)
 (setq scheme-program-name "/usr/bin/racket")
 (setq auto-mode-alist
       (cons '("\\.rkt\\'" . scheme-mode)
@@ -1154,9 +1127,6 @@
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)))
 
-                                        ; NOTE: Make sure to configure a GitHub token before using this package!
-                                        ; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
-                                        ; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
 (when (not (version< emacs-version "26.3"))
   (use-package forge
     :after magit))
@@ -1174,10 +1144,7 @@
 (use-package term
   :commands term
   :config
-  (setq explicit-shell-file-name "zsh") ; Change this to zsh, etc
-                                        ;(setq explicit-zsh-args '())         ; Use 'explicit-<shell>-args for shell-specific args
-
-                                        ; Match the default Bash shell prompt.  Update this if you have a custom prompt
+  (setq explicit-shell-file-name "zsh") 
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
 
 (use-package eterm-256color
@@ -1288,12 +1255,7 @@
   :config
   (simpleclip-mode 1))
 
-(use-package markdown-preview-eww
-  :ensure nil
-  :straight (
-             :host github
-             :files ("*.el")
-             :repo "niku/markdown-preview-eww"))
+(use-package markdown-preview-eww)
 
 (defvar efs/mu4e-path "/usr/share/emacs/site-lisp/mu4e/")
 
@@ -1306,7 +1268,6 @@
     (require 'mu4e)
     (require 'mu4e-org)
 
-                                        ; This is set to 't' to avoid mail syncing issues when using mbsync
     (setq mu4e-change-filenames-when-moving t)
 
                                         ; SMTP settings
