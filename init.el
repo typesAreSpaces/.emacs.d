@@ -1192,7 +1192,11 @@
   :ensure nil
   :commands (dired dired-jump evil)
   :bind (("C-x C-j" . dired-jump))
-  :custom ((dired-listing-switches "-agho --group-directories-first")))
+  :custom ((dired-listing-switches "-agho --group-directories-first"))
+  :config
+  (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
+                                       ("\\.pdf\\'" "zathura")))
+                                       ("\\.pdf\\'" "zathura"))
 
 (put 'dired-find-alternate-file 'disabled nil)
 

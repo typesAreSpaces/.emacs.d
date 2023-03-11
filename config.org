@@ -1705,7 +1705,10 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
         :ensure nil
         :commands (dired dired-jump)
         :bind (("C-x C-j" . dired-jump))
-        :custom ((dired-listing-switches "-agho --group-directories-first")))
+        :custom ((dired-listing-switches "-agho --group-directories-first"))
+        :config
+        (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
+                                             ("\\.pdf\\'" "zathura"))))
   
       (put 'dired-find-alternate-file 'disabled nil)
 
