@@ -680,7 +680,7 @@
         '((sequence "EXTERNAL" "|")
           (sequence "GOAL" "IDEA" "OBSERVATION" "|" "OK")
           (sequence "TODAY" "LATER" "|")
-          (sequence "TODO" "|" "COMPLETED(c)" "CANC(k@)")
+          (sequence "TODO" "|" "MOVED" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
                                         ; Save Org buffers after refiling!
@@ -738,6 +738,8 @@
            :immediate-finish t)
           ))
 
+  (define-key org-mode-map (kbd "C-c d")
+    (lambda () (interactive) (org-todo "MOVED")))
   (define-key org-mode-map (kbd "C-c c")
     (lambda () (interactive) (org-todo "COMPLETED")))
   (define-key org-mode-map (kbd "C-c t")
