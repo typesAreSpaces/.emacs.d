@@ -797,7 +797,8 @@ You can add more =src= block templates below by copying one of the lines and cha
       (add-to-list 'org-structure-template-alist '("py" . "src python"))))
 #+end_src
 
-** Configure Babel Languages
+** OK Configure Babel Languages
+CLOSED: [2023-03-11 Sat 01:31]
 
 To execute or export code in =org-mode= code blocks, you'll need to set up =org-babel-load-languages= for each language you'd like to use.  [[https://orgmode.org/worg/org-contrib/babel/languages.html][This page]] documents all of the languages that you can use with =org-babel=.
 
@@ -847,7 +848,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
           '((sequence "EXTERNAL" "|")
             (sequence "GOAL" "IDEA" "OBSERVATION" "|" "OK")
             (sequence "TODAY" "LATER" "|")
-            (sequence "TODO" "|" "COMPLETED(c)" "CANC(k@)")
+            (sequence "TODO" "|" "MOVED" "COMPLETED(c)" "CANC(k@)")
             (sequence "EMAIL" "|")))
 
                                           ; Save Org buffers after refiling!
@@ -905,6 +906,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
              :immediate-finish t)
             ))
 
+    (define-key org-mode-map (kbd "C-c d")
+      (lambda () (interactive) (org-todo "MOVED")))
     (define-key org-mode-map (kbd "C-c c")
       (lambda () (interactive) (org-todo "COMPLETED")))
     (define-key org-mode-map (kbd "C-c t")
