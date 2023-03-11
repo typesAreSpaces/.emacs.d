@@ -1214,6 +1214,8 @@
   :bind (("C-x C-j" . dired-jump))
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
+  (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
+                                       ("\\.pdf\\'" "zathura")))
   (when (not (version< emacs-version "26.3"))
     (evil-collection-define-key 'normal 'dired-mode-map
       "h" 'dired-single-up-directory
