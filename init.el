@@ -216,8 +216,6 @@
     "rs" '(bookmark-set :which-key "bookmark (s)et")
     "rj" '(bookmark-jump :which-key "bookmark (j)ump")
     "rd" '(bookmark-jump :which-key "bookmark (d)elete")
-    "o" '(:ignore t :which-key "(o)rg")
-    "oc" '(org-capture nil :which-key "org-(c)apture")
     "b" '(:ignore t :which-key "edit (b)uffer")
     "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
     "bf"  '(fill-buffer :which-key "(f)ill buffer")
@@ -251,25 +249,12 @@
               (find-file
                (expand-file-name (concat scc-reports-dir "/references.bib"))))
             :which-key "Edit (s)CC references")
-    "p" '(:ignore t :which-key "Presentation")
-    "pp" '(org-tree-slide-move-previous-tree :which-key "Previous slide")
-    "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide")
     "s"  '(shell-command :which-key "(s)hell command")
     "t"  '(:ignore t :which-key "(t)oggles")
     "tt" '(load-theme :which-key "Choose (t)heme")
     "g" '(magit-status :which-key "Ma(g)it status")
     "d" '(dired-jump :which-key "(d)ired jump")
     "m" '(mu4e :which-key "(m)u4e")
-    "l" '(:ignore t :which-key "(l)atex related")
-    "lp" '((lambda () (interactive)
-             (yasnippet/goto-parent-file))
-           :which-key "Goto (p)arent")
-    "lF" '((lambda () (interactive)
-             (LaTeX-fill-buffer nil))
-           :which-key "Latex (F)ill buffer")
-    "lf" '((lambda () (interactive)
-             (lsp-latex-forward-search))
-           :which-key "Latex (f)orward search")
     "w" '(:ignore t :which-key "(w)indows related")
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
@@ -758,6 +743,10 @@
 
   (efs/org-font-setup))
 
+(efs/leader-keys
+  "o" '(:ignore t :which-key "(o)rg")
+  "oc" '(org-capture nil :which-key "org-(c)apture"))
+
 (use-package org-mime
   :ensure t) 
 
@@ -1045,6 +1034,17 @@
     (setq font-latex-fontify-script nil)))
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+(efs/leader-keys
+  "l" '(:ignore t :which-key "(l)atex related")
+  "lp" '((lambda () (interactive)
+           (yasnippet/goto-parent-file))
+         :which-key "Goto (p)arent")
+  "lF" '((lambda () (interactive)
+           (LaTeX-fill-buffer nil))
+         :which-key "Latex (F)ill buffer")
+  "lf" '((lambda () (interactive)
+           (lsp-latex-forward-search))
+         :which-key "Latex (f)orward search"))
 
 (use-package python-mode
   :ensure t
@@ -1121,6 +1121,24 @@
   ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
   )
 (use-package lsp-haskell)
+
+(use-package parinfer
+  :disabled
+  :hook ((clojure-mode . parinfer-mode)
+         (emacs-lisp-mode . parinfer-mode)
+         (common-lisp-mode . parinfer-mode)
+         (scheme-mode . parinfer-mode)
+         (lisp-mode . parinfer-mode))
+  :config
+  (setq parinfer-extensions
+        '(defaults       ; should be included.
+           pretty-parens  ; different paren styles for different modes.
+           evil           ; If you use Evil.
+           smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+           smart-yank)))  ; Yank behavior depend on mode.
+
+(efs/leader-keys
+  "tp" 'parinfer-toggle-mode)
 
 (use-package company
   :after lsp-mode
@@ -1281,6 +1299,11 @@
   (org-tree-slide-header t)
   (org-tree-slide-breadcrumbs " // ")
   (org-image-actual-width nil))
+
+(efs/leader-keys
+  "p" '(:ignore t :which-key "Presentation")
+  "pp" '(org-tree-slide-move-previous-tree :which-key "Previous slide")
+  "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide"))
 
 (use-package simpleclip
   :config
