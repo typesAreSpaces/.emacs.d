@@ -905,16 +905,26 @@
   (use-package tree-sitter
     :hook ((latex-mode python-mode rustic-mode) . tree-sitter-hl-mode)
     :config
-    (add-to-list 'tree-sitter-major-mode-language-alist '(rustic-mode . rust))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(TeX-mode . latex))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(LaTeX-mode . latex))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(latex-mode . latex))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(bibtex-mode . bibtex))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(org-mode . org))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(c-mode . c))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(cpp-mode . cpp))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(python-mode . python))
-    (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-mode . typescript))))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(rustic-mode . rust))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(TeX-mode . latex))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(LaTeX-mode . latex))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(latex-mode . latex))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(bibtex-mode . bibtex))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(org-mode . org))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(c-mode . c))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(cpp-mode . cpp))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(python-mode . python))
+    (add-to-list 'tree-sitter-major-mode-language-alist
+                 '(typescript-mode . typescript))))
 
 (when (fboundp 'module-load)
   (use-package tree-sitter-langs
