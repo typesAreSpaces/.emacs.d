@@ -232,7 +232,7 @@
     "r" '(:ignore t :which-key "bookma(r)k")
     "rs" '(bookmark-set :which-key "bookmark (s)et")
     "rj" '(bookmark-jump :which-key "bookmark (j)ump")
-    "rd" '(bookmark-jump :which-key "bookmark (d)elete")
+    "rd" '(bookmark-delete :which-key "bookmark (d)elete")
     "b" '(:ignore t :which-key "edit (b)uffer")
     "bf"  '(fill-buffer :which-key "(f)ill buffer")
     "bi"  '((lambda () (interactive)
