@@ -278,8 +278,16 @@
 (use-package command-log-mode
   :commands command-log-mode)
 
-(use-package doom-themes
-  :init (load-theme 'doom-molokai t))
+;(use-package doom-themes
+;  :init (load-theme 'doom-molokai  t))
+
+;(use-package tao-theme
+;  :init (load-theme 'tao-ying t))
+
+(use-package kaolin-themes
+  :config
+  (load-theme 'kaolin-valley-dark t)
+  (kaolin-treemacs-theme))
 
 (use-package anzu)
 
