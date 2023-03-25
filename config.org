@@ -455,8 +455,8 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 [[https://github.com/hlissner/emacs-doom-themes][doom-themes]] is a great set of themes with a lot of variety and support for many different Emacs modes.  Taking a look at the [[https://github.com/hlissner/emacs-doom-themes/tree/screenshots][screenshots]] might help you decide which one you like best.  You can also run =M-x counsel-load-theme= to choose between them easily.
 
 #+begin_src emacs-lisp
-                                          ;(use-package doom-themes
-                                          ;  :init (load-theme 'doom-gruvbox t))
+  (use-package doom-themes
+    :init (load-theme 'doom-gruvbox t))
 #+end_src
 
 *** Tao themes
@@ -468,10 +468,10 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 *** Kaolin themes
 
 #+begin_src emacs-lisp 
-  (use-package kaolin-themes
-    :config
-    (load-theme 'kaolin-valley-dark t)
-    (kaolin-treemacs-theme))
+                                          ;(use-package kaolin-themes
+                                          ;  :config
+                                          ;  (load-theme 'kaolin-valley-dark t)
+                                          ;  (kaolin-treemacs-theme))
 #+end_src
 
 *** Better Modeline
