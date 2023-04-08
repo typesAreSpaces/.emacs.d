@@ -1104,6 +1104,11 @@
 
 (use-package toml-mode)
 
+(use-package boogie-friends
+  :config
+  (setq flycheck-z3-executable
+        "~/Documents/GithubProjects/AXDInterpolator/dependencies/z3-interp-plus/build/z3"))
+
 (use-package lean4-mode
   :straight (lean4-mode :type git
                         :host github
