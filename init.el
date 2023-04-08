@@ -28,6 +28,8 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(setq evil-want-keybinding nil)
+
 (use-package auto-package-update
   :custom
   (auto-package-update-hide-results t)
