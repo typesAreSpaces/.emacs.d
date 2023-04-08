@@ -1957,7 +1957,7 @@ mu index
 
 mu4e comes included with mu. Search the path your package manager used to installed it and use it to change :load-path in the following block:
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (defvar efs/mu4e-path "/opt/homebrew/share/emacs/site-lisp/mu/mu4e/")
 
   (when (file-exists-p (concat efs/mu4e-path "mu4e.el"))
