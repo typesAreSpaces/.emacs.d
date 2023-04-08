@@ -1444,6 +1444,15 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
   (use-package toml-mode)
 #+end_src
 
+*** Z3 mode
+
+#+begin_src emacs-lisp
+  (use-package boogie-friends
+    :config
+    (setq flycheck-z3-executable
+          "~/Documents/GithubProjects/AXDInterpolator/dependencies/z3-interp-plus/build/z3"))
+#+end_src
+
 *** Lean
 
 #+begin_src emacs-lisp
