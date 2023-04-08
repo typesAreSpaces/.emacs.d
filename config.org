@@ -41,6 +41,8 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
 
   (require 'use-package)
   (setq use-package-always-ensure t)
+
+  (setq evil-want-keybinding nil)
 #+end_src
 
 ** Automatic Package Updates
