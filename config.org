@@ -1337,10 +1337,11 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
 
 *** Latex
 
-To setup Skim use select Skim > Preferences...
+Use this setup for Skim.  Select Skim > Preferences...
 - Preset: Custom
 - Command: emacsclient
 - Arguments: -s jose --no-wait +%line "%file"
+Use `CMD + shift + click` on a pdf section to back forward.
 
 #+begin_src emacs-lisp 
   (add-hook 'TeX-mode-hook 'lsp)
