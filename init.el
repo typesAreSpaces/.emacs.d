@@ -189,7 +189,7 @@
                                      "Consolas"))
                             (when (member font-family (font-family-list))
                               (throw 'break font-family)))))
-           (font (when font-family (format "%s-18" font-family))))
+           (font (when font-family (format "%s-14" font-family))))
       (when font
         (add-to-list 'default-frame-alist (cons 'font font))
         (set-frame-font font t t)))))
