@@ -410,7 +410,7 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 
   (when (not (version< emacs-version "26.3"))
     (use-package doom-modeline
-      :init (doom-modeline-mode 1)
+      :config (doom-modeline-mode 1)
       :custom (
                (doom-modeline-height 15)
                (doom-modeline-enable-word-count t)
@@ -1253,10 +1253,11 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
 
 *** Latex
 
-To setup Skim use select Skim > Preferences...
+Use this setup for Skim.  Select Skim > Preferences...
 - Preset: Custom
 - Command: emacsclient
 - Arguments: -s jose --no-wait +%line "%file"
+Use `CMD + shift + click` on a pdf section to back forward.
 
 #+begin_src emacs-lisp 
   (add-hook 'TeX-mode-hook 'lsp)
