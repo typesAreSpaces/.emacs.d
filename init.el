@@ -346,7 +346,7 @@
 
 (when (not (version< emacs-version "26.3"))
   (use-package doom-modeline
-    :init (doom-modeline-mode 1)
+    :config (doom-modeline-mode 1)
     :custom (
              (doom-modeline-height 15)
              (doom-modeline-enable-word-count t)
