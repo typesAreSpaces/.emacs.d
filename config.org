@@ -188,8 +188,6 @@ The content of .emacs-daemon.plist is
 #+end_src
 
 #+begin_src emacs-lisp
-  (defvar efs/default-font-size 160)
-  (defvar efs/default-variable-font-size 160)
   (defvar efs/frame-transparency '(100 . 100))
 
   (setq inhibit-startup-message t)
