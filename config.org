@@ -152,8 +152,6 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 This section configures basic UI settings that remove unneeded elements to make Emacs look a lot more minimal and modern.  If you're just getting started in Emacs, the menu bar might be helpful so you can remove the =(menu-bar-mode -1)= line if you'd like to still see that.
 
 #+begin_src emacs-lisp
-  (defvar efs/default-font-size 160)
-  (defvar efs/default-variable-font-size 160)
   (defvar efs/frame-transparency '(100 . 100))
 
   (setq inhibit-startup-message t)

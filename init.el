@@ -104,8 +104,6 @@
 (defvar seminar-meetings
   (concat seminar-org-files-dir "/meeting_notes.org"))
 
-(defvar efs/default-font-size 160)
-(defvar efs/default-variable-font-size 160)
 (defvar efs/frame-transparency '(100 . 100))
 
 (setq inhibit-startup-message t)
