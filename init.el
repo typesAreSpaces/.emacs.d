@@ -229,6 +229,9 @@
     :prefix "C-c SPC")
 
   (efs/leader-keys
+    "a" '(:ignore t :which-key "(a)vy")
+    "ac" '(avy-goto-char :which-key "(c)haracter")
+    "aw" '(avy-goto-word-0 :which-key "(w)ord")
     "r" '(:ignore t :which-key "bookma(r)k")
     "rs" '(bookmark-set :which-key "bookmark (s)et")
     "rj" '(bookmark-jump :which-key "bookmark (j)ump")
