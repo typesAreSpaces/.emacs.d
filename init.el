@@ -209,6 +209,9 @@
     :prefix "C-c C-SPC")
 
   (efs/leader-keys
+    "a" '(:ignore t :which-key "(a)vy")
+    "ac" '(avy-goto-char :which-key "(c)haracter")
+    "aw" '(avy-goto-word-0 :which-key "(w)ord")
     "r" '(:ignore t :which-key "bookma(r)k")
     "rs" '(bookmark-set :which-key "bookmark (s)et")
     "rj" '(bookmark-jump :which-key "bookmark (j)ump")
@@ -258,7 +261,77 @@
 
 (use-package better-jumper
   :config
-  (better-jumper-mode +1))
+  (better-jumper-mode +1)
+                                        ; TODO: Fix these bindings and/or check more documentation
+                                        ; Currently these are not working as expected
+  (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
+  (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
+  (define-key evil-motion-state-map (kbd "C-u")
+    'better-jumper-jump-forward)
+  (define-key evil-motion-state-map (kbd "C-o")
+    'better-jumper-jump-backward))
+
+(use-package god-mode
+  :config
+  (global-set-key (kbd "s-g") #'god-mode-all)
+  (define-key god-local-mode-map (kbd "i") #'god-local-mode)
+  (global-set-key
+   (kbd "C-g")
+   (lambda () (interactive) (prog1 (god-local-mode) (keyboard-escape-quit))))
+  (setq god-mode-alist '((nil . "C-") ("g" . "M-") ("G" . "C-M-")))
+  (setq god-mode-enable-function-key-translation nil)
+  (setq god-exempt-major-modes nil)
+  (setq god-exempt-predicates nil))
+
+(use-package evil-god-state)
+
+(use-package diminish)
+
+(use-package evil
+  :after (god-mode evil-god-state diminish)
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g")
+    'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h")
+    'evil-delete-backward-char-and-join)
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal)
+  (evil-define-key
+    'normal global-map ","
+    'evil-execute-in-god-state)
+  (add-hook 'evil-god-state-entry-hook
+            (lambda () (diminish 'god-local-mode)))
+  (add-hook 'evil-god-state-exit-hook
+            (lambda () (diminish-undo 'god-local-mode)))
+  (evil-define-key
+    'god global-map [escape]
+    'evil-god-state-bail))
+
+(when (not (version< emacs-version "26.3"))
+  (use-package evil-collection
+    :straight (evil-collection
+               :type git
+               :host github
+               :repo "meliache/evil-collection"
+               :branch "mu4e-development")
+    :after evil
+    :config
+    (evil-collection-init)
+    (setq forge-add-default-bindings nil)))
+
+(use-package evil-numbers
+  :after evil
+  :config
+  (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
 
 (use-package command-log-mode
   :commands command-log-mode)
@@ -880,6 +953,10 @@
           ([f5] . treemacs-select-window))
     :config
     (setq treemacs-is-never-other-window t)))
+
+(when (not (version< emacs-version "26.1"))
+  (use-package treemacs-evil
+    :after treemacs evil))
 
 (when (not (version< emacs-version "26.1"))
   (use-package lsp-treemacs
