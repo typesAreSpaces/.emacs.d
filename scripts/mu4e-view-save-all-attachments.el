@@ -31,7 +31,7 @@
   (let* ((msg (mu4e-message-at-point))
          (id (mu4e-message-field msg :subject))
          (attachdir (concat bulk-saved-attachments-dir "/" id))
-	 (parts (mu4e~view-gather-mime-parts))
+	 (parts (mu4e--view-gather-mime-parts))
          (handles '())
          (files '())
          dir)
