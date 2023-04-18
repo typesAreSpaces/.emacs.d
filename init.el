@@ -258,8 +258,11 @@
                (expand-file-name (concat scc-reports-dir "/references.bib"))))
             :which-key "Edit (s)CC references")
     "s"  '(shell-command :which-key "(s)hell command")
-    "t"  '(:ignore t :which-key "(t)oggles")
-    "tt" '(load-theme :which-key "Choose (t)heme")
+    "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
+    "th" '(load-theme :which-key "Choose t(h)eme")
+    "tt" '(tab-switch :which-key "change (t)ab")
+    "tn" '(tab-new :which-key "(n)ew tab")
+    "tc" '(tab-close :which-key "(c)lose tab")
     "g" '(magit-status :which-key "Ma(g)it status")
     "d" '(dired-jump :which-key "(d)ired jump")
     "m" '(mu4e :which-key "(m)u4e")
@@ -1337,7 +1340,7 @@
   (org-image-actual-width nil))
 
 (efs/leader-keys
-  "p" '(:ignore t :which-key "Presentation")
+  "p" '(:ignore t :which-key "(p)resentation")
   "pp" '(org-tree-slide-move-previous-tree :which-key "Previous slide")
   "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide"))
 
