@@ -179,7 +179,6 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-(tab-bar-mode 1)                           ;; enable tab bar
 (setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
 (setq tab-bar-close-button-show nil)       ;; hide tab close / X button
 (setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
