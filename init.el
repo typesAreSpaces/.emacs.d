@@ -199,10 +199,8 @@
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 (setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
-(setq tab-bar-close-button-show nil)       ;; hide tab close / X button
 (setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
 (setq tab-bar-tab-hints t)                 ;; show tab numbers
-(setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator))
 
 (defun frame-font-setup
     (&rest ...)
