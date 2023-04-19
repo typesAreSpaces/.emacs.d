@@ -124,6 +124,7 @@
 (setq use-dialog-box nil)
 
 (setq ring-bell-function 'ignore)
+(setq confirm-kill-emacs #'y-or-n-p)
 
 (column-number-mode)
 (setq-default display-line-numbers-type 'visual)
@@ -181,6 +182,7 @@
 (setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
 (setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
 (setq tab-bar-tab-hints t)                 ;; show tab numbers
+(setq tab-bar-new-tab-to 'rightmost)       ;; defines where to create a new tab
 
 (defun frame-font-setup
     (&rest ...)
