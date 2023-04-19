@@ -608,7 +608,7 @@
   ("q" nil "finished" :exit t))
 
 (efs/leader-keys
-  "ts" '(hydra-text-scale/body :which-key "scale text"))
+  "tf" '(hydra-text-scale/body :which-key "change (f)ont size"))
 
 (defun efs/org-font-setup ()
                                         ; Replace list hyphen with dot
