@@ -849,8 +849,7 @@ You can add more =src= block templates below by copying one of the lines and cha
       (add-to-list 'org-structure-template-alist '("py" . "src python"))))
 #+end_src
 
-** OK Configure Babel Languages
-CLOSED: [2023-03-11 Sat 01:31]
+** Configure Babel Languages
 
 To execute or export code in =org-mode= code blocks, you'll need to set up =org-babel-load-languages= for each language you'd like to use.  [[https://orgmode.org/worg/org-contrib/babel/languages.html][This page]] documents all of the languages that you can use with =org-babel=.
 
@@ -1027,6 +1026,7 @@ Update org-latex-classes
 #+end_src
 
 *** Org download
+
 #+begin_src emacs-lisp 
   (use-package org-download)
 #+end_src
@@ -1401,6 +1401,7 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
 #+end_src
 
 **** AUCTex setup
+
 #+begin_src emacs-lisp
   (when (not (version< emacs-version "26.3"))
     (use-package tex
@@ -1425,6 +1426,7 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
              (lsp-latex-forward-search))
            :which-key "Latex (f)orward search"))
 #+end_src
+
 *** Python
 
 We use =lsp-mode= and =dap-mode= to provide a more complete development environment for Python in Emacs.  Check out [[https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/][the =pyls= configuration]] in the =lsp-mode= documentation for more details.
@@ -1574,6 +1576,7 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
   (efs/leader-keys
     "tp" 'parinfer-toggle-mode)
 #+end_src
+
 ** Company Mode
 
 [[http://company-mode.github.io/][Company Mode]] provides a nicer in-buffer completion interface than =completion-at-point= which is more reminiscent of what you would expect from an IDE.  We add a simple configuration to make the keybindings a little more useful (=TAB= now completes the selection and initiates completion at the current location if needed).
@@ -1941,10 +1944,12 @@ This is an example of configuring another non-Emacs application using org-mode. 
 #+end_src
 
 ** sqlite3
+
 #+begin_src emacs-lisp 
   (use-package sqlite3)
 #+end_src
-** Managing Mail with mu4e
+
+** Managing mail with mu4e
 
 It is necessary to install isync, setup a .mbsyncrc file like the following:
 
