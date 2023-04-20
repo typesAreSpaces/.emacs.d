@@ -260,6 +260,32 @@ This section configures basic UI settings that remove unneeded elements to make 
   (setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
   (setq tab-bar-tab-hints t)                 ;; show tab numbers
   (setq tab-bar-new-tab-to 'rightmost)       ;; defines where to create a new tab
+  (set-face-attribute 'tab-bar nil
+                      :background "#282828"
+                      :foreground "gray60" :distant-foreground "gray50"
+                      :height 1.0 :box nil)
+  (set-face-attribute 'tab-bar-tab nil
+                      :background "#B8BB26"
+                      :foreground "black" :distant-foreground "gray60"
+                      :height 1.0 :box nil)
+  (set-face-attribute 'tab-bar-tab-inactive nil
+                      :background "#282828"
+                      :foreground "white" :distant-foreground "gray50"
+                      :height 1.0 :box nil)
+
+  ;; (set-face-attribute 'tab-line nil ;; background behind tabs
+  ;;                     :background "gray40"
+  ;;                     :foreground "gray60" :distant-foreground "gray50"
+  ;;                     :height 1.0 :box nil)
+  ;; (set-face-attribute 'tab-line-tab nil $$ active tab in another window
+  ;;                     :inherit 'tab-line
+  ;;                     :foreground "gray70" :background "gray90" :box nil)
+  ;; (set-face-attribute 'tab-line-tab-current nil ;; active tab in current window
+  ;;                     :background "#b34cb3" :foreground "white" :box nil)
+  ;; (set-face-attribute 'tab-line-tab-inactive nil ;; inactive tab
+  ;;                     :background "gray60" :foreground "black" :box nil)
+  ;; (set-face-attribute 'tab-line-highlight nil ;; mouseover
+  ;;                     :background "white" :foreground 'unspecified)
 #+end_src
 
 ** Font Configuration
