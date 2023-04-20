@@ -1940,6 +1940,10 @@ This is an example of configuring another non-Emacs application using org-mode. 
   (use-package markdown-preview-eww)
 #+end_src
 
+** sqlite3
+#+begin_src emacs-lisp 
+  (use-package sqlite3)
+#+end_src
 ** Managing Mail with mu4e
 
 It is necessary to install isync, setup a .mbsyncrc file like the following:
