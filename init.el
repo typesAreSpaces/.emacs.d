@@ -1356,6 +1356,8 @@
 
 (use-package markdown-preview-eww)
 
+(use-package sqlite3)
+
 (defvar efs/mu4e-path "/usr/share/emacs/site-lisp/mu4e/")
 
 (when (file-exists-p (concat efs/mu4e-path "mu4e.el"))
