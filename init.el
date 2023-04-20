@@ -1383,3 +1383,5 @@
   (simpleclip-mode 1))
 
 (use-package markdown-preview-eww)
+
+(use-package sqlite3)

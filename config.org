@@ -1984,6 +1984,10 @@ This is an example of configuring another non-Emacs application using org-mode. 
   (use-package markdown-preview-eww)
 #+end_src
 
+** sqlite3
+#+begin_src emacs-lisp 
+  (use-package sqlite3)
+#+end_src
 ** Managing Mail with mu4e
 
 Follow the following [[https://macowners.club/posts/email-emacs-mu4e-macos/][post]] to setup credential file in ~/.maildir/certificates. It is necessary to install isync. Use the brew package manager and follow xukai92 suggestion in this [[https://github.com/moriyoshi/cyrus-sasl-xoauth2/issues/9][git issue]], i.e. use 
