@@ -248,6 +248,10 @@
 
 (add-hook 'focus-in-hook #'frame-font-setup)
 
+(defun change-font-size (size)
+  (interactive "n")
+  (set-face-attribute 'default nil :height size))
+
 (defun persp-exit ()
   (interactive)
   (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
@@ -276,30 +280,7 @@
     "by" '(simpleclip-copy :which-key "clipboard (y)ank")
     "bs" '(insert-snake :which-key "insert (s)nake")
     "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
-    "f" '(:ignore t :which-key "edit (f)iles")
-    "fa" '((lambda () (interactive)
-             (find-file
-              (expand-file-name (concat phd-thesis-org-files-dir "/main.org"))))
-           :which-key "(a)genda")
-    "fe" '((lambda () (interactive)
-             (find-file
-              (expand-file-name "config.org" user-emacs-directory)))
-           :which-key "(e)macs source")
-    "fw" '((lambda () (interactive)
-             (find-file
-              (expand-file-name
-               (concat seminar-dir
-                       "/Reports/finding_certificates_qm_univariate/main.tex"))))
-           :which-key "Current (w)ork")
-    "fr" '(:ignore t :which-key "Edit (r)eferences")
-    "frp" '((lambda () (interactive)
-              (find-file
-               (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib"))))
-            :which-key "Edit (p)hD references")
-    "frs" '((lambda () (interactive)
-              (find-file
-               (expand-file-name (concat scc-reports-dir "/references.bib"))))
-            :which-key "Edit (s)CC references")
+    "f" '(hydra-jump-files/body :which-key "edit (f)iles") 
     "s"  '(shell-command :which-key "(s)hell command")
     "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
     "tt" '(load-theme :which-key "choose (t)heme")
@@ -588,10 +569,31 @@
 (use-package hydra
   :defer t)
 
+(defhydra hydra-jump-files (:timeout 4)
+  "jump to files"
+  ("a" (find-file
+        (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))
+   "Agenda")
+  ("e" (find-file
+        (expand-file-name "config.org" user-emacs-directory))
+   "Emacs config")
+  ("w" (find-file
+        (expand-file-name
+         (concat seminar-dir
+                 "/Reports/finding_certificates_qm_univariate/main.tex")))
+   "Current report")
+  ("rp" (find-file
+         (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))
+   "Bibtex references - PhD thesis")
+  ("rs" (find-file
+         (expand-file-name (concat scc-reports-dir "/references.bib")))
+   "Bibtex references - SCC project"))
+
 (defhydra hydra-text-scale (:timeout 4)
   "scale text"
   ("k" text-scale-increase "in")
   ("j" text-scale-decrease "out")
+  ("c" change-font-size "change font size")
   ("q" nil "finished" :exit t))
 
 (efs/leader-keys
