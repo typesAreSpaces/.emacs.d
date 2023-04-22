@@ -611,7 +611,7 @@
 (use-package hydra
   :defer t)
 
-(defhydra hydra-jump-files (:timeout 4)
+(defhydra hydra-jump-files (:exit t)
   "jump to files"
   ("a" (find-file
         (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))
@@ -619,11 +619,6 @@
   ("e" (find-file
         (expand-file-name "config.org" user-emacs-directory))
    "Emacs config")
-  ("w" (find-file
-        (expand-file-name
-         (concat seminar-dir
-                 "/Reports/finding_certificates_qm_univariate/main.tex")))
-   "Current report")
   ("rp" (find-file
          (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))
    "Bibtex references - PhD thesis")
@@ -635,7 +630,7 @@
   "scale text"
   ("k" text-scale-increase "in")
   ("j" text-scale-decrease "out")
-  ("c" change-font-size "change font size")
+  ("c" change-font-size "change font size" :exit t)
   ("q" nil "finished" :exit t))
 
 (efs/leader-keys
