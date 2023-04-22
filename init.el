@@ -602,7 +602,7 @@
 (use-package hydra
   :defer t)
 
-(defhydra hydra-jump-files (:timeout 1)
+(defhydra hydra-jump-files (:timeout 4)
   "jump to files"
   ("a" (find-file
         (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))
