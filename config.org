@@ -789,7 +789,7 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
   (use-package hydra
     :defer t)
 
-  (defhydra hydra-jump-files (:timeout 4)
+  (defhydra hydra-jump-files (:timeout 1)
     "jump to files"
     ("a" (find-file
           (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))
