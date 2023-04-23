@@ -234,10 +234,16 @@
 
 (defun persp-exit ()
   (interactive)
-  (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session-mac") (save-buffers-kill-terminal)))
+  (prog1
+      (persp-state-save "~/.config/jose-emacs/.emacs-session-mac")
+    (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key [(control x) (k)] 'kill-buffer)
+
+;; Unbind C-@ in order to make it a global-prefix for general
+(global-unset-key (kbd "C-SPC"))
+(global-unset-key (kbd "C-@"))
 
 (use-package general
   :after evil
