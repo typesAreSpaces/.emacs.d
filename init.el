@@ -234,15 +234,17 @@
 
 (defun persp-exit ()
   (interactive)
-  (prog1 (persp-state-save "~/.config/jose-emacs/.emacs-session") (save-buffers-kill-terminal)))
+  (prog1
+      (persp-state-save "~/.config/jose-emacs/.emacs-session")
+    (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key [(control x) (k)] 'kill-buffer)
 
-(use-package general
-  :config
-  (general-create-definer efs/leader-keys
-    :prefix "C-c C-SPC")
+      (use-package general
+	:config
+	(general-create-definer efs/leader-keys
+	  :prefix "C-c C-SPC")
 
   (efs/leader-keys
     "a" '(:ignore t :which-key "(a)vy")
@@ -992,6 +994,10 @@
     (setq treemacs-is-never-other-window t)))
 
 (when (not (version< emacs-version "26.1"))
+  (use-package treemacs-evil
+    :after treemacs evil))
+
+(when (not (version< emacs-version "26.1"))
   (use-package lsp-treemacs
     :after lsp))
 
@@ -1276,36 +1282,35 @@
   (setq vterm-max-scrollback 10000))
 
 (use-package dired
-  :ensure nil
-  :commands (dired dired-jump evil)
-  :bind (("C-x C-j" . dired-jump))
-  :custom ((dired-listing-switches "-agho --group-directories-first"))
-  :config
-  (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
-                                       ("\\.pdf\\'" "zathura")))
-                                       ("\\.pdf\\'" "zathura"))
+      :ensure nil
+      :commands (dired dired-jump)
+      :bind (("C-x C-j" . dired-jump))
+      :custom ((dired-listing-switches "-agho --group-directories-first"))
+      :config
+      (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
+                                           ("\\.pdf\\'" "zathura"))))
 
-(put 'dired-find-alternate-file 'disabled nil)
+    (put 'dired-find-alternate-file 'disabled nil)
 
-(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+    (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 (use-package dired-single
   :commands (dired dired-jump))
 
-(when (not (version< emacs-version "26.1"))
-  (use-package all-the-icons-dired
-    :hook (dired-mode . all-the-icons-dired-mode)))
+    (when (not (version< emacs-version "26.1"))
+      (use-package all-the-icons-dired
+        :hook (dired-mode . all-the-icons-dired-mode)))
 
-(use-package dired-open
-  :commands (dired dired-jump)
-  :config
-                                        ; Doesn't work as expected!
-                                        ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
-  (setq dired-open-extensions '(("png" . "feh")
-                                ("mkv" . "mpv"))))
+    (use-package dired-open
+      :commands (dired dired-jump)
+      :config
+                                            ; Doesn't work as expected!
+                                            ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
+      (setq dired-open-extensions '(("png" . "feh")
+                                    ("mkv" . "mpv"))))
 
-(use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode))
+    (use-package dired-hide-dotfiles
+      :hook (dired-mode . dired-hide-dotfiles-mode))
 
 (defun snakify (input)
   (replace-regexp-in-string
