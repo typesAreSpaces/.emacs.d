@@ -1087,6 +1087,7 @@
     (setq TeX-auto-save t)
     (setq TeX-parse-self t)
     (setq-default TeX-master nil)
+    (setq reftex-insert-label-flags (list t nil))
     (setq reftex-ref-macro-prompt nil)
     (setq font-latex-fontify-script nil)))
 
