@@ -246,6 +246,9 @@
 (global-unset-key (kbd "C-SPC"))
 (global-unset-key (kbd "C-@"))
 
+(when (eq system-type 'darwin) ;; mac specific settings
+  (setq mac-option-modifier 'meta))
+
 (use-package general
   :after evil
   :config
@@ -1099,6 +1102,7 @@
     (setq TeX-auto-save t)
     (setq TeX-parse-self t)
     (setq-default TeX-master nil)
+    (setq reftex-plug-into-AUCTeX t)
     (setq reftex-insert-label-flags (list t nil))
     (setq reftex-ref-macro-prompt nil)
     (setq font-latex-fontify-script nil)))
