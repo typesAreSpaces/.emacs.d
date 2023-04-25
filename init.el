@@ -266,7 +266,8 @@
 (global-unset-key (kbd "C-@"))
 
 (when (eq system-type 'darwin) ;; mac specific settings
-  (setq mac-option-modifier 'meta))
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta))
 
 (use-package general
   :config
