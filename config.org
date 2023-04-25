@@ -310,58 +310,65 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key [(control x) (k)] 'kill-buffer)
 
-	(use-package general
-	  :config
-	  (general-create-definer efs/leader-keys
-	    :prefix "C-c C-SPC")
+  ;; Unbind C-@ in order to make it a global-prefix for general
+  (global-unset-key (kbd "C-SPC"))
+  (global-unset-key (kbd "C-@"))
 
-    (efs/leader-keys
-      "a" '(:ignore t :which-key "(a)vy")
-      "ac" '(avy-goto-char :which-key "(c)haracter")
-      "aw" '(avy-goto-word-0 :which-key "(w)ord")
-      "r" '(:ignore t :which-key "bookma(r)k")
-      "rs" '(bookmark-set :which-key "bookmark (s)et")
-      "rj" '(bookmark-jump :which-key "bookmark (j)ump")
-      "rd" '(bookmark-delete :which-key "bookmark (d)elete")
-      "b" '(:ignore t :which-key "edit (b)uffer")
-      "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
-      "bf"  '(fill-buffer :which-key "(f)ill buffer")
-      "bi"  '((lambda () (interactive)
-                (indent-region (point-min) (point-max)))
-              :which-key "(i)ndent buffer")
-      "by" '(simpleclip-copy :which-key "clipboard (y)ank")
-      "bs" '(insert-snake :which-key "insert (s)nake")
-      "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
-      "f" '(hydra-jump-files/body :which-key "edit (f)iles") 
-      "s"  '(shell-command :which-key "(s)hell command")
-      "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
-      "tt" '(load-theme :which-key "choose (t)heme")
-      "ts" '(tab-switch :which-key "(s)witch tab")
-      "td" '(tab-duplicate :which-key "tab (d)uplicate")
-      "tn" '(tab-new :which-key "(n)ew tab")
-      "tc" '(tab-close :which-key "(c)lose tab")
-      "th" '(tab-previous :which-key "move to left tab")
-      "tl" '(tab-next :which-key "move to right tab")
-      "tr" '(tab-rename :which-key "(r)ename tab")
-      "g" '(magit-status :which-key "Ma(g)it status")
-      "d" '(dired-jump :which-key "(d)ired jump")
-      "m" '(mu4e :which-key "(m)u4e")
-      "w" '(:ignore t :which-key "(w)indows related")
-      "wu" '(winner-undo :which-key "Winner (u)ndo")
-      "wr" '(winner-redo :which-key "Winner (r)edo")))
+  (when (eq system-type 'darwin) ;; mac specific settings
+    (setq mac-option-modifier 'meta))
 
-  (use-package better-jumper
-    :after (evil god-mode)
+  (use-package general
     :config
-    (better-jumper-mode +1)
+    (general-create-definer efs/leader-keys
+      :prefix "C-SPC")
+
+      (efs/leader-keys
+        "a" '(:ignore t :which-key "(a)vy")
+        "ac" '(avy-goto-char :which-key "(c)haracter")
+        "aw" '(avy-goto-word-0 :which-key "(w)ord")
+        "r" '(:ignore t :which-key "bookma(r)k")
+        "rs" '(bookmark-set :which-key "bookmark (s)et")
+        "rj" '(bookmark-jump :which-key "bookmark (j)ump")
+        "rd" '(bookmark-delete :which-key "bookmark (d)elete")
+        "b" '(:ignore t :which-key "edit (b)uffer")
+        "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
+        "bf"  '(fill-buffer :which-key "(f)ill buffer")
+        "bi"  '((lambda () (interactive)
+                  (indent-region (point-min) (point-max)))
+                :which-key "(i)ndent buffer")
+        "by" '(simpleclip-copy :which-key "clipboard (y)ank")
+        "bs" '(insert-snake :which-key "insert (s)nake")
+        "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
+        "f" '(hydra-jump-files/body :which-key "edit (f)iles") 
+        "s"  '(shell-command :which-key "(s)hell command")
+        "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
+        "tt" '(load-theme :which-key "choose (t)heme")
+        "ts" '(tab-switch :which-key "(s)witch tab")
+        "td" '(tab-duplicate :which-key "tab (d)uplicate")
+        "tn" '(tab-new :which-key "(n)ew tab")
+        "tc" '(tab-close :which-key "(c)lose tab")
+        "th" '(tab-previous :which-key "move to left tab")
+        "tl" '(tab-next :which-key "move to right tab")
+        "tr" '(tab-rename :which-key "(r)ename tab")
+        "g" '(magit-status :which-key "Ma(g)it status")
+        "d" '(dired-jump :which-key "(d)ired jump")
+        "m" '(mu4e :which-key "(m)u4e")
+        "w" '(:ignore t :which-key "(w)indows related")
+        "wu" '(winner-undo :which-key "Winner (u)ndo")
+        "wr" '(winner-redo :which-key "Winner (r)edo")))
+
+    (use-package better-jumper
+      :after (evil god-mode)
+      :config
+      (better-jumper-mode +1)
                                           ; TODO: Fix these bindings and/or check more documentation
                                           ; Currently these are not working as expected
-    (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
-    (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
-    (define-key evil-motion-state-map (kbd "C-u")
-      'better-jumper-jump-forward)
-    (define-key evil-motion-state-map (kbd "C-o")
-      'better-jumper-jump-backward))
+      (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
+      (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
+      (define-key evil-motion-state-map (kbd "C-u")
+        'better-jumper-jump-forward)
+      (define-key evil-motion-state-map (kbd "C-o")
+        'better-jumper-jump-backward))
 #+end_src
 
 *** God mode
@@ -1399,6 +1406,7 @@ This will install the [[https://github.com/theia-ide/typescript-language-server]
       (setq TeX-auto-save t)
       (setq TeX-parse-self t)
       (setq-default TeX-master nil)
+      (setq reftex-plug-into-AUCTeX t)
       (setq reftex-insert-label-flags (list t nil))
       (setq reftex-ref-macro-prompt nil)
       (setq font-latex-fontify-script nil)))
@@ -1810,36 +1818,36 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
 
 #+begin_src emacs-lisp
 
-      (use-package dired
-        :ensure nil
-        :commands (dired dired-jump)
-        :bind (("C-x C-j" . dired-jump))
-        :custom ((dired-listing-switches "-agho --group-directories-first"))
-        :config
-        (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
-                                             ("\\.pdf\\'" "zathura"))))
-  
-      (put 'dired-find-alternate-file 'disabled nil)
+  (use-package dired
+    :ensure nil
+    :commands (dired dired-jump)
+    :bind (("C-x C-j" . dired-jump))
+    :custom ((dired-listing-switches "-agho --group-directories-first"))
+    :config
+    (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
+                                         ("\\.pdf\\'" "zathura"))))
 
-      (add-hook 'dired-mode-hook #'dired-hide-details-mode)
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
   (use-package dired-single
     :commands (dired dired-jump))
 
-      (when (not (version< emacs-version "26.1"))
-        (use-package all-the-icons-dired
-          :hook (dired-mode . all-the-icons-dired-mode)))
+  (when (not (version< emacs-version "26.1"))
+    (use-package all-the-icons-dired
+      :hook (dired-mode . all-the-icons-dired-mode)))
 
-      (use-package dired-open
-        :commands (dired dired-jump)
-        :config
-                                              ; Doesn't work as expected!
-                                              ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
-        (setq dired-open-extensions '(("png" . "feh")
-                                      ("mkv" . "mpv"))))
+  (use-package dired-open
+    :commands (dired dired-jump)
+    :config
+                                          ; Doesn't work as expected!
+                                          ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
+    (setq dired-open-extensions '(("png" . "feh")
+                                  ("mkv" . "mpv"))))
 
-      (use-package dired-hide-dotfiles
-        :hook (dired-mode . dired-hide-dotfiles-mode))
+  (use-package dired-hide-dotfiles
+    :hook (dired-mode . dired-hide-dotfiles-mode))
 
 #+end_src
 
