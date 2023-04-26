@@ -619,6 +619,10 @@
   ("e" (find-file
         (expand-file-name "config.org" user-emacs-directory))
    "Emacs config")
+  ("w" (find-file
+        (expand-file-name
+         (concat seminar-dir "/Reports/2023/monogenic_certificates_compact_case/main.tex")))
+   "Current report")
   ("rp" (find-file
          (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))
    "Bibtex references - PhD thesis")
@@ -1149,8 +1153,9 @@
 
 (use-package boogie-friends
   :config
-  (setq flycheck-z3-executable
-        "~/Documents/GithubProjects/AXDInterpolator/dependencies/z3-interp-plus/build/z3"))
+  (setq
+   flycheck-z3-executable
+   "~/Documents/GithubProjects/CAXDInterpolator/dependencies/z3-interp-plus/build/z3"))
 
 (use-package lean4-mode
   :straight (lean4-mode :type git
