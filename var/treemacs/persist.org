@@ -28,7 +28,7 @@
  - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Notes
 * MaxDiff project
 ** Code
- - path :: ~/Documents/GithubProjects/AXDInterpolator
+ - path :: ~/Documents/GithubProjects/CAXDInterpolator
 ** Discussion
  - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Side-Projects/MaxDiff
 * TA CS 357
