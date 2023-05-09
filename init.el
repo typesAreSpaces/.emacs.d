@@ -1497,6 +1497,7 @@
             ("/unm/Prof. Kapur/Side projects/MaxDiff Extension". ?m)
             ("/unm/TA Work/CS 357". ?c)
             ("/unm/You got a Package!". ?p)
+            ("/unm/ProFellow Info". ?f)
             ("/unm/Archive". ?a)
             ("/cs-unm/Inbox". ?I)
             ("/cs-unm/Trash". ?T)

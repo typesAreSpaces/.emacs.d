@@ -2129,6 +2129,7 @@ mu4e comes included with mu. Search the path your package manager used to instal
               ("/unm/Prof. Kapur/Side projects/MaxDiff Extension". ?m)
               ("/unm/TA Work/CS 357". ?c)
               ("/unm/You got a Package!". ?p)
+              ("/unm/ProFellow Info". ?f)
               ("/unm/Archive". ?a)
               ("/cs-unm/Inbox". ?I)
               ("/cs-unm/Trash". ?T)
