@@ -1124,6 +1124,12 @@
            (lsp-latex-forward-search))
          :which-key "Latex (f)orward search"))
 
+(use-package typst-mode
+  :straight
+  (:type git
+         :host github
+         :repo "Ziqi-Yang/typst-mode.el"))
+
 (use-package python-mode
   :ensure t
   :hook (python-mode . lsp-deferred)
@@ -1497,6 +1503,7 @@
             ("/unm/Prof. Kapur/Side projects/MaxDiff Extension". ?m)
             ("/unm/TA Work/CS 357". ?c)
             ("/unm/You got a Package!". ?p)
+            ("/unm/ProFellow Info". ?f)
             ("/unm/Archive". ?a)
             ("/cs-unm/Inbox". ?I)
             ("/cs-unm/Trash". ?T)
