@@ -75,7 +75,7 @@
 
 (defvar scc-dir
   (concat phd-thesis-dir
-          "/Documents/Side-Projects/kapur-nsf-proposal"))
+          "/Documents/Side-Projects/kapur-nsf-proposal/2022"))
 (defvar scc-reports-dir (concat scc-dir "/Reports"))
 (defvar scc-org-files-dir (concat scc-dir "/Org-Files"))
 
