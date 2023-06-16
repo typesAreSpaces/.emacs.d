@@ -95,7 +95,7 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
           `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 #+end_src
 
-* Directories 
+* Directories
 
 #+begin_src emacs-lisp
   (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
@@ -240,7 +240,7 @@ The content of .emacs-daemon.plist is
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
   (add-to-list 'auto-mode-alist '("\\.dat\\'" . text-mode))
-  (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode)) 
+  (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode))
 #+end_src
 
 ** Dashboard Configuration
@@ -271,7 +271,7 @@ The content of .emacs-daemon.plist is
 
 ** Tabbar setting
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
   (setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
   (setq tab-bar-tab-hints t)                 ;; show tab numbers
@@ -498,14 +498,14 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 #+end_src
 
 *** Tao themes
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
                                           ;(use-package tao-theme
                                           ;  :init (load-theme 'tao-ying t))
 #+end_src
 
 *** Kaolin themes
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
                                           ;(use-package kaolin-themes
                                           ;  :config
                                           ;  (load-theme 'kaolin-valley-dark t)
@@ -1021,7 +1021,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
     "oc" '(org-capture nil :which-key "org-(c)apture"))
 
   (use-package org-mime
-    :ensure t) 
+    :ensure t)
 
   (defun org-sort-buffer ()
     "Sort all entries in the current buffer, recursively."
@@ -1065,7 +1065,7 @@ Update org-latex-classes
 
 *** Org download
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package org-download)
 #+end_src
 
@@ -1472,7 +1472,7 @@ Use `CMD + shift + click` on a pdf section to back forward.
 
 *** Typst
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package typst-mode
     :straight
     (:type git
@@ -1611,7 +1611,7 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
 #+end_src
 
 *** Pairinfer
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package parinfer
     :disabled
     :hook ((clojure-mode . parinfer-mode)
@@ -1688,21 +1688,35 @@ We also use [[https://github.com/sebastiencs/company-box][company-box]] to furth
 
 ** FZF
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package fzf
     :bind
-    ; Don't forget to set keybinds!
+                                          ; Don't forget to set keybinds!
     :config
     (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
           fzf/executable "fzf"
           fzf/git-grep-args "-i --line-number %s"
-          ; command used for `fzf-grep-*` functions
-          ; example usage for ripgrep:
-          ; fzf/grep-command "rg --no-heading -nH"
+                                          ; command used for `fzf-grep-*` functions
+                                          ; example usage for ripgrep:
+                                          ; fzf/grep-command "rg --no-heading -nH"
           fzf/grep-command "grep -nrH"
-          ; If nil, the fzf buffer will appear at the top of the window
+                                          ; If nil, the fzf buffer will appear at the top of the window
           fzf/position-bottom t
           fzf/window-height 15))
+#+end_src
+
+** Chat GPT client
+
+#+begin_src emacs-lisp
+  (use-package gptel
+    :straight
+    (:type git
+           :host github
+           :repo "karthink/gptel")
+    :config
+    (setq gptel-api-key
+          (let ((key (shell-command-to-string "pass personal/chatgpt")))
+            (string-trim key))))
 #+end_src
 
 * Terminals
@@ -1725,7 +1739,7 @@ Run a terminal with =M-x term!=
     (use-package term
       :commands term
       :config
-      (setq explicit-shell-file-name "zsh") 
+      (setq explicit-shell-file-name "zsh")
       (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
   #+end_src
 
@@ -1936,7 +1950,7 @@ This is an example of configuring another non-Emacs application using org-mode. 
 
 ** Scripts
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (defun snakify (input)
     (replace-regexp-in-string
      " "
@@ -1998,7 +2012,7 @@ This is an example of configuring another non-Emacs application using org-mode. 
 
 ** sqlite3
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package sqlite3)
 #+end_src
 
