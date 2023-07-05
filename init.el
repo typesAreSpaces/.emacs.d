@@ -347,11 +347,6 @@
 
 (when (not (version< emacs-version "26.3"))
   (use-package evil-collection
-    :straight (evil-collection
-               :type git
-               :host github
-               :repo "meliache/evil-collection"
-               :branch "mu4e-development")
     :after evil
     :config
     (evil-collection-init)
