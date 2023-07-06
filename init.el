@@ -252,6 +252,18 @@
   (interactive "n")
   (set-face-attribute 'default nil :height size))
 
+(defun toggle-zoom-pane ()
+  (interactive)
+  (if (get 'is-pane-zoomed 'state)
+      (progn
+        (winner-undo)
+        (setq mode-line-misc-info "")
+        (put 'is-pane-zoomed 'state nil))
+    (progn
+      (delete-other-windows)
+      (setq mode-line-misc-info "[\ueb81]")
+      (put 'is-pane-zoomed 'state t))))
+
 (defun persp-exit ()
   (interactive)
   (prog1
@@ -305,6 +317,7 @@
     "d" '(dired-jump :which-key "(d)ired jump")
     "m" '(mu4e :which-key "(m)u4e")
     "w" '(:ignore t :which-key "(w)indows related")
+    "wz" '(toggle-zoom-pane :which-key "Zoom toggle")
     "wu" '(winner-undo :which-key "Winner (u)ndo")
     "wr" '(winner-redo :which-key "Winner (r)edo")))
 
