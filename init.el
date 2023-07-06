@@ -232,6 +232,18 @@
   (interactive "n")
   (set-face-attribute 'default nil :height size))
 
+(defun toggle-zoom-pane ()
+  (interactive)
+  (if (get 'is-pane-zoomed 'state)
+      (progn
+        (winner-undo)
+        (setq mode-line-misc-info "")
+        (put 'is-pane-zoomed 'state nil))
+    (progn
+      (delete-other-windows)
+      (setq mode-line-misc-info "[\ueb81]")
+      (put 'is-pane-zoomed 'state t))))
+
 (defun persp-exit ()
   (interactive)
   (prog1
@@ -254,53 +266,54 @@
   (general-create-definer efs/leader-keys
     :prefix "C-SPC")
 
-  (efs/leader-keys
-    "a" '(:ignore t :which-key "(a)vy")
-    "ac" '(avy-goto-char :which-key "(c)haracter")
-    "aw" '(avy-goto-word-0 :which-key "(w)ord")
-    "r" '(:ignore t :which-key "bookma(r)k")
-    "rs" '(bookmark-set :which-key "bookmark (s)et")
-    "rj" '(bookmark-jump :which-key "bookmark (j)ump")
-    "rd" '(bookmark-delete :which-key "bookmark (d)elete")
-    "b" '(:ignore t :which-key "edit (b)uffer")
-    "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
-    "bf"  '(fill-buffer :which-key "(f)ill buffer")
-    "bi"  '((lambda () (interactive)
-              (indent-region (point-min) (point-max)))
-            :which-key "(i)ndent buffer")
-    "by" '(simpleclip-copy :which-key "clipboard (y)ank")
-    "bs" '(insert-snake :which-key "insert (s)nake")
-    "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
-    "f" '(hydra-jump-files/body :which-key "edit (f)iles") 
-    "s"  '(shell-command :which-key "(s)hell command")
-    "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
-    "tt" '(load-theme :which-key "choose (t)heme")
-    "ts" '(tab-switch :which-key "(s)witch tab")
-    "td" '(tab-duplicate :which-key "tab (d)uplicate")
-    "tn" '(tab-new :which-key "(n)ew tab")
-    "tc" '(tab-close :which-key "(c)lose tab")
-    "th" '(tab-previous :which-key "move to left tab")
-    "tl" '(tab-next :which-key "move to right tab")
-    "tr" '(tab-rename :which-key "(r)ename tab")
-    "g" '(magit-status :which-key "Ma(g)it status")
-    "d" '(dired-jump :which-key "(d)ired jump")
-    "m" '(mu4e :which-key "(m)u4e")
-    "w" '(:ignore t :which-key "(w)indows related")
-    "wu" '(winner-undo :which-key "Winner (u)ndo")
-    "wr" '(winner-redo :which-key "Winner (r)edo")))
+    (efs/leader-keys
+      "a" '(:ignore t :which-key "(a)vy")
+      "ac" '(avy-goto-char :which-key "(c)haracter")
+      "aw" '(avy-goto-word-0 :which-key "(w)ord")
+      "r" '(:ignore t :which-key "bookma(r)k")
+      "rs" '(bookmark-set :which-key "bookmark (s)et")
+      "rj" '(bookmark-jump :which-key "bookmark (j)ump")
+      "rd" '(bookmark-delete :which-key "bookmark (d)elete")
+      "b" '(:ignore t :which-key "edit (b)uffer")
+      "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
+      "bf"  '(fill-buffer :which-key "(f)ill buffer")
+      "bi"  '((lambda () (interactive)
+                (indent-region (point-min) (point-max)))
+              :which-key "(i)ndent buffer")
+      "by" '(simpleclip-copy :which-key "clipboard (y)ank")
+      "bs" '(insert-snake :which-key "insert (s)nake")
+      "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
+      "f" '(hydra-jump-files/body :which-key "edit (f)iles") 
+      "s"  '(shell-command :which-key "(s)hell command")
+      "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
+      "tt" '(load-theme :which-key "choose (t)heme")
+      "ts" '(tab-switch :which-key "(s)witch tab")
+      "td" '(tab-duplicate :which-key "tab (d)uplicate")
+      "tn" '(tab-new :which-key "(n)ew tab")
+      "tc" '(tab-close :which-key "(c)lose tab")
+      "th" '(tab-previous :which-key "move to left tab")
+      "tl" '(tab-next :which-key "move to right tab")
+      "tr" '(tab-rename :which-key "(r)ename tab")
+      "g" '(magit-status :which-key "Ma(g)it status")
+      "d" '(dired-jump :which-key "(d)ired jump")
+      "m" '(mu4e :which-key "(m)u4e")
+      "w" '(:ignore t :which-key "(w)indows related")
+      "wz" '(toggle-zoom-pane :which-key "Zoom toggle")
+      "wu" '(winner-undo :which-key "Winner (u)ndo")
+      "wr" '(winner-redo :which-key "Winner (r)edo")))
 
-(use-package better-jumper
-  :after (evil god-mode)
-  :config
-  (better-jumper-mode +1)
+  (use-package better-jumper
+    :after (evil god-mode)
+    :config
+    (better-jumper-mode +1)
                                         ; TODO: Fix these bindings and/or check more documentation
                                         ; Currently these are not working as expected
-  (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
-  (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
-  (define-key evil-motion-state-map (kbd "C-u")
-    'better-jumper-jump-forward)
-  (define-key evil-motion-state-map (kbd "C-o")
-    'better-jumper-jump-backward))
+    (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
+    (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
+    (define-key evil-motion-state-map (kbd "C-u")
+      'better-jumper-jump-forward)
+    (define-key evil-motion-state-map (kbd "C-o")
+      'better-jumper-jump-backward))
 
 (use-package god-mode
   :config
@@ -365,13 +378,13 @@
 (use-package doom-themes
   :init (load-theme 'doom-gruvbox t))
 
-					;(use-package tao-theme
-					;  :init (load-theme 'tao-ying t))
+;(use-package tao-theme
+;  :init (load-theme 'tao-ying t))
 
-					;(use-package kaolin-themes
-					;  :config
-					;  (load-theme 'kaolin-valley-dark t)
-					;  (kaolin-treemacs-theme))
+;(use-package kaolin-themes
+;  :config
+;  (load-theme 'kaolin-valley-dark t)
+;  (kaolin-treemacs-theme))
 
 (use-package anzu)
 
@@ -1345,8 +1358,8 @@
 (use-package dired-open
   :commands (dired dired-jump)
   :config
-					; Doesn't work as expected!
-					;(add-to-list 'dired-open-functions #'dired-open-xdg t)
+                                        ; Doesn't work as expected!
+                                        ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
   (setq dired-open-extensions '(("png" . "feh")
                                 ("mkv" . "mpv"))))
 
