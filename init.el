@@ -113,6 +113,7 @@
 (set-fringe-mode 10)               ; Give some breathing room
 
 (menu-bar-mode -1)                 ; Disable the menu bar
+(setq make-backup-files nil)
 (winner-mode 1)                    ; Enable winner mode
 (setq winner-dont-bind-my-keys t)
 
@@ -286,7 +287,7 @@
     "by" '(simpleclip-copy :which-key "clipboard (y)ank")
     "bs" '(insert-snake :which-key "insert (s)nake")
     "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
-    "f" '(hydra-jump-files/body :which-key "edit (f)iles") 
+    "f" '(hydra-jump-files/body :which-key "edit (f)iles")
     "s"  '(shell-command :which-key "(s)hell command")
     "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
     "tt" '(load-theme :which-key "choose (t)heme")
