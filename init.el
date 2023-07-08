@@ -295,7 +295,7 @@
     "rj" '(bookmark-jump :which-key "bookmark (j)ump")
     "rd" '(bookmark-delete :which-key "bookmark (d)elete")
     "b" '(:ignore t :which-key "edit (b)uffer")
-    "bf"  '(fill-buffer :which-key "(f)ill buffer")
+    "bf"  '(fill-paragraph :which-key "(f)ill paragraph")
     "bi"  '((lambda () (interactive)
               (indent-region (point-min) (point-max)))
             :which-key "(i)ndent buffer")
