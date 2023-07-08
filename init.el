@@ -279,7 +279,7 @@
     "rd" '(bookmark-delete :which-key "bookmark (d)elete")
     "b" '(:ignore t :which-key "edit (b)uffer")
     "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
-    "bf"  '(fill-buffer :which-key "(f)ill buffer")
+    "bf"  '(fill-paragraph :which-key "(f)ill paragraph")
     "bi"  '((lambda () (interactive)
               (indent-region (point-min) (point-max)))
             :which-key "(i)ndent buffer")
