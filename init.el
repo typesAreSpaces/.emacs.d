@@ -265,6 +265,9 @@
       (setq mode-line-misc-info "[\ueb81]")
       (put 'is-pane-zoomed 'state t))))
 
+(define-key (current-global-map) (kbd "C-w") nil)
+(define-key (current-global-map) (kbd "C-w z") 'toggle-zoom-pane)
+
 (defun persp-exit ()
   (interactive)
   (prog1
