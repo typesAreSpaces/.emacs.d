@@ -222,7 +222,7 @@
                                      "Consolas"))
                             (when (member font-family (font-family-list))
                               (throw 'break font-family)))))
-           (font (when font-family (format "%s-14" font-family))))
+           (font (when font-family (format "%s-18" font-family))))
       (when font
         (add-to-list 'default-frame-alist (cons 'font font))
         (set-frame-font font t t)))))
@@ -1090,8 +1090,16 @@
           '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "-cd" "%f"))
     (setq lsp-latex-forward-search-after t)
     (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable "/Applications/Skim.app/Contents/SharedSupport/displayline")
-    (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
+    (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/sioyek")
+    (setq lsp-latex-forward-search-args
+          '( "--reuse-window"
+            "--inverse-search"
+            "/opt/homebrew/bin/emacsclient -s jose --no-wait +%2 \"%1\""
+            "--forward-search-file"
+            "%f"
+            "--forward-search-line"
+            "%l"
+            "%p"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
