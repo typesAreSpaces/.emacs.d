@@ -724,7 +724,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "open -a Skim %s")
+          ("\\.pdf\\'" . "sioyek %s")
           ("\\.nb?\\'" . "Mathematica %s")))
 
   (setq org-ellipsis "⇓")
@@ -1369,7 +1369,7 @@
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
   (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
-                                       ("\\.pdf\\'" "zathura")))
+                                       ("\\.pdf\\'" "sioyek")))
   (when (not (version< emacs-version "26.3"))
     (evil-collection-define-key 'normal 'dired-mode-map
       "h" 'dired-single-up-directory

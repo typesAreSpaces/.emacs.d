@@ -940,7 +940,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
             (directory . emacs)
             ("\\.mm\\'" . default)
             ("\\.x?html?\\'" . default)
-            ("\\.pdf\\'" . "open -a Skim %s")
+            ("\\.pdf\\'" . "sioyek %s")
             ("\\.nb?\\'" . "Mathematica %s")))
 
     (setq org-ellipsis "⇓")
@@ -1951,7 +1951,7 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
     :custom ((dired-listing-switches "-agho --group-directories-first"))
     :config
     (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
-                                         ("\\.pdf\\'" "zathura")))
+                                         ("\\.pdf\\'" "sioyek")))
     (when (not (version< emacs-version "26.3"))
       (evil-collection-define-key 'normal 'dired-mode-map
         "h" 'dired-single-up-directory
