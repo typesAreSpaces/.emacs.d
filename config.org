@@ -1284,23 +1284,23 @@ Try these commands with =M-x=:
 [[https://emacs-lsp.github.io/dap-mode/][dap-mode]] is an excellent package for bringing rich debugging capabilities to Emacs via the [[https://microsoft.github.io/debug-adapter-protocol/][Debug Adapter Protocol]].  You should check out the [[https://emacs-lsp.github.io/dap-mode/page/configuration/][configuration docs]] to learn how to configure the debugger for your language.  Also make sure to check out the documentation for the debug adapter to see what configuration parameters are available to use for your debug templates!
 
 #+begin_src emacs-lisp
-  (when (not (version< emacs-version "26.1"))
-    (use-package dap-mode
-                                          ; :custom
-                                          ; (lsp-enable-dap-auto-configure nil)
-                                          ; :config
-                                          ; (dap-ui-mode 1)
-      :commands dap-debug
-      :config
-                                          ; Set up Node debugging
-      (require 'dap-node)
-      (dap-node-setup) ; Automatically installs Node debug adapter if needed
+  ;; (when (not (version< emacs-version "26.1"))
+  ;;   (use-package dap-mode
+  ;;                                         ; :custom
+  ;;                                         ; (lsp-enable-dap-auto-configure nil)
+  ;;                                         ; :config
+  ;;                                         ; (dap-ui-mode 1)
+  ;;     :commands dap-debug
+  ;;     :config
+  ;;                                         ; Set up Node debugging
+  ;;     (require 'dap-node)
+  ;;     (dap-node-setup) ; Automatically installs Node debug adapter if needed
 
-                                          ; Bind `C-c l d` to `dap-hydra` for easy access
-      (general-define-key
-       :keymaps 'lsp-mode-map
-       :prefix lsp-keymap-prefix
-       "d" '(dap-hydra t :wk "debugger"))))
+  ;;                                         ; Bind `C-c l d` to `dap-hydra` for easy access
+  ;;     (general-define-key
+  ;;      :keymaps 'lsp-mode-map
+  ;;      :prefix lsp-keymap-prefix
+  ;;      "d" '(dap-hydra t :wk "debugger"))))
 #+end_src
 
 *** TypeScript
