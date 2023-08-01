@@ -1043,23 +1043,23 @@
   (use-package lsp-treemacs
     :after lsp))
 
-(when (not (version< emacs-version "26.1"))
-  (use-package dap-mode
-                                        ; :custom
-                                        ; (lsp-enable-dap-auto-configure nil)
-                                        ; :config
-                                        ; (dap-ui-mode 1)
-    :commands dap-debug
-    :config
-                                        ; Set up Node debugging
-    (require 'dap-node)
-    (dap-node-setup) ; Automatically installs Node debug adapter if needed
+;; (when (not (version< emacs-version "26.1"))
+;;   (use-package dap-mode
+;;                                         ; :custom
+;;                                         ; (lsp-enable-dap-auto-configure nil)
+;;                                         ; :config
+;;                                         ; (dap-ui-mode 1)
+;;     :commands dap-debug
+;;     :config
+;;                                         ; Set up Node debugging
+;;     (require 'dap-node)
+;;     (dap-node-setup) ; Automatically installs Node debug adapter if needed
 
-                                        ; Bind `C-c l d` to `dap-hydra` for easy access
-    (general-define-key
-     :keymaps 'lsp-mode-map
-     :prefix lsp-keymap-prefix
-     "d" '(dap-hydra t :wk "debugger"))))
+;;                                         ; Bind `C-c l d` to `dap-hydra` for easy access
+;;     (general-define-key
+;;      :keymaps 'lsp-mode-map
+;;      :prefix lsp-keymap-prefix
+;;      "d" '(dap-hydra t :wk "debugger"))))
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
