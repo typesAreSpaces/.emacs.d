@@ -217,19 +217,19 @@
                     :foreground "white" :distant-foreground "gray50"
                     :height 1.0 :box nil)
 
-;; (set-face-attribute 'tab-line nil ;; background behind tabs
-;;                     :background "gray40"
-;;                     :foreground "gray60" :distant-foreground "gray50"
-;;                     :height 1.0 :box nil)
-;; (set-face-attribute 'tab-line-tab nil $$ active tab in another window
-;;                     :inherit 'tab-line
-;;                     :foreground "gray70" :background "gray90" :box nil)
+(set-face-attribute 'tab-line nil ;; background behind tabs
+                    :background "gray40"
+                    :foreground "gray60" :distant-foreground "gray50"
+                    :height 1.0 :box nil)
+;;(set-face-attribute 'tab-line-tab nil ;; active tab in another window
+;;                    :inherit 'tab-line
+;;                    :foreground "gray70" :background "gray90" :box nil)
 ;; (set-face-attribute 'tab-line-tab-current nil ;; active tab in current window
 ;;                     :background "#b34cb3" :foreground "white" :box nil)
-;; (set-face-attribute 'tab-line-tab-inactive nil ;; inactive tab
-;;                     :background "gray60" :foreground "black" :box nil)
-;; (set-face-attribute 'tab-line-highlight nil ;; mouseover
-;;                     :background "white" :foreground 'unspecified)
+;;(set-face-attribute 'tab-line-tab-inactive nil ;; inactive tab
+;;                    :background "gray60" :foreground "black" :box nil)
+;;(set-face-attribute 'tab-line-highlight nil ;; mouseover
+;;                    :background "white" :foreground 'unspecified)
 
 (defun frame-font-setup
     (&rest ...)
@@ -765,23 +765,23 @@
           ))
 
   (define-key org-mode-map (kbd "C-c d")
-    (lambda () (interactive) (org-todo "MOVED")))
+              (lambda () (interactive) (org-todo "MOVED")))
   (define-key org-mode-map (kbd "C-c c")
-    (lambda () (interactive) (org-todo "COMPLETED")))
+              (lambda () (interactive) (org-todo "COMPLETED")))
   (define-key org-mode-map (kbd "C-c t")
-    (lambda () (interactive) (org-todo "TODO")))
+              (lambda () (interactive) (org-todo "TODO")))
   (define-key org-mode-map (kbd "C-c k")
-    (lambda () (interactive) (org-todo "CANC")))
+              (lambda () (interactive) (org-todo "CANC")))
   (define-key org-mode-map (kbd "C-c i")
-    (lambda () (interactive) (org-todo "IDEA")))
+              (lambda () (interactive) (org-todo "IDEA")))
   (define-key org-mode-map (kbd "C-c o")
-    (lambda () (interactive) (org-todo "OK")))
+              (lambda () (interactive) (org-todo "OK")))
   (define-key org-mode-map (kbd "C-c C-<return>")
-    'org-meta-return)
+              'org-meta-return)
   (define-key org-mode-map (kbd "C-c RET")
-    'org-meta-return)
+              'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
-    (lambda () (interactive) (org-sort-buffer)))
+              (lambda () (interactive) (org-sort-buffer)))
 
   (efs/org-font-setup))
 
@@ -886,6 +886,13 @@
          (TeX-mode . efs/org-mode-visual-fill)
          (LaTeX-mode . efs/org-mode-visual-fill)
          (mu4e-main-mode . efs/org-mode-visual-fill)))
+
+(use-package olivetti
+  :custom
+  (olivetti-body-width 130))
+
+                                        ;(dolist (f '(org-mode markdown-mode TeX-mode LaTeX-mode mu4e-main-mode))
+                                        ;  (add-hook f #'olivetti-mode))
 
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
@@ -1192,10 +1199,10 @@
   :config
   (setq parinfer-extensions
         '(defaults       ; should be included.
-           pretty-parens  ; different paren styles for different modes.
-           evil           ; If you use Evil.
-           smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-           smart-yank)))  ; Yank behavior depend on mode.
+          pretty-parens  ; different paren styles for different modes.
+          evil           ; If you use Evil.
+          smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+          smart-yank)))  ; Yank behavior depend on mode.
 
 (efs/leader-keys
   "tp" 'parinfer-toggle-mode)
