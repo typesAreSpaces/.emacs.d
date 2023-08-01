@@ -27,16 +27,11 @@
 ** Notes
  - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Notes
 * MaxDiff project
-** Code
+** Code (CAXDInteporlator)
  - path :: ~/Documents/GithubProjects/AXDInterpolator/extension
+** Code (AXDInterpolator)
+ - path :: ~/Documents/GithubProjects/AXDInterpolator/original
+** Code (z3-interp-plus)
+ - path :: ~/Documents/GithubProjects/z3-interp-plus
 ** Discussion
  - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Side-Projects/MaxDiff
-* TA CS 357
-** Grading
- - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Semesters/2023/Spring/TA-CS-357/Grading
-** Materials repo
- - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Semesters/2023/Spring/TA-CS-357/cs357-ta-materials
-** Office hours
- - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Semesters/2023/Spring/TA-CS-357/Meetings/office_hours
-** Recitations
- - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Semesters/2023/Spring/TA-CS-357/Presentations/recitations
