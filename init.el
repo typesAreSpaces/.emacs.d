@@ -197,19 +197,19 @@
                     :foreground "white" :distant-foreground "gray50"
                     :height 1.0 :box nil)
 
-;; (set-face-attribute 'tab-line nil ;; background behind tabs
-;;                     :background "gray40"
-;;                     :foreground "gray60" :distant-foreground "gray50"
-;;                     :height 1.0 :box nil)
-;; (set-face-attribute 'tab-line-tab nil $$ active tab in another window
-;;                     :inherit 'tab-line
-;;                     :foreground "gray70" :background "gray90" :box nil)
+(set-face-attribute 'tab-line nil ;; background behind tabs
+                    :background "gray40"
+                    :foreground "gray60" :distant-foreground "gray50"
+                    :height 1.0 :box nil)
+;;(set-face-attribute 'tab-line-tab nil ;; active tab in another window
+;;                    :inherit 'tab-line
+;;                    :foreground "gray70" :background "gray90" :box nil)
 ;; (set-face-attribute 'tab-line-tab-current nil ;; active tab in current window
 ;;                     :background "#b34cb3" :foreground "white" :box nil)
-;; (set-face-attribute 'tab-line-tab-inactive nil ;; inactive tab
-;;                     :background "gray60" :foreground "black" :box nil)
-;; (set-face-attribute 'tab-line-highlight nil ;; mouseover
-;;                     :background "white" :foreground 'unspecified)
+;;(set-face-attribute 'tab-line-tab-inactive nil ;; inactive tab
+;;                    :background "gray60" :foreground "black" :box nil)
+;;(set-face-attribute 'tab-line-highlight nil ;; mouseover
+;;                    :background "white" :foreground 'unspecified)
 
 (defun frame-font-setup
     (&rest ...)
@@ -222,7 +222,7 @@
                                      "Consolas"))
                             (when (member font-family (font-family-list))
                               (throw 'break font-family)))))
-           (font (when font-family (format "%s-14" font-family))))
+           (font (when font-family (format "%s-18" font-family))))
       (when font
         (add-to-list 'default-frame-alist (cons 'font font))
         (set-frame-font font t t)))))
@@ -314,9 +314,9 @@
   (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
   (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-u")
-    'better-jumper-jump-forward)
+              'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-o")
-    'better-jumper-jump-backward))
+              'better-jumper-jump-backward))
 
 (use-package god-mode
   :config
@@ -343,9 +343,9 @@
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g")
-    'evil-normal-state)
+              'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h")
-    'evil-delete-backward-char-and-join)
+              'evil-delete-backward-char-and-join)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
@@ -715,7 +715,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "open -a Skim %s")
+          ("\\.pdf\\'" . "sioyek %s")
           ("\\.nb?\\'" . "Mathematica %s")))
 
   (setq org-ellipsis "⇓")
@@ -792,23 +792,23 @@
           ))
 
   (define-key org-mode-map (kbd "C-c d")
-    (lambda () (interactive) (org-todo "MOVED")))
+              (lambda () (interactive) (org-todo "MOVED")))
   (define-key org-mode-map (kbd "C-c c")
-    (lambda () (interactive) (org-todo "COMPLETED")))
+              (lambda () (interactive) (org-todo "COMPLETED")))
   (define-key org-mode-map (kbd "C-c t")
-    (lambda () (interactive) (org-todo "TODO")))
+              (lambda () (interactive) (org-todo "TODO")))
   (define-key org-mode-map (kbd "C-c k")
-    (lambda () (interactive) (org-todo "CANC")))
+              (lambda () (interactive) (org-todo "CANC")))
   (define-key org-mode-map (kbd "C-c i")
-    (lambda () (interactive) (org-todo "IDEA")))
+              (lambda () (interactive) (org-todo "IDEA")))
   (define-key org-mode-map (kbd "C-c o")
-    (lambda () (interactive) (org-todo "OK")))
+              (lambda () (interactive) (org-todo "OK")))
   (define-key org-mode-map (kbd "C-c C-<return>")
-    'org-meta-return)
+              'org-meta-return)
   (define-key org-mode-map (kbd "C-c RET")
-    'org-meta-return)
+              'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
-    (lambda () (interactive) (org-sort-buffer)))
+              (lambda () (interactive) (org-sort-buffer)))
 
   (efs/org-font-setup))
 
@@ -913,6 +913,13 @@
          (TeX-mode . efs/org-mode-visual-fill)
          (LaTeX-mode . efs/org-mode-visual-fill)
          (mu4e-main-mode . efs/org-mode-visual-fill)))
+
+(use-package olivetti
+  :custom
+  (olivetti-body-width 130))
+
+                                        ;(dolist (f '(org-mode markdown-mode TeX-mode LaTeX-mode mu4e-main-mode))
+                                        ;  (add-hook f #'olivetti-mode))
 
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
@@ -1079,8 +1086,16 @@
           '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "-cd" "%f"))
     (setq lsp-latex-forward-search-after t)
     (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable "/Applications/Skim.app/Contents/SharedSupport/displayline")
-    (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
+    (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/sioyek")
+    (setq lsp-latex-forward-search-args
+          '( "--reuse-window"
+            "--inverse-search"
+            "/opt/homebrew/bin/emacsclient -s jose --no-wait +%2 \"%1\""
+            "--forward-search-file"
+            "%f"
+            "--forward-search-line"
+            "%l"
+            "%p"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
@@ -1223,10 +1238,10 @@
   :config
   (setq parinfer-extensions
         '(defaults       ; should be included.
-           pretty-parens  ; different paren styles for different modes.
-           evil           ; If you use Evil.
-           smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-           smart-yank)))  ; Yank behavior depend on mode.
+          pretty-parens  ; different paren styles for different modes.
+          evil           ; If you use Evil.
+          smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+          smart-yank)))  ; Yank behavior depend on mode.
 
 (efs/leader-keys
   "tp" 'parinfer-toggle-mode)
@@ -1341,7 +1356,11 @@
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
   (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
-                                       ("\\.pdf\\'" "zathura"))))
+                                       ("\\.pdf\\'" "sioyek")))
+  (when (not (version< emacs-version "26.3"))
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "h" 'dired-single-up-directory
+      "l" 'dired-single-buffer)))
 
 (put 'dired-find-alternate-file 'disabled nil)
 
