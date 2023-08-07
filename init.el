@@ -91,6 +91,10 @@
 
 (defvar research-tasks-mail
   (concat phd-thesis-org-files-dir "/research_tasks.org"))
+(defvar dissertation-tasks-mail
+  (concat phd-thesis-org-files-dir "/dissertation_tasks.org"))
+(defvar graduation-logistics-tasks-mail
+  (concat phd-thesis-org-files-dir "/graduation_logistics.org"))
 (defvar lunch-tasks-mail
   (concat phd-thesis-org-files-dir "/lunch_tasks.org"))
 (defvar side-tasks-mail
@@ -769,6 +773,14 @@
   (setq org-capture-templates
         `(
           ("e" "Email Capture")
+          ("ed" "Dissertation Tasks" entry
+           (file+olp dissertation-tasks-mail "EMAIL")
+           "** TODO Check this email %a"
+           :immediate-finish t)
+          ("eg" "Graduation Logistics" entry
+           (file+olp graduation-logistics-tasks-mail "EMAIL")
+           "** TODO Check this email %a"
+           :immediate-finish t)
           ("er" "Research Tasks" entry
            (file+olp research-tasks-mail "EMAIL")
            "** TODO Check this email %a"
