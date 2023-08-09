@@ -576,16 +576,6 @@
   (let ((consult-project-function (lambda (x) "./")))
     (consult-find)))
 
-(when (not (version< emacs-version "27.1"))
-  (use-package citar
-    :bind (("C-c b" . citar-insert-citation)
-           :map minibuffer-local-map
-           ("M-b" . citar-insert-preset))
-    :custom
-    (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
-                          ,(concat maxdiff-write-ups-dir "/references.bib")
-                          ,(concat phd-thesis-write-ups-dir "/references.bib")))))
-
 (use-package helpful
   :commands (helpful-callable helpful-variable helpful-command helpful-key)
   :custom
@@ -1113,6 +1103,16 @@
            (lsp-latex-forward-search))
          :which-key "Latex (f)orward search"))
 
+(when (not (version< emacs-version "27.1"))
+  (use-package citar
+    :bind (("C-c b" . citar-insert-citation)
+           :map minibuffer-local-map
+           ("M-b" . citar-insert-preset))
+    :custom
+    (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
+                          ,(concat maxdiff-write-ups-dir "/references.bib")
+                          ,(concat phd-thesis-write-ups-dir "/references.bib")))))
+
 (use-package typst-mode
   :straight
   (:type git
@@ -1527,3 +1527,9 @@
        (expand-file-name
         "scripts/mu4e-view-save-all-attachments.el"
         user-emacs-directory)))))
+
+(use-package jinx
+  :config
+  (add-to-list 'vertico-multiform-categories
+               '(jinx grid (vertico-grid-annotate . 20)))
+  (vertico-multiform-mode 1))
