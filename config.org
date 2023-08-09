@@ -776,20 +776,6 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
       (consult-find)))
 #+end_src
 
-** Citar
-
-#+begin_src emacs-lisp
-  (when (not (version< emacs-version "27.1"))
-    (use-package citar
-      :bind (("C-c b" . citar-insert-citation)
-             :map minibuffer-local-map
-             ("M-b" . citar-insert-preset))
-      :custom
-      (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
-                            ,(concat maxdiff-write-ups-dir "/references.bib")
-                            ,(concat phd-thesis-write-ups-dir "/references.bib")))))
-#+end_src
-
 ** Helpful Help Commands
 
 [[https://github.com/Wilfred/helpful][Helpful]] adds a lot of very helpful (get it?) information to Emacs' =describe-= command buffers.  For example, if you use =describe-function=, you will not only get the documentation about the function, you will also see the source code of the function and where it gets used in other places in the Emacs configuration.  It is very useful for figuring out how things work in Emacs.
@@ -1513,6 +1499,20 @@ Use `CMD + shift + click` on a pdf section to back forward.
            :which-key "Latex (f)orward search"))
 #+end_src
 
+**** Citar
+
+#+begin_src emacs-lisp
+  (when (not (version< emacs-version "27.1"))
+    (use-package citar
+      :bind (("C-c b" . citar-insert-citation)
+             :map minibuffer-local-map
+             ("M-b" . citar-insert-preset))
+      :custom
+      (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
+                            ,(concat maxdiff-write-ups-dir "/references.bib")
+                            ,(concat phd-thesis-write-ups-dir "/references.bib")))))
+#+end_src
+
 *** Typst
 
 #+begin_src emacs-lisp
@@ -2215,4 +2215,14 @@ mu4e comes included with mu. Search the path your package manager used to instal
          (expand-file-name
           "scripts/mu4e-view-save-all-attachments.el"
           user-emacs-directory)))))
+#+end_src
+
+** Spell checker
+
+#+begin_src emacs-lisp
+  (use-package jinx
+    :config
+    (add-to-list 'vertico-multiform-categories
+                 '(jinx grid (vertico-grid-annotate . 20)))
+    (vertico-multiform-mode 1))
 #+end_src
