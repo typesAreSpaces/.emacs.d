@@ -472,7 +472,8 @@
                 ("DEL" . vertico-directory-delete-char)
                 ("C-h" . vertico-directory-delete-word))
     :init
-    (vertico-mode)))
+    (vertico-mode)
+    (vertico-multiform-mode)))
 
 (when (not (version< emacs-version "26.1"))
   (use-package orderless

@@ -600,7 +600,8 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
                   ("DEL" . vertico-directory-delete-char)
                   ("C-h" . vertico-directory-delete-word))
       :init
-      (vertico-mode)))
+      (vertico-mode)
+      (vertico-multiform-mode)))
 #+end_src
 
 ** Orderless
@@ -1132,7 +1133,7 @@ We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]
 
 *** Olivetti
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package olivetti
     :custom
     (olivetti-body-width 130))
