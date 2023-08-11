@@ -600,7 +600,8 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
                   ("DEL" . vertico-directory-delete-char)
                   ("C-h" . vertico-directory-delete-word))
       :init
-      (vertico-mode)))
+      (vertico-mode)
+      (vertico-multiform-mode)))
 #+end_src
 
 ** Orderless
@@ -1132,7 +1133,7 @@ We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]
 
 *** Olivetti
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (use-package olivetti
     :custom
     (olivetti-body-width 130))
@@ -1257,7 +1258,11 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 #+begin_src emacs-lisp
   (when (fboundp 'module-load)
     (use-package tree-sitter
+      :commands (treesit-install-language-grammar nf/treesit-install-all-languages)
       :hook ((latex-mode python-mode rustic-mode) . tree-sitter-hl-mode)
+      :init
+      (setq treesit-language-source-alist
+            '((latex . ("https://github.com/latex-lsp/tree-sitter-latex"))))
       :config
       (add-to-list 'tree-sitter-major-mode-language-alist
                    '(rustic-mode . rust))
@@ -1278,7 +1283,16 @@ The =which-key= integration adds helpful descriptions of the various keys so you
       (add-to-list 'tree-sitter-major-mode-language-alist
                    '(python-mode . python))
       (add-to-list 'tree-sitter-major-mode-language-alist
-                   '(typescript-mode . typescript))))
+                   '(typescript-mode . typescript))
+      (defun nf/treesit-install-all-languages ()
+        "Install all languages specified by `treesit-language-source-alist'."
+        (interactive)
+        (let ((languages (mapcar 'car treesit-language-source-alist)))
+          (dolist (lang languages)
+            (treesit-install-language-grammar lang)
+            (message "`%s' parser was installed." lang)
+
+            (sit-for 0.75))))))
 
   (when (fboundp 'module-load)
     (use-package tree-sitter-langs
