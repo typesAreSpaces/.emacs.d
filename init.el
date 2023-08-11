@@ -1001,7 +1001,11 @@
 
 (when (fboundp 'module-load)
   (use-package tree-sitter
+    :commands (treesit-install-language-grammar nf/treesit-install-all-languages)
     :hook ((latex-mode python-mode rustic-mode) . tree-sitter-hl-mode)
+    :init
+    (setq treesit-language-source-alist
+          '((latex . ("https://github.com/latex-lsp/tree-sitter-latex"))))
     :config
     (add-to-list 'tree-sitter-major-mode-language-alist
                  '(rustic-mode . rust))
@@ -1022,7 +1026,16 @@
     (add-to-list 'tree-sitter-major-mode-language-alist
                  '(python-mode . python))
     (add-to-list 'tree-sitter-major-mode-language-alist
-                 '(typescript-mode . typescript))))
+                 '(typescript-mode . typescript))
+    (defun nf/treesit-install-all-languages ()
+      "Install all languages specified by `treesit-language-source-alist'."
+      (interactive)
+      (let ((languages (mapcar 'car treesit-language-source-alist)))
+        (dolist (lang languages)
+          (treesit-install-language-grammar lang)
+          (message "`%s' parser was installed." lang)
+
+          (sit-for 0.75))))))
 
 (when (fboundp 'module-load)
   (use-package tree-sitter-langs
