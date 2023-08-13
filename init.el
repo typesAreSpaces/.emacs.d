@@ -953,6 +953,11 @@
     :init
     (setq lsp-keymap-prefix "C-l")
     :config
+    (setq lsp-completion-provider :none)
+    (defun corfu-lsp-setup ()
+      (setq-local completion-styles '(orderless)
+                  completion-category-defaults nil))
+    (add-hook 'lsp-mode-hook #'corfu-lsp-setup)
     (lsp-enable-which-key-integration t)))
 
 (when (not (version< emacs-version "26.1"))
@@ -1138,10 +1143,10 @@
   :hook (python-mode . lsp-deferred)
   :custom
   (python-shell-interpreter "python3")
-  (dap-python-executable "python3")
-  (dap-python-debugger 'debugpy)
+  ;(dap-python-executable "python3")
+  ;(dap-python-debugger 'debugpy)
   :config
-  (require 'dap-python)
+  ;(require 'dap-python)
   (setq python-indent-offset 2)
   (setq python-indent 2)
   (add-hook 'python-mode-hook
@@ -1233,20 +1238,33 @@
 (efs/leader-keys
   "tp" 'parinfer-toggle-mode)
 
-(use-package company
-  :after lsp-mode
-  :hook (lsp-mode . company-mode)
-  :bind (:map company-active-map
-              ("<tab>" . company-complete-selection))
-  (:map lsp-mode-map
-        ("<tab>" . company-indent-or-complete-common))
+(use-package corfu
+  :after orderless
+  ;; Optional customizations
   :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0))
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  ;; (corfu-separator ?\s)          ;; Orderless field separator
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  (corfu-scroll-margin 5)        ;; Use scroll margin
+  (corfu-auto-delay 0)
+  (corfu-auto-prefix 0)
+  (completion-styles '(basic))
 
-(when (not (version< emacs-version "26"))
-  (use-package company-box
-    :hook (company-mode . company-box-mode)))
+  ;; Enable Corfu only for certain modes.
+  ;; :hook ((prog-mode . corfu-mode)
+  ;;        (shell-mode . corfu-mode)
+  ;;        (eshell-mode . corfu-mode))
+
+  ;; Recommended: Enable Corfu globally.
+  ;; This is recommended since Dabbrev can be used globally (M-/).
+  ;; See also `global-corfu-modes'.
+  :init
+  (global-corfu-mode))
 
 (when (not (version< emacs-version "26.3"))
   (use-package magit
