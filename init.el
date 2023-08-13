@@ -1175,10 +1175,10 @@
   :hook (python-mode . lsp-deferred)
   :custom
   (python-shell-interpreter "python3")
-  ;(dap-python-executable "python3")
-  ;(dap-python-debugger 'debugpy)
+                                        ;(dap-python-executable "python3")
+                                        ;(dap-python-debugger 'debugpy)
   :config
-  ;(require 'dap-python)
+                                        ;(require 'dap-python)
   (setq python-indent-offset 2)
   (setq python-indent 2)
   (add-hook 'python-mode-hook
@@ -1285,7 +1285,7 @@
   (corfu-scroll-margin 5)        ;; Use scroll margin
   (corfu-auto-delay 0)
   (corfu-auto-prefix 0)
-  (completion-styles '(basic))
+                                        ;(completion-styles '(basic))
 
   ;; Enable Corfu only for certain modes.
   ;; :hook ((prog-mode . corfu-mode)
