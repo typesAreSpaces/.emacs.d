@@ -1533,6 +1533,8 @@
             ("/unm/Prof. Kapur/Side projects/Seminars/Beihang University". ?b)
             ("/unm/Prof. Kapur/Side projects/MaxDiff Extension". ?m)
             ("/unm/TA Work/CS 357". ?c)
+            ("/unm/TA Work/CS 105 - Fall 2023". ?u)
+            ("/unm/TA Work/CS 561 - Fall 2023". ?o)
             ("/unm/You got a Package!". ?p)
             ("/unm/ProFellow Info". ?f)
             ("/unm/Archive". ?a)
