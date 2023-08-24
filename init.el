@@ -55,9 +55,9 @@
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
-(defvar ta-org-files-dir
+(defvar curret-semester-dir
   (concat phd-thesis-dir
-          "/Documents/Semesters/2023/Spring/TA-CS-357/Org-Files"))
+          "/Documents/Semesters/2023/Fall"))
 (defvar maxdiff-org-files-dir
   (concat phd-thesis-dir
           "/Documents/Side-Projects/MaxDiff/Documents/org"))
@@ -82,8 +82,10 @@
   (concat phd-thesis-dir
           "/Documents/Seminars/BeihangUniversity-Fall2021"))
 (defvar seminar-org-files-dir (concat seminar-dir "/Org-Files"))
-(defvar ta-tasks-mail
-  (concat ta-org-files-dir "/current_tasks.org"))
+(defvar ta1-tasks-mail
+  (concat curret-semester-dir "/TA-CS-105/Org-Files/current_tasks.org"))
+(defvar ta2-tasks-mail
+  (concat curret-semester-dir "/TA-CS-561/Org-Files/current_tasks.org"))
 
 (defvar maxdiff-agenda-mail
   (concat maxdiff-org-files-dir "/agenda.org"))
@@ -793,8 +795,13 @@
            "%a"
            :prepend t
            :immediate-finish t)
-          ("et" "TA Tasks" entry
+          ("et" "TA Task")
+          ("etu" "CS 105 - Fall 2023" entry
            (file+olp ta-tasks-mail "EMAIL")
+           "** TODO Check this email %a"
+           :immediate-finish t)
+          ("eto" "CS 561 - Fall 2023" entry
+           (file+olp ta1-tasks-mail "EMAIL")
            "** TODO Check this email %a"
            :immediate-finish t)
           ("em" "MaxDiff Agenda" entry
