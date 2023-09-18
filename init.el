@@ -90,6 +90,8 @@
 (defvar maxdiff-agenda-mail
   (concat maxdiff-org-files-dir "/agenda.org"))
 
+(defvar agenda-mail
+  (concat phd-thesis-org-files-dir "/main.org"))
 (defvar research-tasks-mail
   (concat phd-thesis-org-files-dir "/research_tasks.org"))
 (defvar dissertation-tasks-mail
@@ -765,6 +767,10 @@
   (setq org-capture-templates
         `(
           ("e" "Email Capture")
+          ("ea" "Main Agenda" entry
+           (file+olp agenda-mail "EMAIL")
+           "** TODO Check this email %a"
+           :immediate-finish t)
           ("ed" "Dissertation Tasks" entry
            (file+olp dissertation-tasks-mail "EMAIL")
            "** TODO Check this email %a"
