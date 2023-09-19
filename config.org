@@ -133,6 +133,8 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
   (defvar maxdiff-agenda-mail
     (concat maxdiff-org-files-dir "/agenda.org"))
 
+  (defvar agenda-mail
+    (concat phd-thesis-org-files-dir "/main.org"))
   (defvar research-tasks-mail
     (concat phd-thesis-org-files-dir "/research_tasks.org"))
   (defvar dissertation-tasks-mail
@@ -933,6 +935,10 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (setq org-capture-templates
           `(
             ("e" "Email Capture")
+            ("ea" "Main Agenda" entry
+             (file+olp agenda-mail "EMAIL")
+             "** TODO Check this email %a"
+             :immediate-finish t)
             ("ed" "Dissertation Tasks" entry
              (file+olp dissertation-tasks-mail "EMAIL")
              "** TODO Check this email %a"
@@ -1015,7 +1021,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
                        (condition-case x
                            (org-sort-entries nil ?o)
                          (user-error)))))
-#+end_src
+          #+end_src
 
 Update org-latex-classes
 
