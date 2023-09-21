@@ -1746,7 +1746,9 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
     ;; This is recommended since Dabbrev can be used globally (M-/).
     ;; See also `global-corfu-modes'.
     :init
-    (global-corfu-mode))
+    (global-corfu-mode)
+    :config
+    (setq global-corfu-modes '(not latex-mode)))
 #+end_src
 
 ** Magit

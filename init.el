@@ -1327,7 +1327,9 @@
   ;; This is recommended since Dabbrev can be used globally (M-/).
   ;; See also `global-corfu-modes'.
   :init
-  (global-corfu-mode))
+  (global-corfu-mode)
+  :config
+  (setq global-corfu-modes '(not latex-mode)))
 
 (when (not (version< emacs-version "26.3"))
   (use-package magit
