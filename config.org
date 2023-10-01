@@ -772,6 +772,17 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
     "tf" '(hydra-text-scale/body :which-key "change (f)ont size"))
 #+end_src
 
+** Golden ratio
+
+#+begin_src emacs-lisp
+  (use-package golden-ratio
+    :config
+                                          ;(setq golden-ratio-auto-scale t)
+                                          ;(setq golden-ratio-max-width 80)
+                                          ;(golden-ratio-mode 1)
+    )
+#+end_src
+
 * Org Mode
 
 [[https://orgmode.org/][Org Mode]] is one of the hallmark features of Emacs.  It is a rich document editor, project planner, task and time tracker, blogging engine, and literate coding utility all wrapped up in one package.
@@ -992,7 +1003,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
                        (condition-case x
                            (org-sort-entries nil ?o)
                          (user-error)))))
-          #+end_src
+#+end_src
 
 Update org-latex-classes
 
@@ -1652,7 +1663,7 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
     :init
     (global-corfu-mode)
     :config
-    (setq global-corfu-modes '(not latex-mode)))
+    (setq global-corfu-modes '(not LaTeX-mode TeX-mode latex-mode)))
 #+end_src
 
 ** Magit
