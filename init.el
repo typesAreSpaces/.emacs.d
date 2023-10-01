@@ -651,6 +651,13 @@
 (efs/leader-keys
   "tf" '(hydra-text-scale/body :which-key "change (f)ont size"))
 
+(use-package golden-ratio
+  :config
+                                        ;(setq golden-ratio-auto-scale t)
+                                        ;(setq golden-ratio-max-width 80)
+                                        ;(golden-ratio-mode 1)
+  )
+
 (defun efs/org-font-setup ()
                                         ; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
@@ -1318,7 +1325,7 @@
   :init
   (global-corfu-mode)
   :config
-  (setq global-corfu-modes '(not latex-mode)))
+  (setq global-corfu-modes '(not LaTeX-mode TeX-mode latex-mode)))
 
 (when (not (version< emacs-version "26.3"))
   (use-package magit
