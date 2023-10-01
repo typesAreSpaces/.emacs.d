@@ -1,7 +1,8 @@
+!var/treemacs/persist.org
+
 history
 places
 projectile-bookmarks.eld
 elpa/*
 straight/*
 var/*
-!var/treemacs/persist.org
