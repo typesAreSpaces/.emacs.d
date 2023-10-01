@@ -1,4 +1,11 @@
-* QuadMod Seminar
+* Constructive certificates for generalized natural generators
+** Last results
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/constructive_simp_gen_nat_gen/curr_work
+** Report
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/constructive_simp_gen_nat_gen/report
+** Agenda
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Org-Files
+* QuadMod seminar
 ** Reports
  - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports
 ** Presentations
