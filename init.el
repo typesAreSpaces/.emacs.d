@@ -660,12 +660,9 @@
 (efs/leader-keys
   "tf" '(hydra-text-scale/body :which-key "change (f)ont size"))
 
-(use-package golden-ratio
+(use-package zoom
   :config
-                                        ;(setq golden-ratio-auto-scale t)
-                                        ;(setq golden-ratio-max-width 80)
-                                        ;(golden-ratio-mode 1)
-  )
+  (setq zoom-size '(0.618 . 0.618)))
 
 (defun efs/org-font-setup ()
                                         ; Replace list hyphen with dot
