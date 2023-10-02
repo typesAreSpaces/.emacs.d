@@ -809,15 +809,12 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
     "tf" '(hydra-text-scale/body :which-key "change (f)ont size"))
 #+end_src
 
-** Golden ratio
+** Zoom
 
 #+begin_src emacs-lisp
-  (use-package golden-ratio
+  (use-package zoom
     :config
-                                          ;(setq golden-ratio-auto-scale t)
-                                          ;(setq golden-ratio-max-width 80)
-                                          ;(golden-ratio-mode 1)
-    )
+    (setq zoom-size '(0.618 . 0.618)))
 #+end_src
 
 * Org Mode
