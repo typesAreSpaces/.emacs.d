@@ -1629,8 +1629,6 @@
     (setq message-citation-line-function 'message-insert-formatted-citation-line)
     (setq mu4e-headers-fields '((:flags . 5)
                                 (:human-date . 12)
-                                (:maildir . 12)
-                                (:mailing-list . 10)
                                 (:from . 22)
                                 (:subject)))
                                         ; Display
