@@ -1605,6 +1605,12 @@
     (setq mu4e-compose-signature "Best,\nJose")
     (setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
     (setq message-citation-line-function 'message-insert-formatted-citation-line)
+    (setq mu4e-headers-fields '((:flags . 5)
+                                (:human-date . 12)
+                                (:maildir . 12)
+                                (:mailing-list . 10)
+                                (:from . 22)
+                                (:subject)))
                                         ; Display
     (setq
      mu4e-view-show-addresses t
