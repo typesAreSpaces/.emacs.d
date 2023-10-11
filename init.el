@@ -174,7 +174,7 @@
   (use-package dashboard
     :ensure t
     :config
-                                        ;(setq dashboard-center-content t)
+                                        ; (setq dashboard-center-content t)
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
     (setq dashboard-set-navigator t)
@@ -188,10 +188,10 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-(setq tab-bar-show 1)                      ;; hide bar if <= 1 tabs open
-(setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
-(setq tab-bar-tab-hints t)                 ;; show tab numbers
-(setq tab-bar-new-tab-to 'rightmost)       ;; defines where to create a new tab
+(setq tab-bar-show 1)                      ; hide bar if <= 1 tabs open
+(setq tab-bar-new-tab-choice "*dashboard*"); buffer to show in new tabs
+(setq tab-bar-tab-hints t)                 ; show tab numbers
+(setq tab-bar-new-tab-to 'rightmost)       ; defines where to create a new tab
 (set-face-attribute 'tab-bar nil
                     :background "#282828"
                     :foreground "gray60" :distant-foreground "gray50"
@@ -205,23 +205,23 @@
                     :foreground "white" :distant-foreground "gray50"
                     :height 1.0 :box nil)
 
-(set-face-attribute 'tab-line nil ;; background behind tabs
+(set-face-attribute 'tab-line nil ; background behind tabs
                     :background "gray40"
                     :foreground "gray60" :distant-foreground "gray50"
                     :height 1.0 :box nil)
-;;(set-face-attribute 'tab-line-tab nil ;; active tab in another window
-;;                    :inherit 'tab-line
-;;                    :foreground "gray70" :background "gray90" :box nil)
-;; (set-face-attribute 'tab-line-tab-current nil ;; active tab in current window
-;;                     :background "#b34cb3" :foreground "white" :box nil)
-;;(set-face-attribute 'tab-line-tab-inactive nil ;; inactive tab
-;;                    :background "gray60" :foreground "black" :box nil)
-;;(set-face-attribute 'tab-line-highlight nil ;; mouseover
-;;                    :background "white" :foreground 'unspecified)
+                                        ; (set-face-attribute 'tab-line-tab nil ; active tab in another window
+                                        ;                    :inherit 'tab-line
+                                        ;                    :foreground "gray70" :background "gray90" :box nil)
+                                        ; (set-face-attribute 'tab-line-tab-current nil ; active tab in current window
+                                        ;                     :background "#b34cb3" :foreground "white" :box nil)
+                                        ; (set-face-attribute 'tab-line-tab-inactive nil ; inactive tab
+                                        ;                    :background "gray60" :foreground "black" :box nil)
+                                        ; (set-face-attribute 'tab-line-highlight nil ; mouseover
+                                        ;                    :background "white" :foreground 'unspecified)
 
 (defun frame-font-setup
     (&rest ...)
-  ;; (remove-hook 'focus-in-hook #'frame-font-setup)
+                                        ; (remove-hook 'focus-in-hook #'frame-font-setup)
   (unless (assoc 'font default-frame-alist)
     (let* ((font-family (catch 'break
                           (dolist (font-family
@@ -265,11 +265,11 @@
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key [(control x) (k)] 'kill-buffer)
 
-;; Unbind C-@ in order to make it a global-prefix for general
+                                        ; Unbind C-@ in order to make it a global-prefix for general
 (global-unset-key (kbd "C-SPC"))
 (global-unset-key (kbd "C-@"))
 
-(when (eq system-type 'darwin) ;; mac specific settings
+(when (eq system-type 'darwin) ; mac specific settings
   (setq mac-option-modifier 'super)
   (setq mac-command-modifier 'meta))
 
@@ -321,8 +321,6 @@
   :after (evil god-mode)
   :config
   (better-jumper-mode +1)
-                                        ; TODO: Fix these bindings and/or check more documentation
-                                        ; Currently these are not working as expected
   (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
   (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-u")
@@ -393,14 +391,6 @@
 (use-package doom-themes
   :init (load-theme 'doom-gruvbox t))
 
-;(use-package tao-theme
-;  :init (load-theme 'tao-ying t))
-
-;(use-package kaolin-themes
-;  :config
-;  (load-theme 'kaolin-valley-dark t)
-;  (kaolin-treemacs-theme))
-
 (use-package anzu)
 
 (use-package evil-anzu
@@ -429,29 +419,29 @@
 
 (when (not (version< emacs-version "27.1"))
   (use-package marginalia
-    ;; Either bind `marginalia-cycle` globally or only in the minibuffer
+                                        ; Either bind `marginalia-cycle` globally or only in the minibuffer
     :bind (("M-A" . marginalia-cycle)
            :map minibuffer-local-map
            ("M-A" . marginalia-cycle))
 
-    ;; The :init configuration is always executed (Not lazy!)
+                                        ; The :init configuration is always executed (Not lazy!)
     :init
-    ;; Must be in the :init section of use-package such that the mode gets
-    ;; enabled right away. Note that this forces loading the package.
+                                        ; Must be in the :init section of use-package such that the mode gets
+                                        ; enabled right away. Note that this forces loading the package.
     (marginalia-mode)))
 
 (when (not (version< emacs-version "26.1"))
   (use-package embark
     :ensure t
     :bind
-    (("C-." . embark-act)         ;; pick some comfortable binding
-     ("C-;" . embark-dwim)        ;; good alternative: M-.
-     ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+    (("C-." . embark-act)         ; pick some comfortable binding
+     ("C-;" . embark-dwim)        ; good alternative: M-.
+     ("C-h B" . embark-bindings)) ; alternative for `describe-bindings'
     :init
-    ;; Optionally replace the key help with a completing-read interface
+                                        ; Optionally replace the key help with a completing-read interface
     (setq prefix-help-command #'embark-prefix-help-command)
     :config
-    ;; Hide the mode line of the Embark live/completions buffers
+                                        ; Hide the mode line of the Embark live/completions buffers
     (require 'embark)
     (add-to-list 'display-buffer-alist
                  '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -483,9 +473,9 @@
   (use-package orderless
     :demand t
     :init
-    ;; Configure a custom style dispatcher (see the Consult wiki)
-    ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
-    ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+                                        ; Configure a custom style dispatcher (see the Consult wiki)
+                                        ; (setq orderless-style-dispatchers '(+orderless-dispatch)
+                                        ;       orderless-component-separator #'orderless-escapable-split-on-space)
     (setq completion-styles '(basic substring partial-completion orderless)
           completion-category-defaults nil
           completion-category-overrides '((file (styles partial-completion))))
@@ -572,9 +562,12 @@
                                         ; is 'any, such that any key triggers the preview.
                                         ; (setq consult-preview-key 'any)
                                         ; (setq consult-preview-key (kbd "M-."))
-                                        ; (setq consult-preview-key (list (kbd "<S-down>") (kbd "<S-up>")))
-                                        ; For some commands and buffer sources it is useful to configure the
-                                        ; :preview-key on a per-command basis using the `consult-customize' macro.
+                                        ; (setq consult-preview-key (list (kbd "<S-down>") (kbd
+                                        ;"<S-up>")))
+                                        ; For some commands and buffer sources it is useful to
+                                        ; configure the
+                                        ; :preview-key on a per-command basis using the
+                                        ;`consult-customize' macro.
     (consult-customize
      consult-theme
      :preview-key '(:debounce 0.2 any)
@@ -588,21 +581,27 @@
     (setq consult-narrow-key "<") ; (kbd "C-+")
 
                                         ; Optionally make narrowing help available in the minibuffer.
-                                        ; You may want to use `embark-prefix-help-command' or which-key instead.
-                                        ; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+                                        ; You may want to use `embark-prefix-help-command' or which-key
+                                        ;instead.
+                                        ; (define-key consult-narrow-map (vconcat consult-narrow-key
+                                        ;"?") #'consult-narrow-help)
 
-                                        ; By default `consult-project-function' uses `project-root' from project.el.
+                                        ; By default `consult-project-function' uses `project-root'
+                                        ;from project.el.
                                         ; Optionally configure a different project root function.
                                         ; There are multiple reasonable alternatives to chose from.
                                         ; 1. project.el (the default)
-                                        ; (setq consult-project-function #'consult--default-project--function)
+                                        ; (setq consult-project-function
+                                        ;#'consult--default-project--function)
                                         ; 2. projectile.el (projectile-project-root)
                                         ; (autoload 'projectile-project-root "projectile")
-                                        ; (setq consult-project-function (lambda (_) (projectile-project-root)))
+                                        ; (setq consult-project-function (lambda (_)
+                                        ; (projectile-project-root)))
                                         ; 3. vc.el (vc-root-dir)
                                         ; (setq consult-project-function (lambda (_) (vc-root-dir)))
                                         ; 4. locate-dominating-file
-                                        ; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+                                        ; (setq consult-project-function (lambda (_)
+                                        ; (locate-dominating-file "." ".git")))
     ))
 
 (defun consult-grep-from-here ()
@@ -947,9 +946,6 @@
   :custom
   (olivetti-body-width 130))
 
-                                        ;(dolist (f '(org-mode markdown-mode TeX-mode LaTeX-mode mu4e-main-mode))
-                                        ;  (add-hook f #'olivetti-mode))
-
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
                       (expand-file-name user-emacs-directory))
@@ -1080,23 +1076,23 @@
   (use-package lsp-treemacs
     :after lsp))
 
-;; (when (not (version< emacs-version "26.1"))
-;;   (use-package dap-mode
-;;                                         ; :custom
-;;                                         ; (lsp-enable-dap-auto-configure nil)
-;;                                         ; :config
-;;                                         ; (dap-ui-mode 1)
-;;     :commands dap-debug
-;;     :config
-;;                                         ; Set up Node debugging
-;;     (require 'dap-node)
-;;     (dap-node-setup) ; Automatically installs Node debug adapter if needed
+; (when (not (version< emacs-version "26.1"))
+;   (use-package dap-mode
+;                                         ; :custom
+;                                         ; (lsp-enable-dap-auto-configure nil)
+;                                         ; :config
+;                                         ; (dap-ui-mode 1)
+;     :commands dap-debug
+;     :config
+;                                         ; Set up Node debugging
+;     (require 'dap-node)
+;     (dap-node-setup) ; Automatically installs Node debug adapter if needed
 
-;;                                         ; Bind `C-c l d` to `dap-hydra` for easy access
-;;     (general-define-key
-;;      :keymaps 'lsp-mode-map
-;;      :prefix lsp-keymap-prefix
-;;      "d" '(dap-hydra t :wk "debugger"))))
+;                                         ; Bind `C-c l d` to `dap-hydra` for easy access
+;     (general-define-key
+;      :keymaps 'lsp-mode-map
+;      :prefix lsp-keymap-prefix
+;      "d" '(dap-hydra t :wk "debugger"))))
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
@@ -1169,6 +1165,7 @@
     (setq font-latex-fontify-script nil)))
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+
 (efs/leader-keys
   "l" '(:ignore t :which-key "(l)atex related")
   "lp" '((lambda () (interactive)
@@ -1202,10 +1199,10 @@
   :hook (python-mode . lsp-deferred)
   :custom
   (python-shell-interpreter "python3")
-                                        ;(dap-python-executable "python3")
-                                        ;(dap-python-debugger 'debugpy)
+                                        ; (dap-python-executable "python3")
+                                        ; (dap-python-debugger 'debugpy)
   :config
-                                        ;(require 'dap-python)
+                                        ; (require 'dap-python)
   (setq python-indent-offset 2)
   (setq python-indent 2)
   (add-hook 'python-mode-hook
@@ -1273,9 +1270,9 @@
   :config
   (setq haskell-program-name "/usr/bin/ghci")
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-  ;; Choose indentation mode (the latter requires haskell-mode >= 2.5):
+                                        ; Choose indentation mode (the latter requires haskell-mode >= 2.5):
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-  ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+                                        ; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
   )
 (use-package lsp-haskell)
 
@@ -1301,36 +1298,42 @@
   :after orderless
                                         ; Optional customizations
   :custom
-  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)                 ;; Enable auto completion
-  (corfu-separator ?\s)          ;; Orderless field separator
-                                        ; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-                                        ; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-                                        ; (corfu-preview-current nil)    ;; Disable current candidate preview
-                                        ; (corfu-preselect 'prompt)      ;; Preselect the prompt
-                                        ; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  (corfu-scroll-margin 5)        ;; Use scroll margin
+  (corfu-cycle t)                ; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ; Enable auto completion
+  (corfu-separator ?\s)          ; Orderless field separator
+                                        ; (corfu-quit-at-boundary nil)
+                                        ; Never quit at completion boundary
+                                        ; (corfu-quit-no-match nil)
+                                        ; Never quit, even if there is no match
+                                        ; (corfu-preview-current nil)
+                                        ; Disable current candidate preview
+                                        ; (corfu-preselect 'prompt)
+                                        ; Preselect the prompt
+                                        ; (corfu-on-exact-match nil)
+                                        ; Configure handling of exact matches
+  (corfu-scroll-margin 5)        ; Use scroll margin
   (corfu-auto-delay 0.2)
   (corfu-auto-prefix 3)
-                                        ;(completion-styles '(basic))
+                                        ; (completion-styles '(basic))
 
                                         ; Enable Corfu only for certain modes.
                                         ; :hook ((prog-mode . corfu-mode)
                                         ;        (shell-mode . corfu-mode)
                                         ;        (eshell-mode . corfu-mode))
 
-  ;; Recommended: Enable Corfu globally.
-  ;; This is recommended since Dabbrev can be used globally (M-/).
-  ;; See also `global-corfu-modes'.
+                                        ; Recommended: Enable Corfu globally.
+                                        ; This is recommended since Dabbrev can be used globally (M-/).
+                                        ; See also `global-corfu-modes'.
   :init
   (global-corfu-mode))
 
 (use-package cape
                                         ; Bind dedicated completion commands
                                         ; Alternative prefix keys: C-c p, M-p, M-+, ...
-                                        ;:bind (("C-c p p" . completion-at-point) ;; capf
-                                        ;       ("C-c p t" . complete-tag)        ;; etags
-                                        ;       ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
+                                        ;:bind (("C-c p p" . completion-at-point) ; capf
+                                        ;       ("C-c p t" . complete-tag)        ; etags
+                                        ;       ("C-c p d" . cape-dabbrev)        ; or
+                                        ; dabbrev-completion
                                         ;       ("C-c p h" . cape-history)
                                         ;       ("C-c p f" . cape-file)
                                         ;       ("C-c p k" . cape-keyword)
@@ -1345,30 +1348,35 @@
                                         ;       ("C-c p ^" . cape-tex)
                                         ;       ("C-c p &" . cape-sgml)
                                         ;       ("C-c p r" . cape-rfc1345))
-                                        ;:init
-  ;; Add to the global default value of `completion-at-point-functions' which is
-  ;; used by `completion-at-point'.  The order of the functions matters, the
-  ;; first function returning a result wins.  Note that the list of buffer-local
-  ;; completion functions takes precedence over the global list.
-                                        ;(add-to-list 'completion-at-point-functions #'cape-dabbrev)
-                                        ;(add-to-list 'completion-at-point-functions #'cape-file)
-                                        ;(add-to-list 'completion-at-point-functions #'cape-elisp-block)
-  ;;(add-to-list 'completion-at-point-functions #'cape-history)
-  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;;(add-to-list 'completion-at-point-functions #'cape-tex)
-  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
-  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
-  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
-  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
-  ;;(add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
-  ;;(add-to-list 'completion-at-point-functions #'cape-line)
+  :init
+                                        ; Add to the global default value of
+                                        ; `completion-at-point-functions' which is 
+                                        ; used by `completion-at-point'.  The order of the functions
+                                        ; matters, the
+                                        ; first function returning a result wins.  Note that the list
+                                        ; of buffer-local
+                                        ; completion functions takes precedence over the global list.
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+                                        ; (add-to-list 'completion-at-point-functions
+                                        ; #'cape-elisp-block)
+                                        ; (add-to-list 'completion-at-point-functions #'cape-history)
+                                        ; (add-to-list 'completion-at-point-functions #'cape-keyword)
+                                        ; (add-to-list 'completion-at-point-functions #'cape-tex)
+                                        ; (add-to-list 'completion-at-point-functions #'cape-sgml)
+                                        ; (add-to-list 'completion-at-point-functions #'cape-rfc1345)
+                                        ; (add-to-list 'completion-at-point-functions #'cape-abbrev)
+                                        ; (add-to-list 'completion-at-point-functions #'cape-dict)
+                                        ; (add-to-list 'completion-at-point-functions
+                                        ; #'cape-elisp-symbol)
+                                        ; (add-to-list 'completion-at-point-functions #'cape-line)
   )
 
 (use-package yasnippet-capf
   :after cape
   :config
   (add-to-list 'completion-at-point-functions #'yasnippet-capf)
-  (setq yasnippet-capf-lookup-by 'key))
+  (setq yasnippet-capf-lookup-by 'name))
 
 (when (not (version< emacs-version "26.3"))
   (use-package magit
@@ -1495,7 +1503,7 @@
   :commands (dired dired-jump)
   :config
                                         ; Doesn't work as expected!
-                                        ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
+                                        ; (add-to-list 'dired-open-functions #'dired-open-xdg t)
   (setq dired-open-extensions '(("png" . "feh")
                                 ("mkv" . "mpv"))))
 
@@ -1634,7 +1642,7 @@
             :vars '((user-mail-address  . "jose.castellanosjoo@cs.unm.edu")
                     (user-full-name     . "Jose Abel Castellanos Joo")
                     (mu4e-drafts-folder . "/cs-unm/Drafts")
-                                        ;(mu4e-sent-folder   . "/cs-unm/Sent")
+                                        ; (mu4e-sent-folder   . "/cs-unm/Sent")
                     (mu4e-refile-folder . "/cs-unm/Inbox")
                     (mu4e-trash-folder  . "/cs-unm/Trash")
                     (smtpmail-smtp-server . "snape.cs.unm.edu")
