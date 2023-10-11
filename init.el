@@ -326,9 +326,9 @@
   (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
   (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-u")
-              'better-jumper-jump-forward)
+    'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-o")
-              'better-jumper-jump-backward))
+    'better-jumper-jump-backward))
 
 (use-package god-mode
   :config
@@ -355,9 +355,9 @@
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g")
-              'evil-normal-state)
+    'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h")
-              'evil-delete-backward-char-and-join)
+    'evil-delete-backward-char-and-join)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
@@ -821,23 +821,23 @@
           ))
 
   (define-key org-mode-map (kbd "C-c d")
-              (lambda () (interactive) (org-todo "MOVED")))
+    (lambda () (interactive) (org-todo "MOVED")))
   (define-key org-mode-map (kbd "C-c c")
-              (lambda () (interactive) (org-todo "COMPLETED")))
+    (lambda () (interactive) (org-todo "COMPLETED")))
   (define-key org-mode-map (kbd "C-c t")
-              (lambda () (interactive) (org-todo "TODO")))
+    (lambda () (interactive) (org-todo "TODO")))
   (define-key org-mode-map (kbd "C-c k")
-              (lambda () (interactive) (org-todo "CANC")))
+    (lambda () (interactive) (org-todo "CANC")))
   (define-key org-mode-map (kbd "C-c i")
-              (lambda () (interactive) (org-todo "IDEA")))
+    (lambda () (interactive) (org-todo "IDEA")))
   (define-key org-mode-map (kbd "C-c o")
-              (lambda () (interactive) (org-todo "OK")))
+    (lambda () (interactive) (org-todo "OK")))
   (define-key org-mode-map (kbd "C-c C-<return>")
-              'org-meta-return)
+    'org-meta-return)
   (define-key org-mode-map (kbd "C-c RET")
-              'org-meta-return)
+    'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
-              (lambda () (interactive) (org-sort-buffer)))
+    (lambda () (interactive) (org-sort-buffer)))
 
   (efs/org-font-setup))
 
@@ -1138,13 +1138,13 @@
     (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/sioyek")
     (setq lsp-latex-forward-search-args
           '( "--reuse-window"
-            "--inverse-search"
-            "/opt/homebrew/bin/emacsclient -s jose --no-wait +%2 \"%1\""
-            "--forward-search-file"
-            "%f"
-            "--forward-search-line"
-            "%l"
-            "%p"))))
+             "--inverse-search"
+             "/opt/homebrew/bin/emacsclient -s jose --no-wait +%2 \"%1\""
+             "--forward-search-file"
+             "%f"
+             "--forward-search-line"
+             "%l"
+             "%p"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
@@ -1297,10 +1297,10 @@
   :config
   (setq parinfer-extensions
         '(defaults       ; should be included.
-          pretty-parens  ; different paren styles for different modes.
-          evil           ; If you use Evil.
-          smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-          smart-yank)))  ; Yank behavior depend on mode.
+           pretty-parens  ; different paren styles for different modes.
+           evil           ; If you use Evil.
+           smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+           smart-yank)))  ; Yank behavior depend on mode.
 
 (efs/leader-keys
   "tp" 'parinfer-toggle-mode)
