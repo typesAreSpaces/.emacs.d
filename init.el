@@ -984,13 +984,7 @@
 
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  (lsp-headerline-breadcrumb-mode)
-  (setf (alist-get
-         'styles
-         (alist-get
-          'lsp-capf
-          completion-category-defaults))
-        '(orderless)))
+  (lsp-headerline-breadcrumb-mode))
 
 (when (not (version< emacs-version "26.1"))
   (use-package lsp-mode
