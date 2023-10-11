@@ -1238,7 +1238,13 @@ The =which-key= integration adds helpful descriptions of the various keys so you
 #+begin_src emacs-lisp
   (defun efs/lsp-mode-setup ()
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-    (lsp-headerline-breadcrumb-mode))
+    (lsp-headerline-breadcrumb-mode)
+    (setf (alist-get
+           'styles
+           (alist-get
+            'lsp-capf
+            completion-category-defaults))
+          '(orderless)))
 
   (when (not (version< emacs-version "26.1"))
     (use-package lsp-mode
@@ -1672,6 +1678,15 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
   (use-package corfu
     :after orderless
                                           ; Optional customizations
+    :general 
+    (:keymaps 'corfu-map
+              :states 'insert
+              "C-n" #'corfu-next
+              "C-p" #'corfu-previous
+              "C-g" #'corfu-quit
+              "<return>" #'corfu-insert
+              "M-d" #'corfu-show-documentation
+              "M-l" #'corfu-show-location)
     :custom
     (corfu-cycle t)                ; Enable cycling for `corfu-next/previous'
     (corfu-auto t)                 ; Enable auto completion
@@ -1686,6 +1701,8 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
                                           ; Preselect the prompt
                                           ; (corfu-on-exact-match nil)
                                           ; Configure handling of exact matches
+    (corfu-min-width 80)
+    (corfu-max-width corfu-min-width) 
     (corfu-scroll-margin 5)        ; Use scroll margin
     (corfu-auto-delay 0.2)
     (corfu-auto-prefix 3)
@@ -1697,10 +1714,41 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
                                           ;        (eshell-mode . corfu-mode))
 
                                           ; Recommended: Enable Corfu globally.
-                                          ; This is recommended since Dabbrev can be used globally (M-/).
+                                          ; This is recommended since Dabbrev can be used
+                                          ; globally (M-/).
                                           ; See also `global-corfu-modes'.
     :init
     (global-corfu-mode))
+
+  (use-package kind-icon
+    :after corfu
+    :custom
+    (kind-icon-use-icons nil)
+                                          ; Have background color be the same as `corfu' face
+                                          ; background
+    (kind-icon-default-face 'corfu-default) 
+                                          ; Use midpoint color between foreground and background
+                                          ; colors
+                                          ; ("blended")?
+    (kind-icon-blend-background nil)  
+    (kind-icon-blend-frac 0.08)
+
+    ;; NOTE 2022-02-05: `kind-icon' depends `svg-lib' which creates a cache
+    ;; directory that defaults to the `user-emacs-directory'. Here, I change that
+    ;; directory to a location appropriate to `no-littering' conventions, a
+    ;; package which moves directories of other packages to sane locations.
+    (svg-lib-icons-dir (no-littering-expand-var-file-name "svg-lib/cache/")) ; Change cache dir
+    :config
+    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter) ; Enable `kind-icon'
+
+    ;; Add hook to reset cache so the icon colors match my theme
+    ;; NOTE 2022-02-05: This is a hook which resets the cache whenever I switch
+    ;; the theme using my custom defined command for switching themes. If I don't
+    ;; do this, then the backgound color will remain the same, meaning it will not
+    ;; match the background color corresponding to the current theme. Important
+    ;; since I have a light theme and dark theme I switch between. This has no
+    ;; function unless you use something similar
+    (add-hook 'kb/themes-hooks #'(lambda () (interactive) (kind-icon-reset-cache))))
 #+end_src
 
 ** Cape
