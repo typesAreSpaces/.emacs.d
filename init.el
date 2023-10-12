@@ -1326,8 +1326,11 @@
                                         ; This is recommended since Dabbrev can be used
                                         ; globally (M-/).
                                         ; See also `global-corfu-modes'.
+  :config
+  (setq corfu-popupinfo-delay 0.2)
   :init
-  (global-corfu-mode))
+  (global-corfu-mode)
+  (corfu-popupinfo-mode))
 
 (use-package kind-icon
   :after corfu
