@@ -979,6 +979,10 @@
 
 (load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
 
+(defun restart-yasnippet ()
+    (interactive)
+  (add-hook 'post-command-hook #'my-yas-try-expanding-auto-snippets))
+
 (use-package perspective
   :ensure t
   :bind (("C-x k" . persp-kill-buffer*)
