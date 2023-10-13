@@ -147,19 +147,15 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
                                         ; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-                term-mode-hook
+(dolist (mode '(term-mode-hook
                 shell-mode-hook
                 vterm-mode-hook
-                markdown-mode-hook
                 mu4e-headers-mode-hook
                 mu4e-view-mode-hook
                 mu4e-main-mode-hook
                 mu4e-org-mode-hook
                 mu4e-compose-mode-hook
                 treemacs-mode-hook
-                TeX-mode-hook
-                LaTeX-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -967,6 +963,10 @@
 (use-package yasnippet-snippets)
 
 (load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
+
+(defun restart-yasnippet ()
+    (interactive)
+  (add-hook 'post-command-hook #'my-yas-try-expanding-auto-snippets))
 
 (use-package perspective
   :ensure t
