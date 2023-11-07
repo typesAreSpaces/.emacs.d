@@ -377,6 +377,11 @@
   (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
   (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
 
+(use-package evil-matchit
+  :after evil
+  :config
+  (global-evil-matchit-mode 1))
+
 (use-package command-log-mode
   :commands command-log-mode)
 
@@ -965,7 +970,7 @@
 (load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
 
 (defun restart-yasnippet ()
-    (interactive)
+  (interactive)
   (add-hook 'post-command-hook #'my-yas-try-expanding-auto-snippets))
 
 (use-package perspective
