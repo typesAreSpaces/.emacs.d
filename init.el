@@ -940,7 +940,7 @@
 (load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
 
 (defun restart-yasnippet ()
-    (interactive)
+  (interactive)
   (add-hook 'post-command-hook #'my-yas-try-expanding-auto-snippets))
 
 (use-package perspective
