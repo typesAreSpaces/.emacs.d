@@ -454,6 +454,11 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
     :config
     (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
     (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt))
+
+  (use-package evil-matchit
+    :after evil
+    :config
+    (global-evil-matchit-mode 1))
 #+end_src
 
 * UI Configuration
@@ -1188,7 +1193,7 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
   (load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
 
   (defun restart-yasnippet ()
-      (interactive)
+    (interactive)
     (add-hook 'post-command-hook #'my-yas-try-expanding-auto-snippets))
 #+end_src
 
