@@ -464,6 +464,7 @@
   (use-package vertico
     :bind (:map vertico-map
                 ("RET" . vertico-directory-enter)
+                ("C-<return>" . vertico-exit-input)
                 ("DEL" . vertico-directory-delete-char)
                 ("C-h" . vertico-directory-delete-word))
     :init
@@ -897,18 +898,19 @@
       :unnarrowed t)
      ("l" "lecture" plain
       (file "~/Documents/GithubProjects/phd-thesis/Documents/Misc/Templates/lecture.org")
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)
      ("m" "meeting" plain
       (file "~/Documents/GithubProjects/phd-thesis/Documents/Misc/Templates/meeting.org")
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n s" . org-roam-db-sync)
          :map org-mode-map
-         ("C-M-i" . completion-at-point))
+         ("C-M-i" . completion-at-point)
+         ("C-<return>" . vertico-exit-input))
   :config
   (org-roam-setup))
 
