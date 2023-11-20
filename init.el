@@ -1562,6 +1562,10 @@
   (interactive)
   (insert (snakify (car kill-ring))))
 
+(defun reftexify ()
+    (interactive)
+  (shell-command "~/.local/scripts/reftexify"))
+
 (use-package hide-mode-line)
 
 (defun efs/presentation-setup ()
