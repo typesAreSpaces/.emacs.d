@@ -2113,6 +2113,10 @@ This is an example of configuring another non-Emacs application using org-mode. 
   (defun insert-snake ()
     (interactive)
     (insert (snakify (car kill-ring))))
+
+  (defun reftexify ()
+      (interactive)
+    (shell-command "~/.local/scripts/reftexify"))
 #+end_src
 
 ** Presentation mode with org-tree-slide
