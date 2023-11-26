@@ -795,6 +795,8 @@
               (lambda () (interactive) (org-todo "OK")))
   (define-key org-mode-map (kbd "C-c C-<return>")
               'org-insert-heading-respect-content)
+  (define-key org-mode-map (kbd "C-c C-<SPC>")
+              'org-insert-subheading)
   (define-key org-mode-map (kbd "C-c RET")
               'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
@@ -1514,7 +1516,7 @@
   (insert (snakify (car kill-ring))))
 
 (defun reftexify ()
-    (interactive)
+  (interactive)
   (shell-command "~/.local/scripts/reftexify"))
 
 (use-package hide-mode-line)
