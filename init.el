@@ -794,7 +794,7 @@
   (define-key org-mode-map (kbd "C-c o")
               (lambda () (interactive) (org-todo "OK")))
   (define-key org-mode-map (kbd "C-c C-<return>")
-              'org-meta-return)
+              'org-insert-heading-respect-content)
   (define-key org-mode-map (kbd "C-c RET")
               'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
