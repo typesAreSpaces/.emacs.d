@@ -1305,7 +1305,7 @@
 (use-package corfu
   :after orderless
                                         ; Optional customizations
-  :general 
+  :general
   (:keymaps 'corfu-map
             :states 'insert
             "C-n" #'corfu-next
@@ -1329,7 +1329,7 @@
                                         ; (corfu-on-exact-match nil)
                                         ; Configure handling of exact matches
   (corfu-min-width 80)
-  (corfu-max-width corfu-min-width) 
+  (corfu-max-width corfu-min-width)
   (corfu-scroll-margin 5)        ; Use scroll margin
   (corfu-auto-delay 0.2)
   (corfu-auto-prefix 3)
@@ -1356,11 +1356,11 @@
   (kind-icon-use-icons nil)
                                         ; Have background color be the same as `corfu' face
                                         ; background
-  (kind-icon-default-face 'corfu-default) 
+  (kind-icon-default-face 'corfu-default)
                                         ; Use midpoint color between foreground and background
                                         ; colors
                                         ; ("blended")?
-  (kind-icon-blend-background nil)  
+  (kind-icon-blend-background nil)
   (kind-icon-blend-frac 0.08)
 
   ;; NOTE 2022-02-05: `kind-icon' depends `svg-lib' which creates a cache
@@ -1403,7 +1403,7 @@
                                         ;       ("C-c p r" . cape-rfc1345))
   :init
                                         ; Add to the global default value of
-                                        ; `completion-at-point-functions' which is 
+                                        ; `completion-at-point-functions' which is
                                         ; used by `completion-at-point'.  The order of the functions
                                         ; matters, the
                                         ; first function returning a result wins.  Note that the list
@@ -1756,3 +1756,11 @@
   (add-to-list 'vertico-multiform-categories
                '(jinx grid (vertico-grid-annotate . 20)))
   (vertico-multiform-mode 1))
+
+(use-package atomic-chrome
+  :config
+  (atomic-chrome-start-server)
+  (setq atomic-chrome-buffer-open-style 'full)
+  (setq atomic-chrome-url-major-mode-alist
+        '(("github\\.com" . poly-markdown+r-mode)
+          ("overleaf\\.com" . latex-mode))))
