@@ -725,6 +725,17 @@
 
   (setq org-ellipsis "⇓")
 
+  (setq
+   org-agenda-files
+   '(
+     "~/Documents/GithubProjects/phd-thesis/Documents/Misc/20231115200616-qm_seminar.org"
+     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/research_tasks.org"
+     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/school_tasks.org"
+     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/graduation_logistics.org"
+     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/dissertation_tasks.org"
+     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/main.org"
+     ))
+
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
