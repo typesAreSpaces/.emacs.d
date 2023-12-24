@@ -1276,7 +1276,6 @@
             :states 'insert
             "C-n" #'corfu-next
             "C-p" #'corfu-previous
-            "C-g" #'corfu-quit
             "<return>" #'corfu-insert
             "M-d" #'corfu-show-documentation
             "M-l" #'corfu-show-location)
