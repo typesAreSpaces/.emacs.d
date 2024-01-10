@@ -941,6 +941,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
             ("\\.nb?\\'" . "Mathematica %s")))
 
     (setq org-ellipsis "⇓")
+    (setq org-hierarchical-todo-statistics nil)
 
     (setq
      org-agenda-files

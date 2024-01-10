@@ -732,6 +732,7 @@
           ("\\.nb?\\'" . "Mathematica %s")))
 
   (setq org-ellipsis "⇓")
+  (setq org-hierarchical-todo-statistics nil)
 
   (setq
    org-agenda-files
