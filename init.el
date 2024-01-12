@@ -728,7 +728,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "open -a /Applications/Skim.app/Contents/MacOS/Skim %s")
+          ("\\.pdf\\'" . "sioyek %s")
           ("\\.nb?\\'" . "Mathematica %s")))
 
   (setq org-ellipsis "⇓")
