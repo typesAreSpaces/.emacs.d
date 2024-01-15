@@ -520,16 +520,16 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
       (setq prefix-help-command #'embark-prefix-help-command)
       :config
       (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
-                                          ; Hide the mode line of the Embark live/completions buffers
-      (defvar-keymap embark-file-map
-        :doc "Example keymap with a few file actions"
-        :parent embark-general-map
-        "t" #'find-file-other-tab)
+                                          ; Hide the mode line of the Embark live/completions buffers 
       (require 'embark)
       (add-to-list 'display-buffer-alist
                    '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                      nil
-                     (window-parameters (mode-line-format . none))))))
+                     (window-parameters (mode-line-format . none))))
+      (defvar-keymap embark-file-map
+        :doc "Example keymap with a few file actions"
+        :parent embark-general-map
+        "t" #'find-file-other-tab)))
 
   (when (not (version< emacs-version "27.1"))
     (use-package embark-consult
