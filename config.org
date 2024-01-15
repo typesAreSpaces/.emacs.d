@@ -519,7 +519,12 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
                                           ; Optionally replace the key help with a completing-read interface
       (setq prefix-help-command #'embark-prefix-help-command)
       :config
+      (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
                                           ; Hide the mode line of the Embark live/completions buffers
+      (defvar-keymap embark-file-map
+        :doc "Example keymap with a few file actions"
+        :parent embark-general-map
+        "t" #'find-file-other-tab)
       (require 'embark)
       (add-to-list 'display-buffer-alist
                    '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
