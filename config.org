@@ -928,10 +928,11 @@ This section contains the basic configuration for =org-mode= plus the configurat
             (directory . emacs)
             ("\\.mm\\'" . default)
             ("\\.x?html?\\'" . default)
-            ("\\.pdf\\'" . "open -a /Applications/Skim.app/Contents/MacOS/Skim %s")
+            ("\\.pdf\\'" . "sioyek %s")
             ("\\.nb?\\'" . "Mathematica %s")))
 
     (setq org-ellipsis "⇓")
+    (setq org-hierarchical-todo-statistics nil)
 
     (setq
      org-agenda-files
