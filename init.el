@@ -436,7 +436,7 @@
     :ensure t
     :bind
     (
-     ("C-." . embark-act)         ; pick some comfortable binding
+     ("C-c C-." . embark-act)         ; pick some comfortable binding
      ("C-;" . embark-dwim)        ; good alternative: M-.
      ("C-h B" . embark-bindings) ; alternative for `describe-bindings'
      :map embark-file-map
