@@ -426,9 +426,12 @@
   (use-package embark
     :ensure t
     :bind
-    (("C-." . embark-act)         ; pick some comfortable binding
+    (
+     ("C-." . embark-act)         ; pick some comfortable binding
      ("C-;" . embark-dwim)        ; good alternative: M-.
-     ("C-h B" . embark-bindings)) ; alternative for `describe-bindings'
+     ("C-h B" . embark-bindings) ; alternative for `describe-bindings'
+     :map embark-file-map
+     ("t" . find-file-other-tab)) 
     :init
                                         ; Optionally replace the key help with a completing-read interface
     (setq prefix-help-command #'embark-prefix-help-command)
@@ -841,9 +844,9 @@
   (define-key org-mode-map (kbd "C-c o")
     (lambda () (interactive) (org-todo "OK")))
   (define-key org-mode-map (kbd "C-c C-<return>")
-              'org-insert-heading-respect-content)
+    'org-insert-heading-respect-content)
   (define-key org-mode-map (kbd "C-c C-<SPC>")
-              'org-insert-subheading)
+    'org-insert-subheading)
   (define-key org-mode-map (kbd "C-c RET")
     'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
