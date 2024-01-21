@@ -440,13 +440,13 @@
      ("C-;" . embark-dwim)        ; good alternative: M-.
      ("C-h B" . embark-bindings) ; alternative for `describe-bindings'
      :map embark-file-map
-     ("t" . find-file-other-tab)) 
+     ("t" . find-file-other-tab))
     :init
                                         ; Optionally replace the key help with a completing-read interface
     (setq prefix-help-command #'embark-prefix-help-command)
     :config
     (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
-                                        ; Hide the mode line of the Embark live/completions buffers 
+                                        ; Hide the mode line of the Embark live/completions buffers
     (require 'embark)
     (add-to-list 'display-buffer-alist
                  '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -1161,9 +1161,7 @@
     (setq lsp-latex-build-on-save t)
     (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/sioyek")
     (setq lsp-latex-forward-search-args
-          '( "--reuse-window"
-             "--inverse-search"
-             "/opt/homebrew/bin/emacsclient -s jose --no-wait +%2 \"%1\""
+          '( 
              "--forward-search-file"
              "%f"
              "--forward-search-line"

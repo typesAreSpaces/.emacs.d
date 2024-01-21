@@ -161,11 +161,11 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 This section configures basic UI settings that remove unneeded elements to make Emacs look a lot more minimal and modern.  If you're just getting started in Emacs, the menu bar might be helpful so you can remove the =(menu-bar-mode -1)= line if you'd like to still see that.
 
 In order to start up a daemon, use the following command
-#+begin_src 
+#+begin_src
 
-launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist  
-launchctl unload -w ~/Library/LaunchAgents/.emacs-daemon.plist  
-launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist  
+launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist
+launchctl unload -w ~/Library/LaunchAgents/.emacs-daemon.plist
+launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist
 
 #+end_src
 
@@ -593,13 +593,13 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
        ("C-;" . embark-dwim)        ; good alternative: M-.
        ("C-h B" . embark-bindings) ; alternative for `describe-bindings'
        :map embark-file-map
-       ("t" . find-file-other-tab)) 
+       ("t" . find-file-other-tab))
       :init
                                           ; Optionally replace the key help with a completing-read interface
       (setq prefix-help-command #'embark-prefix-help-command)
       :config
       (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
-                                          ; Hide the mode line of the Embark live/completions buffers 
+                                          ; Hide the mode line of the Embark live/completions buffers
       (require 'embark)
       (add-to-list 'display-buffer-alist
                    '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -1390,7 +1390,7 @@ The =which-key= integration adds helpful descriptions of the various keys so you
       (setq treemacs-is-never-other-window t)))
 #+end_src
 
-**** treemacs-evil 
+**** treemacs-evil
 
 #+begin_src emacs-lisp
   (when (not (version< emacs-version "26.1"))
@@ -1481,7 +1481,7 @@ Use this setup for Skim.  Select Skim > Preferences...
 - Arguments: -s jose --no-wait +%line "%file"
 Use `CMD + shift + click` on a pdf section to back forward.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (add-hook 'TeX-mode-hook 'lsp)
   (add-hook 'LaTeX-mode-hook 'lsp)
 
@@ -1510,9 +1510,7 @@ Use `CMD + shift + click` on a pdf section to back forward.
       (setq lsp-latex-build-on-save t)
       (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/sioyek")
       (setq lsp-latex-forward-search-args
-            '( "--reuse-window"
-               "--inverse-search"
-               "/opt/homebrew/bin/emacsclient -s jose --no-wait +%2 \"%1\""
+            '( 
                "--forward-search-file"
                "%f"
                "--forward-search-line"
@@ -2271,15 +2269,15 @@ This is an example of configuring another non-Emacs application using org-mode. 
 
 ** Managing mail with mu4e
 
-Follow the following [[https://macowners.club/posts/email-emacs-mu4e-macos/][post]] to setup credential file in ~/.maildir/certificates. It is necessary to install isync. Use the brew package manager and follow xukai92 suggestion in this [[https://github.com/moriyoshi/cyrus-sasl-xoauth2/issues/9][git issue]], i.e. use 
+Follow the following [[https://macowners.club/posts/email-emacs-mu4e-macos/][post]] to setup credential file in ~/.maildir/certificates. It is necessary to install isync. Use the brew package manager and follow xukai92 suggestion in this [[https://github.com/moriyoshi/cyrus-sasl-xoauth2/issues/9][git issue]], i.e. use
 
 #+begin_src
 HOMEBREW_EDITOR=nvim brew edit isync
 #+end_src
 
-to remove url, sha256 entries, change the head entry with  https://github.com/xukai92/isync.git and recompile isync using 
+to remove url, sha256 entries, change the head entry with  https://github.com/xukai92/isync.git and recompile isync using
 
-#+begin_src 
+#+begin_src
 brew reinstall isync --build
 #+end_src
 
