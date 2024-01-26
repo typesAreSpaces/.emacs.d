@@ -1159,14 +1159,17 @@
           '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "-cd" "%f"))
     (setq lsp-latex-forward-search-after t)
     (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/sioyek")
-    (setq lsp-latex-forward-search-args
-          '( 
-             "--forward-search-file"
-             "%f"
-             "--forward-search-line"
-             "%l"
-             "%p"))))
+    (setq lsp-latex-forward-search-executable
+          "/Applications/Skim.app/Contents/SharedSupport/displayline")
+    (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
+;; (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/sioyek")
+;;     (setq lsp-latex-forward-search-args
+;;           '( 
+;;              "--forward-search-file"
+;;              "%f"
+;;              "--forward-search-line"
+;;              "%l"
+;;              "%p"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
