@@ -440,13 +440,13 @@
      ("C-;" . embark-dwim)        ; good alternative: M-.
      ("C-h B" . embark-bindings) ; alternative for `describe-bindings'
      :map embark-file-map
-     ("t" . find-file-other-tab)) 
+     ("t" . find-file-other-tab))
     :init
                                         ; Optionally replace the key help with a completing-read interface
     (setq prefix-help-command #'embark-prefix-help-command)
     :config
     (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
-                                        ; Hide the mode line of the Embark live/completions buffers 
+                                        ; Hide the mode line of the Embark live/completions buffers
     (require 'embark)
     (add-to-list 'display-buffer-alist
                  '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -1205,6 +1205,13 @@
   "lf" '((lambda () (interactive)
            (lsp-latex-forward-search))
          :which-key "Latex (f)orward search"))
+
+(use-package consult-reftex
+  :after consult
+  :straight
+  (:type git
+         :host github
+         :repo "karthink/consult-reftex"))
 
 (when (not (version< emacs-version "27.1"))
   (use-package citar
