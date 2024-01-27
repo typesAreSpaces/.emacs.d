@@ -1569,6 +1569,17 @@ Use `CMD + shift + click` on a pdf section to back forward.
            :which-key "Latex (f)orward search"))
 #+end_src
 
+**** Consult-reftex
+
+#+begin_src emacs-lisp
+  (use-package consult-reftex
+    :after consult
+    :straight
+    (:type git
+           :host github
+           :repo "karthink/consult-reftex"))
+#+end_src
+
 **** Citar
 
 #+begin_src emacs-lisp

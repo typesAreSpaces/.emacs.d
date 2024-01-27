@@ -1215,6 +1215,13 @@
            (lsp-latex-forward-search))
          :which-key "Latex (f)orward search"))
 
+(use-package consult-reftex
+  :after consult
+  :straight
+  (:type git
+         :host github
+         :repo "karthink/consult-reftex"))
+
 (when (not (version< emacs-version "27.1"))
   (use-package citar
     :bind (("C-c b" . citar-insert-citation)
