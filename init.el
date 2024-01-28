@@ -1209,6 +1209,8 @@
 
 (evil-define-key 'normal
   outline-minor-mode-map (kbd "<tab>") 'outline-toggle-children)
+(evil-define-key 'normal
+  outline-minor-mode-map (kbd "<S-tab>") 'outline-cycle)
 
 (efs/leader-keys
   "l" '(:ignore t :which-key "(l)atex related")
