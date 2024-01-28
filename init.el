@@ -1133,6 +1133,9 @@
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 
+(add-hook 'TeX-mode-hook 'outline-minor-mode)
+(add-hook 'LaTeX-mode-hook 'outline-minor-mode)
+
 (add-hook 'TeX-mode-hook 'lsp)
 (add-hook 'LaTeX-mode-hook 'lsp)
 
@@ -1193,6 +1196,9 @@
     (setq font-latex-fontify-script nil)))
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+
+(evil-define-key 'normal
+  outline-minor-mode-map (kbd "<tab>") 'outline-toggle-children)
 
 (efs/leader-keys
   "l" '(:ignore t :which-key "(l)atex related")
