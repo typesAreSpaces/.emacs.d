@@ -283,7 +283,7 @@
     "aw" '(avy-goto-word-0 :which-key "(w)ord")
     "r" '(:ignore t :which-key "bookma(r)k")
     "rs" '(bookmark-set :which-key "bookmark (s)et")
-    "rj" '(bookmark-jump :which-key "bookmark (j)ump")
+    "rj" '(consult-bookmark :which-key "bookmark (j)ump")
     "rd" '(bookmark-delete :which-key "bookmark (d)elete")
     "b" '(:ignore t :which-key "edit (b)uffer")
     "bc"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
