@@ -414,6 +414,7 @@
   :config
   (which-key-mode)
   (setq which-key-idle-delay 1)
+  (setq which-key-idle-secondary-delay 0.05)
   (which-key-enable-god-mode-support))
 
 (use-package flx)
