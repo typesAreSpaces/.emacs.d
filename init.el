@@ -1208,7 +1208,7 @@
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
 (evil-define-key 'normal
-  outline-minor-mode-map (kbd "<tab>") 'outline-toggle-children)
+  outline-minor-mode-map (kbd "<leader><tab>") 'outline-toggle-children)
 (evil-define-key 'normal
   outline-minor-mode-map (kbd "<S-tab>") 'outline-cycle)
 
