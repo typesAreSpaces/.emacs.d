@@ -14,5 +14,7 @@
                (server-name . "prelude")))
  ("cs357" . ((user-emacs-directory . "~/Documents/GithubProjects/.emacs-cs-357-config")
              (server-name . "cs357")))
+ ("centaur" . ((user-emacs-directory . "~/.config/centaur")
+            (server-name . "centaur")))
  ("lambda" . ((user-emacs-directory . "~/.config/lambda-emacs")
               (server-name . "lambda"))))
