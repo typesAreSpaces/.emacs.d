@@ -318,7 +318,7 @@
   :after (evil god-mode)
   :custom
                                         ; ; this is the key to avoiding conflict with evils jumping stuff
-  (better-jumper-use-evil-jump-advice nil)
+  (better-jumper-use-evil-jump-advice t)
 
   :config
   (better-jumper-mode +1)
@@ -343,7 +343,7 @@
              (line-number-at-pos old-pos)
              (line-number-at-pos (point))))
            1)
-        (better-jumper-set-jump old-pos)))
+        (better-jumper-set-jump old-pos))))
     (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
     (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
     (define-key evil-motion-state-map (kbd "C-u")
@@ -355,7 +355,7 @@
   (advice-add 'evil-next-line :around #'my-jump-advice)
   (advice-add 'evil-previous-line :around #'my-jump-advice)
   (advice-add 'evil-goto-definition :around #'my-jump-advice)
-  (advice-add 'evil-goto-mark  :around #'my-jump-advice))
+  (advice-add 'evil-goto-mark  :around #'my-jump-advice)
 
 (use-package god-mode
   :config
