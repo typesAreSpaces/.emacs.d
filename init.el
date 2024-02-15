@@ -1248,6 +1248,9 @@
 
 (efs/leader-keys
   "l" '(:ignore t :which-key "(l)atex related")
+  "lr" '((lambda () (interactive)
+           (reftex-view-crossref))
+         :which-key "Goto xref (r)erence")
   "lp" '((lambda () (interactive)
            (yasnippet/goto-parent-file))
          :which-key "Goto (p)arent")
