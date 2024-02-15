@@ -413,18 +413,18 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
                (line-number-at-pos (point))))
              1)
           (better-jumper-set-jump old-pos))))
-      (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
-      (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
-      (define-key evil-motion-state-map (kbd "C-u")
-        'better-jumper-jump-forward)
-      (define-key evil-motion-state-map (kbd "C-o")
-        'better-jumper-jump-backward))
+    (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
+    (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
+    (define-key evil-motion-state-map (kbd "C-u")
+      'better-jumper-jump-forward)
+    (define-key evil-motion-state-map (kbd "C-o")
+      'better-jumper-jump-backward))
 
                                           ; jump scenarios
-    (advice-add 'evil-next-line :around #'my-jump-advice)
-    (advice-add 'evil-previous-line :around #'my-jump-advice)
-    (advice-add 'evil-goto-definition :around #'my-jump-advice)
-    (advice-add 'evil-goto-mark  :around #'my-jump-advice)
+  (advice-add 'evil-next-line :around #'my-jump-advice)
+  (advice-add 'evil-previous-line :around #'my-jump-advice)
+  (advice-add 'evil-goto-definition :around #'my-jump-advice)
+  (advice-add 'evil-goto-mark  :around #'my-jump-advice)
 #+end_src
 
 *** God mode
@@ -2480,6 +2480,7 @@ mu4e comes included with mu. Search the path your package manager used to instal
 #+end_src
 
 ** Atomic chrome
+
 #+begin_src emacs-lisp
   (use-package atomic-chrome
     :config
@@ -2488,4 +2489,16 @@ mu4e comes included with mu. Search the path your package manager used to instal
     (setq atomic-chrome-url-major-mode-alist
           '(("github\\.com" . poly-markdown+r-mode)
             ("overleaf\\.com" . latex-mode))))
+#+end_src
+
+** Try
+
+#+begin_src emacs-lisp
+  (use-package try)
+#+end_src
+
+** Zoxide
+
+#+begin_src emacs-lisp
+  (use-package zoxide)
 #+end_src
