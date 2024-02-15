@@ -344,18 +344,18 @@
              (line-number-at-pos (point))))
            1)
         (better-jumper-set-jump old-pos))))
-    (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
-    (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
-    (define-key evil-motion-state-map (kbd "C-u")
-      'better-jumper-jump-forward)
-    (define-key evil-motion-state-map (kbd "C-o")
-      'better-jumper-jump-backward))
+  (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
+  (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
+  (define-key evil-motion-state-map (kbd "C-u")
+    'better-jumper-jump-forward)
+  (define-key evil-motion-state-map (kbd "C-o")
+    'better-jumper-jump-backward))
 
                                         ; jump scenarios
-  (advice-add 'evil-next-line :around #'my-jump-advice)
-  (advice-add 'evil-previous-line :around #'my-jump-advice)
-  (advice-add 'evil-goto-definition :around #'my-jump-advice)
-  (advice-add 'evil-goto-mark  :around #'my-jump-advice)
+(advice-add 'evil-next-line :around #'my-jump-advice)
+(advice-add 'evil-previous-line :around #'my-jump-advice)
+(advice-add 'evil-goto-definition :around #'my-jump-advice)
+(advice-add 'evil-goto-mark  :around #'my-jump-advice)
 
 (use-package god-mode
   :config
@@ -1712,3 +1712,7 @@
   (setq atomic-chrome-url-major-mode-alist
         '(("github\\.com" . poly-markdown+r-mode)
           ("overleaf\\.com" . latex-mode))))
+
+(use-package try)
+
+(use-package zoxide)
