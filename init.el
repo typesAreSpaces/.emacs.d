@@ -1662,6 +1662,16 @@
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode))
 
+(defun linkify (msg)
+  "Returns an org-link"
+  (interactive "sDescription: ")
+  (insert
+   (concat "[[file:"
+           (abbreviate-file-name (buffer-file-name))
+           "]["
+           (if (equal msg "") (buffer-name) msg)
+           "]]")))
+
 (defun snakify (input)
   (replace-regexp-in-string
    " "

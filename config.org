@@ -2228,6 +2228,16 @@ This is an example of configuring another non-Emacs application using org-mode. 
 ** Scripts
 
 #+begin_src emacs-lisp
+  (defun linkify (msg)
+    "Returns an org-link"
+    (interactive "sDescription: ")
+    (insert
+     (concat "[[file:"
+             (abbreviate-file-name (buffer-file-name))
+             "]["
+             (if (equal msg "") (buffer-name) msg)
+             "]]")))
+
   (defun snakify (input)
     (replace-regexp-in-string
      " "
