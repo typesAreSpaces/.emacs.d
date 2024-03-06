@@ -985,10 +985,8 @@
       (file "~/Documents/GithubProjects/phd-thesis/Documents/Misc/Templates/meeting.org")
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)))
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n s" . org-roam-db-sync)
+  :bind (("C-x n f" . org-roam-node-find)
+         ("C-x n i" . org-roam-node-insert)
          :map org-mode-map
          ("C-M-i" . completion-at-point)
          ("C-<return>" . vertico-exit-input))
