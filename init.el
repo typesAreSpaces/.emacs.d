@@ -1012,20 +1012,32 @@
       (fill-region (point-min) (point-max)))))
 
 (defun efs/org-mode-visual-fill ()
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
+  (olivetti-mode 1))
 
-(use-package visual-fill-column
+(use-package olivetti
   :hook ((org-mode . efs/org-mode-visual-fill)
          (markdown-mode . efs/org-mode-visual-fill)
          (TeX-mode . efs/org-mode-visual-fill)
          (LaTeX-mode . efs/org-mode-visual-fill)
-         (mu4e-main-mode . efs/org-mode-visual-fill)))
-
-(use-package olivetti
+         (mu4e-main-mode . efs/org-mode-visual-fill))
   :custom
-  (olivetti-body-width 130))
+  (olivetti-style 'fancy)
+  (olivetti-margin-width 3)
+  (olivetti-body-width 81))
+
+(custom-set-faces
+ '(olivetti-fringe ((t :background "#242424"))))
+
+;; (custom-set-faces
+;;  '(olivetti-fringe ((t :background unspecified))))
+(defun custom-olivetti-mode-on-hook ()
+  (setq-local flycheck-indication-mode 'left-margin))
+
+(defun custom-olivetti-mode-off-hook ()
+  (kill-local-variable 'flycheck-indication-mode))
+
+(add-hook 'olivetti-mode-on-hook 'custom-olivetti-mode-on-hook)
+(add-hook 'olivetti-mode-off-hook 'custom-olivetti-mode-off-hook)
 
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
