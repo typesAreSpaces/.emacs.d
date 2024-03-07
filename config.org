@@ -1237,9 +1237,7 @@ Update org-latex-classes
     (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 #+end_src
 
-*** Center Org Buffers
-
-We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]] to center =org-mode= buffers for a more pleasing writing experience as it centers the contents of the buffer horizontally to seem more like you are editing a document.  This is really a matter of personal preference so you can remove the block below if you don't like the behavior.
+*** Olivetti
 
 #+begin_src emacs-lisp
   (defun fill-buffer ()
@@ -1250,24 +1248,32 @@ We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]
         (fill-region (point-min) (point-max)))))
 
   (defun efs/org-mode-visual-fill ()
-    (setq visual-fill-column-width 100
-          visual-fill-column-center-text t)
-    (visual-fill-column-mode 1))
+    (olivetti-mode 1))
 
-  (use-package visual-fill-column
+  (use-package olivetti
     :hook ((org-mode . efs/org-mode-visual-fill)
            (markdown-mode . efs/org-mode-visual-fill)
            (TeX-mode . efs/org-mode-visual-fill)
            (LaTeX-mode . efs/org-mode-visual-fill)
-           (mu4e-main-mode . efs/org-mode-visual-fill)))
-#+end_src
-
-*** Olivetti
-
-#+begin_src emacs-lisp
-  (use-package olivetti
+           (mu4e-main-mode . efs/org-mode-visual-fill))
     :custom
-    (olivetti-body-width 130))
+    (olivetti-style 'fancy)
+    (olivetti-margin-width 3)
+    (olivetti-body-width 81))
+
+  (custom-set-faces
+   '(olivetti-fringe ((t :background "#242424"))))
+
+  ;; (custom-set-faces
+  ;;  '(olivetti-fringe ((t :background unspecified))))
+  (defun custom-olivetti-mode-on-hook ()
+    (setq-local flycheck-indication-mode 'left-margin))
+
+  (defun custom-olivetti-mode-off-hook ()
+    (kill-local-variable 'flycheck-indication-mode))
+
+  (add-hook 'olivetti-mode-on-hook 'custom-olivetti-mode-on-hook)
+  (add-hook 'olivetti-mode-off-hook 'custom-olivetti-mode-off-hook)
 #+end_src
 
 ** Auto-tangle Configuration Files
