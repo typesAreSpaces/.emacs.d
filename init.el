@@ -970,7 +970,7 @@
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/Documents/GithubProjects/phd-thesis/Documents/Misc")
+  (org-roam-directory "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files")
   (org-roam-completion-everywhere t)
   (org-roam-capture-templates
    '(("d" "default" plain
@@ -978,11 +978,11 @@
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n")
       :unnarrowed t)
      ("l" "lecture" plain
-      (file "~/Documents/GithubProjects/phd-thesis/Documents/Misc/Templates/lecture.org")
+      (file "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/Templates/lecture.org")
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)
      ("m" "meeting" plain
-      (file "~/Documents/GithubProjects/phd-thesis/Documents/Misc/Templates/meeting.org")
+      (file "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/Templates/meeting.org")
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)))
   :bind (("C-x n f" . org-roam-node-find)
@@ -1012,7 +1012,8 @@
       (fill-region (point-min) (point-max)))))
 
 (defun efs/org-mode-visual-fill ()
-  (olivetti-mode 1))
+  (olivetti-mode 1)
+  (visual-line-mode 1))
 
 (use-package olivetti
   :hook ((org-mode . efs/org-mode-visual-fill)
