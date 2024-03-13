@@ -804,7 +804,7 @@
   (setq
    org-agenda-files
    '(
-     "~/Documents/GithubProjects/phd-thesis/Documents/Misc/20231115200616-qm_seminar.org"
+     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/20231115200616-qm_seminar.org"
      "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/research_tasks.org"
      "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/school_tasks.org"
      "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/graduation_logistics.org"
