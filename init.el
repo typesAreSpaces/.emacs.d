@@ -804,14 +804,17 @@
 
   (setq
    org-agenda-files
-   '(
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/20231115200616-qm_seminar.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/research_tasks.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/school_tasks.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/graduation_logistics.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/dissertation_tasks.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/main.org"
-     ))
+   (mapcar
+    #'(lambda (x) (concat phd-thesis-org-files-dir "/" x))
+    '(
+      "20231115200616-qm_seminar.org"
+      "research_tasks.org"
+      "school_tasks.org"
+      "graduation_logistics.org"
+      "dissertation_tasks.org"
+      "main.org"
+      "todo.org"
+      )))
 
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
