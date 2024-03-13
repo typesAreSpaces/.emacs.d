@@ -1113,7 +1113,19 @@ This section contains the basic configuration for =org-mode= plus the configurat
                          (user-error)))))
 #+end_src
 
-Update org-latex-classes
+*** Evil Org
+
+#+begin_src emacs-lisp
+  (use-package evil-org
+    :ensure t
+    :after org
+    :hook (org-mode . (lambda () evil-org-mode))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
+#+end_src
+
+*** Org-latex-classes
 
 #+begin_src emacs-lisp
   (unless (boundp 'org-latex-classes)
