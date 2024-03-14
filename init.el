@@ -820,6 +820,7 @@
       )))
 
   (setq org-agenda-start-with-log-mode t)
+  (setq org-agenda-window-setup 'current-window)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
 
