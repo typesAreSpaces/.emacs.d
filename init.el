@@ -705,6 +705,9 @@
   ("a" (find-file
         (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))
    "Agenda")
+  ("t" (find-file
+        (expand-file-name (concat phd-thesis-org-files-dir "/todo.org")))
+   "Todos")
   ("e" (find-file
         (expand-file-name "config.org" user-emacs-directory))
    "Emacs config")
@@ -839,17 +842,13 @@
 
   (setq org-tag-alist
         '((:startgroup)
-                                        ; Put mutually exclusive tags here
+          ("seminar" . ?s)
+          ("thesis" . ?t)
+          ("graduation" . ?g)
           (:endgroup)
-          ("@errand" . ?E)
-          ("@home" . ?H)
-          ("@work" . ?W)
-          ("agenda" . ?a)
-          ("planning" . ?p)
-          ("publish" . ?P)
-          ("batch" . ?b)
-          ("note" . ?n)
-          ("idea" . ?i)))
+          ("review" . ?r)
+          ("interesting" . ?i)
+          ("now" . ?n)))
 
   (setq org-capture-templates
         `(
