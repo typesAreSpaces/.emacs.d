@@ -821,6 +821,7 @@
 
   (setq org-agenda-start-with-log-mode t)
   (setq org-agenda-window-setup 'current-window)
+  (setq org-indirect-buffer-display 'current-window)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
 
@@ -1035,8 +1036,8 @@
          (mu4e-main-mode . efs/org-mode-visual-fill))
   :custom
   (olivetti-style 'fancy)
-  (olivetti-margin-width 3)
-  (olivetti-body-width 81))
+  (olivetti-margin-width 5)
+  (olivetti-body-width 85))
 
 (custom-set-faces
  '(olivetti-fringe ((t :background "#242424"))))
