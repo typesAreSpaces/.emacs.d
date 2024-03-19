@@ -128,6 +128,30 @@
 (defun indent-buffer ()
   (interactive)
   (indent-region (point-min) (point-max)))
+(defun toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+             (next-win-buffer (window-buffer (next-window)))
+             (this-win-edges (window-edges (selected-window)))
+             (next-win-edges (window-edges (next-window)))
+             (this-win-2nd (not (and (<= (car this-win-edges)
+                                         (car next-win-edges))
+                                     (<= (cadr this-win-edges)
+                                         (cadr next-win-edges)))))
+             (splitter
+              (if (= (car this-win-edges)
+                     (car (window-edges (next-window))))
+                  'split-window-horizontally
+                'split-window-vertically)))
+        (delete-other-windows)
+        (let ((first-win (selected-window)))
+          (funcall splitter)
+          (if this-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) this-win-buffer)
+          (set-window-buffer (next-window) next-win-buffer)
+          (select-window first-win)
+          (if this-win-2nd (other-window 1))))))
 
 (server-start)                     ; Start server
 (setq process-connection-type nil) ; Use pipes
@@ -298,20 +322,22 @@
     "a" '(:ignore t :which-key "(a)vy")
     "ac" '(avy-goto-char :which-key "(c)haracter")
     "aw" '(avy-goto-word-0 :which-key "(w)ord")
-    "r" '(:ignore t :which-key "bookma(r)k")
-    "rs" '(bookmark-set :which-key "bookmark (s)et")
-    "rj" '(bookmark-jump :which-key "bookmark (j)ump")
-    "rd" '(bookmark-delete :which-key "bookmark (d)elete")
-    "b" '(:ignore t :which-key "edit (b)uffer")
-    "bf"  '(fill-paragraph :which-key "(f)ill paragraph")
-    "bi"  '((lambda () (interactive)
+    "b" '(:ignore t :which-key "(b)ookmark")
+    "bs" '(bookmark-set :which-key "bookmark (s)et")
+    "bb" '(consult-bookmark :which-key "(b)ookmark jump")
+    "bd" '(bookmark-delete :which-key "bookmark (d)elete")
+    "e" '(:ignore t :which-key "(e)dit buffer")
+    "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
+    "ef"  '(fill-paragraph :which-key "(f)ill paragraph")
+    "ei"  '((lambda () (interactive)
               (indent-region (point-min) (point-max)))
             :which-key "(i)ndent buffer")
-    "by" '(simpleclip-copy :which-key "clipboard (y)ank")
-    "bs" '(insert-snake :which-key "insert (s)nake")
-    "bp" '(simpleclip-paste :which-key "clipboard (p)aste")
+    "ey" '(simpleclip-copy :which-key "clipboard (y)ank")
+    "es" '(insert-snake :which-key "insert (s)nake")
+    "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
     "f" '(hydra-jump-files/body :which-key "edit (f)iles")
     "s"  '(shell-command :which-key "(s)hell command")
+    "S"  '(async-shell-command :which-key "async (S)hell command")
     "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
     "tt" '(load-theme :which-key "choose (t)heme")
     "ts" '(tab-switch :which-key "(s)witch tab")
@@ -401,22 +427,23 @@
      ("C-;" . embark-dwim)        ; good alternative: M-.
      ("C-h B" . embark-bindings) ; alternative for `describe-bindings'
      :map embark-file-map
-     ("t" . find-file-other-tab)) 
+     ("t" . find-file-other-tab))
     :init
                                         ; Optionally replace the key help with a completing-read interface
     (setq prefix-help-command #'embark-prefix-help-command)
     :config
     (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
-                                        ; Hide the mode line of the Embark live/completions buffers 
+                                        ; Hide the mode line of the Embark live/completions buffers
     (require 'embark)
     (add-to-list 'display-buffer-alist
                  '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                    nil
                    (window-parameters (mode-line-format . none))))
-    (defvar-keymap embark-file-map
-      :doc "Example keymap with a few file actions"
-      :parent embark-general-map
-      "t" #'find-file-other-tab)))
+    (keymap-set
+     embark-file-map
+     "t" #'(lambda ()
+             (interactive)
+             (call-interactively #'find-file-other-tab)))))
 
 (when (not (version< emacs-version "27.1"))
   (use-package embark-consult
@@ -606,6 +633,9 @@
   ("a" (find-file
         (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))
    "Agenda")
+  ("t" (find-file
+        (expand-file-name (concat phd-thesis-org-files-dir "/todo.org")))
+   "Todos")
   ("e" (find-file
         (expand-file-name "config.org" user-emacs-directory))
    "Emacs config")
@@ -705,16 +735,21 @@
 
   (setq
    org-agenda-files
-   '(
-     "~/Documents/GithubProjects/phd-thesis/Documents/Misc/20231115200616-qm_seminar.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/research_tasks.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/school_tasks.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/graduation_logistics.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/dissertation_tasks.org"
-     "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/main.org"
-     ))
+   (mapcar
+    #'(lambda (x) (concat phd-thesis-org-files-dir "/" x))
+    '(
+      "20231115200616-qm_seminar.org"
+      "research_tasks.org"
+      "school_tasks.org"
+      "graduation_logistics.org"
+      "dissertation_tasks.org"
+      "main.org"
+      "todo.org"
+      )))
 
   (setq org-agenda-start-with-log-mode t)
+  (setq org-agenda-window-setup 'current-window)
+  (setq org-indirect-buffer-display 'current-window)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
 
@@ -726,7 +761,7 @@
   (setq org-todo-keywords
         '((sequence "EXTERNAL" "|")
           (sequence "GOAL" "IDEA" "OBSERVATION" "|" "OK")
-          (sequence "TODAY" "TODO" "LATER" "|" "MOVED" "COMPLETED(c)" "CANC(k@)")
+          (sequence "TODO" "|" "MOVED" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
                                         ; Save Org buffers after refiling!
@@ -737,17 +772,13 @@
 
   (setq org-tag-alist
         '((:startgroup)
-                                        ; Put mutually exclusive tags here
+          ("seminar" . ?s)
+          ("thesis" . ?t)
+          ("graduation" . ?g)
           (:endgroup)
-          ("@errand" . ?E)
-          ("@home" . ?H)
-          ("@work" . ?W)
-          ("agenda" . ?a)
-          ("planning" . ?p)
-          ("publish" . ?P)
-          ("batch" . ?b)
-          ("note" . ?n)
-          ("idea" . ?i)))
+          ("review" . ?r)
+          ("interesting" . ?i)
+          ("now" . ?n)))
 
   (setq org-capture-templates
         `(
@@ -813,11 +844,11 @@
     (lambda () (interactive) (org-todo "IDEA")))
   (define-key org-mode-map (kbd "C-c o")
     (lambda () (interactive) (org-todo "OK")))
-  (define-key org-mode-map (kbd "C-c C-<return>")
+  (define-key org-mode-map (kbd "C-c <return>")
     'org-insert-heading-respect-content)
   (define-key org-mode-map (kbd "C-c C-<SPC>")
     'org-insert-subheading)
-  (define-key org-mode-map (kbd "C-c RET")
+  (define-key org-mode-map (kbd "C-c C-<return>")
     'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
     (lambda () (interactive) (org-sort-buffer)))
@@ -840,6 +871,14 @@
                      (condition-case x
                          (org-sort-entries nil ?o)
                        (user-error)))))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 (unless (boundp 'org-latex-classes)
   (setq org-latex-classes nil))
@@ -872,7 +911,7 @@
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/Documents/GithubProjects/phd-thesis/Documents/Misc")
+  (org-roam-directory "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files")
   (org-roam-completion-everywhere t)
   (org-roam-capture-templates
    '(("d" "default" plain
@@ -880,17 +919,15 @@
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n")
       :unnarrowed t)
      ("l" "lecture" plain
-      (file "~/Documents/GithubProjects/phd-thesis/Documents/Misc/Templates/lecture.org")
+      (file "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/Templates/lecture.org")
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)
      ("m" "meeting" plain
-      (file "~/Documents/GithubProjects/phd-thesis/Documents/Misc/Templates/meeting.org")
+      (file "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/Templates/meeting.org")
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)))
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n s" . org-roam-db-sync)
+  :bind (("C-x n f" . org-roam-node-find)
+         ("C-x n i" . org-roam-node-insert)
          :map org-mode-map
          ("C-M-i" . completion-at-point)
          ("C-<return>" . vertico-exit-input))
@@ -916,20 +953,33 @@
       (fill-region (point-min) (point-max)))))
 
 (defun efs/org-mode-visual-fill ()
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
+  (olivetti-mode 1)
+  (visual-line-mode 1))
 
-(use-package visual-fill-column
+(use-package olivetti
   :hook ((org-mode . efs/org-mode-visual-fill)
          (markdown-mode . efs/org-mode-visual-fill)
          (TeX-mode . efs/org-mode-visual-fill)
          (LaTeX-mode . efs/org-mode-visual-fill)
-         (mu4e-main-mode . efs/org-mode-visual-fill)))
-
-(use-package olivetti
+         (mu4e-main-mode . efs/org-mode-visual-fill))
   :custom
-  (olivetti-body-width 130))
+  (olivetti-style 'fancy)
+  (olivetti-margin-width 5)
+  (olivetti-body-width 85))
+
+(custom-set-faces
+ '(olivetti-fringe ((t :background "#242424"))))
+
+;; (custom-set-faces
+;;  '(olivetti-fringe ((t :background unspecified))))
+(defun custom-olivetti-mode-on-hook ()
+  (setq-local flycheck-indication-mode 'left-margin))
+
+(defun custom-olivetti-mode-off-hook ()
+  (kill-local-variable 'flycheck-indication-mode))
+
+(add-hook 'olivetti-mode-on-hook 'custom-olivetti-mode-on-hook)
+(add-hook 'olivetti-mode-off-hook 'custom-olivetti-mode-off-hook)
 
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
@@ -1088,6 +1138,9 @@
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 
+(add-hook 'TeX-mode-hook 'outline-minor-mode)
+(add-hook 'LaTeX-mode-hook 'outline-minor-mode)
+
 (add-hook 'TeX-mode-hook 'lsp)
 (add-hook 'LaTeX-mode-hook 'lsp)
 
@@ -1149,8 +1202,16 @@
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
+(evil-define-key 'normal
+  outline-minor-mode-map (kbd "SPC <tab>") 'outline-toggle-children)
+(evil-define-key 'normal
+  outline-minor-mode-map (kbd "<S-tab>") 'outline-cycle)
+
 (efs/leader-keys
   "l" '(:ignore t :which-key "(l)atex related")
+  "lr" '((lambda () (interactive)
+           (reftex-view-crossref))
+         :which-key "Goto xref (r)erence")
   "lp" '((lambda () (interactive)
            (yasnippet/goto-parent-file))
          :which-key "Goto (p)arent")
@@ -1160,6 +1221,13 @@
   "lf" '((lambda () (interactive)
            (lsp-latex-forward-search))
          :which-key "Latex (f)orward search"))
+
+(use-package consult-reftex
+  :after consult
+  :straight
+  (:type git
+         :host github
+         :repo "karthink/consult-reftex"))
 
 (when (not (version< emacs-version "27.1"))
   (use-package citar
@@ -1524,6 +1592,16 @@
 (use-package dired-hide-dotfiles
   :hook (dired-mode . dired-hide-dotfiles-mode))
 
+(defun linkify (msg)
+  "Returns an org-link"
+  (interactive "sDescription: ")
+  (insert
+   (concat "[[file:"
+           (abbreviate-file-name (buffer-file-name))
+           "]["
+           (if (equal msg "") (buffer-name) msg)
+           "]]")))
+
 (defun snakify (input)
   (replace-regexp-in-string
    " "
@@ -1722,3 +1800,7 @@
   (setq atomic-chrome-url-major-mode-alist
         '(("github\\.com" . poly-markdown+r-mode)
           ("overleaf\\.com" . latex-mode))))
+
+(use-package try)
+
+(use-package zoxide)
