@@ -55,6 +55,8 @@
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 (defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
+(defvar website-dir "~/Documents/GithubProjects/website")
+(defvar website-posts (concat website-dir "/content-org/all-posts.org"))
 (defvar current-semester-dir
   (concat phd-thesis-dir
           "/Documents/Semesters/2023/Fall"))
@@ -1011,6 +1013,29 @@
     :ensure t
     :pin melpa
     :after ox))
+
+(with-eval-after-load 'org-capture
+  (defun org-hugo-new-subtree-post-capture-template ()
+    "Returns `org-capture' template string for new Hugo post.
+      See `org-capture-templates' for more information."
+    (let* ((title (read-from-minibuffer "Post Title: "))
+           (curdate (format-time-string "%Y-%m-%d"))
+           (fname (org-hugo-slug title)))
+      (mapconcat #'identity
+                 `(
+                   ,(concat "* " title)
+                   ":PROPERTIES:"
+                   ,(concat ":EXPORT_FILE_NAME: " fname)
+                   ,(concat ":EXPORT_DATE: " curdate)
+                   ":END:"
+                   "%?\n")          ;Place the cursor here finally
+                 "\n")))
+
+  (add-to-list 'org-capture-templates
+               '("h" "Hugo post" entry
+                 (file+olp website-posts "Posts")
+                 (function org-hugo-new-subtree-post-capture-template)
+                 :prepend t)))
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
