@@ -1334,13 +1334,6 @@
            (lsp-latex-forward-search))
          :which-key "Latex (f)orward search"))
 
-;(use-package outline-magic)
-
-;(eval-after-load 'outline
-;  '(progn
-;     (require 'outline-magic)
-;     (define-key outline-minor-mode-map (kbd "<tab>") 'outline-cycle)))
-
 (use-package consult-reftex
   :after consult
   :straight

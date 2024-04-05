@@ -1686,17 +1686,6 @@ Use `CMD + shift + click` on a pdf section to back forward.
            :which-key "Latex (f)orward search"))
 #+end_src
 
-**** outline-magic
-
-#+begin_src emacs-lisp
-  ;(use-package outline-magic)
-
-  ;(eval-after-load 'outline
-  ;  '(progn
-  ;     (require 'outline-magic)
-  ;     (define-key outline-minor-mode-map (kbd "<tab>") 'outline-cycle)))
-#+end_src
-
 **** Consult-reftex
 
 #+begin_src emacs-lisp
