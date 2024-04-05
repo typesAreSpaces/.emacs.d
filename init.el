@@ -1304,6 +1304,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
+(use-package outline-magic)
+
 (evil-define-key 'normal
   outline-minor-mode-map (kbd "<tab>") 'outline-toggle-children)
 (evil-define-key 'normal
