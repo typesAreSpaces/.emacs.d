@@ -1315,7 +1315,7 @@
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
 (evil-define-key 'normal
-  outline-minor-mode-map (kbd "SPC <tab>") 'outline-toggle-children)
+  outline-minor-mode-map (kbd "<tab>") 'outline-toggle-children)
 (evil-define-key 'normal
   outline-minor-mode-map (kbd "<S-tab>") 'outline-cycle)
 
@@ -1333,6 +1333,13 @@
   "lf" '((lambda () (interactive)
            (lsp-latex-forward-search))
          :which-key "Latex (f)orward search"))
+
+;(use-package outline-magic)
+
+;(eval-after-load 'outline
+;  '(progn
+;     (require 'outline-magic)
+;     (define-key outline-minor-mode-map (kbd "<tab>") 'outline-cycle)))
 
 (use-package consult-reftex
   :after consult
