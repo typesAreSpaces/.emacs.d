@@ -374,9 +374,9 @@
   (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
   (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-u")
-    'better-jumper-jump-forward)
+              'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-o")
-    'better-jumper-jump-backward))
+              'better-jumper-jump-backward))
 
                                         ; jump scenarios
 (advice-add 'evil-next-line :around #'my-jump-advice)
@@ -409,9 +409,9 @@
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g")
-    'evil-normal-state)
+              'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h")
-    'evil-delete-backward-char-and-join)
+              'evil-delete-backward-char-and-join)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
@@ -907,25 +907,25 @@
           ))
 
   (define-key org-mode-map (kbd "C-c d")
-    (lambda () (interactive) (org-todo "MOVED")))
+              (lambda () (interactive) (org-todo "MOVED")))
   (define-key org-mode-map (kbd "C-c c")
-    (lambda () (interactive) (org-todo "COMPLETED")))
+              (lambda () (interactive) (org-todo "COMPLETED")))
   (define-key org-mode-map (kbd "C-c t")
-    (lambda () (interactive) (org-todo "TODO")))
+              (lambda () (interactive) (org-todo "TODO")))
   (define-key org-mode-map (kbd "C-c k")
-    (lambda () (interactive) (org-todo "CANC")))
+              (lambda () (interactive) (org-todo "CANC")))
   (define-key org-mode-map (kbd "C-c i")
-    (lambda () (interactive) (org-todo "IDEA")))
+              (lambda () (interactive) (org-todo "IDEA")))
   (define-key org-mode-map (kbd "C-c o")
-    (lambda () (interactive) (org-todo "OK")))
+              (lambda () (interactive) (org-todo "OK")))
   (define-key org-mode-map (kbd "C-c <return>")
-    'org-insert-heading-respect-content)
+              'org-insert-heading-respect-content)
   (define-key org-mode-map (kbd "C-c C-<SPC>")
-    'org-insert-subheading)
+              'org-insert-subheading)
   (define-key org-mode-map (kbd "C-c C-<return>")
-    'org-meta-return)
+              'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
-    (lambda () (interactive) (org-sort-buffer)))
+              (lambda () (interactive) (org-sort-buffer)))
 
   (efs/org-font-setup))
 
@@ -1314,12 +1314,12 @@
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
-(use-package outline-magic)
+                                        ;(use-package outline-magic)
 
-(evil-define-key 'normal
-  outline-minor-mode-map (kbd "<tab>") 'outline-toggle-children)
-(evil-define-key 'normal
-  outline-minor-mode-map (kbd "<S-tab>") 'outline-cycle)
+                                        ;(evil-define-key 'normal
+                                        ;  outline-minor-mode-map (kbd "<tab>") 'outline-toggle-children)
+                                        ;(evil-define-key 'normal
+                                        ;  outline-minor-mode-map (kbd "<S-tab>") 'outline-cycle)
 
 (efs/leader-keys
   "l" '(:ignore t :which-key "(l)atex related")
@@ -1451,10 +1451,10 @@
   :config
   (setq parinfer-extensions
         '(defaults       ; should be included.
-           pretty-parens  ; different paren styles for different modes.
-           evil           ; If you use Evil.
-           smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-           smart-yank)))  ; Yank behavior depend on mode.
+          pretty-parens  ; different paren styles for different modes.
+          evil           ; If you use Evil.
+          smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+          smart-yank)))  ; Yank behavior depend on mode.
 
 (efs/leader-keys
   "tp" 'parinfer-toggle-mode)
@@ -1788,6 +1788,10 @@
 (use-package sqlite3)
 
 (use-package jinx
+  :init
+  (setenv "PKG_CONFIG_PATH"
+          (concat "/opt/homebrew/opt/glib/lib/pkgconfig/:"
+                  (getenv "PKG_CONFIG_PATH"))) 
   :config
   (add-to-list 'vertico-multiform-categories
                '(jinx grid (vertico-grid-annotate . 20)))
