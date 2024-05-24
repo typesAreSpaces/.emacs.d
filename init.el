@@ -1736,6 +1736,13 @@
   (interactive)
   (shell-command "~/.local/scripts/reftexify"))
 
+(defun quicktex (name type)
+  (interactive
+   (list
+    (read-string "Project name: ")
+    (read-string "Project type: ")))
+  (shell-command (concat "~/.local/bin/quicktex " name " " type)))
+
 (use-package hide-mode-line)
 
 (defun efs/presentation-setup ()
