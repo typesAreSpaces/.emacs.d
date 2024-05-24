@@ -15,49 +15,52 @@
 
 (defvar bulk-saved-attachments-dir mu4e-attachment-dir)
 
-
 (defun cleanse-subject (sub)
   (replace-regexp-in-string
    "[^A-Z0-9]+"
    "-"
    (downcase sub)))
 
-(defun mu4e-view-save-all-attachments (&optional arg)
-  "Save all MIME parts from current mu4e gnus view buffer."
-  ;; Copied from mu4e-view-save-attachments
+(defun mu4e-view-save-all-attachments  (&optional arg)
+  "Save mime parts from current mu4e gnus view buffer.
+
+    When helm-mode is enabled provide completion on attachments and
+    possibility to mark candidates to save, otherwise completion on
+    attachments is done with `completing-read-multiple', in this case
+    use \",\" to separate candidate, completion is provided after
+    each \",\".
+
+    Note, currently this does not work well with file names
+    containing commas."
   (interactive "P")
   (cl-assert (and (eq major-mode 'mu4e-view-mode)
                   (derived-mode-p 'gnus-article-mode)))
   (let* ((msg (mu4e-message-at-point))
          (id (mu4e-message-field msg :subject))
          (attachdir (concat bulk-saved-attachments-dir "/" id))
-	 (parts (mu4e--view-gather-mime-parts))
-         (handles '())
-         (files '())
+	 (parts (mu4e-view-mime-parts))
+	 (candidates  (seq-map
+                         (lambda (fpart)
+                           (cons ;; (filename . annotation)
+                            (plist-get fpart :filename)
+                            fpart))
+                         (seq-filter
+                          (lambda (part) (plist-get part :attachment-like))
+                          parts)))
+	 (handles (or candidates
+                         (mu4e-warn "No attachments for this message")))
+	 (files (seq-map (lambda (h) (car h)) handles))
          dir)
     (mkdir attachdir t)
-    (dolist (part parts)
-      (let ((fname (or 
-		    (cdr (assoc 'filename (assoc "attachment" (cdr part))))
-                    (seq-find #'stringp
-                              (mapcar (lambda (item) (cdr (assoc 'name item)))
-                                      (seq-filter 'listp (cdr part)))))))
-        (when fname
-          (push `(,fname . ,(cdr part)) handles)
-          (push fname files))))
-    (if files
-        (progn
-          (setq dir
-		(if arg (read-directory-name "Save to directory: ")
-		  attachdir))
-          (cl-loop for (f . h) in handles
-                   when (member f files)
-                   do (mm-save-part-to-file h
-					    (sje-next-free
-					     (expand-file-name f dir)))))
-      (mu4e-message "No attached files found"))))
-
-
+    (seq-do (lambda (fname)
+              (let* ((dir (if arg (read-directory-name "Save to directory: ") attachdir))
+		     (part (cdr (assoc fname candidates)))
+                     (path (mu4e--uniqify-file-name
+                            (mu4e-join-paths
+                             (or dir (plist-get part :target-dir))
+                             (plist-get part :filename)))))
+                (mm-save-part-to-file (plist-get part :handle) path)))
+            files)))
 
 (defun sje-next-free (file)
   "Return name of next unique 'free' FILE.
