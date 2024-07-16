@@ -45,6 +45,57 @@
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
+(let
+    ((paths
+      '(
+        "/Applications/Maple 2022"
+        "/Applications/Racket v8.7/bin"
+        "/bin"
+        "/Library/TeX/texbin"
+        "/opt/homebrew/bin"
+        "/opt/homebrew/sbin"
+        "/opt/local/bin"
+        "/opt/local/sbin"
+        "/opt/X11/bin"
+        "/sbin"
+        "/System/Cryptexes/App/usr/bin"
+        "/usr/bin"
+        "/usr/local/bin"
+        "/usr/local/MacGPG2/bin"
+        "/usr/local/opt/cyrus-sasl/sbin"
+        "/usr/local/opt/llvm/bin"
+        "/usr/sbin"
+        "/Users/typesarespaces/.cargo/bin"
+        "/Users/typesarespaces/.config/emacs/bin"
+        "/Users/typesarespaces/.config/tmux/scripts"
+        "/Users/typesarespaces/.gem/ruby/2.7.0/bin"
+        "/Users/typesarespaces/.ghcup/bin"
+        "/Users/typesarespaces/.local/bin"
+        "/Users/typesarespaces/.local/scripts"
+        "/Users/typesarespaces/.local/share/pnpm"
+        "/Users/typesarespaces/.oh-my-zsh/custom/plugins/forgit/bin"
+        "/Users/typesarespaces/.opam/4.07.0/bin"
+        "/Users/typesarespaces/.opam/system/bin"
+        "/Users/typesarespaces/Documents/Apps"
+        "/Users/typesarespaces/Documents/Apps/csdp6.2.0linuxx86_64/bin"
+        "/Users/typesarespaces/Documents/Apps/LADR-2009-11A/bin"
+        "/Users/typesarespaces/Documents/Apps/MATLAB/R2022a/bin"
+        "/Users/typesarespaces/Documents/GithubProjects/M2/M2"
+        "/Users/typesarespaces/Documents/GithubProjects/radamsa/bin"
+        "/Users/typesarespaces/Documents/GithubProjects/sdpa-gmp"
+        "/Users/typesarespaces/Documents/GithubProjects/Singular4/bin"
+        )))
+  (setenv "PATH" (mapconcat 'identity paths ":"))
+  (setq exec-path (append paths (list "." exec-directory))))
+
+(let
+    ((paths
+      '(
+        "/opt/homebrew/lib/gcc/14"
+        "/opt/homebrew/lib/gcc/14/gcc/aarch64-apple-darwin23/14"
+        )))
+  (setenv "LIBRARY_PATH" (mapconcat 'identity paths ":")))
+
 (setq gc-cons-threshold (* 2 1000 1000))
 
 (when (not (version< emacs-version "26.3"))
@@ -461,7 +512,9 @@
 
 (when (not (version< emacs-version "26.3"))
   (use-package doom-modeline
-    :config (doom-modeline-mode 1)
+    :config
+    (doom-modeline-mode 1)
+    (setq mode-line-right-align-edge 'right-fringe)
     :custom (
              (doom-modeline-height 15)
              (doom-modeline-enable-word-count t)
