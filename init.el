@@ -15,6 +15,7 @@
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
@@ -361,7 +362,7 @@
     "aw" '(avy-goto-word-0 :which-key "(w)ord")
     "b" '(:ignore t :which-key "(b)ookmark")
     "bs" '(bookmark-set :which-key "bookmark (s)et")
-    "bb" '(consult-bookmark :which-key "(b)ookmark jump")
+    "bj" '(consult-bookmark :which-key "bookmark (j)ump")
     "bd" '(bookmark-delete :which-key "bookmark (d)elete")
     "e" '(:ignore t :which-key "(e)dit buffer")
     "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
@@ -393,7 +394,7 @@
     "wr" '(winner-redo :which-key "Winner (r)edo")))
 
 (use-package better-jumper
-  :after (evil god-mode)
+  :after (evil)
   :custom
                                         ; ; this is the key to avoiding conflict with evils jumping stuff
   (better-jumper-use-evil-jump-advice t)
@@ -422,8 +423,6 @@
              (line-number-at-pos (point))))
            1)
         (better-jumper-set-jump old-pos))))
-  (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
-  (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-u")
               'better-jumper-jump-forward)
   (define-key evil-motion-state-map (kbd "C-o")
@@ -435,24 +434,10 @@
 (advice-add 'evil-goto-definition :around #'my-jump-advice)
 (advice-add 'evil-goto-mark  :around #'my-jump-advice)
 
-(use-package god-mode
-  :config
-  (global-set-key (kbd "s-g") #'god-mode-all)
-  (define-key god-local-mode-map (kbd "i") #'god-local-mode)
-  (global-set-key
-   (kbd "C-g")
-   (lambda () (interactive) (prog1 (god-local-mode) (keyboard-escape-quit))))
-  (setq god-mode-alist '((nil . "C-") ("g" . "M-") ("G" . "C-M-")))
-  (setq god-mode-enable-function-key-translation nil)
-  (setq god-exempt-major-modes nil)
-  (setq god-exempt-predicates nil))
-
-(use-package evil-god-state)
-
 (use-package diminish)
 
 (use-package evil
-  :after (god-mode evil-god-state diminish)
+  :after (diminish)
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -467,17 +452,7 @@
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal)
-  (evil-define-key
-    'normal global-map ","
-    'evil-execute-in-god-state)
-  (add-hook 'evil-god-state-entry-hook
-            (lambda () (diminish 'god-local-mode)))
-  (add-hook 'evil-god-state-exit-hook
-            (lambda () (diminish-undo 'god-local-mode)))
-  (evil-define-key
-    'god global-map [escape]
-    'evil-god-state-bail))
+  (evil-set-initial-state 'dashboard-mode 'normal))
 
 (when (not (version< emacs-version "26.3"))
   (use-package evil-collection
@@ -526,9 +501,7 @@
   :diminish which-key-mode
   :config
   (which-key-mode)
-  (setq which-key-idle-delay 1)
-  (setq which-key-idle-secondary-delay 0.05)
-  (which-key-enable-god-mode-support))
+  (setq which-key-idle-delay 1))
 
 (use-package flx)
 
@@ -1061,6 +1034,8 @@
   :config
   (org-roam-setup))
 
+(use-package ox-reveal)
+
 (when (not (version< emacs-version "26.3"))
   (use-package ox-hugo
     :ensure t
@@ -1357,6 +1332,7 @@
   (use-package tex
     :ensure auctex
     :config
+    (setq compilation-scroll-output t)
     (setq TeX-auto-save t)
     (setq TeX-parse-self t)
     (setq-default TeX-master nil)
@@ -1364,6 +1340,9 @@
     (setq reftex-insert-label-flags (list t nil))
     (setq reftex-ref-macro-prompt nil)
     (setq font-latex-fontify-script nil)))
+
+(eval-after-load 'tex-mode
+  '(define-key LaTeX-mode-map [f9] 'compile))
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
