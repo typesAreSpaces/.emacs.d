@@ -15,6 +15,7 @@
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
@@ -307,7 +308,7 @@
     "aw" '(avy-goto-word-0 :which-key "(w)ord")
     "b" '(:ignore t :which-key "(b)ookmark")
     "bs" '(bookmark-set :which-key "bookmark (s)et")
-    "bb" '(consult-bookmark :which-key "(b)ookmark jump")
+    "bj" '(consult-bookmark :which-key "bookmark (j)ump")
     "bd" '(bookmark-delete :which-key "bookmark (d)elete")
     "e" '(:ignore t :which-key "(e)dit buffer")
     "ec"  '(evilnc-comment-or-uncomment-lines :which-key "(c)omment line")
@@ -339,7 +340,7 @@
     "wr" '(winner-redo :which-key "Winner (r)edo")))
 
 (use-package better-jumper
-  :after (evil god-mode)
+  :after (evil)
   :custom
                                         ; ; this is the key to avoiding conflict with evils jumping stuff
   (better-jumper-use-evil-jump-advice t)
@@ -367,13 +368,12 @@
              (line-number-at-pos old-pos)
              (line-number-at-pos (point))))
            1)
-        (better-jumper-set-jump old-pos))))
-  (define-key god-local-mode-map (kbd "o") 'better-jumper-jump-backward)
-  (define-key god-local-mode-map (kbd "u") 'better-jumper-jump-forward)
-  (define-key evil-motion-state-map (kbd "C-u")
-    'better-jumper-jump-forward)
-  (define-key evil-motion-state-map (kbd "C-o")
-    'better-jumper-jump-backward))
+        (better-jumper-set-jump old-pos)))))
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map
+              (kbd "C-u") 'better-jumper-jump-forward)
+  (define-key evil-motion-state-map
+              (kbd "C-o") 'better-jumper-jump-backward))
 
                                         ; jump scenarios
 (advice-add 'evil-next-line :around #'my-jump-advice)
@@ -381,24 +381,10 @@
 (advice-add 'evil-goto-definition :around #'my-jump-advice)
 (advice-add 'evil-goto-mark  :around #'my-jump-advice)
 
-(use-package god-mode
-  :config
-  (global-set-key (kbd "s-g") #'god-mode-all)
-  (define-key god-local-mode-map (kbd "i") #'god-local-mode)
-  (global-set-key
-   (kbd "C-g")
-   (lambda () (interactive) (prog1 (god-local-mode) (keyboard-escape-quit))))
-  (setq god-mode-alist '((nil . "C-") ("g" . "M-") ("G" . "C-M-")))
-  (setq god-mode-enable-function-key-translation nil)
-  (setq god-exempt-major-modes nil)
-  (setq god-exempt-predicates nil))
-
-(use-package evil-god-state)
-
 (use-package diminish)
 
 (use-package evil
-  :after (god-mode evil-god-state diminish)
+  :after (diminish)
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -406,24 +392,24 @@
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g")
-    'evil-normal-state)
+              'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h")
-    'evil-delete-backward-char-and-join)
+              'evil-delete-backward-char-and-join)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (defun evil-keyboard-quit ()
+    "Keyboard quit and force normal state."
+    (interactive)
+    (and evil-mode (evil-force-normal-state))
+    (keyboard-quit))
+  (define-key evil-normal-state-map   (kbd "C-g") #'evil-keyboard-quit) 
+  (define-key evil-motion-state-map   (kbd "C-g") #'evil-keyboard-quit) 
+  (define-key evil-insert-state-map   (kbd "C-g") #'evil-keyboard-quit) 
+  (define-key evil-window-map         (kbd "C-g") #'evil-keyboard-quit) 
+  (define-key evil-operator-state-map (kbd "C-g") #'evil-keyboard-quit) 
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal)
-  (evil-define-key
-    'normal global-map ","
-    'evil-execute-in-god-state)
-  (add-hook 'evil-god-state-entry-hook
-            (lambda () (diminish 'god-local-mode)))
-  (add-hook 'evil-god-state-exit-hook
-            (lambda () (diminish-undo 'god-local-mode)))
-  (evil-define-key
-    'god global-map [escape]
-    'evil-god-state-bail))
+  (evil-set-initial-state 'dashboard-mode 'normal))
 
 (when (not (version< emacs-version "26.3"))
   (use-package evil-collection
@@ -466,7 +452,7 @@
   :config
   (which-key-mode)
   (setq which-key-idle-delay 1)
-  (which-key-enable-god-mode-support))
+  (setq which-key-idle-secondary-delay 0.05))
 
 (use-package flx)
 
@@ -898,25 +884,25 @@
           ))
 
   (define-key org-mode-map (kbd "C-c d")
-    (lambda () (interactive) (org-todo "MOVED")))
+              (lambda () (interactive) (org-todo "MOVED")))
   (define-key org-mode-map (kbd "C-c c")
-    (lambda () (interactive) (org-todo "COMPLETED")))
+              (lambda () (interactive) (org-todo "COMPLETED")))
   (define-key org-mode-map (kbd "C-c t")
-    (lambda () (interactive) (org-todo "TODO")))
+              (lambda () (interactive) (org-todo "TODO")))
   (define-key org-mode-map (kbd "C-c k")
-    (lambda () (interactive) (org-todo "CANC")))
+              (lambda () (interactive) (org-todo "CANC")))
   (define-key org-mode-map (kbd "C-c i")
-    (lambda () (interactive) (org-todo "IDEA")))
+              (lambda () (interactive) (org-todo "IDEA")))
   (define-key org-mode-map (kbd "C-c o")
-    (lambda () (interactive) (org-todo "OK")))
+              (lambda () (interactive) (org-todo "OK")))
   (define-key org-mode-map (kbd "C-c <return>")
-    'org-insert-heading-respect-content)
+              'org-insert-heading-respect-content)
   (define-key org-mode-map (kbd "C-c C-<SPC>")
-    'org-insert-subheading)
+              'org-insert-subheading)
   (define-key org-mode-map (kbd "C-c C-<return>")
-    'org-meta-return)
+              'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
-    (lambda () (interactive) (org-sort-buffer)))
+              (lambda () (interactive) (org-sort-buffer)))
 
   (efs/org-font-setup))
 
@@ -998,6 +984,8 @@
          ("C-<return>" . vertico-exit-input))
   :config
   (org-roam-setup))
+
+(use-package ox-reveal)
 
 (when (not (version< emacs-version "26.3"))
   (use-package ox-hugo
@@ -1128,6 +1116,7 @@
     :hook (lsp-mode . efs/lsp-mode-setup)
     :init
     (setq lsp-keymap-prefix "C-l")
+    (setq read-process-output-max (* 1024 1024))
     :config
     (setq lsp-completion-provider :none)
     (defun corfu-lsp-setup ()
@@ -1284,6 +1273,7 @@
   (use-package tex
     :ensure auctex
     :config
+    (setq compilation-scroll-output t)
     (setq TeX-auto-save t)
     (setq TeX-parse-self t)
     (setq-default TeX-master nil)
@@ -1291,6 +1281,9 @@
     (setq reftex-insert-label-flags (list t nil))
     (setq reftex-ref-macro-prompt nil)
     (setq font-latex-fontify-script nil)))
+
+(eval-after-load 'tex-mode
+  '(define-key LaTeX-mode-map [f9] 'compile))
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
@@ -1431,10 +1424,10 @@
   :config
   (setq parinfer-extensions
         '(defaults       ; should be included.
-           pretty-parens  ; different paren styles for different modes.
-           evil           ; If you use Evil.
-           smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-           smart-yank)))  ; Yank behavior depend on mode.
+          pretty-parens  ; different paren styles for different modes.
+          evil           ; If you use Evil.
+          smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+          smart-yank)))  ; Yank behavior depend on mode.
 
 (efs/leader-keys
   "tp" 'parinfer-toggle-mode)
@@ -1467,7 +1460,7 @@
   (corfu-min-width 80)
   (corfu-max-width corfu-min-width)
   (corfu-scroll-margin 5)        ; Use scroll margin
-  (corfu-auto-delay 0.2)
+  (corfu-auto-delay 1)
   (corfu-auto-prefix 3)
                                         ; (completion-styles '(basic))
 
@@ -1481,7 +1474,7 @@
                                         ; globally (M-/).
                                         ; See also `global-corfu-modes'.
   :config
-  (setq corfu-popupinfo-delay 0.2)
+  (setq corfu-popupinfo-delay '(2.0 . 1.0))
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode))
