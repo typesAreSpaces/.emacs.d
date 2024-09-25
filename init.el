@@ -916,6 +916,7 @@
 
 (efs/leader-keys
   "o" '(:ignore t :which-key "(o)rg")
+  "oa" '(org-agenda nil :which-key "org-(a)genda")
   "oc" '(org-capture nil :which-key "org-(c)apture"))
 
 (use-package org-mime
