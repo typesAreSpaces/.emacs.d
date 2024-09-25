@@ -371,11 +371,12 @@
              (line-number-at-pos old-pos)
              (line-number-at-pos (point))))
            1)
-        (better-jumper-set-jump old-pos))))
-  (define-key evil-motion-state-map (kbd "C-u")
-              'better-jumper-jump-forward)
-  (define-key evil-motion-state-map (kbd "C-o")
-              'better-jumper-jump-backward))
+        (better-jumper-set-jump old-pos)))))
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map
+              (kbd "C-u") 'better-jumper-jump-forward)
+  (define-key evil-motion-state-map
+              (kbd "C-o") 'better-jumper-jump-backward))
 
                                         ; jump scenarios
 (advice-add 'evil-next-line :around #'my-jump-advice)
@@ -399,6 +400,16 @@
               'evil-delete-backward-char-and-join)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (defun evil-keyboard-quit ()
+    "Keyboard quit and force normal state."
+    (interactive)
+    (and evil-mode (evil-force-normal-state))
+    (keyboard-quit))
+  (define-key evil-normal-state-map   (kbd "C-g") #'evil-keyboard-quit) 
+  (define-key evil-motion-state-map   (kbd "C-g") #'evil-keyboard-quit) 
+  (define-key evil-insert-state-map   (kbd "C-g") #'evil-keyboard-quit) 
+  (define-key evil-window-map         (kbd "C-g") #'evil-keyboard-quit) 
+  (define-key evil-operator-state-map (kbd "C-g") #'evil-keyboard-quit) 
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
@@ -1115,6 +1126,7 @@
     :hook (lsp-mode . efs/lsp-mode-setup)
     :init
     (setq lsp-keymap-prefix "C-l")
+    (setq read-process-output-max (* 1024 1024))
     :config
     (setq lsp-completion-provider :none)
     (defun corfu-lsp-setup ()
@@ -1458,7 +1470,7 @@
   (corfu-min-width 80)
   (corfu-max-width corfu-min-width)
   (corfu-scroll-margin 5)        ; Use scroll margin
-  (corfu-auto-delay 0.2)
+  (corfu-auto-delay 1)
   (corfu-auto-prefix 3)
                                         ; (completion-styles '(basic))
 
@@ -1472,7 +1484,7 @@
                                         ; globally (M-/).
                                         ; See also `global-corfu-modes'.
   :config
-  (setq corfu-popupinfo-delay 0.2)
+  (setq corfu-popupinfo-delay '(2.0 . 1.0))
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode))
