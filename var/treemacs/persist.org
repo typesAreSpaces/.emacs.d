@@ -15,11 +15,6 @@
  - path :: ~/Documents/GithubProjects/phd-thesis/Software/Maple
 ** Mathematica
  - path :: ~/Documents/GithubProjects/phd-thesis/Software/Mathematica
-* Thesis
-** Proposal
- - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Write-Ups/proposal
-** Weekly reports
- - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Write-Ups/weekly_reports
 * Reading
 ** Papers
  - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Papers
@@ -38,7 +33,16 @@
  - path :: ~/Documents/GithubProjects/AXDInterpolator/extension
 ** Code (AXDInterpolator)
  - path :: ~/Documents/GithubProjects/AXDInterpolator/original
-** Code (z3-interp-plus)
- - path :: ~/Documents/GithubProjects/z3-interp-plus
 ** Discussion
  - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Side-Projects/MaxDiff
+* Progress report for committee
+** Agenda
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Org-Files
+** Report file
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Write-Ups/2024/progress_report_committee
+** Observations
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Write-Ups/2024/observations-with-prof-kapur-07-22-24
+** almost-saturated-qms
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Write-Ups/2024/almost-saturated-qms
+** monogenic_case_report
+ - path :: ~/Documents/GithubProjects/phd-thesis/Documents/Write-Ups/2024/monogenic_case_report
