@@ -173,6 +173,7 @@
 (tool-bar-mode -1)                 ; Disable the toolbar
 (tooltip-mode -1)                  ; Disable tooltips
 (set-fringe-mode 10)               ; Give some breathing room
+(setq whitespace-line-column 250)
 
 (menu-bar-mode -1)                 ; Disable the menu bar
 (setq make-backup-files nil)
@@ -343,6 +344,9 @@
                                         ; Unbind C-@ in order to make it a global-prefix for general
 (global-unset-key (kbd "C-SPC"))
 (global-unset-key (kbd "C-@"))
+(global-unset-key (kbd "C-x o"))
+
+(global-set-key (kbd "C-x o") 'ace-window)
 
 (when (eq system-type 'darwin) ; mac specific settings
   (setq mac-option-modifier 'super)
@@ -667,6 +671,15 @@
     :config
     (consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
+    (setq extra-buffer-sources
+          '(:name     "Extra"
+                      :narrow   ?m
+                      :category buffer
+                      :state    consult--buffer-state
+                      :items
+                      ("*Messages*"
+                       "*scratch*")))
+    (add-to-list 'consult-buffer-sources extra-buffer-sources)
     (setq consult-project-root-function (lambda () (project-root (project-current))))
                                         ; Optionally configure preview. The default value
                                         ; is 'any, such that any key triggers the preview.
@@ -956,11 +969,11 @@
               (lambda () (interactive) (org-todo "IDEA")))
   (define-key org-mode-map (kbd "C-c o")
               (lambda () (interactive) (org-todo "OK")))
-  (define-key org-mode-map (kbd "C-c <return>")
+  (define-key org-mode-map (kbd "C-c C-<return>")
               'org-insert-heading-respect-content)
   (define-key org-mode-map (kbd "C-c C-<SPC>")
               'org-insert-subheading)
-  (define-key org-mode-map (kbd "C-c C-<return>")
+  (define-key org-mode-map (kbd "C-c <return>")
               'org-meta-return)
   (define-key org-mode-map (kbd "C-c s")
               (lambda () (interactive) (org-sort-buffer)))
@@ -1283,6 +1296,8 @@
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 
+;(setq LaTeX-mode-map latex-mode-map)
+
 (add-hook 'TeX-mode-hook 'outline-minor-mode)
 (add-hook 'LaTeX-mode-hook 'outline-minor-mode)
 
@@ -1443,11 +1458,11 @@
 
 (use-package toml-mode)
 
-(use-package boogie-friends
-  :config
-  (setq
-   flycheck-z3-executable
-   "~/Documents/GithubProjects/CAXDInterpolator/dependencies/z3-interp-plus/build/z3"))
+;  (use-package boogie-friends
+;    :config
+;    (setq
+;     flycheck-z3-executable
+;     "~/Documents/GithubProjects/CAXDInterpolator/dependencies/z3-interp-plus/build;/z3"))
 
 (use-package lean4-mode
   :straight (lean4-mode :type git
@@ -1751,7 +1766,11 @@
 (setq dired-listing-switches "-al --group-directories-first")
 
 (use-package dired-single
-  :commands (dired dired-jump))
+  :commands (dired dired-jump)
+  :straight
+  (:type git
+         :host github
+         :repo "emacsattic/dired-single"))
 
 (when (not (version< emacs-version "26.1"))
   (use-package all-the-icons-dired
