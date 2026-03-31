@@ -7,7 +7,7 @@
  ("doom" . ((user-emacs-directory . "~/.config/emacs")
             (server-name . "doom")
             (env . (("DOOMDIR" . "~/.config/doom")))))
- ("spacemacs" . ((user-emacs-directory . "~/.config/spacemacs")
+ ("spacemacs" . ((user-emacs-directory . "~/.config/spacemacs1")
                  (server-name . "spacemacs")
                  (env . (("SPACEMACSDIR" . "~/.spacemacs.d")))))
  ("prelude" . ((user-emacs-directory . "~/.config/prelude")

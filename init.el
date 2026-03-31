@@ -29,6 +29,7 @@
 (setq use-package-always-ensure t)
 
 (setq evil-want-keybinding nil)
+(setq package-enable-at-startup nil)
 
 (use-package auto-package-update
   :custom
@@ -268,6 +269,14 @@
 (setq tab-bar-new-tab-choice "*dashboard*"); buffer to show in new tabs
 (setq tab-bar-tab-hints t)                 ; show tab numbers
 (setq tab-bar-new-tab-to 'rightmost)       ; defines where to create a new tab
+(defun tab-duplicate-next ()
+  "Duplicate the current tab and place the duplicate immediately after it."
+  (interactive)
+  (let* ((tabs (tab-bar-tabs))
+	 (orig-index (cl-position (tab-bar--current-tab) tabs :test #'equal)))
+    (tab-duplicate)
+    (tab-bar-move-tab-to (+ orig-index 1))
+    (tab-next))):
 (set-face-attribute 'tab-bar nil
                     :background "#282828"
                     :foreground "gray60" :distant-foreground "gray50"
@@ -347,6 +356,7 @@
 (global-unset-key (kbd "C-x o"))
 
 (global-set-key (kbd "C-x o") 'ace-window)
+(global-set-key (kbd "C-c l") 'my/org-store-link-with-tilde)
 
 (when (eq system-type 'darwin) ; mac specific settings
   (setq mac-option-modifier 'super)
@@ -381,9 +391,18 @@
     "s"  '(shell-command :which-key "(s)hell command")
     "S"  '(async-shell-command :which-key "async (S)hell command")
     "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
+    "1" '(tab-bar-select-tab 1 :which-key "Move to tab 1")
+    "2" '(tab-bar-select-tab 2 :which-key "Move to tab 2")
+    "3" '(tab-bar-select-tab 3 :which-key "Move to tab 3")
+    "4" '(tab-bar-select-tab 4 :which-key "Move to tab 4")
+    "5" '(tab-bar-select-tab 5 :which-key "Move to tab 5")
+    "6" '(tab-bar-select-tab 6 :which-key "Move to tab 6")
+    "7" '(tab-bar-select-tab 7 :which-key "Move to tab 7")
+    "8" '(tab-bar-select-tab 8 :which-key "Move to tab 8")
+    "9" '(tab-bar-select-tab 9 :which-key "Move to tab 9")
     "tt" '(load-theme :which-key "choose (t)heme")
     "ts" '(tab-switch :which-key "(s)witch tab")
-    "td" '(tab-duplicate :which-key "tab (d)uplicate")
+    "td" '(tab-duplicate-next :which-key "tab (d)uplicate")
     "tn" '(tab-new :which-key "(n)ew tab")
     "tc" '(tab-close :which-key "(c)lose tab")
     "th" '(tab-previous :which-key "move to left tab")
@@ -460,11 +479,11 @@
     (interactive)
     (and evil-mode (evil-force-normal-state))
     (keyboard-quit))
-  (define-key evil-normal-state-map   (kbd "C-g") #'evil-keyboard-quit) 
-  (define-key evil-motion-state-map   (kbd "C-g") #'evil-keyboard-quit) 
-  (define-key evil-insert-state-map   (kbd "C-g") #'evil-keyboard-quit) 
-  (define-key evil-window-map         (kbd "C-g") #'evil-keyboard-quit) 
-  (define-key evil-operator-state-map (kbd "C-g") #'evil-keyboard-quit) 
+  (define-key evil-normal-state-map   (kbd "C-g") #'evil-keyboard-quit)
+  (define-key evil-motion-state-map   (kbd "C-g") #'evil-keyboard-quit)
+  (define-key evil-insert-state-map   (kbd "C-g") #'evil-keyboard-quit)
+  (define-key evil-window-map         (kbd "C-g") #'evil-keyboard-quit)
+  (define-key evil-operator-state-map (kbd "C-g") #'evil-keyboard-quit)
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
@@ -486,6 +505,27 @@
   :after evil
   :config
   (global-evil-matchit-mode 1))
+
+(defun wrap-region-custom (beg end prefix suffix)
+  (interactive "r\nsPrefix: \nsSuffix: ")
+  (save-excursion
+    (goto-char end)
+    (insert suffix)
+    (goto-char beg)
+    (insert prefix)))
+
+(defun wrap-region-fixed (beg end)
+  "Wrap the active region with a fixed prefix and suffix."
+  (interactive "r")
+  (let ((prefix "{\\color{orange} ")
+        (suffix "}"))
+    (save-excursion
+      (goto-char end)
+      (insert suffix)
+      (goto-char beg)
+      (insert prefix))))
+
+(define-key evil-visual-state-map (kbd "C-c w") 'wrap-region-fixed)
 
 (use-package command-log-mode
   :commands command-log-mode)
@@ -842,6 +882,12 @@
   (variable-pitch-mode 1)
   (visual-line-mode 1))
 
+(defun my/org-store-link-with-tilde ()
+  "Store a file link using ~ instead of /home/username."
+  (interactive)
+  (let ((default-directory (substitute-in-file-name "$HOME/")))
+    (call-interactively 'org-store-link)))
+
 (use-package org
   :pin org
   :commands (org-capture org-agenda)
@@ -885,7 +931,7 @@
 
   (setq org-todo-keywords
         '((sequence "EXTERNAL" "|")
-          (sequence "GOAL" "IDEA" "OBSERVATION" "|" "OK")
+          (sequence "GOAL" "|" "OK" "IDEA" "OBSERVATION")
           (sequence "TODO" "|" "MOVED" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
@@ -1111,6 +1157,7 @@
   :hook ((org-mode . efs/org-mode-visual-fill)
          (markdown-mode . efs/org-mode-visual-fill)
          (TeX-mode . efs/org-mode-visual-fill)
+         (latex-mode . efs/org-mode-visual-fill)
          (LaTeX-mode . efs/org-mode-visual-fill)
          (mu4e-main-mode . efs/org-mode-visual-fill))
   :custom
@@ -1300,19 +1347,24 @@
 
 (add-hook 'TeX-mode-hook 'outline-minor-mode)
 (add-hook 'LaTeX-mode-hook 'outline-minor-mode)
+(add-hook 'latex-mode-hook 'outline-minor-mode)
 
 (add-hook 'TeX-mode-hook 'lsp)
 (add-hook 'LaTeX-mode-hook 'lsp)
+(add-hook 'latex-mode-hook 'lsp)
 
 (add-hook 'TeX-mode-hook 'turn-on-reftex)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(add-hook 'latex-mode-hook 'turn-on-reftex)
 
 (add-hook 'TeX-mode-hook #'auto-fill-mode)
 (add-hook 'LaTeX-mode-hook #'auto-fill-mode)
+(add-hook 'latex-mode-hook #'auto-fill-mode)
 (setq-default fill-column 80)
 
 (add-hook 'TeX-mode-hook #'display-fill-column-indicator-mode)
 (add-hook 'LaTeX-mode-hook #'display-fill-column-indicator-mode)
+(add-hook 'latex-mode-hook #'display-fill-column-indicator-mode)
 
 (when (not (version< emacs-version "26.1"))
   (use-package lsp-latex
@@ -1332,7 +1384,7 @@
     (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
 ;; (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/sioyek")
 ;;     (setq lsp-latex-forward-search-args
-;;           '( 
+;;           '(
 ;;              "--forward-search-file"
 ;;              "%f"
 ;;              "--forward-search-line"
@@ -1412,7 +1464,7 @@
     :custom
     (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
                           ,(concat maxdiff-write-ups-dir "/references.bib")
-                          ,(concat phd-thesis-write-ups-dir "/references.bib")))))
+                          ,(concat phd-thesis-write-ups-dir "/2025/thesis-manuscript/references.bib")))))
 
 (use-package typst-mode
   :straight
@@ -1821,6 +1873,26 @@
     (read-string "Project type: ")))
   (shell-command (concat "~/.local/bin/quicktex " name " " type)))
 
+(defun fractify ()
+  "Choose a file from the current directory (default: current buffer)
+and apply the fractify.sh command to it.
+The file name is passed as a shell-quoted argument."
+  (interactive)
+  (let* ((dir default-directory)
+         (default (when buffer-file-name
+                    (file-name-nondirectory buffer-file-name)))
+         (file (read-file-name
+                "File: "
+                dir
+                default
+                t)))
+    (unless (file-regular-p file)
+      (user-error "Not a regular file1: %s" file))
+    (shell-command
+     (format "%s %s"
+             "~/.local/scripts/fractify.sh"
+             (shell-quote-argument (expand-file-name file))))))
+
 (use-package hide-mode-line)
 
 (defun efs/presentation-setup ()
@@ -1863,7 +1935,7 @@
   :init
   (setenv "PKG_CONFIG_PATH"
           (concat "/opt/homebrew/opt/glib/lib/pkgconfig/:"
-                  (getenv "PKG_CONFIG_PATH"))) 
+                  (getenv "PKG_CONFIG_PATH")))
   :config
   (add-to-list 'vertico-multiform-categories
                '(jinx grid (vertico-grid-annotate . 20)))
@@ -1880,3 +1952,7 @@
 (use-package try)
 
 (use-package zoxide)
+
+(use-package lorem-ipsum)
+
+(use-package chess)

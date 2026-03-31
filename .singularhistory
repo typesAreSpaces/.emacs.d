@@ -1,0 +1,6 @@
+ring r = 0, (x, y, z), dp;
+ring r = 0, (x, yz, z), dp;
+yz^2;
+ring r = 0, (x, yz, z), dp;
+quit
+;
