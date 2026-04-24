@@ -1,12 +1,12 @@
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+       (expand-file-name
+      "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
+        (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+                                  'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -82,10 +82,6 @@
         "/Users/typesarespaces/Documents/Apps/csdp6.2.0linuxx86_64/bin"
         "/Users/typesarespaces/Documents/Apps/LADR-2009-11A/bin"
         "/Users/typesarespaces/Documents/Apps/MATLAB/R2022a/bin"
-        "/Users/typesarespaces/Documents/GithubProjects/M2/M2"
-        "/Users/typesarespaces/Documents/GithubProjects/radamsa/bin"
-        "/Users/typesarespaces/Documents/GithubProjects/sdpa-gmp"
-        "/Users/typesarespaces/Documents/GithubProjects/Singular4/bin"
         )))
   (setenv "PATH" (mapconcat 'identity paths ":"))
   (setq exec-path (append paths (list "." exec-directory))))
@@ -106,65 +102,6 @@
 (when (not (version< emacs-version "26.3"))
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
-
-(defvar phd-thesis-dir "~/Documents/GithubProjects/phd-thesis")
-(defvar website-dir "~/Documents/GithubProjects/website")
-(defvar website-posts (concat website-dir "/content-org/all-posts.org"))
-(defvar current-semester-dir
-  (concat phd-thesis-dir
-          "/Documents/Semesters/2023/Fall"))
-(defvar maxdiff-org-files-dir
-  (concat phd-thesis-dir
-          "/Documents/Side-Projects/MaxDiff/Documents/org"))
-(defvar maxdiff-write-ups-dir
-  (concat phd-thesis-dir
-          "/Documents/Side-Projects/MaxDiff/Documents/notes"))
-
-(defvar phd-thesis-write-ups-dir
-  (concat phd-thesis-dir
-          "/Documents/Write-Ups"))
-(defvar phd-thesis-org-files-dir
-  (concat phd-thesis-dir
-          "/Documents/Org-Files"))
-
-(defvar scc-dir
-  (concat phd-thesis-dir
-          "/Documents/Side-Projects/kapur-nsf-proposal/2022"))
-(defvar scc-reports-dir (concat scc-dir "/Reports"))
-(defvar scc-org-files-dir (concat scc-dir "/Org-Files"))
-
-(defvar seminar-dir
-  (concat phd-thesis-dir
-          "/Documents/Seminars/BeihangUniversity-Fall2021"))
-(defvar seminar-org-files-dir (concat seminar-dir "/Org-Files"))
-(defvar ta1-tasks-mail
-  (concat current-semester-dir "/TA-CS-105/Org-Files/current_tasks.org"))
-(defvar ta2-tasks-mail
-  (concat current-semester-dir "/TA-CS-561/Org-Files/current_tasks.org"))
-
-(defvar maxdiff-agenda-mail
-  (concat maxdiff-org-files-dir "/agenda.org"))
-
-(defvar agenda-mail
-  (concat phd-thesis-org-files-dir "/main.org"))
-(defvar research-tasks-mail
-  (concat phd-thesis-org-files-dir "/research_tasks.org"))
-(defvar dissertation-tasks-mail
-  (concat phd-thesis-org-files-dir "/dissertation_tasks.org"))
-(defvar graduation-logistics-tasks-mail
-  (concat phd-thesis-org-files-dir "/graduation_logistics.org"))
-(defvar lunch-tasks-mail
-  (concat phd-thesis-org-files-dir "/lunch_tasks.org"))
-(defvar side-tasks-mail
-  (concat phd-thesis-org-files-dir "/side_tasks.org"))
-(defvar scc-tasks-mail
-  (concat scc-org-files-dir "/scc_tasks.org"))
-(defvar school-tasks-mail
-  (concat phd-thesis-org-files-dir "/school_tasks.org"))
-(defvar seminar-tasks-mail
-  (concat seminar-org-files-dir "/seminar_tasks.org"))
-(defvar seminar-meetings
-  (concat seminar-org-files-dir "/meeting_notes.org"))
 
 (defvar efs/frame-transparency '(100 . 100))
 
@@ -259,8 +196,7 @@
     (when (file-exists-p dashboard-logo-path)
       (setq dashboard-startup-banner dashboard-logo-path))
     (setq dashboard-items '((recents  . 10)
-                            (bookmarks . 10)
-                            (projects . 5)))
+                            (bookmarks . 10)))
     (dashboard-setup-startup-hook)))
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
@@ -273,7 +209,7 @@
   "Duplicate the current tab and place the duplicate immediately after it."
   (interactive)
   (let* ((tabs (tab-bar-tabs))
-	 (orig-index (cl-position (tab-bar--current-tab) tabs :test #'equal)))
+       (orig-index (cl-position (tab-bar--current-tab) tabs :test #'equal)))
     (tab-duplicate)
     (tab-bar-move-tab-to (+ orig-index 1))
     (tab-next))):
@@ -709,7 +645,7 @@
                                         ; Configure other variables and modes in the :config section,
                                         ; after lazily loading the package.
     :config
-    (consult-customize consult--source-buffer :hidden t :default nil)
+                                      ;(consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
     (setq extra-buffer-sources
           '(:name     "Extra"
@@ -745,7 +681,7 @@
 
                                         ; Optionally make narrowing help available in the minibuffer.
                                         ; You may want to use `embark-prefix-help-command' or which-key
-                                        ;instead.
+                                        \in \set{ \mid }tead.
                                         ; (define-key consult-narrow-map (vconcat consult-narrow-key
                                         ;"?") #'consult-narrow-help)
 
@@ -795,25 +731,11 @@
 
 (defhydra hydra-jump-files (:exit t)
   "jump to files"
-  ("a" (find-file
-        (expand-file-name (concat phd-thesis-org-files-dir "/main.org")))
-   "Agenda")
-  ("t" (find-file
-        (expand-file-name (concat phd-thesis-org-files-dir "/todo.org")))
-   "Todos")
+  ("a" (find-file "~/Documents/Org-Files/20260423173343-main_agenda.org")
+   "Main Agenda")
   ("e" (find-file
         (expand-file-name "config.org" user-emacs-directory))
-   "Emacs config")
-  ("w" (find-file
-        (expand-file-name
-         (concat seminar-dir "/Reports/2023/monogenic_certificates_compact_case/main.tex")))
-   "Current report")
-  ("rp" (find-file
-         (expand-file-name (concat phd-thesis-write-ups-dir "/references.bib")))
-   "Bibtex references - PhD thesis")
-  ("rs" (find-file
-         (expand-file-name (concat scc-reports-dir "/references.bib")))
-   "Bibtex references - SCC project"))
+   "Emacs config"))
 
 (defhydra hydra-text-scale (:timeout 4)
   "scale text"
@@ -907,15 +829,14 @@
   (setq
    org-agenda-files
    (mapcar
-    #'(lambda (x) (concat phd-thesis-org-files-dir "/" x))
+    #'(lambda (x) (concat "~/Documents/Org-Files/" x))
     '(
+      "20260423173343-main_agenda.org"
+      "20260423174506-current_work.org"
+      "20260423173522-postdoc_applications.org"
+      "20251105153112-applying_opt.org"
       "20231115200616-qm_seminar.org"
-      "research_tasks.org"
-      "school_tasks.org"
-      "graduation_logistics.org"
-      "dissertation_tasks.org"
-      "main.org"
-      "todo.org"
+      "20260423174626-algebraic_combinatorics_seminar.org"
       )))
 
   (setq org-agenda-start-with-log-mode t)
@@ -935,17 +856,15 @@
           (sequence "TODO" "|" "MOVED" "COMPLETED(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
-                                        ; Save Org buffers after refiling!
+					; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-                                        ; Use find-file instead of file-find-other-window
+					; Use find-file instead of file-find-other-window
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
   (setq org-tag-alist
         '((:startgroup)
           ("seminar" . ?s)
-          ("thesis" . ?t)
-          ("graduation" . ?g)
           (:endgroup)
           ("review" . ?r)
           ("interesting" . ?i)
@@ -954,53 +873,11 @@
   (setq org-capture-templates
         `(
           ("e" "Email Capture")
-          ("ea" "Main Agenda" entry
-           (file+olp agenda-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("ed" "Dissertation Tasks" entry
-           (file+olp dissertation-tasks-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("eg" "Graduation Logistics" entry
-           (file+olp graduation-logistics-tasks-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("er" "Research Tasks" entry
-           (file+olp research-tasks-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("el" "Lunch Tasks" entry
-           (file+olp lunch-tasks-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("es" "S..")
-          ("esc" "School Tasks" entry
-           (file+olp school-tasks-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("est" "Seminar Tasks" entry
-           (file+olp seminar-tasks-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("esm" "Seminar Meetings" plain
-           (file+function seminar-meetings (lambda () (goto-line 5)))
-           "%a"
-           :prepend t
-           :immediate-finish t)
-          ("et" "TA Task")
-          ("etu" "CS 105 - Fall 2023" entry
-           (file+olp ta1-tasks-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("eto" "CS 561 - Fall 2023" entry
-           (file+olp ta2-tasks-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
-          ("em" "MaxDiff Agenda" entry
-           (file+olp maxdiff-agenda-mail "EMAIL")
-           "** TODO Check this email %a"
-           :immediate-finish t)
+					; TODO Update this
+          ;; ("ea" "Main Agenda" entry
+          ;;  (file+olp agenda-mail "EMAIL")
+          ;;  "** TODO Check this email %a"
+          ;;  :immediate-finish t)
           ))
 
   (define-key org-mode-map (kbd "C-c d")
@@ -1083,7 +960,8 @@
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files")
+  (org-roam-directory "~/Documents/Org-Files")
+
   (org-roam-completion-everywhere t)
   (org-roam-capture-templates
    '(("d" "default" plain
@@ -1091,11 +969,11 @@
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n")
       :unnarrowed t)
      ("l" "lecture" plain
-      (file "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/Templates/lecture.org")
+      (file "~/Documents/Org-Files/Templates/lecture.org")
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)
      ("m" "meeting" plain
-      (file "~/Documents/GithubProjects/phd-thesis/Documents/Org-Files/Templates/meeting.org")
+      (file "~/Documents/Org-Files/Templates/meeting.org")
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)))
   :bind (("C-x n f" . org-roam-node-find)
@@ -1195,9 +1073,12 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-                                        ; NOTE: Set this to the folder where you keep your Git repos!
-  (when (file-directory-p "~/Documents/GithubProjects")
-    (setq projectile-project-search-path '("~/Documents/GithubProjects")))
+                                        ; NOTE: Set this to the folder where you keep your Git repos! 
+  (setq projectile-project-search-path
+	'(
+	  "~/Documents/GithubProjects"
+	  "~/Documents/Projects"
+	  ))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package yasnippet
@@ -1462,9 +1343,8 @@
            :map minibuffer-local-map
            ("M-b" . citar-insert-preset))
     :custom
-    (citar-bibliography `(,(concat scc-reports-dir "/references.bib")
-                          ,(concat maxdiff-write-ups-dir "/references.bib")
-                          ,(concat phd-thesis-write-ups-dir "/2025/thesis-manuscript/references.bib")))))
+    (citar-bibliography
+     '("~/Documents/My-Library/references.bib"))))
 
 (use-package typst-mode
   :straight
@@ -1510,11 +1390,7 @@
 
 (use-package toml-mode)
 
-;  (use-package boogie-friends
-;    :config
-;    (setq
-;     flycheck-z3-executable
-;     "~/Documents/GithubProjects/CAXDInterpolator/dependencies/z3-interp-plus/build;/z3"))
+; (use-package boogie-friends)
 
 (use-package lean4-mode
   :straight (lean4-mode :type git
