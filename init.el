@@ -3,10 +3,11 @@
        (expand-file-name
       "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
+  (unless
+	(file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-                                  'silent 'inhibit-cookies)
+                                    'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -143,6 +144,14 @@
           (select-window first-win)
           (if this-win-2nd (other-window 1))))))
 
+
+(require 'server)
+
+(setq server-name "jose")
+
+(unless (server-running-p)
+  (server-start))
+
 (server-start)                     ; Start server
 (setq process-connection-type nil) ; Use pipes
 (setq history-length 25)
@@ -158,13 +167,11 @@
 (when (not (version< emacs-version "26.3"))
   (global-display-line-numbers-mode t))
 
-                                        ; Set frame transparency
 (set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-                                        ; Disable line numbers for some modes
 (dolist (mode '(term-mode-hook
                 shell-mode-hook
                 vterm-mode-hook
@@ -180,7 +187,9 @@
 (add-to-list 'auto-mode-alist '("\\.dat\\'" . text-mode))
 (add-to-list 'auto-mode-alist '("\\.dat-s\\'" . text-mode))
 
-(defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+(defvar
+  dashboard-logo-path
+  "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
 
 (use-package all-the-icons)
 
@@ -188,7 +197,6 @@
   (use-package dashboard
     :ensure t
     :config
-                                        ; (setq dashboard-center-content t)
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
     (setq dashboard-set-navigator t)
@@ -209,7 +217,7 @@
   "Duplicate the current tab and place the duplicate immediately after it."
   (interactive)
   (let* ((tabs (tab-bar-tabs))
-       (orig-index (cl-position (tab-bar--current-tab) tabs :test #'equal)))
+	 (orig-index (cl-position (tab-bar--current-tab) tabs :test #'equal)))
     (tab-duplicate)
     (tab-bar-move-tab-to (+ orig-index 1))
     (tab-next))):
@@ -230,19 +238,9 @@
                     :background "gray40"
                     :foreground "gray60" :distant-foreground "gray50"
                     :height 1.0 :box nil)
-                                        ; (set-face-attribute 'tab-line-tab nil ; active tab in another window
-                                        ;                    :inherit 'tab-line
-                                        ;                    :foreground "gray70" :background "gray90" :box nil)
-                                        ; (set-face-attribute 'tab-line-tab-current nil ; active tab in current window
-                                        ;                     :background "#b34cb3" :foreground "white" :box nil)
-                                        ; (set-face-attribute 'tab-line-tab-inactive nil ; inactive tab
-                                        ;                    :background "gray60" :foreground "black" :box nil)
-                                        ; (set-face-attribute 'tab-line-highlight nil ; mouseover
-                                        ;                    :background "white" :foreground 'unspecified)
 
 (defun frame-font-setup
     (&rest ...)
-                                        ; (remove-hook 'focus-in-hook #'frame-font-setup)
   (unless (assoc 'font default-frame-alist)
     (let* ((font-family (catch 'break
                           (dolist (font-family
@@ -286,7 +284,6 @@
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key [(control x) (k)] 'kill-buffer)
 
-                                        ; Unbind C-@ in order to make it a global-prefix for general
 (global-unset-key (kbd "C-SPC"))
 (global-unset-key (kbd "C-@"))
 (global-unset-key (kbd "C-x o"))
@@ -355,22 +352,15 @@
 (use-package better-jumper
   :after (evil)
   :custom
-                                        ; ; this is the key to avoiding conflict with evils jumping stuff
   (better-jumper-use-evil-jump-advice t)
 
   :config
   (better-jumper-mode +1)
-                                        ; this lets me toggle between two points. (adapted from evil-jump-backward-swap)
   (evil-define-motion better-jumper-toggle (count)
     (let ((pnt (point)))
       (better-jumper-jump-backward 1)
       (better-jumper-set-jump pnt)))
 
-                                        ; this is the key here. This advice makes it so you only set a jump point
-                                        ; if you move more than one line with whatever command you call. For example
-                                        ; if you add this advice around evil-next-line, you will set a jump point
-                                        ; if you do 10 j, but not if you just hit j. I did not write this code, I
-                                        ; I found it a while back and updated it to work with better-jumper.
   (defun my-jump-advice (oldfun &rest args)
     (let ((old-pos (point)))
       (apply oldfun args)
@@ -499,15 +489,10 @@
 
 (when (not (version< emacs-version "27.1"))
   (use-package marginalia
-                                        ; Either bind `marginalia-cycle` globally or only in the minibuffer
     :bind (("M-A" . marginalia-cycle)
            :map minibuffer-local-map
            ("M-A" . marginalia-cycle))
-
-                                        ; The :init configuration is always executed (Not lazy!)
     :init
-                                        ; Must be in the :init section of use-package such that the mode gets
-                                        ; enabled right away. Note that this forces loading the package.
     (marginalia-mode)))
 
 (when (not (version< emacs-version "26.1"))
@@ -521,11 +506,9 @@
      :map embark-file-map
      ("t" . find-file-other-tab))
     :init
-                                        ; Optionally replace the key help with a completing-read interface
     (setq prefix-help-command #'embark-prefix-help-command)
     :config
     (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
-                                        ; Hide the mode line of the Embark live/completions buffers
     (require 'embark)
     (add-to-list 'display-buffer-alist
                  '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -645,7 +628,7 @@
                                         ; Configure other variables and modes in the :config section,
                                         ; after lazily loading the package.
     :config
-                                      ;(consult-customize consult--source-buffer :hidden t :default nil)
+					; (consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
     (setq extra-buffer-sources
           '(:name     "Extra"
@@ -678,29 +661,6 @@
                                         ; Optionally configure the narrowing key.
                                         ; Both < and C-+ work reasonably well.
     (setq consult-narrow-key "<") ; (kbd "C-+")
-
-                                        ; Optionally make narrowing help available in the minibuffer.
-                                        ; You may want to use `embark-prefix-help-command' or which-key
-                                        \in \set{ \mid }tead.
-                                        ; (define-key consult-narrow-map (vconcat consult-narrow-key
-                                        ;"?") #'consult-narrow-help)
-
-                                        ; By default `consult-project-function' uses `project-root'
-                                        ;from project.el.
-                                        ; Optionally configure a different project root function.
-                                        ; There are multiple reasonable alternatives to chose from.
-                                        ; 1. project.el (the default)
-                                        ; (setq consult-project-function
-                                        ;#'consult--default-project--function)
-                                        ; 2. projectile.el (projectile-project-root)
-                                        ; (autoload 'projectile-project-root "projectile")
-                                        ; (setq consult-project-function (lambda (_)
-                                        ; (projectile-project-root)))
-                                        ; 3. vc.el (vc-root-dir)
-                                        ; (setq consult-project-function (lambda (_) (vc-root-dir)))
-                                        ; 4. locate-dominating-file
-                                        ; (setq consult-project-function (lambda (_)
-                                        ; (locate-dominating-file "." ".git")))
     ))
 
 (defun consult-grep-current-dir ()
@@ -853,7 +813,7 @@
   (setq org-todo-keywords
         '((sequence "EXTERNAL" "|")
           (sequence "GOAL" "|" "OK" "IDEA" "OBSERVATION")
-          (sequence "TODO" "|" "MOVED" "COMPLETED(c)" "CANC(k@)")
+          (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
 					; Save Org buffers after refiling!
@@ -881,9 +841,7 @@
           ))
 
   (define-key org-mode-map (kbd "C-c d")
-              (lambda () (interactive) (org-todo "MOVED")))
-  (define-key org-mode-map (kbd "C-c c")
-              (lambda () (interactive) (org-todo "COMPLETED")))
+              (lambda () (interactive) (org-todo "DONE")))
   (define-key org-mode-map (kbd "C-c t")
               (lambda () (interactive) (org-todo "TODO")))
   (define-key org-mode-map (kbd "C-c k")
@@ -986,35 +944,6 @@
 
 (use-package ox-reveal)
 
-(when (not (version< emacs-version "26.3"))
-  (use-package ox-hugo
-    :ensure t
-    :pin melpa
-    :after ox))
-
-(with-eval-after-load 'org-capture
-  (defun org-hugo-new-subtree-post-capture-template ()
-    "Returns `org-capture' template string for new Hugo post.
-      See `org-capture-templates' for more information."
-    (let* ((title (read-from-minibuffer "Post Title: "))
-           (curdate (format-time-string "%Y-%m-%d"))
-           (fname (org-hugo-slug title)))
-      (mapconcat #'identity
-                 `(
-                   ,(concat "* " title)
-                   ":PROPERTIES:"
-                   ,(concat ":EXPORT_FILE_NAME: " fname)
-                   ,(concat ":EXPORT_DATE: " curdate)
-                   ":END:"
-                   "%?\n")          ;Place the cursor here finally
-                 "\n")))
-
-  (add-to-list 'org-capture-templates
-               '("h" "Hugo post" entry
-                 (file+olp website-posts "Posts")
-                 (function org-hugo-new-subtree-post-capture-template)
-                 :prepend t)))
-
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
   :custom
@@ -1091,7 +1020,8 @@
 
 (use-package yasnippet-snippets)
 
-(load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
+(load
+ (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
 
 (defun restart-yasnippet ()
   (interactive)
@@ -1617,9 +1547,13 @@
          :host github
          :repo "karthink/gptel")
   :config
-  (setq gptel-api-key
-        (let ((key (shell-command-to-string "pass personal/chatgpt")))
-          (string-trim key))))
+
+  (setq gptel-backend
+        (gptel-make-ollama "Ollama"
+          :host "localhost:11434"
+          :stream t
+          :models '("gemma4:e2b")))
+  (setq gptel-model "gemma4:e2b"))
 
 (use-package term
   :commands term

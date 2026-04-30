@@ -5,18 +5,19 @@ In this document I've added links in many places that lead you to documentation 
 * Package System Setup
 ** Straight.el setup
 #+begin_src emacs-lisp
-  (defvar bootstrap-version)
-  (let ((bootstrap-file
-         (expand-file-name
-        "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-        (bootstrap-version 5))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-          (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-                                    'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
+    (defvar bootstrap-version)
+    (let ((bootstrap-file
+           (expand-file-name
+          "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+          (bootstrap-version 5))
+      (unless
+  	(file-exists-p bootstrap-file)
+        (with-current-buffer
+            (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+                                        'silent 'inhibit-cookies)
+          (goto-char (point-max))
+          (eval-print-last-sexp)))
+      (load bootstrap-file nil 'nomessage))
 #+end_src
 
 Emacs has a built in package manager but it doesn't make it easy to automatically install packages on a new system the first time you pull down your configuration.  [[https://github.com/jwiegley/use-package][use-package]] is a really helpful package used in this configuration to make it a lot easier to automate the installation and configuration of everything else we use.
@@ -209,6 +210,14 @@ The content of .emacs-daemon.plist is
             (select-window first-win)
             (if this-win-2nd (other-window 1))))))
 
+
+  (require 'server)
+
+  (setq server-name "jose")
+
+  (unless (server-running-p)
+    (server-start))
+
   (server-start)                     ; Start server
   (setq process-connection-type nil) ; Use pipes
   (setq history-length 25)
@@ -224,13 +233,11 @@ The content of .emacs-daemon.plist is
   (when (not (version< emacs-version "26.3"))
     (global-display-line-numbers-mode t))
 
-                                          ; Set frame transparency
   (set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
   (add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
   (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-                                          ; Disable line numbers for some modes
   (dolist (mode '(term-mode-hook
                   shell-mode-hook
                   vterm-mode-hook
@@ -248,7 +255,9 @@ The content of .emacs-daemon.plist is
 #+end_src
 ** Dashboard Configuration
 #+begin_src emacs-lisp
-  (defvar dashboard-logo-path "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
+  (defvar
+    dashboard-logo-path
+    "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
 
   (use-package all-the-icons)
 
@@ -256,7 +265,6 @@ The content of .emacs-daemon.plist is
     (use-package dashboard
       :ensure t
       :config
-                                          ; (setq dashboard-center-content t)
       (setq dashboard-set-heading-icons t)
       (setq dashboard-set-file-icons t)
       (setq dashboard-set-navigator t)
@@ -279,7 +287,7 @@ The content of .emacs-daemon.plist is
     "Duplicate the current tab and place the duplicate immediately after it."
     (interactive)
     (let* ((tabs (tab-bar-tabs))
-         (orig-index (cl-position (tab-bar--current-tab) tabs :test #'equal)))
+  	 (orig-index (cl-position (tab-bar--current-tab) tabs :test #'equal)))
       (tab-duplicate)
       (tab-bar-move-tab-to (+ orig-index 1))
       (tab-next))):
@@ -300,15 +308,6 @@ The content of .emacs-daemon.plist is
                       :background "gray40"
                       :foreground "gray60" :distant-foreground "gray50"
                       :height 1.0 :box nil)
-                                          ; (set-face-attribute 'tab-line-tab nil ; active tab in another window
-                                          ;                    :inherit 'tab-line
-                                          ;                    :foreground "gray70" :background "gray90" :box nil)
-                                          ; (set-face-attribute 'tab-line-tab-current nil ; active tab in current window
-                                          ;                     :background "#b34cb3" :foreground "white" :box nil)
-                                          ; (set-face-attribute 'tab-line-tab-inactive nil ; inactive tab
-                                          ;                    :background "gray60" :foreground "black" :box nil)
-                                          ; (set-face-attribute 'tab-line-highlight nil ; mouseover
-                                          ;                    :background "white" :foreground 'unspecified)
 #+end_src
 ** Font Configuration
 I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://fonts.google.com/specimen/Cantarell][Cantarell]] fonts for this configuration which will more than likely need to be installed on your machine.  Both can usually be found in the various Linux distro package managers or downloaded from the links above.
@@ -316,7 +315,6 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 #+begin_src emacs-lisp
   (defun frame-font-setup
       (&rest ...)
-                                          ; (remove-hook 'focus-in-hook #'frame-font-setup)
     (unless (assoc 'font default-frame-alist)
       (let* ((font-family (catch 'break
                             (dolist (font-family
@@ -364,7 +362,6 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key [(control x) (k)] 'kill-buffer)
 
-                                          ; Unbind C-@ in order to make it a global-prefix for general
   (global-unset-key (kbd "C-SPC"))
   (global-unset-key (kbd "C-@"))
   (global-unset-key (kbd "C-x o"))
@@ -433,22 +430,15 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
   (use-package better-jumper
     :after (evil)
     :custom
-                                          ; ; this is the key to avoiding conflict with evils jumping stuff
     (better-jumper-use-evil-jump-advice t)
 
     :config
     (better-jumper-mode +1)
-                                          ; this lets me toggle between two points. (adapted from evil-jump-backward-swap)
     (evil-define-motion better-jumper-toggle (count)
       (let ((pnt (point)))
         (better-jumper-jump-backward 1)
         (better-jumper-set-jump pnt)))
 
-                                          ; this is the key here. This advice makes it so you only set a jump point
-                                          ; if you move more than one line with whatever command you call. For example
-                                          ; if you add this advice around evil-next-line, you will set a jump point
-                                          ; if you do 10 j, but not if you just hit j. I did not write this code, I
-                                          ; I found it a while back and updated it to work with better-jumper.
     (defun my-jump-advice (oldfun &rest args)
       (let ((old-pos (point)))
         (apply oldfun args)
@@ -603,15 +593,10 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 #+begin_src emacs-lisp
   (when (not (version< emacs-version "27.1"))
     (use-package marginalia
-                                          ; Either bind `marginalia-cycle` globally or only in the minibuffer
       :bind (("M-A" . marginalia-cycle)
              :map minibuffer-local-map
              ("M-A" . marginalia-cycle))
-
-                                          ; The :init configuration is always executed (Not lazy!)
       :init
-                                          ; Must be in the :init section of use-package such that the mode gets
-                                          ; enabled right away. Note that this forces loading the package.
       (marginalia-mode)))
 #+end_src
 ** Embark
@@ -627,11 +612,9 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
        :map embark-file-map
        ("t" . find-file-other-tab))
       :init
-                                          ; Optionally replace the key help with a completing-read interface
       (setq prefix-help-command #'embark-prefix-help-command)
       :config
       (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
-                                          ; Hide the mode line of the Embark live/completions buffers
       (require 'embark)
       (add-to-list 'display-buffer-alist
                    '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -757,7 +740,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
                                           ; Configure other variables and modes in the :config section,
                                           ; after lazily loading the package.
       :config
-                                        ;(consult-customize consult--source-buffer :hidden t :default nil)
+  					; (consult-customize consult--source-buffer :hidden t :default nil)
       (add-to-list 'consult-buffer-sources persp-consult-source)
       (setq extra-buffer-sources
             '(:name     "Extra"
@@ -790,29 +773,6 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
                                           ; Optionally configure the narrowing key.
                                           ; Both < and C-+ work reasonably well.
       (setq consult-narrow-key "<") ; (kbd "C-+")
-
-                                          ; Optionally make narrowing help available in the minibuffer.
-                                          ; You may want to use `embark-prefix-help-command' or which-key
-                                          \in \set{ \mid }tead.
-                                          ; (define-key consult-narrow-map (vconcat consult-narrow-key
-                                          ;"?") #'consult-narrow-help)
-
-                                          ; By default `consult-project-function' uses `project-root'
-                                          ;from project.el.
-                                          ; Optionally configure a different project root function.
-                                          ; There are multiple reasonable alternatives to chose from.
-                                          ; 1. project.el (the default)
-                                          ; (setq consult-project-function
-                                          ;#'consult--default-project--function)
-                                          ; 2. projectile.el (projectile-project-root)
-                                          ; (autoload 'projectile-project-root "projectile")
-                                          ; (setq consult-project-function (lambda (_)
-                                          ; (projectile-project-root)))
-                                          ; 3. vc.el (vc-root-dir)
-                                          ; (setq consult-project-function (lambda (_) (vc-root-dir)))
-                                          ; 4. locate-dominating-file
-                                          ; (setq consult-project-function (lambda (_)
-                                          ; (locate-dominating-file "." ".git")))
       ))
 
   (defun consult-grep-current-dir ()
@@ -995,7 +955,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (setq org-todo-keywords
           '((sequence "EXTERNAL" "|")
             (sequence "GOAL" "|" "OK" "IDEA" "OBSERVATION")
-            (sequence "TODO" "|" "MOVED" "COMPLETED(c)" "CANC(k@)")
+            (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
             (sequence "EMAIL" "|")))
 
   					; Save Org buffers after refiling!
@@ -1023,9 +983,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
             ))
 
     (define-key org-mode-map (kbd "C-c d")
-                (lambda () (interactive) (org-todo "MOVED")))
-    (define-key org-mode-map (kbd "C-c c")
-                (lambda () (interactive) (org-todo "COMPLETED")))
+                (lambda () (interactive) (org-todo "DONE")))
     (define-key org-mode-map (kbd "C-c t")
                 (lambda () (interactive) (org-todo "TODO")))
     (define-key org-mode-map (kbd "C-c k")
@@ -1138,37 +1096,6 @@ This section contains the basic configuration for =org-mode= plus the configurat
 #+begin_src emacs-lisp
   (use-package ox-reveal)
 #+end_src
-*** Ox Hugo
-#+begin_src emacs-lisp
-  (when (not (version< emacs-version "26.3"))
-    (use-package ox-hugo
-      :ensure t
-      :pin melpa
-      :after ox))
-
-  (with-eval-after-load 'org-capture
-    (defun org-hugo-new-subtree-post-capture-template ()
-      "Returns `org-capture' template string for new Hugo post.
-        See `org-capture-templates' for more information."
-      (let* ((title (read-from-minibuffer "Post Title: "))
-             (curdate (format-time-string "%Y-%m-%d"))
-             (fname (org-hugo-slug title)))
-        (mapconcat #'identity
-                   `(
-                     ,(concat "* " title)
-                     ":PROPERTIES:"
-                     ,(concat ":EXPORT_FILE_NAME: " fname)
-                     ,(concat ":EXPORT_DATE: " curdate)
-                     ":END:"
-                     "%?\n")          ;Place the cursor here finally
-                   "\n")))
-
-    (add-to-list 'org-capture-templates
-                 '("h" "Hugo post" entry
-                   (file+olp website-posts "Posts")
-                   (function org-hugo-new-subtree-post-capture-template)
-                   :prepend t)))
-#+end_src
 *** Nicer Heading Bullets
 [[https://github.com/sabof/org-bullets][org-bullets]] replaces the heading stars in =org-mode= buffers with nicer looking characters that you can control.  Another option for this is [[https://github.com/integral-dw/org-superstar-mode][org-superstar-mode]] which we may cover in a later video.
 
@@ -1262,7 +1189,8 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
 
   (use-package yasnippet-snippets)
 
-  (load (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
+  (load
+   (expand-file-name "snippets/yasnippet-scripts.el" user-emacs-directory))
 
   (defun restart-yasnippet ()
     (interactive)
@@ -1917,9 +1845,13 @@ Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=)
            :host github
            :repo "karthink/gptel")
     :config
-    (setq gptel-api-key
-          (let ((key (shell-command-to-string "pass personal/chatgpt")))
-            (string-trim key))))
+
+    (setq gptel-backend
+          (gptel-make-ollama "Ollama"
+            :host "localhost:11434"
+            :stream t
+            :models '("gemma4:e2b")))
+    (setq gptel-model "gemma4:e2b"))
 #+end_src
 * Terminals
 ** term-mode
@@ -2298,74 +2230,38 @@ mu4e comes included with mu. Search the path your package manager used to instal
         (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
       (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
 
-      (defun refile-func (msg)
-        (cond
-         ((mu4e-message-contact-field-matches msg :to "kapur@cs.unm.edu")
-          "/unm/Prof. Kapur")
-         ((mu4e-message-contact-field-matches msg :from "kapur@cs.unm.edu")
-          "/unm/Prof. Kapur")
-         ((mu4e-message-contact-field-matches msg :cc "kapur@cs.unm.edu")
-          "/unm/Prof. Kapur")
-         ((mu4e-message-contact-field-matches msg :to "kapur@unm.edu")
-          "/unm/Prof. Kapur")
-         ((mu4e-message-contact-field-matches msg :from "kapur@unm.edu")
-          "/unm/Prof. Kapur")
-         ((mu4e-message-contact-field-matches msg :cc "kapur@unm.edu")
-          "/unm/Prof. Kapur")
-         (t "/unm/Archive")))
-
       (setq mu4e-contexts
             (list
-                                          ; School account
-             (make-mu4e-context
-              :name "School"
+
+  	   (make-mu4e-context
+              :name "Gmail"
               :match-func
               (lambda (msg)
                 (when msg
-                  (string-prefix-p "/unm" (mu4e-message-field msg :maildir))))
-              :vars '((user-mail-address  . "jabelcastellanosjoo@unm.edu")
+                  (string-prefix-p
+  		 "/gmail" (mu4e-message-field msg :maildir))))
+              :vars '((user-mail-address  . "jcastellanos34@gmail.com")
                       (user-full-name     . "Jose Abel Castellanos Joo")
-                      (mu4e-drafts-folder . "/unm/Drafts")
-                      (mu4e-sent-folder   . "/unm/Sent")
-                      (mu4e-refile-folder . refile-func)
-                      (mu4e-trash-folder  . "/unm/Trash")
-                      (smtpmail-smtp-server . "smtp.office365.com")
+                      (mu4e-drafts-folder . "/gmail/Drafts")
+                      (mu4e-sent-folder   . "/gmail/[Gmail]/Sent Mail")
+                      (mu4e-refile-folder . "/gmail/INBOX")
+                      (mu4e-trash-folder  . "/gmail/[Gmail]/Trash")
+                      (smtpmail-smtp-server . "smtp.gmail.com")
                       (smtpmail-smtp-service . 587)
                       (smtpmail-debug-info . t)
                       (smtpmail-stream-type . starttls)))
-                                          ; School CS department account
-             (make-mu4e-context
-              :name "CS department"
-              :match-func
-              (lambda (msg)
-                (when msg
-                  (string-prefix-p "/cs-unm" (mu4e-message-field msg :maildir))))
-              :vars '((user-mail-address  . "jose.castellanosjoo@cs.unm.edu")
-                      (user-full-name     . "Jose Abel Castellanos Joo")
-                      (mu4e-drafts-folder . "/cs-unm/Drafts")
-                                          ; (mu4e-sent-folder   . "/cs-unm/Sent")
-                      (mu4e-refile-folder . "/cs-unm/Inbox")
-                      (mu4e-trash-folder  . "/cs-unm/Trash")
-                      (smtpmail-smtp-server . "snape.cs.unm.edu")
-                      (smtpmail-smtp-service . 1200)
-                      (smtpmail-stream-type . starttls)))))
+  	   ))
 
       (setq mu4e-context-policy 'pick-first)
 
+  					; TODO Update this
       (setq mu4e-maildir-shortcuts
-            '(("/unm/Inbox" . ?i)
-              ("/unm/Sent"  . ?s)
-              ("/unm/Trash" . ?t)
-              ("/unm/Dissertation communication". ?d)
-              ("/unm/Dissertation logistics". ?l)
-              ("/unm/Prof. Kapur". ?k)
-              ("/unm/Prof. Kapur/Side projects/Seminars/Beihang University". ?b)
-              ("/unm/You got a Package!". ?p)
-              ("/unm/ProFellow Info". ?f)
-              ("/unm/Archive". ?a)
-              ("/cs-unm/Inbox". ?I)
-              ("/cs-unm/Trash". ?T)
-              ("/cs-unm/Drafts". ?D)))
+            '(
+  	    ("/gmail/INBOX" . ?i)
+              ("/gmail/[Gmail]/Sent Mail"  . ?s)
+              ("/gmail/[Gmail]/Trash" . ?t)
+              ("/gmail/[Gmail]/All Mail". ?a)
+  	    ))
                                           ; UX settings
       (setq mu4e-use-fancy-chars t)
       (setq mu4e-attachment-dir  "~/tosend")
@@ -2374,7 +2270,8 @@ mu4e comes included with mu. Search the path your package manager used to instal
       (setq mu4e-headers-results-limit -1)
       (setq mu4e-compose-signature "Best,\nJose")
       (setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
-      (setq message-citation-line-function 'message-insert-formatted-citation-line)
+      (setq message-citation-line-function
+  	  'message-insert-formatted-citation-line) 
       (setq mu4e-headers-fields '((:flags . 5)
                                   (:human-date . 12)
                                   (:from . 22)
