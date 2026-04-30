@@ -1741,6 +1741,102 @@ The file name is passed as a shell-quoted argument."
 
 (use-package sqlite3)
 
+(defvar efs/mu4e-path "/opt/homebrew/share/emacs/site-lisp/mu/mu4e/")
+
+(when (file-exists-p (concat efs/mu4e-path "mu4e.el"))
+  (use-package mu4e
+    :ensure nil
+    :load-path (lambda () (expand-file-name efs/mu4e-path))
+                                        ; :defer 20 ; Wait until 20 seconds after startup
+    :init
+    (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
+    :config
+    (require 'mu4e)
+    (require 'mu4e-org)
+
+    (setq mu4e-change-filenames-when-moving t)
+
+                                        ; SMTP settings
+    (setq sendmail-program "/opt/homebrew/bin/msmtp"
+          message-sendmail-f-is-evil t
+          message-sendmail-extra-arguments '("--read-envelope-from")
+          send-mail-function 'smtpmail-send-it
+          message-send-mail-function 'message-send-mail-with-sendmail)
+
+    (setq smtpmail-debug-info t)
+    (setq starttls-use-gnutls t)
+
+    (setq mu4e-update-interval 600)
+    (setq mu4e-get-mail-command "mbsync -a")
+    (setq mu4e-root-maildir "~/Mail")
+
+                                        ; Just plain text
+    (with-eval-after-load "mm-decode"
+      (add-to-list 'mm-discouraged-alternatives "text/html")
+      (add-to-list 'mm-discouraged-alternatives "text/richtext"))
+
+    (defun jcs-view-in-eww (msg)
+      (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
+    (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
+
+    (setq mu4e-contexts
+          (list
+
+	   (make-mu4e-context
+            :name "Gmail"
+            :match-func
+            (lambda (msg)
+              (when msg
+                (string-prefix-p
+		 "/gmail" (mu4e-message-field msg :maildir))))
+            :vars '((user-mail-address  . "jcastellanos34@gmail.com")
+                    (user-full-name     . "Jose Abel Castellanos Joo")
+                    (mu4e-drafts-folder . "/gmail/Drafts")
+                    (mu4e-sent-folder   . "/gmail/[Gmail]/Sent Mail")
+                    (mu4e-refile-folder . "/gmail/INBOX")
+                    (mu4e-trash-folder  . "/gmail/[Gmail]/Trash")
+                    (smtpmail-smtp-server . "smtp.gmail.com")
+                    (smtpmail-smtp-service . 587)
+                    (smtpmail-debug-info . t)
+                    (smtpmail-stream-type . starttls)))
+	   ))
+
+    (setq mu4e-context-policy 'pick-first)
+
+					; TODO Update this
+    (setq mu4e-maildir-shortcuts
+          '(
+	    ("/gmail/INBOX" . ?i)
+            ("/gmail/[Gmail]/Sent Mail"  . ?s)
+            ("/gmail/[Gmail]/Trash" . ?t)
+            ("/gmail/[Gmail]/All Mail". ?a)
+	    ))
+                                        ; UX settings
+    (setq mu4e-use-fancy-chars t)
+    (setq mu4e-attachment-dir  "~/tosend")
+    (setq mu4e-headers-show-threads nil)
+    (setq mu4e-confirm-quit nil)
+    (setq mu4e-headers-results-limit -1)
+    (setq mu4e-compose-signature "Best,\nJose")
+    (setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
+    (setq message-citation-line-function
+	  'message-insert-formatted-citation-line) 
+    (setq mu4e-headers-fields '((:flags . 5)
+                                (:human-date . 12)
+                                (:from . 22)
+                                (:subject)))
+                                        ; Display
+    (setq
+     mu4e-view-show-addresses t
+     mu4e-view-show-images t
+     mu4e-view-image-max-width 800
+     mu4e-hide-index-messages t)
+    (with-eval-after-load 'mu4e
+      (load
+       (expand-file-name
+        "scripts/mu4e-view-save-all-attachments.el"
+        user-emacs-directory)))))
+
 (use-package jinx
   :init
   (setenv "PKG_CONFIG_PATH"
