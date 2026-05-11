@@ -4,7 +4,7 @@
       "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 5))
   (unless
-	(file-exists-p bootstrap-file)
+      (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
                                     'silent 'inhibit-cookies)
@@ -1004,8 +1004,7 @@
   :init
                                         ; NOTE: Set this to the folder where you keep your Git repos! 
   (setq projectile-project-search-path
-	'(
-	  "~/Documents/GithubProjects"
+	'( 
 	  "~/Documents/Projects"
 	  ))
   (setq projectile-switch-project-action #'projectile-dired))
@@ -1747,7 +1746,7 @@ The file name is passed as a shell-quoted argument."
   (use-package mu4e
     :ensure nil
     :load-path (lambda () (expand-file-name efs/mu4e-path))
-                                        ; :defer 20 ; Wait until 20 seconds after startup
+  					; :defer 20 ; Wait until 20 seconds after startup
     :init
     (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
     :config
@@ -1756,7 +1755,7 @@ The file name is passed as a shell-quoted argument."
 
     (setq mu4e-change-filenames-when-moving t)
 
-                                        ; SMTP settings
+  					; SMTP settings
     (setq sendmail-program "/opt/homebrew/bin/msmtp"
           message-sendmail-f-is-evil t
           message-sendmail-extra-arguments '("--read-envelope-from")
@@ -1770,7 +1769,7 @@ The file name is passed as a shell-quoted argument."
     (setq mu4e-get-mail-command "mbsync -a")
     (setq mu4e-root-maildir "~/Mail")
 
-                                        ; Just plain text
+  					; Just plain text
     (with-eval-after-load "mm-decode"
       (add-to-list 'mm-discouraged-alternatives "text/html")
       (add-to-list 'mm-discouraged-alternatives "text/richtext"))
@@ -1782,13 +1781,13 @@ The file name is passed as a shell-quoted argument."
     (setq mu4e-contexts
           (list
 
-	   (make-mu4e-context
+    	   (make-mu4e-context
             :name "Gmail"
             :match-func
             (lambda (msg)
               (when msg
                 (string-prefix-p
-		 "/gmail" (mu4e-message-field msg :maildir))))
+    		 "/gmail" (mu4e-message-field msg :maildir))))
             :vars '((user-mail-address  . "jcastellanos34@gmail.com")
                     (user-full-name     . "Jose Abel Castellanos Joo")
                     (mu4e-drafts-folder . "/gmail/Drafts")
@@ -1799,19 +1798,40 @@ The file name is passed as a shell-quoted argument."
                     (smtpmail-smtp-service . 587)
                     (smtpmail-debug-info . t)
                     (smtpmail-stream-type . starttls)))
-	   ))
+
+  	   (make-mu4e-context
+            :name "gmail 2"
+            :match-func
+            (lambda (msg)
+              (when msg
+                (string-prefix-p
+    		 "/gmail" (mu4e-message-field msg :maildir))))
+            :vars '((user-mail-address  . "jcastellanosjoo@gmail.com")
+                    (user-full-name     . "Jose Abel Castellanos Joo")
+                    (mu4e-drafts-folder . "/gmail2/Drafts")
+                    (mu4e-sent-folder   . "/gmail2/[Gmail]/Sent Mail")
+                    (mu4e-refile-folder . "/gmail2/INBOX")
+                    (mu4e-trash-folder  . "/gmail2/[Gmail]/Trash")
+                    (smtpmail-smtp-server . "smtp.gmail.com")
+                    (smtpmail-smtp-service . 587)
+                    (smtpmail-debug-info . t)
+                    (smtpmail-stream-type . starttls)))
+    	   ))
 
     (setq mu4e-context-policy 'pick-first)
 
-					; TODO Update this
     (setq mu4e-maildir-shortcuts
           '(
-	    ("/gmail/INBOX" . ?i)
+    	    ("/gmail/INBOX" . ?i)
             ("/gmail/[Gmail]/Sent Mail"  . ?s)
             ("/gmail/[Gmail]/Trash" . ?t)
             ("/gmail/[Gmail]/All Mail". ?a)
-	    ))
-                                        ; UX settings
+            ("/gmail2/INBOX" . ?I)
+            ("/gmail2/[Gmail]/Sent Mail"  . ?S)
+            ("/gmail2/[Gmail]/Trash" . ?T)
+            ("/gmail2/[Gmail]/All Mail". ?A)
+            ))
+					; UX settings
     (setq mu4e-use-fancy-chars t)
     (setq mu4e-attachment-dir  "~/tosend")
     (setq mu4e-headers-show-threads nil)
@@ -1820,12 +1840,12 @@ The file name is passed as a shell-quoted argument."
     (setq mu4e-compose-signature "Best,\nJose")
     (setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
     (setq message-citation-line-function
-	  'message-insert-formatted-citation-line) 
+          'message-insert-formatted-citation-line) 
     (setq mu4e-headers-fields '((:flags . 5)
                                 (:human-date . 12)
                                 (:from . 22)
                                 (:subject)))
-                                        ; Display
+					; Display
     (setq
      mu4e-view-show-addresses t
      mu4e-view-show-images t
