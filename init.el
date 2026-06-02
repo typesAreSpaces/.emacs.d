@@ -792,11 +792,14 @@
     #'(lambda (x) (concat "~/Documents/Org-Files/" x))
     '(
       "20260423173343-main_agenda.org"
-      "20260423174506-current_work.org"
       "20260423173522-postdoc_applications.org"
+      "20260423174506-current_work.org"
       "20251105153112-applying_opt.org"
       "20231115200616-qm_seminar.org"
       "20260423174626-algebraic_combinatorics_seminar.org"
+      "20260428165951-saturated_quadratic_module.org"
+      "20260428165645-monogenic_quadratic_module_certificates.org"
+      "20260511204944-general_case_univariate_quadratic_modules.org"
       )))
 
   (setq org-agenda-start-with-log-mode t)
@@ -864,7 +867,10 @@
 (efs/leader-keys
   "o" '(:ignore t :which-key "(o)rg")
   "oa" '(org-agenda nil :which-key "org-(a)genda")
-  "oc" '(org-capture nil :which-key "org-(c)apture"))
+  "oc" '(org-capture nil :which-key "org-(c)apture")
+  "ot" '(:ignore t :which-key "org-(t)able")
+  "otd" '(org-table-blank-field nil :which-key "(d)elete cell")
+  )
 
 (use-package org-mime
   :ensure t)
@@ -1882,3 +1888,9 @@ The file name is passed as a shell-quoted argument."
 (use-package lorem-ipsum)
 
 (use-package chess)
+
+(use-package gnuplot
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((gnuplot . t))))
