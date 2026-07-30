@@ -792,9 +792,10 @@
     #'(lambda (x) (concat "~/Documents/Org-Files/" x))
     '(
       "20260423173343-main_agenda.org"
-      "20260423173522-postdoc_applications.org"
       "20260423174506-current_work.org"
       "20251105153112-applying_opt.org"
+      "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
+	        "20260721081408-quantum_research.org"
       "20231115200616-qm_seminar.org"
       "20260423174626-algebraic_combinatorics_seminar.org"
       "20260428165951-saturated_quadratic_module.org"
@@ -1891,3 +1892,8 @@ The file name is passed as a shell-quoted argument."
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((gnuplot . t))))
+
+(use-package org-noter)
+
+(use-package zotxt
+  :after org-noter)

@@ -899,131 +899,132 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
 This section contains the basic configuration for =org-mode= plus the configuration for Org agendas and capture templates.  There's a lot to unpack in here so I'd recommend watching the videos for [[https://youtu.be/VcgjTEa0kU4][Part 5]] and [[https://youtu.be/PNE-mgkZ6HM][Part 6]] for a full explanation.
 
 #+begin_src emacs-lisp
-  (defun efs/org-mode-setup ()
-    (org-indent-mode)
-    (variable-pitch-mode 1)
-    (visual-line-mode 1))
+      (defun efs/org-mode-setup ()
+        (org-indent-mode)
+        (variable-pitch-mode 1)
+        (visual-line-mode 1))
 
-  (defun my/org-store-link-with-tilde ()
-    "Store a file link using ~ instead of /home/username."
-    (interactive)
-    (let ((default-directory (substitute-in-file-name "$HOME/")))
-      (call-interactively 'org-store-link)))
+      (defun my/org-store-link-with-tilde ()
+        "Store a file link using ~ instead of /home/username."
+        (interactive)
+        (let ((default-directory (substitute-in-file-name "$HOME/")))
+          (call-interactively 'org-store-link)))
 
-  (use-package org
-    :pin org
-    :commands (org-capture org-agenda)
-    :hook (org-mode . efs/org-mode-setup)
-    :config
-    (setq org-file-apps
-          '((auto-mode . emacs)
-            (directory . emacs)
-            ("\\.mm\\'" . default)
-            ("\\.x?html?\\'" . default)
-            ("\\.pdf\\'" . "sioyek %s")
-            ("\\.nb?\\'" . "Mathematica %s")))
+      (use-package org
+        :pin org
+        :commands (org-capture org-agenda)
+        :hook (org-mode . efs/org-mode-setup)
+        :config
+        (setq org-file-apps
+              '((auto-mode . emacs)
+                (directory . emacs)
+                ("\\.mm\\'" . default)
+                ("\\.x?html?\\'" . default)
+                ("\\.pdf\\'" . "sioyek %s")
+                ("\\.nb?\\'" . "Mathematica %s")))
 
-    (setq org-ellipsis "⇓")
-    (setq org-hierarchical-todo-statistics nil)
+        (setq org-ellipsis "⇓")
+        (setq org-hierarchical-todo-statistics nil)
 
-    (setq
-     org-agenda-files
-     (mapcar
-      #'(lambda (x) (concat "~/Documents/Org-Files/" x))
-      '(
-        "20260423173343-main_agenda.org"
-        "20260423173522-postdoc_applications.org"
-        "20260423174506-current_work.org"
-        "20251105153112-applying_opt.org"
-        "20231115200616-qm_seminar.org"
-        "20260423174626-algebraic_combinatorics_seminar.org"
-        "20260428165951-saturated_quadratic_module.org"
-        "20260428165645-monogenic_quadratic_module_certificates.org"
-        "20260511204944-general_case_univariate_quadratic_modules.org"
-        )))
+        (setq
+         org-agenda-files
+         (mapcar
+          #'(lambda (x) (concat "~/Documents/Org-Files/" x))
+          '(
+            "20260423173343-main_agenda.org"
+            "20260423174506-current_work.org"
+            "20251105153112-applying_opt.org"
+            "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
+  	        "20260721081408-quantum_research.org"
+            "20231115200616-qm_seminar.org"
+            "20260423174626-algebraic_combinatorics_seminar.org"
+            "20260428165951-saturated_quadratic_module.org"
+            "20260428165645-monogenic_quadratic_module_certificates.org"
+            "20260511204944-general_case_univariate_quadratic_modules.org"
+            )))
 
-    (setq org-agenda-start-with-log-mode t)
-    (setq org-agenda-window-setup 'current-window)
-    (setq org-indirect-buffer-display 'current-window)
-    (setq org-log-done 'time)
-    (setq org-log-into-drawer t)
+        (setq org-agenda-start-with-log-mode t)
+        (setq org-agenda-window-setup 'current-window)
+        (setq org-indirect-buffer-display 'current-window)
+        (setq org-log-done 'time)
+        (setq org-log-into-drawer t)
 
-    (require 'org-habit)
-    (require 'org-protocol)
-    (add-to-list 'org-modules 'org-habit)
-    (setq org-habit-graph-column 60)
+        (require 'org-habit)
+        (require 'org-protocol)
+        (add-to-list 'org-modules 'org-habit)
+        (setq org-habit-graph-column 60)
 
-    (setq org-todo-keywords
-          '((sequence "EXTERNAL" "|")
-            (sequence "GOAL" "|" "OK" "IDEA" "OBSERVATION")
-            (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
-            (sequence "EMAIL" "|")))
+        (setq org-todo-keywords
+              '((sequence "EXTERNAL" "|")
+                (sequence "GOAL" "|" "OK" "IDEA" "OBSERVATION")
+                (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
+                (sequence "EMAIL" "|")))
 
-  					; Save Org buffers after refiling!
-    (advice-add 'org-refile :after 'org-save-all-org-buffers)
+      					; Save Org buffers after refiling!
+        (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-  					; Use find-file instead of file-find-other-window
-    (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
+      					; Use find-file instead of file-find-other-window
+        (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
-    (setq org-tag-alist
-          '((:startgroup)
-            ("seminar" . ?s)
-            (:endgroup)
-            ("review" . ?r)
-            ("interesting" . ?i)
-            ("now" . ?n)))
+        (setq org-tag-alist
+              '((:startgroup)
+                ("seminar" . ?s)
+                (:endgroup)
+                ("review" . ?r)
+                ("interesting" . ?i)
+                ("now" . ?n)))
 
-    (setq org-capture-templates
-          `(
-            ("e" "Email Capture")
-  					; TODO Update this
-            ;; ("ea" "Main Agenda" entry
-            ;;  (file+olp agenda-mail "EMAIL")
-            ;;  "** TODO Check this email %a"
-            ;;  :immediate-finish t)
-            ))
+        (setq org-capture-templates
+              `(
+                ("e" "Email Capture")
+      					; TODO Update this
+                ;; ("ea" "Main Agenda" entry
+                ;;  (file+olp agenda-mail "EMAIL")
+                ;;  "** TODO Check this email %a"
+                ;;  :immediate-finish t)
+                ))
 
-    (define-key org-mode-map (kbd "C-c d")
-                (lambda () (interactive) (org-todo "DONE")))
-    (define-key org-mode-map (kbd "C-c t")
-                (lambda () (interactive) (org-todo "TODO")))
-    (define-key org-mode-map (kbd "C-c k")
-                (lambda () (interactive) (org-todo "CANC")))
-    (define-key org-mode-map (kbd "C-c i")
-                (lambda () (interactive) (org-todo "IDEA")))
-    (define-key org-mode-map (kbd "C-c o")
-                (lambda () (interactive) (org-todo "OK")))
-    (define-key org-mode-map (kbd "C-c C-<return>")
-                'org-insert-heading-respect-content)
-    (define-key org-mode-map (kbd "C-c C-<SPC>")
-                'org-insert-subheading)
-    (define-key org-mode-map (kbd "C-c <return>")
-                'org-meta-return)
-    (define-key org-mode-map (kbd "C-c s")
-                (lambda () (interactive) (org-sort-buffer)))
+        (define-key org-mode-map (kbd "C-c d")
+                    (lambda () (interactive) (org-todo "DONE")))
+        (define-key org-mode-map (kbd "C-c t")
+                    (lambda () (interactive) (org-todo "TODO")))
+        (define-key org-mode-map (kbd "C-c k")
+                    (lambda () (interactive) (org-todo "CANC")))
+        (define-key org-mode-map (kbd "C-c i")
+                    (lambda () (interactive) (org-todo "IDEA")))
+        (define-key org-mode-map (kbd "C-c o")
+                    (lambda () (interactive) (org-todo "OK")))
+        (define-key org-mode-map (kbd "C-c C-<return>")
+                    'org-insert-heading-respect-content)
+        (define-key org-mode-map (kbd "C-c C-<SPC>")
+                    'org-insert-subheading)
+        (define-key org-mode-map (kbd "C-c <return>")
+                    'org-meta-return)
+        (define-key org-mode-map (kbd "C-c s")
+                    (lambda () (interactive) (org-sort-buffer)))
 
-    (efs/org-font-setup))
+        (efs/org-font-setup))
 
-  (efs/leader-keys
-    "o" '(:ignore t :which-key "(o)rg")
-    "oa" '(org-agenda nil :which-key "org-(a)genda")
-    "oc" '(org-capture nil :which-key "org-(c)apture")
-    "ot" '(:ignore t :which-key "org-(t)able")
-    "otd" '(org-table-blank-field nil :which-key "(d)elete cell")
-    )
+      (efs/leader-keys
+        "o" '(:ignore t :which-key "(o)rg")
+        "oa" '(org-agenda nil :which-key "org-(a)genda")
+        "oc" '(org-capture nil :which-key "org-(c)apture")
+        "ot" '(:ignore t :which-key "org-(t)able")
+        "otd" '(org-table-blank-field nil :which-key "(d)elete cell")
+        )
 
-  (use-package org-mime
-    :ensure t)
+      (use-package org-mime
+        :ensure t)
 
-  (defun org-sort-buffer ()
-    "Sort all entries in the current buffer, recursively."
-    (interactive)
-    (mark-whole-buffer)
-    (org-sort-entries nil ?o)
-    (org-map-entries (lambda ()
-                       (condition-case x
-                           (org-sort-entries nil ?o)
-                         (user-error)))))
+      (defun org-sort-buffer ()
+        "Sort all entries in the current buffer, recursively."
+        (interactive)
+        (mark-whole-buffer)
+        (org-sort-entries nil ?o)
+        (org-map-entries (lambda ()
+                           (condition-case x
+                               (org-sort-entries nil ?o)
+                             (user-error)))))
 #+end_src
 *** Evil Org
 #+begin_src emacs-lisp
@@ -2355,4 +2356,14 @@ mu4e comes included with mu. Search the path your package manager used to instal
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((gnuplot . t))))
+#+end_src
+
+** Zotxt
+#+begin_src emacs-lisp
+  (use-package org-noter)
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package zotxt
+    :after org-noter)
 #+end_src
