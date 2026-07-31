@@ -1896,4 +1896,6 @@ The file name is passed as a shell-quoted argument."
 (use-package org-noter)
 
 (use-package zotxt
-  :after org-noter)
+  :after org-noter
+  :config
+  (setq org-zotxt-link-description-style :title))
