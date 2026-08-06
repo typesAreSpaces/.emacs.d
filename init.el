@@ -260,17 +260,32 @@
   (interactive "n")
   (set-face-attribute 'default nil :height size))
 
+(defvar toggle-zoom-pane--configuration nil)
+
 (defun toggle-zoom-pane ()
   (interactive)
-  (if (get 'is-pane-zoomed 'state)
+  (if toggle-zoom-pane--configuration
       (progn
-        (winner-undo)
         (setq mode-line-misc-info "")
-        (put 'is-pane-zoomed 'state nil))
+        (set-window-configuration toggle-zoom-pane--configuration)
+        (setq toggle-zoom-pane--configuration nil))
+    (setq toggle-zoom-pane--configuration
+          (current-window-configuration))
     (progn
-      (delete-other-windows)
       (setq mode-line-misc-info "[\ueb81]")
-      (put 'is-pane-zoomed 'state t))))
+      (delete-other-windows))))
+
+;; (defun toggle-zoom-pane ()
+;;   (interactive)
+;;   (if (get 'is-pane-zoomed 'state)
+;;       (progn
+;;         (winner-undo)
+;;         (setq mode-line-misc-info "")
+;;         (put 'is-pane-zoomed 'state nil))
+;;     (progn
+;;       (delete-other-windows)
+;;       (setq mode-line-misc-info "[\ueb81]")
+;;       (put 'is-pane-zoomed 'state t))))
 
 (define-key (current-global-map) (kbd "C-w") nil)
 (define-key (current-global-map) (kbd "C-w z") 'toggle-zoom-pane)
@@ -378,7 +393,7 @@
   (define-key evil-motion-state-map
               (kbd "C-o") 'better-jumper-jump-backward))
 
-                                        ; jump scenarios
+    					; jump scenarios
 (advice-add 'evil-next-line :around #'my-jump-advice)
 (advice-add 'evil-previous-line :around #'my-jump-advice)
 (advice-add 'evil-goto-definition :around #'my-jump-advice)
@@ -781,7 +796,7 @@
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
           ("\\.pdf\\'" . "sioyek %s")
-          ("\\.nb?\\'" . "Mathematica %s")))
+          ("\\.nb?\\'" . "open -a Mathematica %s")))
 
   (setq org-ellipsis "⇓")
   (setq org-hierarchical-todo-statistics nil)
@@ -795,7 +810,7 @@
       "20260423174506-current_work.org"
       "20251105153112-applying_opt.org"
       "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
-	        "20260721081408-quantum_research.org"
+      "20260721081408-quantum_research.org"
       "20231115200616-qm_seminar.org"
       "20260423174626-algebraic_combinatorics_seminar.org"
       "20260428165951-saturated_quadratic_module.org"
