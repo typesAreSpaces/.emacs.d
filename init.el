@@ -14,10 +14,10 @@
 
 (require 'package)
 
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+			 ("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -209,10 +209,15 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
+(require 'tab-bar)
+
+(tab-bar-mode 1)
+
 (setq tab-bar-show 1)                      ; hide bar if <= 1 tabs open
 (setq tab-bar-new-tab-choice "*dashboard*"); buffer to show in new tabs
 (setq tab-bar-tab-hints t)                 ; show tab numbers
-(setq tab-bar-new-tab-to 'rightmost)       ; defines where to create a new tab
+(setq tab-bar-new-tab-to 'right)       ; defines where to create a new tab
+
 (defun tab-duplicate-next ()
   "Duplicate the current tab and place the duplicate immediately after it."
   (interactive)
@@ -220,7 +225,8 @@
 	 (orig-index (cl-position (tab-bar--current-tab) tabs :test #'equal)))
     (tab-duplicate)
     (tab-bar-move-tab-to (+ orig-index 1))
-    (tab-next))):
+    (tab-next)))
+
 (set-face-attribute 'tab-bar nil
                     :background "#282828"
                     :foreground "gray60" :distant-foreground "gray50"
@@ -569,6 +575,59 @@
           completion-category-overrides '((file (styles partial-completion))))
     :config
     (setq orderless-matching-styles '(orderless-flex))))
+
+(use-package project
+  :config
+  (defun my-project-tab-name ()
+    "Return current project name."
+    (when-let ((project (project-current)))
+      (file-name-nondirectory
+       (directory-file-name
+        (project-root project)))))
+
+  (defun my-project-open-tab ()
+    "Open current project in its own tab."
+    (interactive)
+    (let ((name (my-project-tab-name)))
+      (unless name
+  	(user-error "Not inside a project"))
+
+      (let ((existing
+             (seq-find
+              (lambda (tab)
+  		(equal (alist-get 'name tab) name))
+              (tab-bar-tabs))))
+
+  	(if existing
+            ;; switch to existing tab
+            (tab-bar-select-tab
+             (1+ (seq-position (tab-bar-tabs) existing)))
+
+          ;; create new tab
+          (tab-bar-new-tab)
+          (tab-bar-rename-tab name)
+
+          ;; remove unrelated buffers
+          (project-switch-project
+           (project-current))))))
+
+  (defun my-project-switch-project ()
+    "Switch project using tabs."
+    (interactive)
+    (project-switch-project
+     (project-prompt-project-dir)))
+
+  (add-hook
+   'project-switch-project-hook
+   #'my-project-open-tab))
+
+(use-package tabspaces
+  :hook
+  (after-init . tabspaces-mode)
+
+  :custom
+  (tabspaces-use-filtered-buffers t)
+  (tabspaces-default-tab "Default"))
 
 (when (not (version< emacs-version "26.3"))
   (use-package consult
@@ -1026,9 +1085,7 @@
   :init
                                         ; NOTE: Set this to the folder where you keep your Git repos! 
   (setq projectile-project-search-path
-	'( 
-	  "~/Documents/Projects"
-	  ))
+	'("~/Documents/Projects"))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package yasnippet
