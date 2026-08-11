@@ -15,8 +15,8 @@
 (require 'package)
 
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-			 ("melpa" . "https://melpa.org/packages/")
+                       ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                       ("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")))
 
 (package-initialize)
@@ -209,41 +209,42 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
-(require 'tab-bar)
+(use-package tab-bar
+  :init
+  (tab-bar-mode 1)
+  :config
+  (setq tab-bar-show 1)                      ; hide bar if <= 1 tabs open
+  (setq tab-bar-new-tab-choice "*dashboard*"); buffer to show in new tabs
+  (setq tab-bar-tab-hints t)                 ; show tab numbers
+  (setq tab-bar-new-tab-to 'right)       ; defines where to create a new tab
 
-(tab-bar-mode 1)
+  (set-face-attribute 'tab-bar nil
+                      :background "#282828"
+                      :foreground "gray60" :distant-foreground "gray50"
+                      :height 1.0 :box nil)
+  (set-face-attribute 'tab-bar-tab nil
+                      :background "#B8BB26"
+                      :foreground "black" :distant-foreground "gray60"
+                      :height 1.0 :box nil)
+  (set-face-attribute 'tab-bar-tab-inactive nil
+                      :background "#282828"
+                      :foreground "white" :distant-foreground "gray50"
+                      :height 1.0 :box nil)
 
-(setq tab-bar-show 1)                      ; hide bar if <= 1 tabs open
-(setq tab-bar-new-tab-choice "*dashboard*"); buffer to show in new tabs
-(setq tab-bar-tab-hints t)                 ; show tab numbers
-(setq tab-bar-new-tab-to 'right)       ; defines where to create a new tab
+  (set-face-attribute 'tab-line nil ; background behind tabs
+                      :background "gray40"
+                      :foreground "gray60" :distant-foreground "gray50"
+                      :height 1.0 :box nil)
 
-(defun tab-duplicate-next ()
-  "Duplicate the current tab and place the duplicate immediately after it."
-  (interactive)
-  (let* ((tabs (tab-bar-tabs))
-	 (orig-index (cl-position (tab-bar--current-tab) tabs :test #'equal)))
-    (tab-duplicate)
-    (tab-bar-move-tab-to (+ orig-index 1))
-    (tab-next)))
-
-(set-face-attribute 'tab-bar nil
-                    :background "#282828"
-                    :foreground "gray60" :distant-foreground "gray50"
-                    :height 1.0 :box nil)
-(set-face-attribute 'tab-bar-tab nil
-                    :background "#B8BB26"
-                    :foreground "black" :distant-foreground "gray60"
-                    :height 1.0 :box nil)
-(set-face-attribute 'tab-bar-tab-inactive nil
-                    :background "#282828"
-                    :foreground "white" :distant-foreground "gray50"
-                    :height 1.0 :box nil)
-
-(set-face-attribute 'tab-line nil ; background behind tabs
-                    :background "gray40"
-                    :foreground "gray60" :distant-foreground "gray50"
-                    :height 1.0 :box nil)
+  (defun tab-duplicate-next ()
+    (interactive)
+    (let* (
+         (tabs (tab-bar-tabs))
+         (orig-index
+          (cl-position (tab-bar--current-tab) tabs :test #'equal)))
+      (tab-duplicate)
+      (tab-bar-move-tab-to (+ orig-index 1))
+      (tab-next))))
 
 (defun frame-font-setup
     (&rest ...)
@@ -295,12 +296,6 @@
 
 (define-key (current-global-map) (kbd "C-w") nil)
 (define-key (current-global-map) (kbd "C-w z") 'toggle-zoom-pane)
-
-(defun persp-exit ()
-  (interactive)
-  (prog1
-      (persp-state-save "~/.config/jose-emacs/.emacs-session-mac")
-    (save-buffers-kill-terminal)))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key [(control x) (k)] 'kill-buffer)
@@ -399,7 +394,7 @@
   (define-key evil-motion-state-map
               (kbd "C-o") 'better-jumper-jump-backward))
 
-    					; jump scenarios
+                                      ; jump scenarios
 (advice-add 'evil-next-line :around #'my-jump-advice)
 (advice-add 'evil-previous-line :around #'my-jump-advice)
 (advice-add 'evil-goto-definition :around #'my-jump-advice)
@@ -576,59 +571,6 @@
     :config
     (setq orderless-matching-styles '(orderless-flex))))
 
-(use-package project
-  :config
-  (defun my-project-tab-name ()
-    "Return current project name."
-    (when-let ((project (project-current)))
-      (file-name-nondirectory
-       (directory-file-name
-        (project-root project)))))
-
-  (defun my-project-open-tab ()
-    "Open current project in its own tab."
-    (interactive)
-    (let ((name (my-project-tab-name)))
-      (unless name
-  	(user-error "Not inside a project"))
-
-      (let ((existing
-             (seq-find
-              (lambda (tab)
-  		(equal (alist-get 'name tab) name))
-              (tab-bar-tabs))))
-
-  	(if existing
-            ;; switch to existing tab
-            (tab-bar-select-tab
-             (1+ (seq-position (tab-bar-tabs) existing)))
-
-          ;; create new tab
-          (tab-bar-new-tab)
-          (tab-bar-rename-tab name)
-
-          ;; remove unrelated buffers
-          (project-switch-project
-           (project-current))))))
-
-  (defun my-project-switch-project ()
-    "Switch project using tabs."
-    (interactive)
-    (project-switch-project
-     (project-prompt-project-dir)))
-
-  (add-hook
-   'project-switch-project-hook
-   #'my-project-open-tab))
-
-(use-package tabspaces
-  :hook
-  (after-init . tabspaces-mode)
-
-  :custom
-  (tabspaces-use-filtered-buffers t)
-  (tabspaces-default-tab "Default"))
-
 (when (not (version< emacs-version "26.3"))
   (use-package consult
     :after (vertico perspective)
@@ -702,7 +644,7 @@
                                         ; Configure other variables and modes in the :config section,
                                         ; after lazily loading the package.
     :config
-					; (consult-customize consult--source-buffer :hidden t :default nil)
+                                      ; (consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
     (setq extra-buffer-sources
           '(:name     "Extra"
@@ -894,10 +836,10 @@
           (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
-					; Save Org buffers after refiling!
+                                      ; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-					; Use find-file instead of file-find-other-window
+                                      ; Use find-file instead of file-find-other-window
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
   (setq org-tag-alist
@@ -911,7 +853,7 @@
   (setq org-capture-templates
         `(
           ("e" "Email Capture")
-					; TODO Update this
+                                      ; TODO Update this
           ;; ("ea" "Main Agenda" entry
           ;;  (file+olp agenda-mail "EMAIL")
           ;;  "** TODO Check this email %a"
@@ -1083,9 +1025,9 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-                                        ; NOTE: Set this to the folder where you keep your Git repos! 
+                                        ; NOTE: Set this to the folder where you keep your Git repos!
   (setq projectile-project-search-path
-	'("~/Documents/Projects"))
+      '("~/Documents/Projects"))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package yasnippet
@@ -1685,51 +1627,6 @@
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
 
-(use-package dired
-  :ensure nil
-  :commands (dired dired-jump evil)
-  :bind (("C-x C-j" . dired-jump))
-  :custom ((dired-listing-switches "-agho --group-directories-first"))
-  :config
-  (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
-                                       ("\\.pdf\\'" "sioyek")))
-  (when (not (version< emacs-version "26.3"))
-    (evil-collection-define-key 'normal 'dired-mode-map
-      "h" 'dired-single-up-directory
-      "l" 'dired-single-buffer)))
-
-(put 'dired-find-alternate-file 'disabled nil)
-
-(add-hook 'dired-mode-hook #'dired-hide-details-mode)
-
-(setq insert-directory-program "gls" dired-use-ls-dired t)
-(setq dired-listing-switches "-al --group-directories-first")
-
-(use-package dired-single
-  :commands (dired dired-jump)
-  :straight
-  (:type git
-         :host github
-         :repo "emacsattic/dired-single"))
-
-(when (not (version< emacs-version "26.1"))
-  (use-package all-the-icons-dired
-    :hook (dired-mode . all-the-icons-dired-mode)))
-
-(use-package dired-open
-  :commands (dired dired-jump)
-  :config
-                                        ; Doesn't work as expected!
-                                        ; (add-to-list 'dired-open-functions #'dired-open-xdg t)
-  (setq dired-open-extensions '(("png" . "feh")
-                                ("mkv" . "mpv"))))
-
-(use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode)
-  :config
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "H" 'dired-hide-dotfiles-mode))
-
 (defun linkify (msg)
   "Returns an org-link"
   (interactive "sDescription: ")
@@ -1781,6 +1678,51 @@ The file name is passed as a shell-quoted argument."
              "~/.local/scripts/fractify.sh"
              (shell-quote-argument (expand-file-name file))))))
 
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump evil)
+  :bind (("C-x C-j" . dired-jump))
+  :custom ((dired-listing-switches "-agho --group-directories-first"))
+  :config
+  (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
+                                       ("\\.pdf\\'" "sioyek")))
+  (when (not (version< emacs-version "26.3"))
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "h" 'dired-single-up-directory
+      "l" 'dired-single-buffer)))
+
+(put 'dired-find-alternate-file 'disabled nil)
+
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+
+(setq insert-directory-program "gls" dired-use-ls-dired t)
+(setq dired-listing-switches "-al --group-directories-first")
+
+(use-package dired-single
+  :commands (dired dired-jump)
+  :straight
+  (:type git
+         :host github
+         :repo "emacsattic/dired-single"))
+
+(when (not (version< emacs-version "26.1"))
+  (use-package all-the-icons-dired
+    :hook (dired-mode . all-the-icons-dired-mode)))
+
+(use-package dired-open
+  :commands (dired dired-jump)
+  :config
+                                        ; Doesn't work as expected!
+                                        ; (add-to-list 'dired-open-functions #'dired-open-xdg t)
+  (setq dired-open-extensions '(("png" . "feh")
+                                ("mkv" . "mpv"))))
+
+(use-package dired-hide-dotfiles
+  :hook (dired-mode . dired-hide-dotfiles-mode)
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "H" 'dired-hide-dotfiles-mode))
+
 (use-package hide-mode-line)
 
 (defun efs/presentation-setup ()
@@ -1825,7 +1767,7 @@ The file name is passed as a shell-quoted argument."
   (use-package mu4e
     :ensure nil
     :load-path (lambda () (expand-file-name efs/mu4e-path))
-  					; :defer 20 ; Wait until 20 seconds after startup
+					; :defer 20 ; Wait until 20 seconds after startup
     :init
     (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
     :config
@@ -1834,7 +1776,7 @@ The file name is passed as a shell-quoted argument."
 
     (setq mu4e-change-filenames-when-moving t)
 
-  					; SMTP settings
+					; SMTP settings
     (setq sendmail-program "/opt/homebrew/bin/msmtp"
           message-sendmail-f-is-evil t
           message-sendmail-extra-arguments '("--read-envelope-from")
@@ -1848,7 +1790,7 @@ The file name is passed as a shell-quoted argument."
     (setq mu4e-get-mail-command "mbsync -a")
     (setq mu4e-root-maildir "~/Mail")
 
-  					; Just plain text
+					; Just plain text
     (with-eval-after-load "mm-decode"
       (add-to-list 'mm-discouraged-alternatives "text/html")
       (add-to-list 'mm-discouraged-alternatives "text/richtext"))
@@ -1860,13 +1802,13 @@ The file name is passed as a shell-quoted argument."
     (setq mu4e-contexts
           (list
 
-    	   (make-mu4e-context
+           (make-mu4e-context
             :name "Gmail"
             :match-func
             (lambda (msg)
               (when msg
                 (string-prefix-p
-    		 "/gmail" (mu4e-message-field msg :maildir))))
+		 "/gmail" (mu4e-message-field msg :maildir))))
             :vars '((user-mail-address  . "jcastellanos34@gmail.com")
                     (user-full-name     . "Jose Abel Castellanos Joo")
                     (mu4e-drafts-folder . "/gmail/[Gmail]/Drafts")
@@ -1878,13 +1820,13 @@ The file name is passed as a shell-quoted argument."
                     (smtpmail-debug-info . t)
                     (smtpmail-stream-type . starttls)))
 
-  	   (make-mu4e-context
+           (make-mu4e-context
             :name "gmail 2"
             :match-func
             (lambda (msg)
               (when msg
                 (string-prefix-p
-    		 "/gmail" (mu4e-message-field msg :maildir))))
+		 "/gmail" (mu4e-message-field msg :maildir))))
             :vars '((user-mail-address  . "jcastellanosjoo@gmail.com")
                     (user-full-name     . "Jose Abel Castellanos Joo")
                     (mu4e-drafts-folder . "/gmail2/[Gmail]/Drafts")
@@ -1895,7 +1837,7 @@ The file name is passed as a shell-quoted argument."
                     (smtpmail-smtp-service . 587)
                     (smtpmail-debug-info . t)
                     (smtpmail-stream-type . starttls)))
-    	   ))
+           ))
 
     (setq mu4e-context-policy 'pick-first)
 
@@ -1916,7 +1858,7 @@ The file name is passed as a shell-quoted argument."
     (setq mu4e-compose-signature "Best,\nJose")
     (setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
     (setq message-citation-line-function
-          'message-insert-formatted-citation-line) 
+          'message-insert-formatted-citation-line)
     (setq mu4e-headers-fields '((:flags . 5)
                                 (:human-date . 12)
                                 (:from . 22)
