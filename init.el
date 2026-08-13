@@ -95,6 +95,48 @@
         )))
   (setenv "LIBRARY_PATH" (mapconcat 'identity paths ":")))
 
+(use-package desktop
+  :config
+  (setq desktop-save-frames nil
+        desktop-restore-frames nil)
+
+  (defun my-save-session (name)
+    "Save the current Emacs session under NAME."
+    (interactive "MSession name: ")
+    (let* ((dir (expand-file-name name "~/.config/jose-emacs/workflows/"))
+           (tab-file (expand-file-name "tabs.el" dir)))
+      (make-directory dir t)
+      (desktop-save dir t)
+
+      (with-temp-file tab-file
+  	(prin1
+  	 (mapcar
+          (lambda (tab)
+            (cdr (assq 'name tab)))
+          (tab-bar-tabs))
+  	 (current-buffer)))))
+
+  (defun my-load-session (name)
+    "Load the Emacs session NAME."
+    (interactive "MSession name: ")
+    (let* ((dir (expand-file-name name "~/.config/jose-emacs/workflows/"))
+           (tab-file (expand-file-name "tabs.el" dir))
+           tabs)
+
+      (desktop-read dir)
+
+      (when (file-exists-p tab-file)
+	(with-temp-buffer
+          (insert-file-contents tab-file)
+          (setq tabs (read (current-buffer))))
+
+	(dolist (tab tabs)
+          (let ((buffer (get-buffer tab)))
+            (when buffer
+              (tab-bar-new-tab)
+              (switch-to-buffer buffer))))))) 
+  )
+
 (setq gc-cons-threshold (* 2 1000 1000))
 
 (when (not (version< emacs-version "26.3"))
@@ -239,9 +281,9 @@
   (defun tab-duplicate-next ()
     (interactive)
     (let* (
-         (tabs (tab-bar-tabs))
-         (orig-index
-          (cl-position (tab-bar--current-tab) tabs :test #'equal)))
+           (tabs (tab-bar-tabs))
+           (orig-index
+            (cl-position (tab-bar--current-tab) tabs :test #'equal)))
       (tab-duplicate)
       (tab-bar-move-tab-to (+ orig-index 1))
       (tab-next))))
@@ -394,7 +436,7 @@
   (define-key evil-motion-state-map
               (kbd "C-o") 'better-jumper-jump-backward))
 
-                                      ; jump scenarios
+					; jump scenarios
 (advice-add 'evil-next-line :around #'my-jump-advice)
 (advice-add 'evil-previous-line :around #'my-jump-advice)
 (advice-add 'evil-goto-definition :around #'my-jump-advice)
@@ -644,7 +686,7 @@
                                         ; Configure other variables and modes in the :config section,
                                         ; after lazily loading the package.
     :config
-                                      ; (consult-customize consult--source-buffer :hidden t :default nil)
+					; (consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
     (setq extra-buffer-sources
           '(:name     "Extra"
@@ -836,10 +878,10 @@
           (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
-                                      ; Save Org buffers after refiling!
+					; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-                                      ; Use find-file instead of file-find-other-window
+					; Use find-file instead of file-find-other-window
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
   (setq org-tag-alist
@@ -853,7 +895,7 @@
   (setq org-capture-templates
         `(
           ("e" "Email Capture")
-                                      ; TODO Update this
+					; TODO Update this
           ;; ("ea" "Main Agenda" entry
           ;;  (file+olp agenda-mail "EMAIL")
           ;;  "** TODO Check this email %a"
@@ -1027,7 +1069,7 @@
   :init
                                         ; NOTE: Set this to the folder where you keep your Git repos!
   (setq projectile-project-search-path
-      '("~/Documents/Projects"))
+	'("~/Documents/Projects"))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package yasnippet
@@ -1913,3 +1955,5 @@ The file name is passed as a shell-quoted argument."
   :after org-noter
   :config
   (setq org-zotxt-link-description-style :title))
+
+(load "~/workflows.el")

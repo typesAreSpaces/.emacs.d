@@ -66,9 +66,7 @@ You can also use =M-x auto-package-update-now= to update right now!
              gcs-done))
 
   (add-hook 'emacs-startup-hook #'efs/display-startup-time)
-#+end_src
 
-#+begin_src emacs-lisp
   (let
       ((paths
         '(
@@ -115,6 +113,52 @@ You can also use =M-x auto-package-update-now= to update right now!
           "/opt/homebrew/lib/gcc/14/gcc/aarch64-apple-darwin23/14"
           )))
     (setenv "LIBRARY_PATH" (mapconcat 'identity paths ":")))
+#+end_src
+
+** Desktop save/restore
+#+begin_src emacs-lisp
+  (use-package desktop
+    :config
+    (setq desktop-save-frames nil
+          desktop-restore-frames nil)
+
+    (defun my-save-session (name)
+      "Save the current Emacs session under NAME."
+      (interactive "MSession name: ")
+      (let* ((dir (expand-file-name name "~/.config/jose-emacs/workflows/"))
+             (tab-file (expand-file-name "tabs.el" dir)))
+        (make-directory dir t)
+        (desktop-save dir t)
+
+        (with-temp-file tab-file
+    	(prin1
+    	 (mapcar
+            (lambda (tab)
+              (cdr (assq 'name tab)))
+            (tab-bar-tabs))
+    	 (current-buffer)))))
+
+    (defun my-load-session (name)
+      "Load the Emacs session NAME."
+      (interactive "MSession name: ")
+      (let* ((dir (expand-file-name name "~/.config/jose-emacs/workflows/"))
+             (tab-file (expand-file-name "tabs.el" dir))
+             tabs)
+
+        (desktop-read dir)
+
+        (when (file-exists-p tab-file)
+  	(with-temp-buffer
+            (insert-file-contents tab-file)
+            (setq tabs (read (current-buffer))))
+
+  	(dolist (tab tabs)
+            (let ((buffer (get-buffer tab)))
+              (when buffer
+                (tab-bar-new-tab)
+                (switch-to-buffer buffer))))))) 
+    )
+
 #+end_src
 ** Runtime Performance
 Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
@@ -309,9 +353,9 @@ The content of .emacs-daemon.plist is
     (defun tab-duplicate-next ()
       (interactive)
       (let* (
-           (tabs (tab-bar-tabs))
-           (orig-index
-            (cl-position (tab-bar--current-tab) tabs :test #'equal)))
+             (tabs (tab-bar-tabs))
+             (orig-index
+              (cl-position (tab-bar--current-tab) tabs :test #'equal)))
         (tab-duplicate)
         (tab-bar-move-tab-to (+ orig-index 1))
         (tab-next))))
@@ -470,7 +514,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     (define-key evil-motion-state-map
                 (kbd "C-o") 'better-jumper-jump-backward))
 
-                                        ; jump scenarios
+  					; jump scenarios
   (advice-add 'evil-next-line :around #'my-jump-advice)
   (advice-add 'evil-previous-line :around #'my-jump-advice)
   (advice-add 'evil-goto-definition :around #'my-jump-advice)
@@ -754,7 +798,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
                                           ; Configure other variables and modes in the :config section,
                                           ; after lazily loading the package.
       :config
-                                        ; (consult-customize consult--source-buffer :hidden t :default nil)
+  					; (consult-customize consult--source-buffer :hidden t :default nil)
       (add-to-list 'consult-buffer-sources persp-consult-source)
       (setq extra-buffer-sources
             '(:name     "Extra"
@@ -976,10 +1020,10 @@ This section contains the basic configuration for =org-mode= plus the configurat
             (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
             (sequence "EMAIL" "|")))
 
-                                        ; Save Org buffers after refiling!
+  					; Save Org buffers after refiling!
     (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-                                        ; Use find-file instead of file-find-other-window
+  					; Use find-file instead of file-find-other-window
     (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
     (setq org-tag-alist
@@ -993,7 +1037,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (setq org-capture-templates
           `(
             ("e" "Email Capture")
-                                        ; TODO Update this
+  					; TODO Update this
             ;; ("ea" "Main Agenda" entry
             ;;  (file+olp agenda-mail "EMAIL")
             ;;  "** TODO Check this email %a"
@@ -1192,7 +1236,7 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
     :init
                                           ; NOTE: Set this to the folder where you keep your Git repos!
     (setq projectile-project-search-path
-        '("~/Documents/Projects"))
+  	'("~/Documents/Projects"))
     (setq projectile-switch-project-action #'projectile-dired))
 #+end_src
 ** Yasnippet setup
@@ -1352,23 +1396,23 @@ Try these commands with =M-x=:
 [[https://emacs-lsp.github.io/dap-mode/][dap-mode]] is an excellent package for bringing rich debugging capabilities to Emacs via the [[https://microsoft.github.io/debug-adapter-protocol/][Debug Adapter Protocol]].  You should check out the [[https://emacs-lsp.github.io/dap-mode/page/configuration/][configuration docs]] to learn how to configure the debugger for your language.  Also make sure to check out the documentation for the debug adapter to see what configuration parameters are available to use for your debug templates!
 
 #+begin_src emacs-lisp
-                                        ; (when (not (version< emacs-version "26.1"))
-                                        ;   (use-package dap-mode
-                                        ;                                         ; :custom
-                                        ;                                         ; (lsp-enable-dap-auto-configure nil)
-                                        ;                                         ; :config
-                                        ;                                         ; (dap-ui-mode 1)
-                                        ;     :commands dap-debug
-                                        ;     :config
-                                        ;                                         ; Set up Node debugging
-                                        ;     (require 'dap-node)
-                                        ;     (dap-node-setup) ; Automatically installs Node debug adapter if needed
+  					; (when (not (version< emacs-version "26.1"))
+  					;   (use-package dap-mode
+  					;                                         ; :custom
+  					;                                         ; (lsp-enable-dap-auto-configure nil)
+  					;                                         ; :config
+  					;                                         ; (dap-ui-mode 1)
+  					;     :commands dap-debug
+  					;     :config
+  					;                                         ; Set up Node debugging
+  					;     (require 'dap-node)
+  					;     (dap-node-setup) ; Automatically installs Node debug adapter if needed
 
-                                        ;                                         ; Bind `C-c l d` to `dap-hydra` for easy access
-                                        ;     (general-define-key
-                                        ;      :keymaps 'lsp-mode-map
-                                        ;      :prefix lsp-keymap-prefix
-                                        ;      "d" '(dap-hydra t :wk "debugger"))))
+  					;                                         ; Bind `C-c l d` to `dap-hydra` for easy access
+  					;     (general-define-key
+  					;      :keymaps 'lsp-mode-map
+  					;      :prefix lsp-keymap-prefix
+  					;      "d" '(dap-hydra t :wk "debugger"))))
 #+end_src
 *** TypeScript
 This is a basic configuration for the TypeScript language so that =.ts= files activate =typescript-mode= when opened.  We're also adding a hook to =typescript-mode-hook= to call =lsp-deferred= so that we activate =lsp-mode= to get LSP features every time we edit TypeScript code.
@@ -1604,7 +1648,7 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
 #+end_src
 *** Z3 mode
 #+begin_src emacs-lisp
-                                        ; (use-package boogie-friends)
+  					; (use-package boogie-friends)
 #+end_src
 *** Lean
 #+begin_src emacs-lisp
@@ -2381,4 +2425,9 @@ mu4e comes included with mu. Search the path your package manager used to instal
     :after org-noter
     :config
     (setq org-zotxt-link-description-style :title))
+#+end_src
+
+** Workflows
+#+begin_src emacs-lisp
+  (load "~/workflows.el")
 #+end_src

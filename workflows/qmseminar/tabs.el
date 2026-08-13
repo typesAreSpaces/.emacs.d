@@ -1,0 +1,1 @@
+("20231115200616-qm_seminar.org" "main.tex<GeneralCaseUnivariate>")

@@ -1,0 +1,187 @@
+;; -*- mode: emacs-lisp; lexical-binding:t; coding: utf-8-emacs; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Thu Aug 13 17:18:07 2026
+;; Desktop file format version 208
+;; Emacs version 30.2
+
+;; Global section:
+(setq desktop-saved-frameset nil)
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/.config/jose-emacs/workflows/quantum/.emacs.desktop" "~/.config/jose-emacs/workflows/Quantum/.emacs.desktop" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/demosost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsdp.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/conclusion.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/preliminaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex" "~/Library/texmf/tex/latex/QuantumCommandsAndDeclarations.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex" "~/Library/texmf/tex/latex/QuantumCommandsAndDeclarations.sty" "~/Library/texmf/tex/latex/quantum-math-environment.sty" "~/Library/texmf/tex/latex/quantum-packages.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex" "~/temp.bib"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260626124850-pavithra_prabhakar_postdoc_discussion.org"
+  "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
+  'org-mode
+  '(text-scale-mode olivetti-mode org-bullets-mode font-lock-mode org-indent-mode buffer-face-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode)
+  143
+  '(126 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20648 756690 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260426111709-projects.org"
+  "20260426111709-projects.org"
+  'org-mode
+  '(olivetti-mode org-bullets-mode font-lock-mode org-indent-mode buffer-face-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode)
+  271
+  '(271 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20629 787717 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (271 1 335 335 269 269 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
+  "20260423173343-main_agenda.org"
+  'org-mode
+  '(olivetti-mode org-bullets-mode font-lock-mode org-indent-mode buffer-face-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode)
+  202
+  '(202 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20628 964497 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (202 202 202 202 202))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260423174506-current_work.org"
+  "20260423174506-current_work.org"
+  'org-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
+  1572
+  '(1572 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20621 233775 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex"
+  "main.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode reftex-mode display-fill-column-indicator-mode)
+  7048
+  '(2451 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27262 20543 590646 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20231115200616-qm_seminar.org"
+  "20231115200616-qm_seminar.org"
+  'org-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
+  10913
+  '(10913 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20518 971349 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (10913 12 12 28762 28762 14606 14606 10913 10913 10913 10913 10913 10913 10913 10913 425))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
+  "main.tex"
+  'LaTeX-mode
+  '(display-fill-column-indicator-mode reftex-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode outline-minor-mode olivetti-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode font-lock-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode eldoc-mode lsp-managed-mode)
+  205
+  '(205 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27262 20509 672173 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260721081408-quantum_research.org"
+  "20260721081408-quantum_research.org"
+  'org-mode
+  '(olivetti-mode org-bullets-mode font-lock-mode org-indent-mode buffer-face-mode visual-line-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode)
+  218
+  '(218 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20502 769487 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
+  "main.tex"
+  'LaTeX-mode
+  '(display-fill-column-indicator-mode reftex-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode outline-minor-mode olivetti-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode font-lock-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode eldoc-mode lsp-managed-mode)
+  205
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27262 20502 763316 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20251105153112-applying_opt.org"
+  "20251105153112-applying_opt.org"
+  'org-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260423174626-algebraic_combinatorics_seminar.org"
+  "20260423174626-algebraic_combinatorics_seminar.org"
+  'org-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260428165951-saturated_quadratic_module.org"
+  "20260428165951-saturated_quadratic_module.org"
+  'org-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260428165645-monogenic_quadratic_module_certificates.org"
+  "20260428165645-monogenic_quadratic_module_certificates.org"
+  'org-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260511204944-general_case_univariate_quadratic_modules.org"
+  "20260511204944-general_case_univariate_quadratic_modules.org"
+  'org-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
