@@ -2426,8 +2426,3 @@ mu4e comes included with mu. Search the path your package manager used to instal
     :config
     (setq org-zotxt-link-description-style :title))
 #+end_src
-
-** Workflows
-#+begin_src emacs-lisp
-  (load "~/workflows.el")
-#+end_src

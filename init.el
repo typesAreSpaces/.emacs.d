@@ -1955,5 +1955,3 @@ The file name is passed as a shell-quoted argument."
   :after org-noter
   :config
   (setq org-zotxt-link-description-style :title))
-
-(load "~/workflows.el")
