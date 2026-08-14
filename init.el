@@ -97,44 +97,62 @@
 
 (use-package desktop
   :config
+  (defvar workflow-dir "~/.config/jose-emacs/workflows/")
   (setq desktop-save-frames nil
         desktop-restore-frames nil)
 
   (defun my-save-session (name)
     "Save the current Emacs session under NAME."
-    (interactive "MSession name: ")
-    (let* ((dir (expand-file-name name "~/.config/jose-emacs/workflows/"))
+					; ; (interactive "MSession name: ")
+    (interactive
+     (list
+      (completing-read
+       "Session name: "
+       (directory-files workflow-dir nil
+  			directory-files-no-dot-files-regexp)
+       nil nil)))
+    (let* ((dir (expand-file-name name workflow-dir))
            (tab-file (expand-file-name "tabs.el" dir)))
       (make-directory dir t)
       (desktop-save dir t)
 
       (with-temp-file tab-file
-  	(prin1
-  	 (mapcar
+        (prin1
+         (mapcar
           (lambda (tab)
             (cdr (assq 'name tab)))
           (tab-bar-tabs))
-  	 (current-buffer)))))
+         (current-buffer)))))
 
-  (defun my-load-session (name)
-    "Load the Emacs session NAME."
-    (interactive "MSession name: ")
-    (let* ((dir (expand-file-name name "~/.config/jose-emacs/workflows/"))
+  (defun my-load-session ()
+    "Load one of the saved Emacs sessions."
+    (interactive)
+    (let* ((base-dir workflow-dir)
+           (sessions
+            (seq-filter
+             #'file-directory-p
+             (directory-files
+              base-dir t
+              directory-files-no-dot-files-regexp)))
+           (name (completing-read
+                  "Session: "
+                  (mapcar #'file-name-nondirectory sessions)
+                  nil t))
+           (dir (expand-file-name name base-dir))
            (tab-file (expand-file-name "tabs.el" dir))
            tabs)
 
       (desktop-read dir)
 
       (when (file-exists-p tab-file)
-	(with-temp-buffer
+        (with-temp-buffer
           (insert-file-contents tab-file)
           (setq tabs (read (current-buffer))))
 
-	(dolist (tab tabs)
-          (let ((buffer (get-buffer tab)))
-            (when buffer
-              (tab-bar-new-tab)
-              (switch-to-buffer buffer))))))) 
+        (dolist (tab tabs)
+          (when (get-buffer tab)
+            (tab-bar-new-tab)
+            (switch-to-buffer tab))))))
   )
 
 (setq gc-cons-threshold (* 2 1000 1000))
