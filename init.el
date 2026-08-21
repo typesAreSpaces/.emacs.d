@@ -142,6 +142,7 @@
            (tab-file (expand-file-name "tabs.el" dir))
            tabs)
 
+      (delete-file (expand-file-name ".emacs.desktop.lock" dir))
       (desktop-read dir)
 
       (when (file-exists-p tab-file)
@@ -397,6 +398,9 @@
     "es" '(insert-snake :which-key "insert (s)nake")
     "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
     "f" '(hydra-jump-files/body :which-key "edit (f)iles")
+    "j" '(:ignore t :whick-key "sessions")
+    "js" '(my-save-session :which-key "Save session")
+    "jl" '(my-load-session :which-key "Load session")
     "s"  '(shell-command :which-key "(s)hell command")
     "S"  '(async-shell-command :which-key "async (S)hell command")
     "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
@@ -868,6 +872,7 @@
     #'(lambda (x) (concat "~/Documents/Org-Files/" x))
     '(
       "20260423173343-main_agenda.org"
+      "20260819135302-postdoc_tasks.org"
       "20260423174506-current_work.org"
       "20251105153112-applying_opt.org"
       "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
