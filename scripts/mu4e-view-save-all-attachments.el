@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;; mu4e-view-save-all-attachments.el -- Save all attachments from view mode.
 ;;; Stephen J Eglen 2021
 
