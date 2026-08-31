@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -15,8 +17,8 @@
 (require 'package)
 
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                       ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-                       ("melpa" . "https://melpa.org/packages/")
+			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+			 ("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")))
 
 (package-initialize)
@@ -39,14 +41,14 @@
 
 (setq gc-cons-threshold (* 50 1000 1000))
 
-(defun efs/display-startup-time ()
+(defun my/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
                    (float-time
                     (time-subtract after-init-time before-init-time)))
            gcs-done))
 
-(add-hook 'emacs-startup-hook #'efs/display-startup-time)
+(add-hook 'emacs-startup-hook #'my/display-startup-time)
 
 (let
     ((paths
@@ -165,7 +167,7 @@
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
-(defvar efs/frame-transparency '(100 . 100))
+(defvar my/frame-transparency '(100 . 100))
 
 (setq inhibit-startup-message t)
 
@@ -228,8 +230,8 @@
 (when (not (version< emacs-version "26.3"))
   (global-display-line-numbers-mode t))
 
-(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
+(set-frame-parameter (selected-frame) 'alpha my/frame-transparency)
+(add-to-list 'default-frame-alist `(alpha . ,my/frame-transparency))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -375,12 +377,12 @@
 (use-package general
   :after evil
   :config
-  (general-create-definer efs/leader-keys
+  (general-create-definer my/leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
     :global-prefix "C-SPC")
 
-  (efs/leader-keys
+  (my/leader-keys
     "a" '(:ignore t :which-key "(a)vy")
     "ac" '(avy-goto-char :which-key "(c)haracter")
     "aw" '(avy-goto-word-0 :which-key "(w)ord")
@@ -784,14 +786,14 @@
   ("c" change-font-size "change font size" :exit t)
   ("q" nil "finished" :exit t))
 
-(efs/leader-keys
+(my/leader-keys
   "tf" '(hydra-text-scale/body :which-key "change (f)ont size"))
 
 (use-package zoom
   :config
   (setq zoom-size '(0.618 . 0.618)))
 
-(defun efs/org-font-setup ()
+(defun my/org-font-setup ()
                                         ; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
@@ -839,7 +841,7 @@
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
-(defun efs/org-mode-setup ()
+(defun my/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1))
@@ -850,10 +852,18 @@
   (let ((default-directory (substitute-in-file-name "$HOME/")))
     (call-interactively 'org-store-link)))
 
+(defun my/org-uncheck-all ()
+  "Uncheck all Org-mode checkboxes in the current buffer."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward "\\[X\\]" nil t)
+      (replace-match "[ ]"))))
+
 (use-package org
   :pin org
   :commands (org-capture org-agenda)
-  :hook (org-mode . efs/org-mode-setup)
+  :hook (org-mode . my/org-mode-setup)
   :config
   (setq org-file-apps
         '((auto-mode . emacs)
@@ -901,10 +911,10 @@
           (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
-					; Save Org buffers after refiling!
+  					; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-					; Use find-file instead of file-find-other-window
+  					; Use find-file instead of file-find-other-window
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
   (setq org-tag-alist
@@ -918,7 +928,7 @@
   (setq org-capture-templates
         `(
           ("e" "Email Capture")
-					; TODO Update this
+  					; TODO Update this
           ;; ("ea" "Main Agenda" entry
           ;;  (file+olp agenda-mail "EMAIL")
           ;;  "** TODO Check this email %a"
@@ -944,12 +954,13 @@
   (define-key org-mode-map (kbd "C-c s")
               (lambda () (interactive) (org-sort-buffer)))
 
-  (efs/org-font-setup))
+  (my/org-font-setup))
 
-(efs/leader-keys
+(my/leader-keys
   "o" '(:ignore t :which-key "(o)rg")
   "oa" '(org-agenda nil :which-key "org-(a)genda")
   "oc" '(org-capture nil :which-key "org-(c)apture")
+  "ou" '(my/org-uncheck-all nil :which-key "(u)nchek boxes")
   "ot" '(:ignore t :which-key "org-(t)able")
   "otd" '(org-table-blank-field nil :which-key "(d)elete cell")
   )
@@ -1044,17 +1055,17 @@
       (widen)
       (fill-region (point-min) (point-max)))))
 
-(defun efs/org-mode-visual-fill ()
+(defun my/org-mode-visual-fill ()
   (olivetti-mode 1)
   (visual-line-mode 1))
 
 (use-package olivetti
-  :hook ((org-mode . efs/org-mode-visual-fill)
-         (markdown-mode . efs/org-mode-visual-fill)
-         (TeX-mode . efs/org-mode-visual-fill)
-         (latex-mode . efs/org-mode-visual-fill)
-         (LaTeX-mode . efs/org-mode-visual-fill)
-         (mu4e-main-mode . efs/org-mode-visual-fill))
+  :hook ((org-mode . my/org-mode-visual-fill)
+         (markdown-mode . my/org-mode-visual-fill)
+         (TeX-mode . my/org-mode-visual-fill)
+         (latex-mode . my/org-mode-visual-fill)
+         (LaTeX-mode . my/org-mode-visual-fill)
+         (mu4e-main-mode . my/org-mode-visual-fill))
   :custom
   (olivetti-style 'fancy)
   (olivetti-margin-width 5)
@@ -1074,13 +1085,13 @@
 (add-hook 'olivetti-mode-on-hook 'custom-olivetti-mode-on-hook)
 (add-hook 'olivetti-mode-off-hook 'custom-olivetti-mode-off-hook)
 
-(defun efs/org-babel-tangle-config ()
+(defun my/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name))
                       (expand-file-name user-emacs-directory))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'my/org-babel-tangle-config)))
 
 (use-package projectile
   :after orderless
@@ -1126,14 +1137,14 @@
   (setq avy-all-windows 'all-frames)
   (global-set-key (kbd "C-:") 'avy-goto-char))
 
-(defun efs/lsp-mode-setup ()
+(defun my/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
 (when (not (version< emacs-version "26.1"))
   (use-package lsp-mode
     :commands (lsp lsp-deferred)
-    :hook (lsp-mode . efs/lsp-mode-setup)
+    :hook (lsp-mode . my/lsp-mode-setup)
     :init
     (setq lsp-keymap-prefix "C-l")
     (setq read-process-output-max (* 1024 1024))
@@ -1330,7 +1341,7 @@
                                         ;(evil-define-key 'normal
                                         ;  outline-minor-mode-map (kbd "<S-tab>") 'outline-cycle)
 
-(efs/leader-keys
+(my/leader-keys
   "l" '(:ignore t :which-key "(l)atex related")
   "lr" '((lambda () (interactive)
            (reftex-view-crossref))
@@ -1460,7 +1471,7 @@
           smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
           smart-yank)))  ; Yank behavior depend on mode.
 
-(efs/leader-keys
+(my/leader-keys
   "tp" 'parinfer-toggle-mode)
 
 (use-package corfu
@@ -1653,7 +1664,7 @@
   (setq explicit-shell-file-name "powershell.exe")
   (setq explicit-powershell.exe-args '()))
 
-(defun efs/configure-eshell ()
+(defun my/configure-eshell ()
                                         ; Save command history when commands are entered
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
 
@@ -1676,7 +1687,7 @@
   :after eshell)
 
 (use-package eshell
-  :hook (eshell-first-time-mode . efs/configure-eshell)
+  :hook (eshell-first-time-mode . my/configure-eshell)
   :config
 
   (with-eval-after-load 'esh-opt
@@ -1790,21 +1801,21 @@ The file name is passed as a shell-quoted argument."
 
 (use-package hide-mode-line)
 
-(defun efs/presentation-setup ()
+(defun my/presentation-setup ()
   (setq text-scale-mode-amount 3)
   (hide-mode-line-mode 1)
   (org-display-inline-images)
   (text-scale-mode 1))
 
-(defun efs/presentation-end ()
+(defun my/presentation-end ()
   (hide-mode-line-mode 0)
   (text-scale-mode 0)
-  (efs/org-mode-setup)
-  (efs/org-mode-visual-fill))
+  (my/org-mode-setup)
+  (my/org-mode-visual-fill))
 
 (use-package org-tree-slide
-  :hook ((org-tree-slide-play . efs/presentation-setup)
-         (org-tree-slide-stop . efs/presentation-end))
+  :hook ((org-tree-slide-play . my/presentation-setup)
+         (org-tree-slide-stop . my/presentation-end))
   :custom
   (org-tree-slide-slide-in-effect t)
   (org-tree-slide-activate-message "Presentation started!")
@@ -1813,7 +1824,7 @@ The file name is passed as a shell-quoted argument."
   (org-tree-slide-breadcrumbs " // ")
   (org-image-actual-width nil))
 
-(efs/leader-keys
+(my/leader-keys
   "p" '(:ignore t :which-key "(p)resentation")
   "pp" '(org-tree-slide-move-previous-tree :which-key "Previous slide")
   "pn" '(org-tree-slide-move-next-tree  :which-key "Next slide"))
@@ -1826,12 +1837,12 @@ The file name is passed as a shell-quoted argument."
 
 (use-package sqlite3)
 
-(defvar efs/mu4e-path "/opt/homebrew/share/emacs/site-lisp/mu/mu4e/")
+(defvar my/mu4e-path "/opt/homebrew/share/emacs/site-lisp/mu/mu4e/")
 
-(when (file-exists-p (concat efs/mu4e-path "mu4e.el"))
+(when (file-exists-p (concat my/mu4e-path "mu4e.el"))
   (use-package mu4e
     :ensure nil
-    :load-path (lambda () (expand-file-name efs/mu4e-path))
+    :load-path (lambda () (expand-file-name my/mu4e-path))
 					; :defer 20 ; Wait until 20 seconds after startup
     :init
     (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
@@ -1973,6 +1984,47 @@ The file name is passed as a shell-quoted argument."
    '((gnuplot . t))))
 
 (use-package org-noter)
+
+(defun zotero-export-bibtex-at-point ()
+  "Export the Zotero item whose link is at or around point as BibTeX."
+  (interactive)
+  (let* ((pattern "zotero://select/items/[0-9]+_\\([A-Z0-9]+\\)")
+         (start (line-beginning-position))
+         (end (line-end-position))
+         (url nil)
+         (item-key nil))
+
+    ;; Search the current line for a Zotero link containing point.
+    (save-excursion
+      (goto-char start)
+      (while (and (not url)
+                  (re-search-forward pattern end t))
+        (when (and (<= (match-beginning 0) (point))
+                   (>= (match-end 0) (point)))
+          (setq url (match-string 0)
+                item-key (match-string 1)))))
+
+    ;; If point isn't inside the URL itself, search for the
+    ;; Zotero link on the current line.
+    (unless item-key
+      (save-excursion
+        (goto-char start)
+        (when (re-search-forward pattern end t)
+          (setq url (match-string 0)
+                item-key (match-string 1)))))
+
+    (if item-key
+        (let ((bibtex
+               (string-trim
+                (shell-command-to-string
+                 (format
+                  "curl -s 'http://localhost:23119/api/users/0/items/%s?format=bibtex'"
+                  item-key)))))
+          (if (string-empty-p bibtex)
+              (user-error "Zotero returned no BibTeX for %s" item-key)
+            (kill-new bibtex)
+            (message "BibTeX for %s copied to clipboard" item-key)))
+      (user-error "No Zotero link found on this line"))))
 
 (use-package zotxt
   :after org-noter
