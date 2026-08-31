@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Aug 13 17:18:07 2026
+;; Created Wed Aug 26 13:19:59 2026
 ;; Desktop file format version 208
 ;; Emacs version 30.2
 
@@ -12,58 +12,94 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring nil)
-(setq register-alist nil)
-(setq file-name-history '("~/.config/jose-emacs/workflows/quantum/.emacs.desktop" "~/.config/jose-emacs/workflows/Quantum/.emacs.desktop" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/demosost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsdp.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/conclusion.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/preliminaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex" "~/Library/texmf/tex/latex/QuantumCommandsAndDeclarations.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex" "~/Library/texmf/tex/latex/QuantumCommandsAndDeclarations.sty" "~/Library/texmf/tex/latex/quantum-math-environment.sty" "~/Library/texmf/tex/latex/quantum-packages.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex" "~/temp.bib"))
+(setq regexp-search-ring '(#("Linear" 0 6 (isearch-case-fold-search nil)) #("section{" 0 8 (isearch-case-fold-search t)) #("Execution vs." 0 13 (isearch-case-fold-search nil)) #("Execution" 0 9 (isearch-case-fold-search nil)) #("E" 0 1 (isearch-case-fold-search nil)) #("TODO" 0 4 (isearch-case-fold-search nil)) #("definitoin" 0 10 (isearch-case-fold-search t)) #("redmakr" 0 7 (isearch-case-fold-search t))))
+(setq register-alist '((97 . [105 42 46 escape 106 94]) (48 . #("TODO.\n\n\\subsection{Safety using Barrier Certificates}\n\nTODO.\n\n\\subsection{Lyapunov Stability}\n\nTODO.\n\n\\subsection{Reachability Algorithms}\n\nTODO.\n\n\\subsection{SOSTools}\n\nTODO." 0 5 (fontified t) 5 6 (fontified t) 6 7 (rear-nonsticky t fontified t) 7 18 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 18 19 (fontified t) 19 52 (face (font-latex-sectioning-3-face) fontified t) 52 53 (fontified t) 53 54 (fontified t) 54 55 (rear-nonsticky t fontified t) 55 60 (fontified t) 60 61 (fontified t) 61 62 (fontified t rear-nonsticky t) 62 73 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 73 74 (fontified t) 74 92 (face (font-latex-sectioning-3-face) fontified t) 92 93 (fontified t) 93 94 (fontified t) 94 95 (fontified t rear-nonsticky t) 95 100 (fontified t) 100 101 (fontified t) 101 102 (fontified t rear-nonsticky t) 102 113 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 113 114 (fontified t) 114 137 (face (font-latex-sectioning-3-face) fontified t) 137 138 (fontified t) 138 139 (fontified t) 139 140 (fontified t rear-nonsticky t) 140 145 (fontified t) 145 146 (fontified t) 146 147 (fontified t) 147 158 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 158 159 (fontified t) 159 167 (face (font-latex-sectioning-3-face) fontified t) 167 169 (fontified t) 169 175 (fontified t)))))
+(setq file-name-history '("~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class15_lyapunov_functions_barrier.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class14_non_linear.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_linear.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_14_modeling_linear_systems.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/.gitignore" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/StrictlyPositiveCase/main_revised.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class15_lyapunov_functions_barrier.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_14_modeling_linear_systems.tex" "~/Documents/Org-Files/20260819135302-postdoc_tasks.org" "~/.config/jose-emacs/workflows/quantum/.emacs.desktop" "~/.config/jose-emacs/workflows/Quantum/.emacs.desktop" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/demosost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsdp.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/conclusion.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/preliminaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_background.tex"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260626124850-pavithra_prabhakar_postdoc_discussion.org"
-  "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
-  'org-mode
-  '(text-scale-mode olivetti-mode org-bullets-mode font-lock-mode org-indent-mode buffer-face-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode)
-  143
-  '(126 nil)
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class14_non_linear.tex"
+  "class14_non_linear.tex"
+  'LaTeX-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-headerline-breadcrumb-mode lsp-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode)
+  1029
+  '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20648 756690 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (1))))
+  '((indent-tabs-mode) (buffer-display-time 27279 15454 348562 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (1 1688 1688 1688 1688 30 30 30 1))))
 
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260426111709-projects.org"
-  "20260426111709-projects.org"
-  'org-mode
-  '(olivetti-mode org-bullets-mode font-lock-mode org-indent-mode buffer-face-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode)
-  271
-  '(271 nil)
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_linear.tex"
+  "class13_linear.tex"
+  'LaTeX-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-headerline-breadcrumb-mode lsp-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode)
+  1685
+  '(138 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20629 787717 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (271 1 335 335 269 269 1))))
+  '((indent-tabs-mode) (buffer-display-time 27279 15454 348561 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (138 1404 1404 1087 1))))
 
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
-  "20260423173343-main_agenda.org"
-  'org-mode
-  '(olivetti-mode org-bullets-mode font-lock-mode org-indent-mode buffer-face-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode)
-  202
-  '(202 nil)
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class15_lyapunov_functions_barrier.tex"
+  "class15_lyapunov_functions_barrier.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode lsp-mode font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode olivetti-mode outline-minor-mode reftex-mode display-fill-column-indicator-mode)
+  1718
+  '(1892 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20628 964497 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (202 202 202 202 202))))
+  '((indent-tabs-mode) (buffer-display-time 27279 15288 575077 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (493 474 1939 1939 1011 1011 1895 1895 1865 1863 1 1954 1954 1 1))))
 
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260423174506-current_work.org"
-  "20260423174506-current_work.org"
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_14_modeling_linear_systems.tex"
+  "class13_14_modeling_linear_systems.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode lsp-mode font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode olivetti-mode outline-minor-mode reftex-mode display-fill-column-indicator-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27279 15119 365860 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (1789 1028 1585 1585 1585 1585 1585 1585 1585 1585 1 1 1789 381 527 527))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260819135302-postdoc_tasks.org"
+  "20260819135302-postdoc_tasks.org"
   'org-mode
-  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
-  1572
-  '(1572 nil)
+  '(text-scale-mode olivetti-mode org-bullets-mode font-lock-mode org-indent-mode buffer-face-mode visual-line-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode auto-revert-mode)
+  4870
+  '(2500 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20621 233775 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring nil)))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27279 14621 429959 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (2500 1 1 2500 2500 2500 2500 2500 4808 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/.gitignore"
+  ".gitignore"
+  'fundamental-mode
+  '(auto-revert-mode font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 27279 13375 482781 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (39 57 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/StrictlyPositiveCase/main_revised.tex"
+  "main_revised.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode reftex-mode display-fill-column-indicator-mode)
+  3681
+  '(2 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27279 12409 869251 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . t))
+  '((mark-ring (2 2 21924 21924 21924))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex"
@@ -74,114 +110,30 @@
   '(2451 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27262 20543 590646 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27279 11270 199259 438000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20231115200616-qm_seminar.org"
-  "20231115200616-qm_seminar.org"
-  'org-mode
-  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
-  10913
-  '(10913 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20518 971349 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (10913 12 12 28762 28762 14606 14606 10913 10913 10913 10913 10913 10913 10913 10913 425))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
   "main.tex"
   'LaTeX-mode
-  '(display-fill-column-indicator-mode reftex-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode outline-minor-mode olivetti-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode font-lock-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode eldoc-mode lsp-managed-mode)
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode display-fill-column-indicator-mode reftex-mode lsp-mode outline-minor-mode olivetti-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode font-lock-mode)
   205
   '(205 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27262 20509 672173 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27279 11237 160359 438000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
   '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260721081408-quantum_research.org"
-  "20260721081408-quantum_research.org"
-  'org-mode
-  '(olivetti-mode org-bullets-mode font-lock-mode org-indent-mode buffer-face-mode visual-line-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode)
-  218
-  '(218 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27262 20502 769487 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
   "main.tex"
   'LaTeX-mode
-  '(display-fill-column-indicator-mode reftex-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode outline-minor-mode olivetti-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode font-lock-mode lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode eldoc-mode lsp-managed-mode)
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode display-fill-column-indicator-mode reftex-mode lsp-mode outline-minor-mode olivetti-mode visual-line-mode auto-revert-mode corfu-mode yas-minor-mode anzu-mode evil-matchit-mode evil-collection-unimpaired-mode evil-local-mode better-jumper-local-mode display-line-numbers-mode font-lock-mode)
   205
   '(nil nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27262 20502 763316 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20251105153112-applying_opt.org"
-  "20251105153112-applying_opt.org"
-  'org-mode
-  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260423174626-algebraic_combinatorics_seminar.org"
-  "20260423174626-algebraic_combinatorics_seminar.org"
-  'org-mode
-  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260428165951-saturated_quadratic_module.org"
-  "20260428165951-saturated_quadratic_module.org"
-  'org-mode
-  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260428165645-monogenic_quadratic_module_certificates.org"
-  "20260428165645-monogenic_quadratic_module_certificates.org"
-  'org-mode
-  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260511204944-general_case_univariate_quadratic_modules.org"
-  "20260511204944-general_case_univariate_quadratic_modules.org"
-  'org-mode
-  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode visual-line-mode buffer-face-mode org-indent-mode org-bullets-mode olivetti-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((indent-tabs-mode) (buffer-display-time 27279 11230 389894 438000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
   '((mark-ring nil)))
 

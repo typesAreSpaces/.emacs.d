@@ -1,1 +1,1 @@
-("20260626124850-pavithra_prabhakar_postdoc_discussion.org" "main.tex<QuantumSpeedup>")
+("summaries.tex" "20260626124850-pavithra_prabhakar_postdoc_discussion.org" "summaries.tex")
