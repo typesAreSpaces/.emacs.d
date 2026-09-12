@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Tue Sep  1 10:06:51 2026
+;; Created Sat Sep 12 15:55:58 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -12,8 +12,8 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring '(#("exa" 0 3 (isearch-case-fold-search t)) #("HAHA" 0 4 (isearch-case-fold-search nil)) #("example" 0 7 (isearch-case-fold-search t)) #("2027" 0 4 (isearch-case-fold-search t))))
-(setq register-alist '((97 . [105 109 118 32 escape 65 32 97 114 99 104 105 118 101 115 escape 106 94]) (48 . #("|                  | 81.3 |\n" 0 19 (yank-handler (evil-yank-line-handler nil t) face org-table fontified t) 19 27 (yank-handler (evil-yank-line-handler nil t) face org-table fontified t) 27 28 (yank-handler (evil-yank-line-handler nil t) face org-table-row fontified t rear-nonsticky t)))))
+(setq regexp-search-ring '(#("org-no" 0 6 (isearch-case-fold-search t)) #("exa" 0 3 (isearch-case-fold-search t)) #("HAHA" 0 4 (isearch-case-fold-search nil)) #("example" 0 7 (isearch-case-fold-search t)) #("2027" 0 4 (isearch-case-fold-search t))))
+(setq register-alist '((97 . [105 109 118 32 escape 65 32 97 114 99 104 105 118 101 115 escape 106 94]) (48 . #("| <2026-09-11 Fri> | 82.2 |\n" 0 2 (yank-handler (evil-yank-line-handler nil t) face org-table fontified t) 2 17 (yank-handler (evil-yank-line-handler nil t) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-date org-table) fontified t) 17 18 (yank-handler (evil-yank-line-handler nil t) rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-date org-table) fontified t) 18 27 (yank-handler (evil-yank-line-handler nil t) face org-table fontified t) 27 28 (yank-handler (evil-yank-line-handler nil t) face org-table-row fontified t)))))
 (setq file-name-history '("~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/generalfix.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/experiments_1.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_global_case.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_local_case.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/preliminaries_1.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_2.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_1.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/.config/jose-emacs/workflows/quantum/.emacs.desktop" "~/.config/jose-emacs/workflows/Quantum/.emacs.desktop" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/demosost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsdp.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/conclusion.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/preliminaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.tex"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
@@ -21,12 +21,12 @@
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex"
   "main.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   6871
   '(6871 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27286 63514 106301 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27301 51819 289314 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 1338 1338))))
 
 (desktop-create-buffer 208
@@ -34,12 +34,24 @@
   "20260424181333-water_intake.org"
   'org-mode
   '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  123
-  '(142 nil)
+  180
+  '(180 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27286 1850 201215 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (180 180 199 199 199 1))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27301 51712 808375 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (180 180 123 142 180 180 199 199 199 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260520164631-weight_control.org"
+  "20260520164631-weight_control.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  212
+  '(212 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27301 49481 322373 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (240))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20231115200616-qm_seminar.org"
@@ -50,211 +62,163 @@
   '(14693 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27285 53509 148746 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27301 48083 248810 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
   '((mark-ring (14693 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/introduction.tex"
+  "introduction.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1
+  '(7766 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27301 48091 621140 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (7766 7766 6777 7854 7854 7854 6777 7854 7854 7854 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/certificates_global_case.tex"
   "certificates_global_case.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   22096
   '(40253 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 56116 551687 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 40682 565592 367000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (40253 40253 40257 31540 31540 31540 31544 17404 17404 17404 17408 13237 13237 13237 13241 8103))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/generalfix.tex"
-  "generalfix.tex"
-  'LaTeX-mode
-  '(font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  8030
-  '(7566 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27285 55869 138377 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (7566 7554 7554 7554 7558 4722 4722 4722 4726 5019 5019 5032 2837 2837 2850))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/experiments.tex"
   "experiments.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   16695
   '(16683 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 55580 598191 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 40146 736095 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (16683 16683 16687 10078 10078 10082 12952 12952 12952 12956 12952 12952 12956 10078 10078 10078))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/strictly_positive_cert.tex"
-  "strictly_positive_cert.tex"
-  'LaTeX-mode
-  '(font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  43211
-  '(43199 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27285 55568 883215 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (43199 43199 43203 30214 30214 30214 30218 24237 24237 24248 20768 20768 20768 20772 19033 19033))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/new_experiments.tex"
-  "new_experiments.tex"
-  'LaTeX-mode
-  '(font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  20955
-  '(20943 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27285 55524 869452 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (20943 20943 20947 19137 19137 19137 19141 17427 17427 17427 17431 19154 19154 19192 17444 17444))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_global_case.tex"
   "certificates_global_case.tex"
   'LaTeX-mode
-  '(auto-revert-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  '(lsp-managed-mode eldoc-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   33135
   '(33123 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 55518 161922 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 40084 435548 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (33123 33123 33127 30837 30837 30837 30841 26021 26021 26021 26025 16921 16921 16921 16925 30858))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_local_case.tex"
   "certificates_local_case.tex"
   'LaTeX-mode
-  '(auto-revert-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  '(lsp-managed-mode eldoc-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   8187
   '(8175 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 55509 256674 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 40075 703388 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (8175 8175 8179 1919 1919 1923 1919 1919 1919 1923 7768 7768 7781 1474 1474 1487))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/experiments_1.tex"
   "experiments_1.tex"
   'LaTeX-mode
-  '(auto-revert-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  '(lsp-managed-mode eldoc-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   14491
   '(14479 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 55501 270367 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 40067 846104 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (14479 14479 14483 10483 10483 10483 10487 8625 8625 8625 8629 6853 6853 6853 6857 10502))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/new_strictly_positive_cert.tex"
-  "new_strictly_positive_cert.tex"
-  'LaTeX-mode
-  '(font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  34605
-  '(34605 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27285 55715 484863 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (34605 34609 34605 34605 34605 34605 34605 34609 30957 30957 30968 27479 27479 27490 27479 27479))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/conclusion.tex"
   "conclusion.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   782
   '(782 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 54975 375852 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 39542 79041 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (782 782 31 31 31 31 31 31 31 31 31 31 31 31 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/certificates_local_case.tex"
   "certificates_local_case.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   21220
   '(21220 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 54049 512040 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 38616 349553 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (21221 21294 21294 21294 19830 19830 19830 19830 21146 21146 21146 19830 3446 3444))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/preliminaries_1.tex"
   "preliminaries_1.tex"
   'LaTeX-mode
-  '(auto-revert-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  '(lsp-managed-mode eldoc-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   6965
   '(6965 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 53777 724985 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 38344 688273 367000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (6647 1630 176 176 6644 6644 1630 1630 1630 1630 1628 1627 1 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/preliminaries.tex"
   "preliminaries.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   12768
   '(12768 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 53768 56201 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 38335 145566 367000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (10500 3886 14359 14359 14359 14359 14359 1 1 13003 13003 12922 12922 14156 14156 25))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/running_example.tex"
   "running_example.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   6660
   '(6660 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 53529 761600 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 38096 976384 367000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (7384 7384 7393 7393 7391 7391 7392 12 72 72 6967 6967 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/introduction.tex"
-  "introduction.tex"
-  'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  7766
-  '(7766 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27285 53512 542939 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (6777 7854 7854 7854 6777 7854 7854 7854 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_2.tex"
   "abstract_2.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   16
   '(2580 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 51580 561499 643000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 36148 81906 10000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (2580 20 2670 20 1 1 1 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_1.tex"
   "abstract_1.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   8
   '(8 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27285 51557 409082 643000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27300 36125 55969 10000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (1054 1054 18 1))))
 
 (desktop-create-buffer 208
@@ -266,7 +230,7 @@
   '(214 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27285 45901 374384 86000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 30469 143318 453000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
   '((mark-ring (214 1))))
 
 (desktop-create-buffer 208
@@ -278,6 +242,6 @@
   '(202 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27285 45899 780075 86000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 30467 663401 453000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
   '((mark-ring (202 202))))
 

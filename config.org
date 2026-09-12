@@ -2443,51 +2443,51 @@ mu4e comes included with mu. Search the path your package manager used to instal
 #+begin_src emacs-lisp
   (use-package org-noter)
 
-  (defun zotero-export-bibtex-at-point ()
-    "Export the Zotero item whose link is at or around point as BibTeX."
-    (interactive)
-    (let* ((pattern "zotero://select/items/[0-9]+_\\([A-Z0-9]+\\)")
-           (start (line-beginning-position))
-           (end (line-end-position))
-           (url nil)
-           (item-key nil))
-
-      ;; Search the current line for a Zotero link containing point.
-      (save-excursion
-        (goto-char start)
-        (while (and (not url)
-                    (re-search-forward pattern end t))
-          (when (and (<= (match-beginning 0) (point))
-                     (>= (match-end 0) (point)))
-            (setq url (match-string 0)
-                  item-key (match-string 1)))))
-
-      ;; If point isn't inside the URL itself, search for the
-      ;; Zotero link on the current line.
-      (unless item-key
-        (save-excursion
-          (goto-char start)
-          (when (re-search-forward pattern end t)
-            (setq url (match-string 0)
-                  item-key (match-string 1)))))
-
-      (if item-key
-          (let ((bibtex
-                 (string-trim
-                  (shell-command-to-string
-                   (format
-                    "curl -s 'http://localhost:23119/api/users/0/items/%s?format=bibtex'"
-                    item-key)))))
-            (if (string-empty-p bibtex)
-                (user-error "Zotero returned no BibTeX for %s" item-key)
-              (kill-new bibtex)
-              (message "BibTeX for %s copied to clipboard" item-key)))
-        (user-error "No Zotero link found on this line"))))
-#+end_src
-
-#+begin_src emacs-lisp
   (use-package zotxt
     :after org-noter
     :config
-    (setq org-zotxt-link-description-style :title))
+
+    (setq org-zotxt-link-description-style :title)
+
+    (defun zotero-export-bibtex-at-point ()
+      "Export the Zotero item whose link is at or around point as BibTeX."
+      (interactive)
+      (let* ((pattern "zotero://select/items/[0-9]+_\\([A-Z0-9]+\\)")
+             (start (line-beginning-position))
+             (end (line-end-position))
+             (url nil)
+             (item-key nil))
+
+        ;; Search the current line for a Zotero link containing point.
+        (save-excursion
+          (goto-char start)
+          (while (and (not url)
+                      (re-search-forward pattern end t))
+            (when (and (<= (match-beginning 0) (point))
+                       (>= (match-end 0) (point)))
+              (setq url (match-string 0)
+                    item-key (match-string 1)))))
+
+        ;; If point isn't inside the URL itself, search for the
+        ;; Zotero link on the current line.
+        (unless item-key
+          (save-excursion
+            (goto-char start)
+            (when (re-search-forward pattern end t)
+              (setq url (match-string 0)
+                    item-key (match-string 1)))))
+
+        (if item-key
+            (let ((bibtex
+                   (string-trim
+                    (shell-command-to-string
+                     (format
+                      "curl -s 'http://localhost:23119/api/users/0/items/%s?format=bibtex'"
+                      item-key)))))
+              (if (string-empty-p bibtex)
+                  (user-error "Zotero returned no BibTeX for %s" item-key)
+                (kill-new bibtex)
+                (message "BibTeX for %s copied to clipboard" item-key)))
+          (user-error "No Zotero link found on this line"))))
+    )
 #+end_src
