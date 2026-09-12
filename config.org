@@ -10,7 +10,7 @@ In this document I've added links in many places that lead you to documentation 
   (defvar bootstrap-version)
   (let ((bootstrap-file
          (expand-file-name
-        "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+  	"straight/repos/straight.el/bootstrap.el" user-emacs-directory))
         (bootstrap-version 5))
     (unless
         (file-exists-p bootstrap-file)
@@ -204,35 +204,35 @@ This section configures basic UI settings that remove unneeded elements to make 
 
 In order to start up a daemon, use the following command
 #+begin_src
-launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist
-launchctl unload -w ~/Library/LaunchAgents/.emacs-daemon.plist
-launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist
+  launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist
+  launchctl unload -w ~/Library/LaunchAgents/.emacs-daemon.plist
+  launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist
 #+end_src
 
 The content of .emacs-daemon.plist is
 
 #+begin_src
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
   "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
- <plist version="1.0">
-<dict>
+  <plist version="1.0">
+  <dict>
   <key>Label</key>
   <string>gnu.emacs.daemon</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/opt/homebrew/bin/emacs</string>
-    <string>--init-directory</string>
-    <string>/Users/typesarespaces/.config/jose-emacs/</string>
-    <string>jose</string>
-    <string>&</string>
+  <string>/opt/homebrew/bin/emacs</string>
+  <string>--init-directory</string>
+  <string>/Users/typesarespaces/.config/jose-emacs/</string>
+  <string>jose</string>
+  <string>&</string>
   </array>
- <key>RunAtLoad</key>
- <true/>
- <key>ServiceDescription</key>
- <string>Gnu Emacs Daemon</string>
-</dict>
-</plist>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>ServiceDescription</key>
+  <string>Gnu Emacs Daemon</string>
+  </dict>
+  </plist>
 #+end_src
 
 #+begin_src emacs-lisp
@@ -423,18 +423,6 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
       (progn
         (setq mode-line-misc-info "[\ueb81]")
         (delete-other-windows))))
-
-  ;; (defun toggle-zoom-pane ()
-  ;;   (interactive)
-  ;;   (if (get 'is-pane-zoomed 'state)
-  ;;       (progn
-  ;;         (winner-undo)
-  ;;         (setq mode-line-misc-info "")
-  ;;         (put 'is-pane-zoomed 'state nil))
-  ;;     (progn
-  ;;       (delete-other-windows)
-  ;;       (setq mode-line-misc-info "[\ueb81]")
-  ;;       (put 'is-pane-zoomed 'state t))))
 
   (define-key (current-global-map) (kbd "C-w") nil)
   (define-key (current-global-map) (kbd "C-w z") 'toggle-zoom-pane)
@@ -1030,6 +1018,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
         "20251105153112-applying_opt.org"
         "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
         "20260721081408-quantum_research.org"
+        "20260910102152-bqrlg.org"
         "20231115200616-qm_seminar.org"
         "20260423174626-algebraic_combinatorics_seminar.org"
         "20260428165951-saturated_quadratic_module.org"
@@ -1430,7 +1419,7 @@ Try these commands with =M-x=:
 *** Debugging with dap-mode
 [[https://emacs-lsp.github.io/dap-mode/][dap-mode]] is an excellent package for bringing rich debugging capabilities to Emacs via the [[https://microsoft.github.io/debug-adapter-protocol/][Debug Adapter Protocol]].  You should check out the [[https://emacs-lsp.github.io/dap-mode/page/configuration/][configuration docs]] to learn how to configure the debugger for your language.  Also make sure to check out the documentation for the debug adapter to see what configuration parameters are available to use for your debug templates!
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :
   					; (when (not (version< emacs-version "26.1"))
   					;   (use-package dap-mode
   					;                                         ; :custom
@@ -1682,11 +1671,11 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
   (use-package toml-mode)
 #+end_src
 *** Z3 mode
-#+begin_src emacs-lisp
-  					; (use-package boogie-friends)
+#+begin_src emacs-lisp :tangle no
+  (use-package boogie-friends)
 #+end_src
 *** Lean
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package lean4-mode
     :straight (lean4-mode :type git
                           :host github
@@ -2269,20 +2258,20 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
 Follow the following [[https://macowners.club/posts/email-emacs-mu4e-macos/][post]] to setup credential file in ~/.maildir/certificates. It is necessary to install isync. Use the brew package manager and follow xukai92 suggestion in this [[https://github.com/moriyoshi/cyrus-sasl-xoauth2/issues/9][git issue]], i.e. use
 
 #+begin_src
-HOMEBREW_EDITOR=nvim brew edit isync
+  HOMEBREW_EDITOR=nvim brew edit isync
 #+end_src
 
 to remove url, sha256 entries, change the head entry with  https://github.com/xukai92/isync.git and recompile isync using
 
 #+begin_src
-brew reinstall isync --build
+  brew reinstall isync --build
 #+end_src
 
 Additionally, install mu using your package manager and set it up with the following:
 
 #+begin_src
-mu init --maildir=~/Mail --my-address=ADDRESS1 --my-address=ADDRESS2
-mu index
+  mu init --maildir=~/Mail --my-address=ADDRESS1 --my-address=ADDRESS2
+  mu index
 #+end_src
 
 mu4e comes included with mu. Search the path your package manager used to installed it and use it to change :load-path in the following block:

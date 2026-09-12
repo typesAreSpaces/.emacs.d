@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Fri Sep  4 09:09:00 2026
+;; Created Fri Sep 11 22:56:13 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -12,81 +12,165 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring '(#("enc(" 0 4 (isearch-case-fold-search t)) #("operator" 0 8 (isearch-case-fold-search t)) #("new" 0 3 (isearch-case-fold-search t)) #("Declare" 0 7 (isearch-case-fold-search nil)) #("ri" 0 2 (isearch-case-fold-search t)) #("TODO" 0 4 (isearch-case-fold-search nil)) #("E" 0 1 (isearch-case-fold-search nil)) #("Di" 0 2 (isearch-case-fold-search nil)) #("input" 0 5 (isearch-case-fold-search t)) #("ls" 0 2 (isearch-case-fold-search t)) #("orders" 0 6 (isearch-case-fold-search t)) #("cite" 0 4 (isearch-case-fold-search t)) #("Decl" 0 4 (isearch-case-fold-search nil)) #("span" 0 4 (isearch-case-fold-search t)) #("Q" 0 1 (isearch-case-fold-search nil)) #("Proof" 0 5 (isearch-case-fold-search nil))))
-(setq register-alist '((48 . #("\\DeclareMathOperator{\\poly}{poly}\n" 0 1 (yank-handler (evil-yank-line-handler nil t) face (font-latex-sedate-face) fontified t) 1 20 (yank-handler (evil-yank-line-handler nil t) face (font-latex-sedate-face) fontified t) 20 21 (yank-handler (evil-yank-line-handler nil t) fontified t) 21 26 (yank-handler (evil-yank-line-handler nil t) face (font-latex-sedate-face) fontified t) 26 33 (yank-handler (evil-yank-line-handler nil t) fontified t) 33 34 (yank-handler (evil-yank-line-handler nil t) fontified t)))))
-(setq file-name-history '("~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Library/texmf/tex/latex/QuantumCommandsAndDeclarations.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/deutsch_jozsa.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/grover.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/grover.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/qiskit_code_deutsch_jozsa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/grover.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/oracle.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/deutsch_jozsa.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/grover.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/grover.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/deutsch_jozsa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/kwon_bounded_2023.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/benzmuller_equivalence_2024.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/chareton_formal_2022.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/kwon_bounded_2023.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/references.bib" "~/Library/texmf/tex/latex/QuantumCommandsAndDeclarations.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty"))
+(setq regexp-search-ring '(#("-bq" 0 3 (isearch-case-fold-search t)) #("Org-Files" 0 9 (isearch-case-fold-search nil)) #("main" 0 4 (isearch-case-fold-search t)) #("b" 0 1 (isearch-case-fold-search t)) #("In" 0 2 (isearch-case-fold-search nil)) #("to" 0 2 (isearch-case-fold-search t)) #("Del" 0 3 (isearch-case-fold-search nil)) #("con" 0 3 (isearch-case-fold-search t)) #("**" 0 2 (isearch-case-fold-search nil isearch-regexp-function nil)) #("enc(" 0 4 (isearch-case-fold-search t)) #("operator" 0 8 (isearch-case-fold-search t)) #("new" 0 3 (isearch-case-fold-search t)) #("Declare" 0 7 (isearch-case-fold-search nil)) #("ri" 0 2 (isearch-case-fold-search t)) #("TODO" 0 4 (isearch-case-fold-search nil)) #("E" 0 1 (isearch-case-fold-search nil))))
+(setq register-alist '((48 . #("- [[https://blog.theophile.me/posts/building-sioyek-on-macos/][Building sioyek]]\n" 0 1 (yank-handler (evil-yank-line-handler nil t) composition (2 1 [8226]) fontified t) 1 2 (yank-handler (evil-yank-line-handler nil t) fontified t) 2 62 (yank-handler (evil-yank-line-handler nil t) face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link help-echo "LINK: https://blog.theophile.me/posts/building-sioyek-on-macos/" fontified t htmlize-link (:uri "https://blog.theophile.me/posts/building-sioyek-on-macos/")) 62 63 (yank-handler (evil-yank-line-handler nil t) face org-link font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link help-echo "LINK: https://blog.theophile.me/posts/building-sioyek-on-macos/" fontified t htmlize-link (:uri "https://blog.theophile.me/posts/building-sioyek-on-macos/") rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link)) 63 77 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link help-echo "LINK: https://blog.theophile.me/posts/building-sioyek-on-macos/" fontified t htmlize-link (:uri "https://blog.theophile.me/posts/building-sioyek-on-macos/")) 77 78 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face org-link help-echo "LINK: https://blog.theophile.me/posts/building-sioyek-on-macos/" fontified t htmlize-link (:uri "https://blog.theophile.me/posts/building-sioyek-on-macos/") rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link)) 78 79 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link help-echo "LINK: https://blog.theophile.me/posts/building-sioyek-on-macos/" fontified t htmlize-link (:uri "https://blog.theophile.me/posts/building-sioyek-on-macos/")) 79 80 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face org-link help-echo "LINK: https://blog.theophile.me/posts/building-sioyek-on-macos/" fontified t rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "https://blog.theophile.me/posts/building-sioyek-on-macos/")) 80 81 (yank-handler (evil-yank-line-handler nil t) rear-nonsticky t fontified t)))))
+(setq file-name-history '("~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/kwon_bounded_2023.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Library/texmf/tex/latex/QuantumCommandsAndDeclarations.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/deutsch_jozsa.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/grover.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/grover.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/qiskit_code_deutsch_jozsa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/grover.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/oracle.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/deutsch_jozsa.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/scripts/grover.py" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/grover.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/deutsch_jozsa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/kwon_bounded_2023.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/benzmuller_equivalence_2024.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/chareton_formal_2022.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/kwon_bounded_2023.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/references.bib"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/kwon_bounded_2023.tex"
   "kwon_bounded_2023.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  6830
-  '(6830 nil)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-diagnostics-mode flymake-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  8008
+  '(7666 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27290 57099 823296 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (6830 24 24 6816 6816 83 1 1 1 7974 7974 82 82 8350 8350 82))))
+  '((indent-tabs-mode) (buffer-display-time 27300 56172 546540 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "../main.tex"))
+  '((mark-ring (7666 7792 7790 7790 7783 7763 7763 7783 7783 7783 7748 7748 7783 7783 7783 7783))))
 
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries.tex"
-  "paper_summaries.tex"
-  'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  360
-  '(360 nil)
+  "/Users/typesarespaces/Documents/Org-Files/20260424181333-water_intake.org"
+  "20260424181333-water_intake.org"
+  'org-mode
+  '(font-lock-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  190
+  '(228 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27290 57094 82704 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
-  '((mark-ring (360 360 322 322 362 362 362 329 299 284 284 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
-  "main.tex"
-  'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  939
-  '(939 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27290 57090 637893 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
-  '((mark-ring (901 876 876 876 876 876 848 848 848 848 821 821 364 845 845 845))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 24478 39838 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (228 228 114 103 103 103 103 103 312 103 103 199 199 199 199 161))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260721081408-quantum_research.org"
   "20260721081408-quantum_research.org"
   'org-mode
-  '(font-lock-mode text-scale-mode org-zotxt-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  579
-  '(525 nil)
+  '(font-lock-mode org-zotxt-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  2734
+  '(819 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27290 57086 859618 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (1))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 20291 316229 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (572 572 572 573 573 573 573 573 573 525 525 523 523 523 523 1678))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260626124850-pavithra_prabhakar_postdoc_discussion.org"
   "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
   'org-mode
   '(font-lock-mode org-zotxt-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  511
-  '(427 nil)
+  9135
+  '(2868 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27290 57086 859449 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (427 1))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 20281 88342 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (541 1 1 1 1 486 445 695 695 648 648 648 2868 2868 2868 427))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260910102152-bqrlg.org"
+  "20260910102152-bqrlg.org"
+  'org-mode
+  '(font-lock-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  444
+  '(443 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 20281 87912 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260423174506-current_work.org"
+  "20260423174506-current_work.org"
+  'org-mode
+  '(font-lock-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  3734
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 17447 359050 641000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (169 90 1 381 1 1 1 2666))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
+  "20260423173343-main_agenda.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  147
+  '(147 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 17420 540111 641000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (147 144 144 144 253 253 253 142 142 142 198 198 198 198 198 198))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260423173647-bookmarks.org"
+  "20260423173647-bookmarks.org"
+  'org-mode
+  '(font-lock-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  3
+  '(3 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 17373 693168 641000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (8082 8082 8080 8080 9967 9967 9903 9903 87 1 9834 9834 10060 10060 10060 10060))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260426111709-projects.org"
+  "20260426111709-projects.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  270
+  '(270 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 16814 338191 641000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (270 1 271 271 1 1 1 396 396 271 271 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260520164631-weight_control.org"
+  "20260520164631-weight_control.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  212
+  '(212 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 16794 473778 641000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (268 219 247 247 247 247 248 248 248))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/.config/jose-emacs/config.org"
+  "config.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  43197
+  '(42809 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 16391 61634 641000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (42784 42784 42784 36493 36493 36400 36400 36400 11457 11457 24 24 24 59060 59060 59061))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries.tex"
+  "paper_summaries.tex"
+  'LaTeX-mode
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  360
+  '(360 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27298 49646 276295 575000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
+  '((mark-ring (360 360 322 322 362 362 362 329 299 284 284 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantumsymbols.sty"
   "quantumsymbols.sty"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   4593
   '(2858 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27290 56979 206067 496000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27298 49532 652373 71000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (2858 2858 2858 2858 1202 1202 1 1 1 4627 4627 2858 2858 2858 2858 4594))))
 
 (desktop-create-buffer 208
@@ -98,103 +182,91 @@
   '(2974 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27290 56946 308876 496000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27298 49500 433911 71000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (3025 3001 3070 3070 1333 18 18 18 3101 3101 3101 3069 3069 3069 1 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260424181333-water_intake.org"
-  "20260424181333-water_intake.org"
-  'org-mode
-  '(font-lock-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  161
-  '(1 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27290 53976 281412 496000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring nil)))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/grover.tex"
   "grover.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   13331
   '(13331 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27290 53180 123757 996000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "../main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27298 45734 857206 571000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "../main.tex"))
   '((mark-ring (13339 13269 13269 13269 13269 13269 13268 13354 13354 4455 4455 1 1 1 15383 15383))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/qiskit_code_grover.tex"
   "qiskit_code_grover.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   1
   '(1 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27290 52905 638415 996000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27298 45460 959275 571000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (54 1 54 54 54 122 122 122 131 131 1 122 54 54 54 55))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/qiskit_code_deutsch_jozsa.tex"
   "qiskit_code_deutsch_jozsa.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   113
   '(166 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27290 52856 558104 996000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27298 45412 467920 571000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
   '((mark-ring (166 1 1 1 61 61 61 223 223 1 1 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms/deutsch_jozsa.tex"
   "deutsch_jozsa.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   9396
   '(9396 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27290 52392 901776 996000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "../main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27298 44949 455457 571000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "../main.tex"))
   '((mark-ring (7589 8 8 8 9733 9733 9733 9389 8194 8194 1427 1427 1427))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_algorithms.tex"
   "quantum_algorithms.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   1
   '(1 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27290 52355 859885 996000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27298 44912 996506 571000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
   '((mark-ring (1 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/benzmuller_equivalence_2024.tex"
   "benzmuller_equivalence_2024.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   4553
   '(1 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27289 32528 421977 562000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "../main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27297 25086 89309 137000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "../main.tex"))
   '((mark-ring (1 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/paper_summaries/chareton_formal_2022.tex"
   "chareton_formal_2022.tex"
   'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode flymake-mode lsp-diagnostics-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   1
   '(1 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27289 32381 901624 562000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "../main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27297 24940 205595 137000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "../main.tex"))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -206,42 +278,102 @@
   '(39584 nil)
   nil
   nil
-  '((buffer-display-time 27289 32296 869740 562000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (TeX-master . t))
+  '((buffer-display-time 27297 24855 660144 137000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (TeX-master . t))
   '((mark-ring (39567 41492 41492 39553 39553 39553 1 1 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260426111709-projects.org"
-  "20260426111709-projects.org"
-  'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  396
-  '(396 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27289 31530 167763 570000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (396 271 271 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
-  "20260423173343-main_agenda.org"
-  'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  202
-  '(202 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27289 31524 623431 570000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (202 142))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
   "main.tex"
   'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode eldoc-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   1010
   '(nil nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (truncate-lines) (TeX-master . "main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27298 49659 363426 254000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260819135302-postdoc_tasks.org"
+  "20260819135302-postdoc_tasks.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 13022 786734 28000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20251105153112-applying_opt.org"
+  "20251105153112-applying_opt.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 13023 393441 28000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20231115200616-qm_seminar.org"
+  "20231115200616-qm_seminar.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  242
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 13024 40962 28000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260423174626-algebraic_combinatorics_seminar.org"
+  "20260423174626-algebraic_combinatorics_seminar.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 13024 432162 28000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260428165951-saturated_quadratic_module.org"
+  "20260428165951-saturated_quadratic_module.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 13024 922088 28000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260428165645-monogenic_quadratic_module_certificates.org"
+  "20260428165645-monogenic_quadratic_module_certificates.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 13025 614001 28000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260511204944-general_case_univariate_quadratic_modules.org"
+  "20260511204944-general_case_univariate_quadratic_modules.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 13026 30111 28000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
   '((mark-ring nil)))
 

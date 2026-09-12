@@ -1,1 +1,1 @@
-("20260819135302-postdoc_tasks.org" "class14_non_linear.tex")
+("20260819135302-postdoc_tasks.org" "class13_linear.tex" "class14_non_linear.tex")

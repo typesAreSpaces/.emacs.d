@@ -3,7 +3,7 @@
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
-      "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	"straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 5))
   (unless
       (file-exists-p bootstrap-file)
@@ -344,18 +344,6 @@
     (progn
       (setq mode-line-misc-info "[\ueb81]")
       (delete-other-windows))))
-
-;; (defun toggle-zoom-pane ()
-;;   (interactive)
-;;   (if (get 'is-pane-zoomed 'state)
-;;       (progn
-;;         (winner-undo)
-;;         (setq mode-line-misc-info "")
-;;         (put 'is-pane-zoomed 'state nil))
-;;     (progn
-;;       (delete-other-windows)
-;;       (setq mode-line-misc-info "[\ueb81]")
-;;       (put 'is-pane-zoomed 'state t))))
 
 (define-key (current-global-map) (kbd "C-w") nil)
 (define-key (current-global-map) (kbd "C-w z") 'toggle-zoom-pane)
@@ -887,6 +875,7 @@
       "20251105153112-applying_opt.org"
       "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
       "20260721081408-quantum_research.org"
+      "20260910102152-bqrlg.org"
       "20231115200616-qm_seminar.org"
       "20260423174626-algebraic_combinatorics_seminar.org"
       "20260428165951-saturated_quadratic_module.org"
@@ -1415,14 +1404,6 @@
   (add-to-list 'auto-mode-alist '("\\.wl\\'" . wolfram-mode)))
 
 (use-package toml-mode)
-
-; (use-package boogie-friends)
-
-(use-package lean4-mode
-  :straight (lean4-mode :type git
-                        :host github
-                        :repo "leanprover/lean4-mode")
-  :commands (lean4-mode))
 
 (setq scheme-program-name "racket")
 (setq auto-mode-alist
