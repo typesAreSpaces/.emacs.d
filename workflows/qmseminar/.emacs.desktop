@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Sep 12 15:55:58 2026
+;; Created Tue Sep 22 21:41:33 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -12,226 +12,58 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring '(#("org-no" 0 6 (isearch-case-fold-search t)) #("exa" 0 3 (isearch-case-fold-search t)) #("HAHA" 0 4 (isearch-case-fold-search nil)) #("example" 0 7 (isearch-case-fold-search t)) #("2027" 0 4 (isearch-case-fold-search t))))
-(setq register-alist '((97 . [105 109 118 32 escape 65 32 97 114 99 104 105 118 101 115 escape 106 94]) (48 . #("| <2026-09-11 Fri> | 82.2 |\n" 0 2 (yank-handler (evil-yank-line-handler nil t) face org-table fontified t) 2 17 (yank-handler (evil-yank-line-handler nil t) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-date org-table) fontified t) 17 18 (yank-handler (evil-yank-line-handler nil t) rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-date org-table) fontified t) 18 27 (yank-handler (evil-yank-line-handler nil t) face org-table fontified t) 27 28 (yank-handler (evil-yank-line-handler nil t) face org-table-row fontified t)))))
-(setq file-name-history '("~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/generalfix.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/experiments_1.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_global_case.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_local_case.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/preliminaries_1.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_2.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_1.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/.config/jose-emacs/workflows/quantum/.emacs.desktop" "~/.config/jose-emacs/workflows/Quantum/.emacs.desktop" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/demosost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsost.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/installsdp.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/symbolicmatlab.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/conclusion.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/preliminaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/install_sostools/main.tex"))
+(setq regexp-search-ring '(#("tangle.*no" 0 10 (isearch-case-fold-search t)) #("TODO" 0 4 (isearch-case-fold-search nil)) #("sum" 0 3 (isearch-case-fold-search t)) #("HEAD" 0 4 (isearch-case-fold-search nil)) #("==" 0 2 (isearch-case-fold-search t)) #("ENA" 0 3 (isearch-case-fold-search nil)) #("archive" 0 7 (isearch-case-fold-search t)) #("E" 0 1 (isearch-case-fold-search nil)) #("In this " 0 8 (isearch-case-fold-search nil)) #("org-no" 0 6 (isearch-case-fold-search t)) #("exa" 0 3 (isearch-case-fold-search t)) #("HAHA" 0 4 (isearch-case-fold-search nil)) #("example" 0 7 (isearch-case-fold-search t)) #("2027" 0 4 (isearch-case-fold-search t))))
+(setq register-alist '((97 . [47 69 78 65 return 100 97 119 120 100 97 119 120 escape 94]) (48 . #("In this section, we compute certificates for all natural generators in a\nsaturated quadratic module given on the generators of the form\n$\\{p_{isolated}, -p_{isolated}\\}$ where\n$p_{isolated} :=\n\\sum_{i=1}^{n}{(x-a_i)}$. Table~\\ref{tab:comp-cert-natur-heuristics-fixed}\nreports the results obtained for this benchmark.\n\n% # Number of isolated points & Max degree & Average degree & Average time &\n% # Total time & Ratio of success\n\n\\begin{table}[htpb]\n  \\centering\n  \\color{red}\n  \\label{tab:comp-cert-natur-heuristics-fixed}\n  \\begin{tabular}{c|ccc|cc|c}\n    % \\sisetup{table-format = 2.2, table-alignment-mode = format}\n    \\multirow{2}{2.5cm}{\\makecell{Number of\\\\isolated points}}&\n    \\multicolumn{3}{c|}{Degree of certificates}&\n    \\multicolumn{2}{c|}{Time (seconds)}&\n    \\multirow{2}{3cm}{\\makecell{Number of\\\\certificates computed}}\\\\\n    \\cline{2-6}\n    & Maximum & Average & Median & Average & Total & \\\\\n    \\hline\n    2 & 8 & 4 & 2 & 0.071 & 0.213 & 3/3 \\\\\n    4 & 80 & 30.4 & 8 & 0.304 & 1.52 & 5/5 \\\\\n    6 & 1222 & 247.143 & 70 & 2.859 & 20.015 & 7/7 \\\\\n    8 & 16828 & 3417.333 & 220 & 3.824 & 34.413 & 9/9 \\\\\n    10 & 94514 & 14246 & 1314 & 28.523 & 313.753 & 11/11 \\\\\n  \\end{tabular}\n  \\caption{Computing certificates of natural generators}\n\\end{table}\n\n% # Number of isolated points & Max degree & Average degree & Average time &\n% # Total time & Ratio of success\n\\begin{table}[htpb]\n  \\centering\n  \\label{tab:comp-cert-natur-heuristics-fixed-updated}\n  \\begin{tabular}{c|ccc|cc|c}\n    % \\sisetup{table-format = 2.2, table-alignment-mode = format}\n    \\multirow{2}{2.5cm}{\\makecell{Number of\\\\isolated points}}&\n    \\multicolumn{3}{c|}{Degree of certificates}&\n    \\multicolumn{2}{c|}{Time (seconds)}&\n    \\multirow{2}{3cm}{\\makecell{Number of\\\\certificates computed}}\\\\\n    \\cline{2-6}\n    & Maximum & Average & Median & Average & Total & \\\\\n    \\hline\n    2 & 6 & 3.333 & 2 & 0.023 & 0.068 & 3/3 \\\\\n    3 & 31 & 19.0 & 31 & 0.202 & 0.808 & 4/4 \\\\\n    4 & 8 & 6.4 & 8 & 0.052 & 0.261 & 5/5 \\\\\n    5 & 39 & 25.667 & 29 & 1.521 & 9.124 & 6/6 \\\\\n    6 & 82 & 29.429 & 10 & 1.96 & 13.719 & 7/7 \\\\\n    7 & 151 & 91.5 & 137 & 8.031 & 64.245 & 8/8 \\\\\n    8 & 1100 & 315.111 & 28 & 4.962 & 44.658 & 9/9 \\\\\n    9 & 805 & 445.0 & 517 & 31.261 & 312.611 & 10/10 \\\\\n  \\end{tabular}\n  \\caption{Computing certificates of natural generators}\n\\end{table}" 0 136 (fontified t) 136 140 (face font-latex-math-face fontified t) 140 141 (face (font-latex-script-char-face font-latex-math-face) fontified t) 141 155 (face font-latex-math-face fontified t) 155 156 (face (font-latex-script-char-face font-latex-math-face) fontified t) 156 169 (face font-latex-math-face fontified t) 169 176 (fontified t) 176 178 (face font-latex-math-face font-lock-multiline t fontified t) 178 179 (face (font-latex-script-char-face font-latex-math-face) font-lock-multiline t fontified t) 179 193 (face font-latex-math-face font-lock-multiline t fontified t) 193 197 (face (font-latex-math-face font-latex-sedate-face) font-lock-multiline t fontified t) 197 198 (face (font-latex-script-char-face font-latex-math-face) font-lock-multiline t fontified t) 198 203 (face font-latex-math-face font-lock-multiline t fontified t) 203 204 (face (font-latex-script-char-face font-latex-math-face) font-lock-multiline t fontified t) 204 212 (face font-latex-math-face font-lock-multiline t fontified t) 212 213 (face (font-latex-script-char-face font-latex-math-face) font-lock-multiline t fontified t) 213 217 (face font-latex-math-face font-lock-multiline t fontified t) 217 225 (fontified t) 225 229 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 229 230 (fontified t) 230 266 (face (font-lock-constant-face) fontified t) 266 318 (fontified t) 318 320 (face font-lock-comment-delimiter-face fontified t) 320 395 (face font-lock-comment-face fontified t) 395 397 (face font-lock-comment-delimiter-face fontified t) 397 429 (face font-lock-comment-face fontified t) 429 430 (fontified t) 430 436 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 436 437 (fontified t) 437 442 (face (font-lock-function-name-face) fontified t) 442 452 (fontified t) 452 462 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 462 465 (fontified t) 465 471 (face (font-latex-sedate-face) fontified t) 471 479 (fontified t) 479 485 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 485 486 (fontified t) 486 522 (face (font-lock-constant-face) fontified t) 522 526 (fontified t) 526 532 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 532 533 (fontified t) 533 540 (face (font-lock-function-name-face) fontified t) 540 558 (fontified t) 558 560 (face font-lock-comment-face fontified t) 560 568 (face (font-lock-comment-face font-latex-sedate-face) fontified t) 568 620 (face font-lock-comment-face fontified t) 620 624 (fontified t) 624 633 (face (font-latex-sedate-face) fontified t) 633 644 (fontified t) 644 653 (face (font-latex-sedate-face) fontified t) 653 663 (fontified t) 663 665 (face font-latex-warning-face fontified t) 665 682 (fontified t) 682 683 (face font-latex-warning-face fontified t) 683 688 (fontified t) 688 700 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 700 701 (fontified t) 701 702 (face (font-lock-function-name-face) fontified t) 702 704 (fontified t) 704 706 (face (font-lock-function-name-face) fontified t) 706 708 (fontified t) 708 730 (face (font-lock-function-name-face) fontified t) 730 731 (fontified t) 731 732 (face font-latex-warning-face fontified t) 732 737 (fontified t) 737 749 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 749 750 (fontified t) 750 751 (face (font-lock-function-name-face) fontified t) 751 753 (fontified t) 753 755 (face (font-lock-function-name-face) fontified t) 755 757 (fontified t) 757 771 (face (font-lock-function-name-face) fontified t) 771 772 (fontified t) 772 773 (face font-latex-warning-face fontified t) 773 778 (fontified t) 778 787 (face (font-latex-sedate-face) fontified t) 787 796 (fontified t) 796 805 (face (font-latex-sedate-face) fontified t) 805 815 (fontified t) 815 817 (face font-latex-warning-face fontified t) 817 840 (fontified t) 840 842 (face font-latex-warning-face fontified t) 842 847 (fontified t) 847 853 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 853 854 (fontified t) 854 857 (face (font-lock-function-name-face) fontified t) 857 863 (fontified t) 863 864 (face font-latex-warning-face fontified t) 864 873 (fontified t) 873 874 (face font-latex-warning-face fontified t) 874 883 (fontified t) 883 884 (face font-latex-warning-face fontified t) 884 892 (fontified t) 892 893 (face font-latex-warning-face fontified t) 893 902 (fontified t) 902 903 (face font-latex-warning-face fontified t) 903 910 (fontified t) 910 911 (face font-latex-warning-face fontified t) 911 912 (fontified t) 912 914 (face font-latex-warning-face fontified t) 914 919 (fontified t) 919 925 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 925 930 (fontified t) 930 932 (fontified t) 932 933 (face font-latex-warning-face fontified t) 933 936 (fontified t) 936 937 (face font-latex-warning-face fontified t) 937 940 (fontified t) 940 941 (face font-latex-warning-face fontified t) 941 944 (fontified t) 944 945 (face font-latex-warning-face fontified t) 945 952 (fontified t) 952 953 (face font-latex-warning-face fontified t) 953 960 (fontified t) 960 961 (face font-latex-warning-face fontified t) 961 966 (fontified t) 966 968 (face font-latex-warning-face fontified t) 968 969 (fontified t) 969 975 (fontified t) 975 976 (face font-latex-warning-face fontified t) 976 980 (fontified t) 980 981 (face font-latex-warning-face fontified t) 981 987 (fontified t) 987 988 (face font-latex-warning-face fontified t) 988 991 (fontified t) 991 992 (face font-latex-warning-face fontified t) 992 999 (fontified t) 999 1000 (face font-latex-warning-face fontified t) 1000 1006 (fontified t) 1006 1007 (face font-latex-warning-face fontified t) 1007 1012 (fontified t) 1012 1014 (face font-latex-warning-face fontified t) 1014 1021 (fontified t) 1021 1022 (face font-latex-warning-face fontified t) 1022 1028 (fontified t) 1028 1029 (face font-latex-warning-face fontified t) 1029 1038 (fontified t) 1038 1039 (face font-latex-warning-face fontified t) 1039 1043 (fontified t) 1043 1044 (face font-latex-warning-face fontified t) 1044 1051 (fontified t) 1051 1052 (face font-latex-warning-face fontified t) 1052 1060 (fontified t) 1060 1061 (face font-latex-warning-face fontified t) 1061 1066 (fontified t) 1066 1068 (face font-latex-warning-face fontified t) 1068 1075 (fontified t) 1075 1076 (face font-latex-warning-face fontified t) 1076 1083 (fontified t) 1083 1084 (face font-latex-warning-face fontified t) 1084 1094 (fontified t) 1094 1095 (face font-latex-warning-face fontified t) 1095 1100 (fontified t) 1100 1101 (face font-latex-warning-face fontified t) 1101 1108 (fontified t) 1108 1109 (face font-latex-warning-face fontified t) 1109 1117 (fontified t) 1117 1118 (face font-latex-warning-face fontified t) 1118 1123 (fontified t) 1123 1125 (face font-latex-warning-face fontified t) 1125 1133 (fontified t) 1133 1134 (face font-latex-warning-face fontified t) 1134 1141 (fontified t) 1141 1142 (face font-latex-warning-face fontified t) 1142 1149 (fontified t) 1149 1150 (face font-latex-warning-face fontified t) 1150 1156 (fontified t) 1156 1157 (face font-latex-warning-face fontified t) 1157 1165 (fontified t) 1165 1166 (face font-latex-warning-face fontified t) 1166 1175 (fontified t) 1175 1176 (face font-latex-warning-face fontified t) 1176 1183 (fontified t) 1183 1185 (face font-latex-warning-face fontified t) 1185 1188 (fontified t) 1188 1189 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1189 1192 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1192 1193 (fontified t) 1193 1200 (face (font-lock-function-name-face) fontified t) 1200 1204 (fontified t) 1204 1212 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1212 1213 (fontified t) 1213 1257 (face (font-lock-type-face) fontified t) 1257 1259 (fontified t) 1259 1260 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1260 1263 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1263 1264 (fontified t) 1264 1269 (face (font-lock-function-name-face) fontified t) 1269 1272 (fontified t) 1272 1274 (face font-lock-comment-delimiter-face fontified t) 1274 1349 (face font-lock-comment-face fontified t) 1349 1351 (face font-lock-comment-delimiter-face fontified t) 1351 1383 (face font-lock-comment-face fontified t) 1383 1389 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1389 1390 (fontified t) 1390 1395 (face (font-lock-function-name-face) fontified t) 1395 1405 (fontified t) 1405 1415 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1415 1418 (fontified t) 1418 1424 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1424 1425 (fontified t) 1425 1469 (face (font-lock-constant-face) fontified t) 1469 1473 (fontified t) 1473 1479 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1479 1480 (fontified t) 1480 1487 (face (font-lock-function-name-face) fontified t) 1487 1505 (fontified t) 1505 1507 (face font-lock-comment-face fontified t) 1507 1515 (face (font-lock-comment-face font-latex-sedate-face) fontified t) 1515 1567 (face font-lock-comment-face fontified t) 1567 1571 (fontified t) 1571 1580 (face (font-latex-sedate-face) fontified t) 1580 1591 (fontified t) 1591 1600 (face (font-latex-sedate-face) fontified t) 1600 1610 (fontified t) 1610 1612 (face font-latex-warning-face fontified t) 1612 1629 (fontified t) 1629 1630 (face font-latex-warning-face fontified t) 1630 1635 (fontified t) 1635 1647 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1647 1648 (fontified t) 1648 1649 (face (font-lock-function-name-face) fontified t) 1649 1651 (fontified t) 1651 1653 (face (font-lock-function-name-face) fontified t) 1653 1655 (fontified t) 1655 1677 (face (font-lock-function-name-face) fontified t) 1677 1678 (fontified t) 1678 1679 (face font-latex-warning-face fontified t) 1679 1684 (fontified t) 1684 1696 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1696 1697 (fontified t) 1697 1698 (face (font-lock-function-name-face) fontified t) 1698 1700 (fontified t) 1700 1702 (face (font-lock-function-name-face) fontified t) 1702 1704 (fontified t) 1704 1718 (face (font-lock-function-name-face) fontified t) 1718 1719 (fontified t) 1719 1720 (face font-latex-warning-face fontified t) 1720 1725 (fontified t) 1725 1734 (face (font-latex-sedate-face) fontified t) 1734 1743 (fontified t) 1743 1752 (face (font-latex-sedate-face) fontified t) 1752 1762 (fontified t) 1762 1764 (face font-latex-warning-face fontified t) 1764 1787 (fontified t) 1787 1789 (face font-latex-warning-face fontified t) 1789 1794 (fontified t) 1794 1800 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1800 1801 (fontified t) 1801 1804 (face (font-lock-function-name-face) fontified t) 1804 1810 (fontified t) 1810 1811 (face font-latex-warning-face fontified t) 1811 1820 (fontified t) 1820 1821 (face font-latex-warning-face fontified t) 1821 1830 (fontified t) 1830 1831 (face font-latex-warning-face fontified t) 1831 1839 (fontified t) 1839 1840 (face font-latex-warning-face fontified t) 1840 1849 (fontified t) 1849 1850 (face font-latex-warning-face fontified t) 1850 1857 (fontified t) 1857 1858 (face font-latex-warning-face fontified t) 1858 1859 (fontified t) 1859 1861 (face font-latex-warning-face fontified t) 1861 1866 (fontified t) 1866 1872 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1872 1879 (fontified t) 1879 1880 (face font-latex-warning-face fontified t) 1880 1883 (fontified t) 1883 1884 (face font-latex-warning-face fontified t) 1884 1891 (fontified t) 1891 1892 (face font-latex-warning-face fontified t) 1892 1895 (fontified t) 1895 1896 (face font-latex-warning-face fontified t) 1896 1903 (fontified t) 1903 1904 (face font-latex-warning-face fontified t) 1904 1911 (fontified t) 1911 1912 (face font-latex-warning-face fontified t) 1912 1917 (fontified t) 1917 1919 (face font-latex-warning-face fontified t) 1919 1926 (fontified t) 1926 1927 (face font-latex-warning-face fontified t) 1927 1931 (fontified t) 1931 1932 (face font-latex-warning-face fontified t) 1932 1938 (fontified t) 1938 1939 (face font-latex-warning-face fontified t) 1939 1943 (fontified t) 1943 1944 (face font-latex-warning-face fontified t) 1944 1951 (fontified t) 1951 1952 (face font-latex-warning-face fontified t) 1952 1959 (fontified t) 1959 1960 (face font-latex-warning-face fontified t) 1960 1965 (fontified t) 1965 1967 (face font-latex-warning-face fontified t) 1967 1974 (fontified t) 1974 1975 (face font-latex-warning-face fontified t) 1975 1978 (fontified t) 1978 1979 (face font-latex-warning-face fontified t) 1979 1984 (fontified t) 1984 1985 (face font-latex-warning-face fontified t) 1985 1988 (fontified t) 1988 1989 (face font-latex-warning-face fontified t) 1989 1996 (fontified t) 1996 1997 (face font-latex-warning-face fontified t) 1997 2004 (fontified t) 2004 2005 (face font-latex-warning-face fontified t) 2005 2010 (fontified t) 2010 2012 (face font-latex-warning-face fontified t) 2012 2019 (fontified t) 2019 2020 (face font-latex-warning-face fontified t) 2020 2024 (fontified t) 2024 2025 (face font-latex-warning-face fontified t) 2025 2033 (fontified t) 2033 2034 (face font-latex-warning-face fontified t) 2034 2038 (fontified t) 2038 2039 (face font-latex-warning-face fontified t) 2039 2046 (fontified t) 2046 2047 (face font-latex-warning-face fontified t) 2047 2054 (fontified t) 2054 2055 (face font-latex-warning-face fontified t) 2055 2060 (fontified t) 2060 2062 (face font-latex-warning-face fontified t) 2062 2069 (fontified t) 2069 2070 (face font-latex-warning-face fontified t) 2070 2074 (fontified t) 2074 2075 (face font-latex-warning-face fontified t) 2075 2083 (fontified t) 2083 2084 (face font-latex-warning-face fontified t) 2084 2088 (fontified t) 2088 2089 (face font-latex-warning-face fontified t) 2089 2095 (fontified t) 2095 2096 (face font-latex-warning-face fontified t) 2096 2104 (fontified t) 2104 2105 (face font-latex-warning-face fontified t) 2105 2110 (fontified t) 2110 2112 (face font-latex-warning-face fontified t) 2112 2119 (fontified t) 2119 2120 (face font-latex-warning-face fontified t) 2120 2125 (fontified t) 2125 2126 (face font-latex-warning-face fontified t) 2126 2132 (fontified t) 2132 2133 (face font-latex-warning-face fontified t) 2133 2138 (fontified t) 2138 2139 (face font-latex-warning-face fontified t) 2139 2146 (fontified t) 2146 2147 (face font-latex-warning-face fontified t) 2147 2155 (fontified t) 2155 2156 (face font-latex-warning-face fontified t) 2156 2161 (fontified t) 2161 2163 (face font-latex-warning-face fontified t) 2163 2170 (fontified t) 2170 2171 (face font-latex-warning-face fontified t) 2171 2177 (fontified t) 2177 2178 (face font-latex-warning-face fontified t) 2178 2187 (fontified t) 2187 2188 (face font-latex-warning-face fontified t) 2188 2192 (fontified t) 2192 2193 (face font-latex-warning-face fontified t) 2193 2200 (fontified t) 2200 2201 (face font-latex-warning-face fontified t) 2201 2209 (fontified t) 2209 2210 (face font-latex-warning-face fontified t) 2210 2215 (fontified t) 2215 2217 (face font-latex-warning-face fontified t) 2217 2224 (fontified t) 2224 2225 (face font-latex-warning-face fontified t) 2225 2230 (fontified t) 2230 2231 (face font-latex-warning-face fontified t) 2231 2238 (fontified t) 2238 2239 (face font-latex-warning-face fontified t) 2239 2244 (fontified t) 2244 2245 (face font-latex-warning-face fontified t) 2245 2253 (fontified t) 2253 2254 (face font-latex-warning-face fontified t) 2254 2263 (fontified t) 2263 2264 (face font-latex-warning-face fontified t) 2264 2271 (fontified t) 2271 2273 (face font-latex-warning-face fontified t) 2273 2276 (fontified t) 2276 2277 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 2277 2280 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 2280 2281 (fontified t) 2281 2288 (face (font-lock-function-name-face) fontified t) 2288 2292 (fontified t) 2292 2300 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 2300 2301 (fontified t) 2301 2345 (face (font-lock-type-face) fontified t) 2345 2347 (fontified t) 2347 2348 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 2348 2351 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 2351 2352 (fontified t) 2352 2357 (face (font-lock-function-name-face) fontified t) 2357 2358 (fontified t)))))
+(setq file-name-history '("~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/experiments.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/experiments_2.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/experiments.tex" "~/Documents/Projects/dev/WeifengCertificates/tests/benchmarking.mpl" "~/Documents/Projects/dev/WeifengCertificates/src/WeifengCertificates.mpl" "~/Documents/Projects/dev/WeifengCertificates/src/signature_constructions.mpl" "~/Documents/Projects/dev/WeifengCertificates/src/local_certificate.mpl" "~/Documents/Projects/dev/WeifengCertificates/src/global_certificate.mpl" "~/Documents/Projects/dev/WeifengCertificates/src/find_certificate.mpl" "~/Documents/Projects/dev/WeifengCertificates/src/WeifengCertificates.mpl" "~/Documents/Projects/dev/StrictlyPositiveCert/src/utilities.mpl" "~/Documents/Projects/dev/StrictlyPositiveCert/src/StrictlyPositiveCert.mpl" "~/Documents/Projects/dev/StrictlyPositiveCert/src/spCertificates.mpl" "~/Documents/Projects/dev/StrictlyPositiveCert/src/signature_constructions.mpl" "~/Documents/Projects/dev/StrictlyPositiveCert/src/lower_bound_poly.mpl" "~/Documents/Projects/dev/StrictlyPositiveCert/src/eps_computation.mpl" "~/Documents/Projects/dev/StrictlyPositiveCert/src/bound_poly.mpl" "~/Documents/Projects/dev/StrictlyPositiveCert/src/averkov_constructions.mpl" "~/Documents/Projects/dev/StrictlyPositiveCert/src/StrictlyPositiveCert.mpl" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/experiments.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/generalfix.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/experiments_1.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex" "~/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_global_case.tex"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex"
-  "main.tex"
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/experiments.tex"
+  "experiments.tex"
   'LaTeX-mode
-  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  6871
-  '(6871 nil)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode text-scale-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  10682
+  '(9979 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27301 51819 289314 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 1338 1338))))
+  '((indent-tabs-mode) (buffer-display-time 27315 19053 136605 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (9979 9979 9979 8764 8764 8764 8041 8025 5437 5437 5152 5510 5506 5506 5505 5483))))
 
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260424181333-water_intake.org"
-  "20260424181333-water_intake.org"
-  'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  180
-  '(180 nil)
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/experiments_2.tex"
+  "experiments_2.tex"
+  'LaTeX-mode
+  '(font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  10266
+  '(10249 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27301 51712 808375 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (180 180 123 142 180 180 199 199 199 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260520164631-weight_control.org"
-  "20260520164631-weight_control.org"
-  'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  212
-  '(212 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27301 49481 322373 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (240))))
+  '((indent-tabs-mode) (buffer-display-time 27315 4851 462792 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (10249 1 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20231115200616-qm_seminar.org"
   "20231115200616-qm_seminar.org"
   'org-mode
   '(font-lock-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  14689
-  '(14693 nil)
+  16979
+  '(460 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27301 48083 248810 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (14693 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/introduction.tex"
-  "introduction.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  1
-  '(7766 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27301 48091 621140 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (7766 7766 6777 7854 7854 7854 6777 7854 7854 7854 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/certificates_global_case.tex"
-  "certificates_global_case.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  22096
-  '(40253 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 40682 565592 367000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (40253 40253 40257 31540 31540 31540 31544 17404 17404 17404 17408 13237 13237 13237 13241 8103))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/experiments.tex"
-  "experiments.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  16695
-  '(16683 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 40146 736095 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (16683 16683 16687 10078 10078 10082 12952 12952 12952 12956 12952 12952 12956 10078 10078 10078))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_global_case.tex"
-  "certificates_global_case.tex"
-  'LaTeX-mode
-  '(lsp-managed-mode eldoc-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  33135
-  '(33123 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 40084 435548 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (33123 33123 33127 30837 30837 30837 30841 26021 26021 26021 26025 16921 16921 16921 16925 30858))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_local_case.tex"
-  "certificates_local_case.tex"
-  'LaTeX-mode
-  '(lsp-managed-mode eldoc-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  8187
-  '(8175 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 40075 703388 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (8175 8175 8179 1919 1919 1923 1919 1919 1919 1923 7768 7768 7781 1474 1474 1487))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/experiments_1.tex"
-  "experiments_1.tex"
-  'LaTeX-mode
-  '(lsp-managed-mode eldoc-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  14491
-  '(14479 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 40067 846104 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (14479 14479 14483 10483 10483 10483 10487 8625 8625 8625 8629 6853 6853 6853 6857 10502))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/conclusion.tex"
-  "conclusion.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  782
-  '(782 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 39542 79041 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (782 782 31 31 31 31 31 31 31 31 31 31 31 31 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/certificates_local_case.tex"
-  "certificates_local_case.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  21220
-  '(21220 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 38616 349553 367000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (21221 21294 21294 21294 19830 19830 19830 19830 21146 21146 21146 19830 3446 3444))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/preliminaries_1.tex"
-  "preliminaries_1.tex"
-  'LaTeX-mode
-  '(lsp-managed-mode eldoc-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  6965
-  '(6965 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 38344 688273 367000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (6647 1630 176 176 6644 6644 1630 1630 1630 1630 1628 1627 1 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/preliminaries.tex"
-  "preliminaries.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  12768
-  '(12768 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 38335 145566 367000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (10500 3886 14359 14359 14359 14359 14359 1 1 13003 13003 12922 12922 14156 14156 25))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/running_example.tex"
-  "running_example.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  6660
-  '(6660 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 38096 976384 367000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (7384 7384 7393 7393 7391 7391 7392 12 72 72 6967 6967 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_2.tex"
-  "abstract_2.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  16
-  '(2580 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 36148 81906 10000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (2580 20 2670 20 1 1 1 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_1.tex"
-  "abstract_1.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  8
-  '(8 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27300 36125 55969 10000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (1054 1054 18 1))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27315 4436 270982 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (485 485 486 438 438 438 14933 14933 16554 16554 16554 16554 14924 14924 16817 14924))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260426111709-projects.org"
   "20260426111709-projects.org"
   'org-mode
   '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  214
-  '(214 nil)
+  395
+  '(395 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 30469 143318 453000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (214 1))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27314 38896 159427 949000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (395 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
@@ -242,6 +74,186 @@
   '(202 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27300 30467 663401 453000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (202 202))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27314 38886 240815 949000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (202 147))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex"
+  "main.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  7013
+  '(7013 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27312 39041 590577 567000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (7234 7234 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871 6871))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/introduction.tex"
+  "introduction.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1
+  '(7766 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27312 33545 458979 994000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (7766 7766 6777 7854 7854 7854 6777 7854 7854 7854 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/certificates_global_case.tex"
+  "certificates_global_case.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  22096
+  '(40253 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 26137 111781 361000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (40253 40253 40257 31540 31540 31540 31544 17404 17404 17404 17408 13237 13237 13237 13241 8103))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_global_case.tex"
+  "certificates_global_case.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  33135
+  '(33123 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 25539 976913 361000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (33123 33123 33127 30837 30837 30837 30841 26021 26021 26021 26025 16921 16921 16921 16925 30858))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/certificates_local_case.tex"
+  "certificates_local_case.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  8187
+  '(8175 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 25531 940867 361000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (8175 8175 8179 1919 1919 1923 1919 1919 1919 1923 7768 7768 7781 1474 1474 1487))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/experiments_1.tex"
+  "experiments_1.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  14491
+  '(14479 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 25524 738718 361000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (14479 14479 14483 10483 10483 10483 10487 8625 8625 8625 8629 6853 6853 6853 6857 10502))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/conclusion.tex"
+  "conclusion.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  782
+  '(782 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 24999 650079 361000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (782 782 31 31 31 31 31 31 31 31 31 31 31 31 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/certificates_local_case.tex"
+  "certificates_local_case.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  21220
+  '(21220 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 24074 688610 361000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (21221 21294 21294 21294 19830 19830 19830 19830 21146 21146 21146 19830 3446 3444))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/preliminaries_1.tex"
+  "preliminaries_1.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  6965
+  '(6965 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 23803 764010 361000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (6647 1630 176 176 6644 6644 1630 1630 1630 1630 1628 1627 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/preliminaries.tex"
+  "preliminaries.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  12768
+  '(12768 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 23795 3725 361000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (10500 3886 14359 14359 14359 14359 14359 1 1 13003 13003 12922 12922 14156 14156 25))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/running_example.tex"
+  "running_example.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  6660
+  '(6660 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 23557 479798 361000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (7384 7384 7393 7393 7391 7391 7392 12 72 72 6967 6967 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_2.tex"
+  "abstract_2.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  16
+  '(2580 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 21609 272027 4000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (2580 20 2670 20 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/archive/abstract_1.tex"
+  "abstract_1.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  8
+  '(8 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27311 21586 930051 4000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (1054 1054 18 1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
+  "main.tex"
+  'LaTeX-mode
+  '(lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode eldoc-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1010
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27314 29559 654685 669000) (buffer-file-coding-system . undecided-unix) (truncate-lines) (TeX-master . "main.tex"))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
+  "main.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode eldoc-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1010
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27314 38857 554426 949000) (buffer-file-coding-system . undecided-unix) (truncate-lines) (TeX-master . "main.tex"))
+  '((mark-ring nil)))
 

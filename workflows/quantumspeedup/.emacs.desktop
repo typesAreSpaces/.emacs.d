@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Fri Sep  4 16:44:58 2026
+;; Created Wed Sep 16 16:58:08 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -12,45 +12,105 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring nil)
-(setq register-alist '((48 . #("* <2026-08-19 Wed> Meeting with Prof. Pavithra, Prof. Jun, Max\n- Overall discussion and ideas\n  - Check classical/quantum literature about positivity checking\n  - Understand limitations of quantum computers\n  - Understand how people are using this\n- @Max: Introduction to block encoding\n** TODO Check [[zotero://select/items/1_H9DHUMD7][Quantum Speed-ups for Semidefinite Programming]]\n- [ ] Check [[zotero://select/items/1_DNQLAMCY][A Combinatorial, Primal-Dual Approach to Semidefinite Programs]] for the SDP part\n- [ ] Do a small presentation\n" 0 1 (yank-handler (evil-yank-line-handler nil t) face org-level-1 keymap (keymap) composition (0 1 [9673]) fontified t) 1 2 (yank-handler (evil-yank-line-handler nil t) face org-level-1 keymap (keymap) fontified t) 2 17 (yank-handler (evil-yank-line-handler nil t) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-date org-level-1) fontified t) 17 18 (yank-handler (evil-yank-line-handler nil t) keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-date org-level-1) rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 18 62 (yank-handler (evil-yank-line-handler nil t) face org-level-1 fontified t) 62 63 (yank-handler (evil-yank-line-handler nil t) fontified t) 63 64 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 64 94 (yank-handler (evil-yank-line-handler nil t) fontified t) 94 96 (yank-handler (evil-yank-line-handler nil t) fontified t) 96 97 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 97 159 (yank-handler (evil-yank-line-handler nil t) fontified t) 159 161 (yank-handler (evil-yank-line-handler nil t) fontified t) 161 162 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 162 207 (yank-handler (evil-yank-line-handler nil t) fontified t) 207 209 (yank-handler (evil-yank-line-handler nil t) fontified t) 209 210 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 210 248 (yank-handler (evil-yank-line-handler nil t) fontified t) 248 249 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 249 287 (yank-handler (evil-yank-line-handler nil t) fontified t) 287 288 (yank-handler (evil-yank-line-handler nil t) keymap (keymap) face org-hide fontified t) 288 289 (yank-handler (evil-yank-line-handler nil t) face org-level-2 keymap (keymap) composition (2 1 [9675]) fontified t) 289 290 (yank-handler (evil-yank-line-handler nil t) face org-level-2 keymap (keymap) fontified t) 290 294 (yank-handler (evil-yank-line-handler nil t) face (org-todo org-level-2) fontified t) 294 301 (yank-handler (evil-yank-line-handler nil t) face org-level-2 fontified t) 301 322 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t htmlize-link (:uri "zotero://select/items/1_H9DHUMD7") help-echo "LINK: zotero://select/items/1_H9DHUMD7" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-2) fontified t) 322 336 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t htmlize-link (:uri "zotero://select/items/1_H9DHUMD7") help-echo "LINK: zotero://select/items/1_H9DHUMD7" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-2) fontified t) 336 337 (yank-handler (evil-yank-line-handler nil t) rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) font-lock-multiline t htmlize-link (:uri "zotero://select/items/1_H9DHUMD7") help-echo "LINK: zotero://select/items/1_H9DHUMD7" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-2) fontified t) 337 382 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t htmlize-link (:uri "zotero://select/items/1_H9DHUMD7") help-echo "LINK: zotero://select/items/1_H9DHUMD7" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-link org-level-2) fontified t) 382 383 (yank-handler (evil-yank-line-handler nil t) rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) font-lock-multiline t htmlize-link (:uri "zotero://select/items/1_H9DHUMD7") help-echo "LINK: zotero://select/items/1_H9DHUMD7" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-link org-level-2) fontified t) 383 384 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t htmlize-link (:uri "zotero://select/items/1_H9DHUMD7") help-echo "LINK: zotero://select/items/1_H9DHUMD7" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-2) fontified t) 384 385 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t htmlize-link (:uri "zotero://select/items/1_H9DHUMD7") help-echo "LINK: zotero://select/items/1_H9DHUMD7" keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) face (org-link org-level-2) fontified t) 385 386 (yank-handler (evil-yank-line-handler nil t) fontified t) 386 516 (yank-handler (evil-yank-line-handler nil t) fontified nil) 516 517 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 517 518 (yank-handler (evil-yank-line-handler nil t) fontified t) 518 521 (yank-handler (evil-yank-line-handler nil t) face (org-checkbox) fontified t) 521 545 (yank-handler (evil-yank-line-handler nil t) fontified t) 545 546 (yank-handler (evil-yank-line-handler nil t) face nil fontified t)))))
-(setq file-name-history '("~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/presentationQ.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/terminology.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/algorithm.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/terminology.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/preliminaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/references.bib" "~/Exported Items.bib" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/references.bib" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/summaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/references.bib" "~/Exported Items.bib" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/quantumsymbols.sty" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Library/texmf/tex/latex/QuantumCommandsAndDeclarations.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/quantum_circuits.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/manipulating_multiple_qubits.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/semantics_quantum_circuits.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/qiskit_tutorial.tex"))
+(setq regexp-search-ring '(#("algorithm" 0 9 (isearch-case-fold-search t)) #("Algo" 0 4 (isearch-case-fold-search nil)) #("Mul" 0 3 (isearch-case-fold-search nil)) #("Alg" 0 3 (isearch-case-fold-search nil)) #("Weight" 0 6 (isearch-case-fold-search nil)) #("Int" 0 3 (isearch-case-fold-search nil)) #("\\\\-" 0 3 (isearch-case-fold-search t)) #(" = " 0 3 (isearch-case-fold-search t)) #("Our goal" 0 8 (isearch-case-fold-search nil)) #("log" 0 3 (isearch-case-fold-search t)) #("su" 0 2 (isearch-case-fold-search t)) #("Main" 0 4 (isearch-case-fold-search nil)) #("arg" 0 3 (isearch-case-fold-search t)) #("mi" 0 2 (isearch-case-fold-search t)) #("argc" 0 4 (isearch-case-fold-search t)) #("-" 0 1 (isearch-case-fold-search t))))
+(setq register-alist '((48 . #("\\begin{frame}[fragile]{Solving SDP using LP framework}\n  TODO\n\\end{frame}" 0 1 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 1 6 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 6 7 (fontified t) 7 12 (face (font-lock-function-name-face) fontified t) 12 55 (fontified t) 55 62 (fontified t) 62 63 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 63 66 (face (font-lock-keyword-face font-latex-sedate-face) fontified t) 66 67 (fontified t) 67 72 (face (font-lock-function-name-face) fontified t) 72 73 (fontified t)))))
+(setq file-name-history '("~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Library/texmf/tex/latex/symbols.sty" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/presentationQ.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/terminology.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/algorithm.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/terminology.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/preliminaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/references.bib" "~/Exported Items.bib" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/references.bib" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/summaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumSpeedup/references.bib"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/algorithm.tex"
-  "algorithm.tex"
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex"
+  "mwa.tex"
   'LaTeX-mode
-  '(lsp-managed-mode eldoc-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode lsp-diagnostics-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
-  5886
-  '(5929 nil)
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-modeline-workspace-status-mode flymake-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  3969
+  '(4139 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27291 18919 856707 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
-  '((mark-ring (6247 6247 5848 5848 5848 6247 6247 6247 6247 6247 6247 6247 6247 704 704 704))))
+  '((indent-tabs-mode) (buffer-display-time 27307 7935 539831 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex"))
+  '((mark-ring (3954 3150 3150 3027 3027 2373 2373 1485 1485 1213 1213 661 661 437 437 43))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex"
+  "main.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode lsp-modeline-workspace-status-mode flymake-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  698
+  '(47 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27307 7904 482299 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
+  '((mark-ring (293 698 698 801))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260626124850-pavithra_prabhakar_postdoc_discussion.org"
   "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
   'org-mode
   '(font-lock-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  499
-  '(3261 nil)
+  973
+  '(3323 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27291 18660 711048 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (3261 655 3261 3261 515 1 1))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27307 7919 927776 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (3323 686 3323 3323 515 1 1))))
 
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex"
-  "main.tex"
+  "/Users/typesarespaces/Library/texmf/tex/latex/symbols.sty"
+  "symbols.sty"
   'LaTeX-mode
-  '(lsp-managed-mode eldoc-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
-  741
-  '(741 nil)
+  '(font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  4840
+  '(246 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 27291 18610 39692 493000) (buffer-file-coding-system . undecided-unix) (truncate-lines) (TeX-master . "main.tex"))
+  '((indent-tabs-mode) (buffer-display-time 27307 6577 830897 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (246 246 246))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Library/texmf/tex/latex/quantumsymbols.sty"
+  "quantumsymbols.sty"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode eldoc-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  4419
+  '(4419 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27307 6324 686756 0) (buffer-file-coding-system . undecided-unix) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (234 234 234 1 1 1 1951 1951 1951))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/presentationQ.sty"
+  "presentationQ.sty"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-mode lsp-modeline-workspace-status-mode flymake-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  544
+  '(544 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27307 6312 593943 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex"))
+  '((mark-ring (20 20 20 4980 4980 4980))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/algorithm.tex"
+  "algorithm.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-diagnostics-mode lsp-managed-mode lsp-headerline-breadcrumb-mode eldoc-mode flymake-mode lsp-modeline-workspace-status-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1974
+  '(1974 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27307 6278 302451 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
+  '((mark-ring (604 604 366 366 1 1 1 6321 6321 27 27 6357 6357 9 9 9))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb"
+  "main.vrb"
+  'fundamental-mode
+  '(font-lock-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  264
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27307 5520 139010 887000) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -62,7 +122,7 @@
   '(271 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27291 18498 433619 493000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27306 59898 450309 777000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
   '((mark-ring (271 274 274 1))))
 
 (desktop-create-buffer 208
@@ -74,18 +134,6 @@
   '(202 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27291 18485 699200 493000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27306 59885 834045 777000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
   '((mark-ring (202 202))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex"
-  "main.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode eldoc-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
-  741
-  '(nil nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time) (buffer-file-coding-system . undecided-unix) (truncate-lines) (TeX-master . "main.tex"))
-  '((mark-ring nil)))
 
