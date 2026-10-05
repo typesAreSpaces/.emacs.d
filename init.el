@@ -3,7 +3,7 @@
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
-	"straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 5))
   (unless
       (file-exists-p bootstrap-file)
@@ -17,8 +17,8 @@
 (require 'package)
 
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-			 ("melpa" . "https://melpa.org/packages/")
+                       ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                       ("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")))
 
 (package-initialize)
@@ -81,10 +81,6 @@
         "/Users/typesarespaces/.oh-my-zsh/custom/plugins/forgit/bin"
         "/Users/typesarespaces/.opam/4.07.0/bin"
         "/Users/typesarespaces/.opam/system/bin"
-        "/Users/typesarespaces/Documents/Apps"
-        "/Users/typesarespaces/Documents/Apps/csdp6.2.0linuxx86_64/bin"
-        "/Users/typesarespaces/Documents/Apps/LADR-2009-11A/bin"
-        "/Users/typesarespaces/Documents/Apps/MATLAB/R2022a/bin"
         )))
   (setenv "PATH" (mapconcat 'identity paths ":"))
   (setq exec-path (append paths (list "." exec-directory))))
@@ -105,13 +101,13 @@
 
   (defun my-save-session (name)
     "Save the current Emacs session under NAME."
-					; ; (interactive "MSession name: ")
+                                      ; ; (interactive "MSession name: ")
     (interactive
      (list
       (completing-read
        "Session name: "
        (directory-files workflow-dir nil
-  			directory-files-no-dot-files-regexp)
+                      directory-files-no-dot-files-regexp)
        nil nil)))
     (let* ((dir (expand-file-name name workflow-dir))
            (tab-file (expand-file-name "tabs.el" dir)))
@@ -279,7 +275,7 @@
   (setq tab-bar-show 1)                      ; hide bar if <= 1 tabs open
   (setq tab-bar-new-tab-choice "*dashboard*"); buffer to show in new tabs
   (setq tab-bar-tab-hints t)                 ; show tab numbers
-  (setq tab-bar-new-tab-to 'right)       ; defines where to create a new tab
+  (setq tab-bar-new-tab-to 'rightmost)       ; defines where to create a new tab
 
   (set-face-attribute 'tab-bar nil
                       :background "#282828"
@@ -307,7 +303,25 @@
             (cl-position (tab-bar--current-tab) tabs :test #'equal)))
       (tab-duplicate)
       (tab-bar-move-tab-to (+ orig-index 1))
-      (tab-next))))
+      (tab-next)))
+
+  (defun my-tab-new-left ()
+    "Create a new tab immediately to the right of the current tab."
+    (interactive)
+    (let ((tab-bar-new-tab-to 'left))
+      (tab-bar-new-tab)))
+
+  (defun my-tab-new-right ()
+    "Create a new tab immediately to the right of the current tab."
+    (interactive)
+    (let ((tab-bar-new-tab-to 'right))
+      (tab-bar-new-tab)))
+
+  (defun my-tab-new-rightmost ()
+    "Create a new tab at the rightmost end of the tab bar."
+    (interactive)
+    (let ((tab-bar-new-tab-to 'rightmost))
+      (tab-bar-new-tab))))
 
 (defun frame-font-setup
     (&rest ...)
@@ -406,11 +420,11 @@
     "tt" '(load-theme :which-key "choose (t)heme")
     "ts" '(tab-switch :which-key "(s)witch tab")
     "td" '(tab-duplicate-next :which-key "tab (d)uplicate")
-    "tn" '(tab-new :which-key "(n)ew tab")
+    "tn" '(my-tab-new-rightmost :which-key "(n)ew tab")
+    "tl" '(my-tab-new-left :which-key "new tab (l)eft")
+    "tr" '(my-tab-new-right :which-key "new tab (r)ight")
     "tc" '(tab-close :which-key "(c)lose tab")
-    "th" '(tab-previous :which-key "move to left tab")
-    "tl" '(tab-next :which-key "move to right tab")
-    "tr" '(tab-rename :which-key "(r)ename tab")
+    "tR" '(tab-rename :which-key "(R)ename tab")
     "g" '(magit-status :which-key "Ma(g)it status")
     "d" '(dired-jump :which-key "(d)ired jump")
     "m" '(mu4e :which-key "(m)u4e")
@@ -448,7 +462,7 @@
   (define-key evil-motion-state-map
               (kbd "C-o") 'better-jumper-jump-backward))
 
-					; jump scenarios
+                                      ; jump scenarios
 (advice-add 'evil-next-line :around #'my-jump-advice)
 (advice-add 'evil-previous-line :around #'my-jump-advice)
 (advice-add 'evil-goto-definition :around #'my-jump-advice)
@@ -698,7 +712,7 @@
                                         ; Configure other variables and modes in the :config section,
                                         ; after lazily loading the package.
     :config
-					; (consult-customize consult--source-buffer :hidden t :default nil)
+                                      ; (consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
     (setq extra-buffer-sources
           '(:name     "Extra"
@@ -858,7 +872,7 @@
           (directory . emacs)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . "sioyek %s")
+          ("\\.pdf\\'" . "open -a sioyek %s")
           ("\\.nb?\\'" . "open -a Mathematica %s")))
 
   (setq org-ellipsis "⇓")
@@ -876,11 +890,13 @@
       "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
       "20260721081408-quantum_research.org"
       "20260910102152-bqrlg.org"
+      "20260930165052-uwaterloo_seminar.org"
       "20231115200616-qm_seminar.org"
       "20260423174626-algebraic_combinatorics_seminar.org"
       "20260428165951-saturated_quadratic_module.org"
       "20260428165645-monogenic_quadratic_module_certificates.org"
       "20260511204944-general_case_univariate_quadratic_modules.org"
+      "20260724112641-todolater.org"
       )))
 
   (setq org-agenda-start-with-log-mode t)
@@ -900,10 +916,10 @@
           (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
           (sequence "EMAIL" "|")))
 
-  					; Save Org buffers after refiling!
+                                      ; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-  					; Use find-file instead of file-find-other-window
+                                      ; Use find-file instead of file-find-other-window
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
   (setq org-tag-alist
@@ -917,7 +933,7 @@
   (setq org-capture-templates
         `(
           ("e" "Email Capture")
-  					; TODO Update this
+                                      ; TODO Update this
           ;; ("ea" "Main Agenda" entry
           ;;  (file+olp agenda-mail "EMAIL")
           ;;  "** TODO Check this email %a"
@@ -1092,7 +1108,7 @@
   :init
                                         ; NOTE: Set this to the folder where you keep your Git repos!
   (setq projectile-project-search-path
-	'("~/Documents/Projects"))
+      '("~/Documents/Projects"))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package yasnippet
@@ -1278,14 +1294,6 @@
     (setq lsp-latex-forward-search-executable
           "/Applications/Skim.app/Contents/SharedSupport/displayline")
     (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
-;; (setq lsp-latex-forward-search-executable "/opt/homebrew/bin/sioyek")
-;;     (setq lsp-latex-forward-search-args
-;;           '(
-;;              "--forward-search-file"
-;;              "%f"
-;;              "--forward-search-line"
-;;              "%l"
-;;              "%p"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
@@ -1741,8 +1749,8 @@ The file name is passed as a shell-quoted argument."
   :bind (("C-x C-j" . dired-jump))
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
-  (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "Mathematica")
-                                       ("\\.pdf\\'" "sioyek")))
+  (setq dired-guess-shell-alist-user '(("\\.nb?\\'" "open -a Mathematica")
+                                       ("\\.pdf\\'" "open -a sioyek")))
   (when (not (version< emacs-version "26.3"))
     (evil-collection-define-key 'normal 'dired-mode-map
       "h" 'dired-single-up-directory
@@ -1824,7 +1832,7 @@ The file name is passed as a shell-quoted argument."
   (use-package mu4e
     :ensure nil
     :load-path (lambda () (expand-file-name my/mu4e-path))
-					; :defer 20 ; Wait until 20 seconds after startup
+                                      ; :defer 20 ; Wait until 20 seconds after startup
     :init
     (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
     :config
@@ -1833,7 +1841,7 @@ The file name is passed as a shell-quoted argument."
 
     (setq mu4e-change-filenames-when-moving t)
 
-					; SMTP settings
+                                      ; SMTP settings
     (setq sendmail-program "/opt/homebrew/bin/msmtp"
           message-sendmail-f-is-evil t
           message-sendmail-extra-arguments '("--read-envelope-from")
@@ -1847,7 +1855,7 @@ The file name is passed as a shell-quoted argument."
     (setq mu4e-get-mail-command "mbsync -a")
     (setq mu4e-root-maildir "~/Mail")
 
-					; Just plain text
+                                      ; Just plain text
     (with-eval-after-load "mm-decode"
       (add-to-list 'mm-discouraged-alternatives "text/html")
       (add-to-list 'mm-discouraged-alternatives "text/richtext"))
@@ -1865,7 +1873,7 @@ The file name is passed as a shell-quoted argument."
             (lambda (msg)
               (when msg
                 (string-prefix-p
-		 "/gmail" (mu4e-message-field msg :maildir))))
+               "/gmail" (mu4e-message-field msg :maildir))))
             :vars '((user-mail-address  . "jcastellanos34@gmail.com")
                     (user-full-name     . "Jose Abel Castellanos Joo")
                     (mu4e-drafts-folder . "/gmail/[Gmail]/Drafts")
@@ -1883,7 +1891,7 @@ The file name is passed as a shell-quoted argument."
             (lambda (msg)
               (when msg
                 (string-prefix-p
-		 "/gmail" (mu4e-message-field msg :maildir))))
+               "/gmail" (mu4e-message-field msg :maildir))))
             :vars '((user-mail-address  . "jcastellanosjoo@gmail.com")
                     (user-full-name     . "Jose Abel Castellanos Joo")
                     (mu4e-drafts-folder . "/gmail2/[Gmail]/Drafts")
@@ -1906,7 +1914,7 @@ The file name is passed as a shell-quoted argument."
             ("/gmail2/[Gmail]/Sent Mail"  . ?S)
             ("/gmail2/[Gmail]/Trash" . ?T)
             ))
-					; UX settings
+                                      ; UX settings
     (setq mu4e-use-fancy-chars t)
     (setq mu4e-attachment-dir  "~/tosend")
     (setq mu4e-headers-show-threads nil)
@@ -1920,7 +1928,7 @@ The file name is passed as a shell-quoted argument."
                                 (:human-date . 12)
                                 (:from . 22)
                                 (:subject)))
-					; Display
+                                      ; Display
     (setq
      mu4e-view-show-addresses t
      mu4e-view-show-images t
@@ -2013,3 +2021,10 @@ The file name is passed as a shell-quoted argument."
               (message "BibTeX for %s copied to clipboard" item-key)))
         (user-error "No Zotero link found on this line"))))
   )
+
+(my/leader-keys
+  "z" '(:ignore t :which-key "(z)otero related")
+  "zz" '(org-zotxt-mode :which-key "enable (z)otxt")
+  "zi" '(org-zotxt-insert-reference-link :which-key "(i)nsert zotero entry")
+  "zo" '(org-zotxt-open-attachment :which-key "(o)pen zotero entry")
+  "zr" '(zotero-export-bibtex-at-point :which-key "get bibtex (r)eference to clipboard"))
