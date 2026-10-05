@@ -1,1 +1,1 @@
-("20260626124850-pavithra_prabhakar_postdoc_discussion.org" "main.tex" "mwa.tex")
+("20260930165052-uwaterloo_seminar.org" "main.tex" "mwa.tex")
