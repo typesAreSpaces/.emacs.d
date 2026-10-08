@@ -1027,13 +1027,13 @@ This section contains the basic configuration for =org-mode= plus the configurat
       #'(lambda (x) (concat "~/Documents/Org-Files/" x))
       '(
         "20260423173343-main_agenda.org"
-        "20260819135302-postdoc_tasks.org"
         "20260423174506-current_work.org"
-        "20251105153112-applying_opt.org"
         "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
+        "20260819135302-postdoc_tasks.org"
         "20260721081408-quantum_research.org"
         "20260910102152-bqrlg.org"
         "20260930165052-uwaterloo_seminar.org"
+        "20261008091120-quantumspeedup_project.org"
         "20231115200616-qm_seminar.org"
         "20260423174626-algebraic_combinatorics_seminar.org"
         "20260428165951-saturated_quadratic_module.org"
@@ -1041,6 +1041,17 @@ This section contains the basic configuration for =org-mode= plus the configurat
         "20260511204944-general_case_univariate_quadratic_modules.org"
         "20260724112641-todolater.org"
         )))
+
+    (defun org-archive-file ()
+      "Move the current Org file to the archive directory."
+      (interactive)
+      (let* ((archive-dir (expand-file-name "~/Documents/Org-Files/archive/"))
+             (file (buffer-file-name)))
+        (unless file
+        (user-error "Current buffer is not visiting a file"))
+        (make-directory archive-dir t)
+        (rename-visited-file
+         (expand-file-name (file-name-nondirectory file) archive-dir))))
 
     (setq org-agenda-start-with-log-mode t)
     (setq org-agenda-window-setup 'current-window)
@@ -1059,10 +1070,10 @@ This section contains the basic configuration for =org-mode= plus the configurat
             (sequence "TODO" "|" "MOVED" "DONE(c)" "CANC(k@)")
             (sequence "EMAIL" "|")))
 
-                                        ; Save Org buffers after refiling!
+                                          ; Save Org buffers after refiling!
     (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-                                        ; Use find-file instead of file-find-other-window
+                                          ; Use find-file instead of file-find-other-window
     (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
     (setq org-tag-alist
@@ -1076,7 +1087,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (setq org-capture-templates
           `(
             ("e" "Email Capture")
-                                        ; TODO Update this
+                                          ; TODO Update this
             ;; ("ea" "Main Agenda" entry
             ;;  (file+olp agenda-mail "EMAIL")
             ;;  "** TODO Check this email %a"
