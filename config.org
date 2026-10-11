@@ -986,10 +986,23 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
 This section contains the basic configuration for =org-mode= plus the configuration for Org agendas and capture templates.  There's a lot to unpack in here so I'd recommend watching the videos for [[https://youtu.be/VcgjTEa0kU4][Part 5]] and [[https://youtu.be/PNE-mgkZ6HM][Part 6]] for a full explanation.
 
 #+begin_src emacs-lisp
+  (defun my/org-breadcrumbs ()
+    "Show the Org heading hierarchy at point in the window header."
+    (save-excursion
+      (save-restriction
+        (widen)
+        (let ((path (unless (org-before-first-heading-p)
+                      (org-get-outline-path t))))
+          (if path
+              (concat " " (org-format-outline-path
+                           path (max 1 (1- (window-body-width))) nil " › "))
+            " ")))))
+
   (defun my/org-mode-setup ()
     (org-indent-mode)
     (variable-pitch-mode 1)
-    (visual-line-mode 1))
+    (visual-line-mode 1)
+    (setq-local header-line-format '((:eval (my/org-breadcrumbs)))))
 
   (defun my/org-store-link-with-tilde ()
     "Store a file link using ~ instead of /home/username."
@@ -1758,6 +1771,30 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
 
   (my/leader-keys
     "tp" 'parinfer-toggle-mode)
+#+end_src
+*** Typst
+#+begin_src emacs-lisp
+  (use-package websocket)
+
+  (use-package typst-preview
+    :init
+                                        ; start preview automatically when typst-preview-mode is activated
+    (setq typst-preview-autostart t)
+                                        ; open browser automatically when typst-preview-start is run
+    (setq typst-preview-open-browser-automatically t)
+
+    :custom
+                                        ; this is the default option; other options are `eaf-browser' or `xwidget'.
+    (typst-preview-browser "default")
+                                        ; invert colors depending on system theme
+    (typst-preview-invert-colors "auto")
+                                        ; path to tinymist binary (relative or absolute)
+    (typst-preview-executable "tinymist")
+                                        ; enable partial rendering
+    (typst-preview-partial-rendering t)
+
+    :config
+    (define-key typst-preview-mode-map (kbd "C-c C-j") 'typst-preview-send-position))
 #+end_src
 ** Corfu
 #+begin_src emacs-lisp

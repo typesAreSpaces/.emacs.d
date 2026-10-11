@@ -843,10 +843,23 @@
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
+(defun my/org-breadcrumbs ()
+  "Show the Org heading hierarchy at point in the window header."
+  (save-excursion
+    (save-restriction
+      (widen)
+      (let ((path (unless (org-before-first-heading-p)
+                    (org-get-outline-path t))))
+        (if path
+            (concat " " (org-format-outline-path
+                         path (max 1 (1- (window-body-width))) nil " › "))
+          " ")))))
+
 (defun my/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
-  (visual-line-mode 1))
+  (visual-line-mode 1)
+  (setq-local header-line-format '((:eval (my/org-breadcrumbs)))))
 
 (defun my/org-store-link-with-tilde ()
   "Store a file link using ~ instead of /home/username."
@@ -1473,6 +1486,28 @@
 
 (my/leader-keys
   "tp" 'parinfer-toggle-mode)
+
+(use-package websocket)
+
+(use-package typst-preview
+  :init
+                                      ; start preview automatically when typst-preview-mode is activated
+  (setq typst-preview-autostart t)
+                                      ; open browser automatically when typst-preview-start is run
+  (setq typst-preview-open-browser-automatically t)
+
+  :custom
+                                      ; this is the default option; other options are `eaf-browser' or `xwidget'.
+  (typst-preview-browser "default")
+                                      ; invert colors depending on system theme
+  (typst-preview-invert-colors "auto")
+                                      ; path to tinymist binary (relative or absolute)
+  (typst-preview-executable "tinymist")
+                                      ; enable partial rendering
+  (typst-preview-partial-rendering t)
+
+  :config
+  (define-key typst-preview-mode-map (kbd "C-c C-j") 'typst-preview-send-position))
 
 (use-package corfu
   :after orderless
