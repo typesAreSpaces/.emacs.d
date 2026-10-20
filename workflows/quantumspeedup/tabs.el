@@ -1,1 +1,1 @@
-("main.tex" "mwa.tex" "20260930165052-uwaterloo_seminar.org" "20260721081408-quantum_research.org")
+("20260930165052-uwaterloo_seminar.org" "20261008091120-quantumspeedup_project.org" "main.tex<mmwa>")
