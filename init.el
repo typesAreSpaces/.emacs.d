@@ -908,6 +908,7 @@
       "20260428165951-saturated_quadratic_module.org"
       "20260428165645-monogenic_quadratic_module_certificates.org"
       "20260511204944-general_case_univariate_quadratic_modules.org"
+      "20261023184453-learning_automata_switch_linear_systems.org"
       "20260724112641-todolater.org"
       )))
 
@@ -2090,6 +2091,20 @@ The file name is passed as a shell-quoted argument."
               (message "BibTeX for %s copied to clipboard" item-key)))
         (user-error "No Zotero link found on this line"))))
   )
+
+(defun my/org-zotxt-open-at-point ()
+  "Open the attachment of the Zotero link at point via `org-zotxt'.
+Meant for `org-open-at-point-functions': return non-nil when point
+is on a zotero link so `org-open-at-point' stops there."
+  (let ((ct (org-element-context)))
+    (when (and (eq (org-element-type ct) 'link)
+               (string= (org-element-property :type ct) "zotero"))
+      (require 'org-zotxt)
+      (org-zotxt-open-attachment current-prefix-arg)
+      t)))
+
+(with-eval-after-load 'org
+  (add-hook 'org-open-at-point-functions #'my/org-zotxt-open-at-point))
 
 (my/leader-keys
   "z" '(:ignore t :which-key "(z)otero related")
