@@ -2042,7 +2042,14 @@ The file name is passed as a shell-quoted argument."
    'org-babel-load-languages
    '((gnuplot . t))))
 
-(use-package org-noter)
+(use-package pdf-tools
+  :config
+  (pdf-tools-install :no-query))
+
+(use-package org-noter
+  :init
+  ;; Only load the PDF backend; skip nov (epub) and djvu modules.
+  (setq org-noter-supported-modes (quote (doc-view-mode pdf-view-mode))))
 
 (use-package zotxt
   :after org-noter
