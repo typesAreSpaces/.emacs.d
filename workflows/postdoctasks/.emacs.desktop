@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Oct 21 11:24:41 2026
+;; Created Wed Oct 28 17:35:28 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -12,200 +12,56 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring '(#(">>" 0 2 (isearch-case-fold-search t)) #("av" 0 2 (isearch-case-fold-search t)) #("matrix" 0 6 (isearch-case-fold-search t)) #("y" 0 1 (isearch-case-fold-search nil)) #("x" 0 1 (isearch-case-fold-search nil)) #("J" 0 1 (isearch-case-fold-search nil)) #("latexm" 0 6 (isearch-case-fold-search t)) #("org-f" 0 5 (isearch-case-fold-search t)) #("Org-Files" 0 9 (isearch-case-fold-search nil)) #("agenda" 0 6 (isearch-case-fold-search t)) #("spee" 0 4 (isearch-case-fold-search t)) #("\\<Lyapunov\\>" 0 12 (isearch-case-fold-search nil)) #("chapter" 0 7 (isearch-case-fold-search t)) #("Linear" 0 6 (isearch-case-fold-search nil)) #("section{" 0 8 (isearch-case-fold-search t)) #("Execution vs." 0 13 (isearch-case-fold-search nil))))
-(setq register-alist '((97 . [105 42 46 escape 106 94]) (48 . #("*** Team: [Team Name]\n- Project title:\n- Team members:\n- Reviewer:\n**** Presentation Quality [ /10]\n- Problem statement and relevance [ /4]\n  - Clearly describes the problem.\n  - Explains its importance.\n  - States the project objectives.\n- Methodology [ /3]\n  - Explains the proposed approach.\n  - Describes relevant methods, models, tools, or algorithms.\n- Self-knowledge [ /3]\n  - Demonstrates understanding of the technical content.\n  - Recognizes assumptions and limitations.\n  - Responds clearly to questions.\n**** Progress [ /10]\n- Describes completed work.\n- Provides concrete evidence of progress.\n- Relates progress to the planned schedule and deliverables.\n- Demonstrates appropriate progress given the remaining time. \n**** Team Coordination [ /10]\n- Team leader [ /5]\n  - Identifies the team leader.\n  - Explains the leader's coordination role.\n- Task assignments [ /5]\n  - Clearly defines each member's responsibilities.\n  - Explains how work is divided among the team.\n**** Overall Evaluation\n- Total score: [ /30]\n- Strengths:\n- Areas for improvement:\n- Additional comments:\n" 0 2 (yank-handler (evil-yank-line-handler nil t) keymap (keymap) face org-hide fontified t) 2 3 (yank-handler (evil-yank-line-handler nil t) face org-level-3 keymap (keymap) composition (3 1 [9679]) fontified t) 3 4 (yank-handler (evil-yank-line-handler nil t) face org-level-3 keymap (keymap) fontified t) 4 21 (yank-handler (evil-yank-line-handler nil t) face org-level-3 fontified t) 21 22 (yank-handler (evil-yank-line-handler nil t) fontified t) 22 23 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 23 39 (yank-handler (evil-yank-line-handler nil t) fontified t) 39 40 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 40 55 (yank-handler (evil-yank-line-handler nil t) fontified t) 55 56 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 56 66 (yank-handler (evil-yank-line-handler nil t) fontified t) 66 67 (yank-handler (evil-yank-line-handler nil t) fontified t) 67 70 (yank-handler (evil-yank-line-handler nil t) keymap (keymap) face org-hide fontified t) 70 71 (yank-handler (evil-yank-line-handler nil t) face org-level-4 keymap (keymap) composition (2 1 [9675]) fontified t) 71 72 (yank-handler (evil-yank-line-handler nil t) face org-level-4 keymap (keymap) fontified t) 72 99 (yank-handler (evil-yank-line-handler nil t) face org-level-4 fontified t) 99 100 (yank-handler (evil-yank-line-handler nil t) fontified t) 100 101 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 101 140 (yank-handler (evil-yank-line-handler nil t) fontified t) 140 142 (yank-handler (evil-yank-line-handler nil t) fontified t) 142 143 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 143 175 (yank-handler (evil-yank-line-handler nil t) fontified t) 175 177 (yank-handler (evil-yank-line-handler nil t) fontified t) 177 178 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 178 204 (yank-handler (evil-yank-line-handler nil t) fontified t) 204 206 (yank-handler (evil-yank-line-handler nil t) fontified t) 206 207 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 207 239 (yank-handler (evil-yank-line-handler nil t) fontified t) 239 240 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 240 259 (yank-handler (evil-yank-line-handler nil t) fontified t) 259 261 (yank-handler (evil-yank-line-handler nil t) fontified t) 261 262 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 262 295 (yank-handler (evil-yank-line-handler nil t) fontified t) 295 297 (yank-handler (evil-yank-line-handler nil t) fontified t) 297 298 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 298 357 (yank-handler (evil-yank-line-handler nil t) fontified t) 357 358 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 358 380 (yank-handler (evil-yank-line-handler nil t) fontified t) 380 382 (yank-handler (evil-yank-line-handler nil t) fontified t) 382 383 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 383 437 (yank-handler (evil-yank-line-handler nil t) fontified t) 437 439 (yank-handler (evil-yank-line-handler nil t) fontified t) 439 440 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 440 481 (yank-handler (evil-yank-line-handler nil t) fontified t) 481 483 (yank-handler (evil-yank-line-handler nil t) fontified t) 483 484 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 484 515 (yank-handler (evil-yank-line-handler nil t) fontified t) 515 516 (yank-handler (evil-yank-line-handler nil t) fontified t) 516 519 (yank-handler (evil-yank-line-handler nil t) keymap (keymap) face org-hide fontified t) 519 520 (yank-handler (evil-yank-line-handler nil t) face org-level-4 keymap (keymap) composition (2 1 [9675]) fontified t) 520 521 (yank-handler (evil-yank-line-handler nil t) face org-level-4 keymap (keymap) fontified t) 521 536 (yank-handler (evil-yank-line-handler nil t) face org-level-4 fontified t) 536 537 (yank-handler (evil-yank-line-handler nil t) fontified t) 537 538 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 538 565 (yank-handler (evil-yank-line-handler nil t) fontified t) 565 566 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 566 607 (yank-handler (evil-yank-line-handler nil t) fontified t) 607 608 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 608 668 (yank-handler (evil-yank-line-handler nil t) fontified t) 668 669 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 669 729 (yank-handler (evil-yank-line-handler nil t) fontified t) 729 730 (yank-handler (evil-yank-line-handler nil t) fontified t) 730 731 (yank-handler (evil-yank-line-handler nil t) fontified t) 731 734 (yank-handler (evil-yank-line-handler nil t) keymap (keymap) face org-hide fontified t) 734 735 (yank-handler (evil-yank-line-handler nil t) face org-level-4 keymap (keymap) composition (2 1 [9675]) fontified t) 735 736 (yank-handler (evil-yank-line-handler nil t) face org-level-4 keymap (keymap) fontified t) 736 760 (yank-handler (evil-yank-line-handler nil t) face org-level-4 fontified t) 760 761 (yank-handler (evil-yank-line-handler nil t) fontified t) 761 762 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 762 781 (yank-handler (evil-yank-line-handler nil t) fontified t) 781 783 (yank-handler (evil-yank-line-handler nil t) fontified t) 783 784 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 784 813 (yank-handler (evil-yank-line-handler nil t) fontified t) 813 815 (yank-handler (evil-yank-line-handler nil t) fontified t) 815 816 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 816 858 (yank-handler (evil-yank-line-handler nil t) fontified t) 858 859 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 859 883 (yank-handler (evil-yank-line-handler nil t) fontified t) 883 885 (yank-handler (evil-yank-line-handler nil t) fontified t) 885 886 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 886 935 (yank-handler (evil-yank-line-handler nil t) fontified t) 935 937 (yank-handler (evil-yank-line-handler nil t) fontified t) 937 938 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 938 983 (yank-handler (evil-yank-line-handler nil t) fontified t) 983 984 (yank-handler (evil-yank-line-handler nil t) fontified t) 984 987 (yank-handler (evil-yank-line-handler nil t) keymap (keymap) face org-hide fontified t) 987 988 (yank-handler (evil-yank-line-handler nil t) face org-level-4 keymap (keymap) composition (2 1 [9675]) fontified t) 988 989 (yank-handler (evil-yank-line-handler nil t) face org-level-4 keymap (keymap) fontified t) 989 1007 (yank-handler (evil-yank-line-handler nil t) face org-level-4 fontified t) 1007 1008 (yank-handler (evil-yank-line-handler nil t) fontified t) 1008 1009 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 1009 1030 (yank-handler (evil-yank-line-handler nil t) fontified t) 1030 1031 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 1031 1043 (yank-handler (evil-yank-line-handler nil t) fontified t) 1043 1044 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 1044 1068 (yank-handler (evil-yank-line-handler nil t) fontified t) 1068 1069 (yank-handler (evil-yank-line-handler nil t) composition (1 1 [8226]) fontified t) 1069 1089 (yank-handler (evil-yank-line-handler nil t) fontified t) 1089 1090 (yank-handler (evil-yank-line-handler nil t) fontified t rear-nonsticky t) 1090 1091 (yank-handler (evil-yank-line-handler nil t) face nil fontified t)))))
-(setq file-name-history '("~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/temporary_files/homework/hw-3.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/temporary_files/homework/Makefile" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/temporary_files/homework/hw-3.tex" "~/Documents/Org-Files/20260715080734-hasan_papers_review.org" "~/Documents/Org-Files/20260527180853-performance_and_contributions.org" "~/Documents/Org-Files/20260423173902-notes.org" "~/Documents/Org-Files/20251105153112-applying_opt.org" "~/Documents/Org-Files/todo.txt" "~/Documents/Org-Files/20241205134300-reviewing_papers.org" "~/Documents/Org-Files/20260531170149-work_plan_beihang.org" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/non_linear/temp/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/modeling_non_linear_systems/material/" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/modeling_linear_systems/material/" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/modeling_non_linear_systems/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/modeling_linear_systems/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/modeling_non_linear_systems/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/modeling_linear_systems/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_linear.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/linear_stuff/" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_linear.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class15_lyapunov_functions_barrier.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class14_non_linear.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_linear.tex" "~/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_14_modeling_linear_systems.tex"))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/Documents/Org-Files/20260626124850-pavithra_prabhakar_postdoc_discussion.org" "~/Documents/Org-Files/20260819135302-postdoc_tasks.org" "~/Documents/Org-Files/20260426111709-projects.org" "~/Documents/Org-Files/20260423173343-main_agenda.org" "~/.config/jose-emacs/config.org" "~/Documents/Org-Files/20261008091120-quantumspeedup_project.org" "~/Documents/Org-Files/20260930165052-uwaterloo_seminar.org" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/algorithm.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/presentationQ.sty" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Library/texmf/tex/latex/symbols.sty" "~/Documents/Org-Files/20260721081408-quantum_research.org" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/mmwa/main.tex" "~/Documents/Org-Files/20231115200616-qm_seminar.org" "~/Documents/Org-Files/20260724112641-todolater.org" "~/Documents/Org-Files/20261023184453-learning_automata_switch_linear_systems.org" "~/Documents/Org-Files/20260511204944-general_case_univariate_quadratic_modules.org" "~/Documents/Org-Files/20260428165645-monogenic_quadratic_module_certificates.org" "~/Documents/Org-Files/20260428165951-saturated_quadratic_module.org" "~/Documents/Org-Files/20260423174626-algebraic_combinatorics_seminar.org" "~/Documents/Org-Files/20260423174506-current_work.org" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/Quantum Automata Certificates/main.tex"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260426111709-projects.org"
+  "20260426111709-projects.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  335
+  '(335 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 34495 576234 0) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring (335 335 1))))
+
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260819135302-postdoc_tasks.org"
   "20260819135302-postdoc_tasks.org"
   'org-mode
-  '(font-lock-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  4504
-  '(5595 nil)
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  1
+  '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27352 62807 773075 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (5595 5595 5595 5595 5595 5595 5595 5602 4504 4449 4449 5904 5904 4464 4296 4296))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 34490 535185 0) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
+  "20260423173343-main_agenda.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  198
+  '(198 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 34469 633189 42000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring (198 198))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260626124850-pavithra_prabhakar_postdoc_discussion.org"
   "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
   'org-mode
-  '(font-lock-mode text-scale-mode org-zotxt-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  467
-  '(1843 nil)
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  109
+  '(109 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27352 62605 246234 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (513 519 519 519 450 449 449 449 431 431 812 812 662 662 449 430))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/temporary_files/homework/hw-3.tex"
-  "hw-3.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode eldoc-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  20034
-  '(19773 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27352 30076 5256 417000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (771 25 25 25 18301 18301 18301 19512 19736 7784 19522 19453 19453 19453 19388 19388))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/StrictlyPositiveCase/main_revised.tex"
-  "main_revised.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode eldoc-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  3681
-  '(2 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27348 7968 792804 990000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . t))
-  '((mark-ring (2 2 21924 21924 21924))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/QMSeminar/writing/Overleaf/GeneralCaseUnivariate/main.tex"
-  "main.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode eldoc-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  7048
-  '(2451 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27348 6831 541051 428000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
-  "main.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode eldoc-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  205
-  '(205 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27348 6801 856944 428000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/QuantumCircuit/main.tex"
-  "main.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode eldoc-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  205
-  '(nil nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27348 6795 122584 428000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class13_linear.tex"
-  "class13_linear.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode eldoc-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27351 28982 731792 444000) (buffer-file-coding-system . utf-8-unix) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class14_non_linear.tex"
-  "class14_non_linear.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode eldoc-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27351 28983 472013 444000) (buffer-file-coding-system . undecided-unix) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/Trust worthy AI and Autonomous Systems - 2026/TrustAINotes/week5/week5_slides_or_notes/class15_lyapunov_functions_barrier.tex"
-  "class15_lyapunov_functions_barrier.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode eldoc-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode flymake-mode lsp-diagnostics-mode lsp-managed-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27351 28984 87012 444000) (buffer-file-coding-system . undecided-unix) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex"
-  "mwa.tex"
-  'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  104
-  '(809 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27350 42 725636 379000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex"))
-  '((mark-ring (3954 3150 3150 3027 3027 2373 2373 1485 1485 1213 1213 661 661 437 437 43))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Library/texmf/tex/latex/symbols.sty"
-  "symbols.sty"
-  'LaTeX-mode
-  '(lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode eldoc-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
-  4840
-  '(246 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27349 22701 245110 384000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (246 246 246))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Library/texmf/tex/latex/quantumsymbols.sty"
-  "quantumsymbols.sty"
-  'LaTeX-mode
-  '(lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode eldoc-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  4419
-  '(4419 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27349 22450 125524 384000) (buffer-file-coding-system . undecided-unix) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (234 234 234 1 1 1 1951 1951 1951))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/presentationQ.sty"
-  "presentationQ.sty"
-  'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  544
-  '(544 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27349 22439 921165 384000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex"))
-  '((mark-ring (20 20 20 4980 4980 4980))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/algorithm.tex"
-  "algorithm.tex"
-  'LaTeX-mode
-  '(eldoc-mode lsp-modeline-workspace-status-mode lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  1974
-  '(1974 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27349 22407 196383 384000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
-  '((mark-ring (604 604 366 366 1 1 1 6321 6321 27 27 6357 6357 9 9 9))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex"
-  "main.tex"
-  'LaTeX-mode
-  '(lsp-managed-mode lsp-diagnostics-mode flymake-mode lsp-modeline-workspace-status-mode lsp-modeline-diagnostics-mode lsp-modeline-code-actions-mode eldoc-mode lsp-completion-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  663
-  '(nil nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27352 28282 368263 417000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines) (TeX-master . "main.tex"))
-  '((mark-ring nil)))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 34469 550322 42000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring (109))))
 
