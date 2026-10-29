@@ -116,10 +116,11 @@ Saves then happen when idle, when the last frame closes, and on exit.")
 
   (defun my/session-names ()
     "Return the names of the saved workflows."
-    (mapcar #'file-name-nondirectory
-            (seq-filter #'file-directory-p
-                        (directory-files workflow-dir t
-                                         directory-files-no-dot-files-regexp))))
+    (when (file-directory-p workflow-dir)
+      (mapcar #'file-name-nondirectory
+              (seq-filter #'file-directory-p
+                          (directory-files workflow-dir t
+                                           directory-files-no-dot-files-regexp)))))
 
   (defun my/last-session ()
     "Return the workflow name recorded in `my/last-session-file', or nil."
@@ -156,61 +157,37 @@ Saves then happen when idle, when the last frame closes, and on exit.")
                     desktop-clear-preserve-buffers)))))
      (buffer-list)))
 
-  (defun my/session-tab-buffer-names (tabs)
-    "Return the names of the buffers shown in the saved TABS."
-    (let (names)
-      (cl-labels ((walk (state)
-                    (while (consp state)
-                      (let ((item (car state)))
-                        (if (and (eq (car-safe item) 'buffer)
-                                 (stringp (car-safe (cdr item))))
-                            (push (cadr item) names)
-                          (walk item)))
-                      (setq state (cdr state)))))
-        (if (eq (car tabs) :version)
-            (dolist (tab (plist-get tabs :tabs))
-              (walk (plist-get tab :state)))
-          ;; Older tabs.el files contain buffer names rather than window states.
-          (setq names (seq-filter #'stringp tabs))))
-      names))
+  (defun my/session-owner (dir)
+    "Return the live Emacs owner of DIR, ignoring abandoned locks."
+    (let ((owner (desktop-owner dir)))
+      (when (and owner
+                 (or (= owner (emacs-pid))
+                     (desktop--emacs-pid-running-p owner)))
+        owner)))
 
-  (defun my/read-desktop-lazily (dir eager)
-    "Read the desktop in DIR, creating only the buffers named in EAGER now.
-The others are queued for creation when Emacs is idle, so their modes
-and packages load after startup.  `desktop-save' fixes which entries are
-eager, so redirect both kinds of entry while the desktop file loads."
-    (let* ((create (symbol-function 'desktop-create-buffer))
-           (queue (symbol-function 'desktop-append-buffer-args))
-           (dispatch (lambda (&rest args)
-                       (if (member (nth 2 args) eager)
-                           (apply create args)
-                         (apply queue args)))))
-      (cl-letf (((symbol-function 'desktop-create-buffer) dispatch)
-                ((symbol-function 'desktop-append-buffer-args) dispatch))
+  (defun my/read-session-desktop (dir)
+    "Restore every buffer in DIR before restoring its tab layouts.
+Desktop files decide eager versus lazy loading when they are saved, so
+handle both entry points, including files saved by older configurations."
+    (let ((create (symbol-function 'desktop-create-buffer)))
+      (cl-letf (((symbol-function 'desktop-append-buffer-args) create))
         (desktop-read dir))))
 
-  (defun my/save-pending-desktop-buffers (desktop-file)
-    "Append buffers still queued for lazy creation to DESKTOP-FILE.
-`desktop-save' writes live buffers only, which would drop them."
-    (when-let* ((pending
-                 (seq-remove (lambda (args)
-                               (if (nth 1 args)
-                                   (find-buffer-visiting (nth 1 args))
-                                 (get-buffer (nth 2 args))))
-                             desktop-buffer-args-list)))
-      (with-temp-buffer
-        (let ((print-length nil)
-              (print-level nil))
-          (dolist (args pending)
-            (prin1 (cons 'desktop-append-buffer-args
-                         (mapcar (lambda (arg) (list 'quote arg)) args))
-                   (current-buffer))
-            (insert "\n")))
-        (let ((coding-system-for-write 'utf-8-emacs))
-          (write-region nil nil desktop-file t 'silent)))
-      ;; Keep the next save from mistaking this append for a newer desktop.
-      (setq desktop-file-modtime (file-attribute-modification-time
-                                  (file-attributes desktop-file)))))
+  (defun my/validate-session-tabs (tabs)
+    "Reject malformed TABS before closing the current workflow."
+    (unless (or (null tabs)
+                (and (listp tabs) (cl-every #'stringp tabs))
+                (and (eq (car-safe tabs) :version)
+                     (eq (plist-get tabs :version) 2)
+                     (consp (plist-get tabs :tabs))
+                     (integerp (plist-get tabs :selected))
+                     (<= 1 (plist-get tabs :selected)
+                         (length (plist-get tabs :tabs)))
+                     (cl-every (lambda (tab)
+                                 (and (stringp (plist-get tab :name))
+                                      (consp (plist-get tab :state))))
+                               (plist-get tabs :tabs))))
+      (user-error "Invalid saved workflow tabs")))
 
   (defun my-save-session (name)
     "Save the current workflow's desktop and tab window layouts under NAME."
@@ -220,10 +197,16 @@ eager, so redirect both kinds of entry while the desktop file loads."
             (directory-files workflow-dir nil
                              directory-files-no-dot-files-regexp)
             nil nil)))
+    ;; Finish a queue left by an older configuration before taking a snapshot.
+    (when desktop-buffer-args-list (desktop-lazy-complete))
+    (when (or (string-empty-p name) (member name '("." ".."))
+              (string-match-p "/" name))
+      (user-error "Invalid workflow name %S" name))
     (let* ((dir (file-name-as-directory (expand-file-name name workflow-dir)))
+           (previous-dir desktop-dirname)
            (tab-file (expand-file-name "tabs.el" dir))
            (desktop-file (expand-file-name desktop-base-file-name dir))
-           (owner (desktop-owner dir))
+           (owner (my/session-owner dir))
            (tabs (tab-bar-tabs))
            (selected (1+ (seq-position tabs (assq 'current-tab tabs)))))
       (when (and owner (/= owner (emacs-pid)))
@@ -234,14 +217,17 @@ eager, so redirect both kinds of entry while the desktop file loads."
                        (format "Overwrite workflow %s with the current one? " name))))
         (user-error "Workflow %s was not saved" name))
       (make-directory dir t)
-      ;; desktop-save skips the write when the checksum matches the last
-      ;; save (of any directory) and silently aborts on a modtime conflict,
-      ;; either of which would pair a stale desktop with the new tabs.el.
-      (setq desktop-file-checksum nil
-            desktop-file-modtime (file-attribute-modification-time
-                                  (file-attributes desktop-file)))
-      (desktop-save dir t)
-      (my/save-pending-desktop-buffers desktop-file)
+      ;; Retain the lock while this workflow is loaded.  Preserve the modtime
+      ;; of the loaded desktop so concurrent edits cause a conflict, not data loss.
+      (unless (equal dir desktop-dirname)
+        (setq desktop-file-modtime (file-attribute-modification-time
+                                    (file-attributes desktop-file))))
+      (when (and (not owner) (desktop-owner dir))
+        (desktop-release-lock dir))
+      (desktop-save dir)
+      (when (and previous-dir (not (equal previous-dir dir))
+                 (equal (desktop-owner previous-dir) (emacs-pid)))
+        (desktop-release-lock previous-dir))
       (with-temp-file tab-file
         (let ((print-length nil)
               (print-level nil))
@@ -290,6 +276,16 @@ Desktop locks owned by other Emacs processes are never removed."
                             (buffer-modified-p buffer)))
                      (my/workflow-buffers))
       (user-error "Save modified workflow buffers before switching"))
+    ;; Every perspective needs a preserved buffer: otherwise its last file
+    ;; refuses to close, even when another perspective contains the dashboard.
+    (when (bound-and-true-p persp-mode)
+      (let ((current (persp-current-name))
+            (dashboard (get-buffer-create "*dashboard*")))
+        (unwind-protect
+            (dolist (name (persp-names))
+              (persp-switch name 'norecord)
+              (persp-add-buffer dashboard))
+          (persp-switch current 'norecord))))
     (let ((buffers (my/workflow-buffers)))
       (unwind-protect
           (progn
@@ -316,12 +312,13 @@ Desktop locks owned by other Emacs processes are never removed."
     (interactive (list (my/read-session "Session: ")))
     (let* ((dir (file-name-as-directory (expand-file-name name workflow-dir)))
            (tab-file (expand-file-name "tabs.el" dir))
-           (owner (desktop-owner dir))
+           (owner (my/session-owner dir))
            (tabs (when (file-exists-p tab-file)
                    (with-temp-buffer
                      (insert-file-contents tab-file)
                      (read (current-buffer))))))
       ;; Validate before changing the current buffers or tabs.
+      (my/validate-session-tabs tabs)
       (unless (file-exists-p (expand-file-name desktop-base-file-name dir))
         (user-error "No desktop saved for workflow %s" name))
       (when (and owner (/= owner (emacs-pid)))
@@ -330,29 +327,38 @@ Desktop locks owned by other Emacs processes are never removed."
       ;; desktop-read otherwise skips a desktop already owned by this process.
       (when (equal (desktop-owner dir) (emacs-pid))
         (desktop-release-lock dir))
-      ;; Create the buffers the tabs show now; the rest follow when idle.
-      (let ((desktop-load-locked-desktop nil))
-        (unless (my/read-desktop-lazily dir (my/session-tab-buffer-names tabs))
-          (user-error "Workflow %s could not be loaded" name)))
-      (if (eq (car tabs) :version)
+      ;; `check-pid' accepts abandoned locks, while refusing a live owner.
+      ;; Detach a failed restoration so a later save cannot overwrite it.
+      (condition-case err
           (progn
-            (let ((first t))
-              (dolist (tab (plist-get tabs :tabs))
-                (unless first (tab-bar-new-tab))
-                (setq first nil)
-                (when (plist-get tab :state)
-                  (window-state-put (plist-get tab :state)
-                                    (frame-root-window) 'safe))
-                (tab-bar-rename-tab (plist-get tab :name))))
-            (tab-bar-select-tab (or (plist-get tabs :selected) 1)))
-        ;; Older tabs.el files contain buffer names rather than window states.
-        (let ((first t))
-          (dolist (tab tabs)
-            (when (get-buffer tab)
-              (unless first (tab-bar-new-tab))
-              (setq first nil)
-              (switch-to-buffer tab)))))
-      (my/remember-session name)))
+            (let ((desktop-load-locked-desktop 'check-pid))
+              (unless (my/read-session-desktop dir)
+                (user-error "Workflow %s could not be loaded" name)))
+            (if (eq (car tabs) :version)
+                (progn
+                  (let ((first t))
+                    (dolist (tab (plist-get tabs :tabs))
+                      (unless first (tab-bar-new-tab))
+                      (setq first nil)
+                      (when (plist-get tab :state)
+                        (window-state-put (plist-get tab :state)
+                                          (frame-root-window) 'safe))
+                      (tab-bar-rename-tab (plist-get tab :name))))
+                  (tab-bar-select-tab (or (plist-get tabs :selected) 1)))
+              ;; Older tabs.el files contain buffer names rather than window states.
+              (let ((first t))
+                (dolist (tab tabs)
+                  (when (get-buffer tab)
+                    (unless first (tab-bar-new-tab))
+                    (setq first nil)
+                    (switch-to-buffer tab)))))
+            (my/remember-session name))
+        (error
+         (desktop-lazy-abort)
+         (when (equal (desktop-owner dir) (emacs-pid))
+           (desktop-release-lock dir))
+         (setq desktop-dirname nil)
+         (signal (car err) (cdr err))))))
 
   (defun my-change-session (name)
     "Save the current workflow, then replace it with the saved workflow NAME.
@@ -402,7 +408,7 @@ When NAME is the loaded workflow, first switch to a new automatically
 named blank workflow, without saving the one being deleted."
     (interactive (list (my/read-session "Delete session: ")))
     (let* ((dir (file-name-as-directory (expand-file-name name workflow-dir)))
-           (owner (desktop-owner dir)))
+           (owner (my/session-owner dir)))
       ;; An empty or relative name would expand to workflow-dir itself.
       (unless (member name (my/session-names))
         (user-error "No workflow named %s" name))
@@ -424,7 +430,7 @@ Renaming the loaded workflow keeps it loaded under NEW-NAME."
     (let* ((dir (file-name-as-directory (expand-file-name name workflow-dir)))
            (new-dir (file-name-as-directory
                      (expand-file-name new-name workflow-dir)))
-           (owner (desktop-owner dir)))
+           (owner (my/session-owner dir)))
       (unless (member name (my/session-names))
         (user-error "No workflow named %s" name))
       (my/check-new-session-name new-name)

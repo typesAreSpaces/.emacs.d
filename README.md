@@ -36,3 +36,20 @@ On Emacs 31.1, three sequential warm runs measured median init evaluation of
 source-loading measurements with Straight in safe mode; they exclude GUI
 creation/redisplay, package builds, startup hooks/workflow restoration, idle
 timers, and first-use latency. Deferred tools pay their loading cost on use.
+
+Workflow commands live under `SPC j`: save (`s`), load (`l`), change (`c`),
+new (`n`), delete (`d`), and rename (`r`). Change saves the current workflow
+before loading the next one; load replaces it without saving its layout.
+Automatic saving remains opt-in through `my/session-autosave`.
+
+Workflow loading restores all saved buffers before applying tabs and window
+layouts. Large workflows may take longer to open, since file modes initialize
+before loading finishes. Active workflows keep their desktop lock; abandoned
+locks from exited Emacs processes are ignored. A desktop modified by another
+process is checked before overwriting it.
+
+Run the isolated workflow checks with installed packages (temporary files only):
+
+```sh
+emacs -Q --batch -l scripts/check-workflows.el
+```
