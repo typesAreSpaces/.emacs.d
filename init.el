@@ -1899,7 +1899,12 @@ and LOCATE finds that python3 first.  Remote directories use LOCATE."
                  (and (looking-at "#!\\(/\\S-+\\)") (match-string 1)))))
         (funcall locate)))
   (with-eval-after-load 'jupyter-env
-    (advice-add 'jupyter-locate-python :around #'my/jupyter-locate-python)))
+    (advice-add 'jupyter-locate-python :around #'my/jupyter-locate-python))
+  ;; Evil's normal state shadows the REPL's RET with `evil-ret'.
+  (with-eval-after-load 'jupyter-repl
+    (evil-define-key 'normal jupyter-repl-mode-map
+      (kbd "RET") #'jupyter-repl-ret)
+    (evil-set-initial-state 'jupyter-repl-mode 'insert)))
 
 (use-package maplev
   :straight (maplev :type git

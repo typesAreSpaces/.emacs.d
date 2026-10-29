@@ -206,7 +206,8 @@ You can also use =M-x auto-package-update-now= to update right now!
                        (<= 1 (plist-get tabs :selected)
                            (length (plist-get tabs :tabs)))
                        (cl-every (lambda (tab)
-                                   (and (stringp (plist-get tab :name))
+                                   (and (or (null (plist-get tab :name))
+                                            (stringp (plist-get tab :name)))
                                         (consp (plist-get tab :state))))
                                  (plist-get tabs :tabs))))
         (user-error "Invalid saved workflow tabs")))
@@ -258,7 +259,9 @@ You can also use =M-x auto-package-update-now= to update right now!
                    :tabs
                    (mapcar
                     (lambda (tab)
-                      (list :name (alist-get 'name tab)
+                      ;; Save only explicit names; others follow the buffer.
+                      (list :name (and (alist-get 'explicit-name tab)
+                                       (alist-get 'name tab))
                             :state (if (eq (car tab) 'current-tab)
                                        (window-state-get (frame-root-window) t)
                                      (alist-get 'ws tab))))
@@ -365,7 +368,8 @@ You can also use =M-x auto-package-update-now= to update right now!
                         (when (plist-get tab :state)
                           (window-state-put (plist-get tab :state)
                                             (frame-root-window) 'safe))
-                        (tab-bar-rename-tab (plist-get tab :name))))
+                        ;; An empty name clears one left by the previous workflow.
+                        (tab-bar-rename-tab (or (plist-get tab :name) ""))))
                     (tab-bar-select-tab (or (plist-get tabs :selected) 1)))
                 ;; Older tabs.el files contain buffer names rather than window states.
                 (let ((first t))
@@ -734,6 +738,15 @@ The content of .emacs-daemon.plist is
     (setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
     (setq tab-bar-tab-hints t)                 ;; show tab numbers
     (setq tab-bar-new-tab-to 'rightmost)       ;; defines where to create a new tab
+
+    (defun my/tab-bar-tab-name-file ()
+      "Name the tab after the selected window's file, or its buffer name."
+      (let ((buffer (window-buffer (minibuffer-selected-window))))
+        (if-let* ((file (buffer-file-name buffer)))
+            (file-name-nondirectory file)
+          (buffer-name buffer))))
+    ;; Tabs renamed explicitly keep their name; this only sets the default.
+    (setq tab-bar-tab-name-function #'my/tab-bar-tab-name-file)
 
     (set-face-attribute 'tab-bar nil
                         :background "#282828"
@@ -2132,7 +2145,7 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
     (pyvenv-mode 1))
 #+end_src
 *** Jupyter
-[[https://github.com/emacs-jupyter/jupyter][emacs-jupyter]] runs Jupyter kernels from Emacs: =M-x jupyter-run-repl= opens a REPL, and Org blocks such as =jupyter-python= or =jupyter-Wolfram-Language= run in a kernel (see the Babel languages section).  Every block needs a =:session= header argument.
+[[https://github.com/emacs-jupyter/jupyter][emacs-jupyter]] runs Jupyter kernels from Emacs: =M-x jupyter-run-repl= opens a REPL, and Org blocks such as =jupyter-python= or =jupyter-Wolfram-Language= run in a kernel (see the Babel languages section).  Every block needs a =:session= header argument.  REPL buffers start in insert state, and =RET= sends input in normal state too.
 
 #+begin_src emacs-lisp
   (use-package jupyter
@@ -2149,7 +2162,12 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
                    (and (looking-at "#!\\(/\\S-+\\)") (match-string 1)))))
           (funcall locate)))
     (with-eval-after-load 'jupyter-env
-      (advice-add 'jupyter-locate-python :around #'my/jupyter-locate-python)))
+      (advice-add 'jupyter-locate-python :around #'my/jupyter-locate-python))
+    ;; Evil's normal state shadows the REPL's RET with `evil-ret'.
+    (with-eval-after-load 'jupyter-repl
+      (evil-define-key 'normal jupyter-repl-mode-map
+        (kbd "RET") #'jupyter-repl-ret)
+      (evil-set-initial-state 'jupyter-repl-mode 'insert)))
 #+end_src
 *** Maple mode
 #+begin_src emacs-lisp
