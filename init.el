@@ -380,6 +380,15 @@ Nothing is saved when no workflow is loaded."
                workflow-dir)))
       name))
 
+  (defun my/blank-session ()
+    "Start an unnamed blank workspace without saving a workflow."
+    (my/clear-session)
+    (get-scratch-buffer-create)
+    (delete-other-windows)
+    (switch-to-buffer (or (get-buffer "*dashboard*") "*scratch*"))
+    ;; An empty name restores the tab's automatic name.
+    (tab-bar-rename-tab ""))
+
   (defun my-new-session (&optional name discard)
     "Save the current workflow, then start a blank one named NAME.
 The blank workflow has one tab showing the dashboard, plus *scratch*.
@@ -393,12 +402,7 @@ When DISCARD is non-nil, close the current workflow without saving it."
       (my/check-new-session-name name)
       (unless discard
         (my/save-current-session))
-      (my/clear-session)
-      (get-scratch-buffer-create)
-      (delete-other-windows)
-      (switch-to-buffer (or (get-buffer "*dashboard*") "*scratch*"))
-      ;; An empty name restores the tab's automatic name.
-      (tab-bar-rename-tab "")
+      (my/blank-session)
       (my-save-session name)
       (message "Started workflow %s" name)))
 
@@ -482,20 +486,22 @@ and `kill-emacs-hook' later runs with only the hidden frame left."
         (my/autosave-session))))
 
   (defvar my/start-new-session (getenv "EMACS_NEW_SESSION")
-    "Non-nil to start a new workflow at startup instead of the last one.
+    "Non-nil to start an unnamed workspace instead of restoring the last workflow.
 Set from EMACS_NEW_SESSION, which the `rej' shell function exports.")
   ;; Keep processes started from Emacs from inheriting the request.
   (setenv "EMACS_NEW_SESSION" nil)
 
   (defun my/restore-last-session ()
     "Load the workflow recorded in `my/last-session-file', if it exists.
-When `my/start-new-session' is non-nil, start a new workflow instead.
+When `my/start-new-session' is non-nil, start an unsaved workspace instead.
 Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
     (when-let* (((not noninteractive))
                 ((my/session-frame-p))
                 ((not (seq-some #'buffer-file-name (buffer-list)))))
       (if my/start-new-session
-          (my-new-session)
+          (progn
+            (my/blank-session)
+            (setq my/start-new-session nil))
         (when-let* ((name (my/last-session))
                     ((member name (my/session-names))))
           (condition-case err

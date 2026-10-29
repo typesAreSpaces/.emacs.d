@@ -204,4 +204,34 @@
            (should-not (desktop-owner (expand-file-name "one" workflow-dir))))
        (with-current-buffer one (setq kill-buffer-query-functions nil))))))
 
+(ert-deftest my/workflow-rej-starts-unsaved-then-loads-existing ()
+  (my/with-workflow-test
+   (switch-to-buffer (my/workflow-test-file "learning.txt"))
+   (my-save-session "learning")
+   (my/clear-session)
+   (let ((my/start-new-session t)
+         (noninteractive nil))
+     ;; Batch Emacs has an initial terminal, unlike the daemon's client frame.
+     (cl-letf (((symbol-function 'my/session-frame-p) (lambda (&optional _) t)))
+       (my/restore-last-session))
+     (should-not my/start-new-session))
+   (should-not (my/current-session))
+   (should (equal (my/session-names) '("learning")))
+   (should (equal (my/last-session) "learning"))
+   (should (= (length (tab-bar-tabs)) 1))
+   ;; Change must not save the unnamed workspace before loading the target.
+   (let ((noninteractive nil)) (my-change-session "learning"))
+   (should (equal (my/current-session) "learning"))
+   (should (get-file-buffer (expand-file-name "learning.txt" test-dir)))
+   (should (equal (my/session-names) '("learning")))))
+
+(ert-deftest my/workflow-explicit-new-still-saves ()
+  (my/with-workflow-test
+   (let ((my/session-counter 0))
+     (my-new-session)
+     (should (equal (my/current-session) "session-1"))
+     (should (equal (my/session-names) '("session-1")))
+     (should (file-exists-p (desktop-full-file-name)))
+     (should (file-exists-p (expand-file-name "session-1/tabs.el" workflow-dir))))))
+
 (ert-run-tests-batch-and-exit "my/workflow-")

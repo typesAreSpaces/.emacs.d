@@ -42,6 +42,10 @@ new (`n`), delete (`d`), and rename (`r`). Change saves the current workflow
 before loading the next one; load replaces it without saving its layout.
 Automatic saving remains opt-in through `my/session-autosave`.
 
+`rej` starts an unnamed blank workspace without creating a `session-N` folder.
+Use save (`SPC j s`) to give it a name, or load an existing workflow. Explicitly
+creating a new session (`SPC j n`) still creates a saved workflow.
+
 Workflow loading restores all saved buffers before applying tabs and window
 layouts. Large workflows may take longer to open, since file modes initialize
 before loading finishes. Active workflows keep their desktop lock; abandoned
