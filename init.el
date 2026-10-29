@@ -1255,7 +1255,12 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
 
     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-    (add-to-list 'org-structure-template-alist '("py" . "src python"))))
+    (add-to-list 'org-structure-template-alist '("py" . "src python"))
+    ;; Jupyter blocks need a session; blocks sharing one share a kernel.
+    (add-to-list 'org-structure-template-alist
+                 '("jp" . "src jupyter-python :session py"))
+    (add-to-list 'org-structure-template-alist
+                 '("ma" . "src jupyter-Wolfram-Language :session wl"))))
 
 (with-eval-after-load 'org
   (org-babel-do-load-languages
