@@ -184,7 +184,8 @@ handle both entry points, including files saved by older configurations."
                      (<= 1 (plist-get tabs :selected)
                          (length (plist-get tabs :tabs)))
                      (cl-every (lambda (tab)
-                                 (and (stringp (plist-get tab :name))
+                                 (and (or (null (plist-get tab :name))
+                                          (stringp (plist-get tab :name)))
                                       (consp (plist-get tab :state))))
                                (plist-get tabs :tabs))))
       (user-error "Invalid saved workflow tabs")))
@@ -236,7 +237,9 @@ handle both entry points, including files saved by older configurations."
                  :tabs
                  (mapcar
                   (lambda (tab)
-                    (list :name (alist-get 'name tab)
+                    ;; Save only explicit names; others follow the buffer.
+                    (list :name (and (alist-get 'explicit-name tab)
+                                     (alist-get 'name tab))
                           :state (if (eq (car tab) 'current-tab)
                                      (window-state-get (frame-root-window) t)
                                    (alist-get 'ws tab))))
@@ -343,7 +346,8 @@ Desktop locks owned by other Emacs processes are never removed."
                       (when (plist-get tab :state)
                         (window-state-put (plist-get tab :state)
                                           (frame-root-window) 'safe))
-                      (tab-bar-rename-tab (plist-get tab :name))))
+                      ;; An empty name clears one left by the previous workflow.
+                      (tab-bar-rename-tab (or (plist-get tab :name) ""))))
                   (tab-bar-select-tab (or (plist-get tabs :selected) 1)))
               ;; Older tabs.el files contain buffer names rather than window states.
               (let ((first t))
@@ -661,6 +665,15 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   (setq tab-bar-new-tab-choice "*dashboard*");; buffer to show in new tabs
   (setq tab-bar-tab-hints t)                 ;; show tab numbers
   (setq tab-bar-new-tab-to 'rightmost)       ;; defines where to create a new tab
+
+  (defun my/tab-bar-tab-name-file ()
+    "Name the tab after the selected window's file, or its buffer name."
+    (let ((buffer (window-buffer (minibuffer-selected-window))))
+      (if-let* ((file (buffer-file-name buffer)))
+          (file-name-nondirectory file)
+        (buffer-name buffer))))
+  ;; Tabs renamed explicitly keep their name; this only sets the default.
+  (setq tab-bar-tab-name-function #'my/tab-bar-tab-name-file)
 
   (set-face-attribute 'tab-bar nil
                       :background "#282828"

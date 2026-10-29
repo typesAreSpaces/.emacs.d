@@ -90,6 +90,23 @@
      (should (= (length (window-list)) 2))
      (should (= (window-point) 15)))))
 
+(ert-deftest my/workflow-roundtrip-keeps-automatic-tab-names ()
+  (my/with-workflow-test
+   (tab-bar-rename-tab "")
+   (switch-to-buffer (my/workflow-test-file "one.txt"))
+   (tab-bar-new-tab)
+   (switch-to-buffer (my/workflow-test-file "two.txt"))
+   (tab-bar-rename-tab "named")
+   (my-save-session "automatic")
+   (let ((noninteractive nil)) (my-load-session "automatic"))
+   (tab-bar-select-tab 1)
+   (should-not (alist-get 'explicit-name (tab-bar--current-tab)))
+   (switch-to-buffer (get-file-buffer (expand-file-name "two.txt" test-dir)))
+   (should (equal (alist-get 'name (tab-bar--current-tab)) "two.txt"))
+   (tab-bar-select-tab 2)
+   (should (alist-get 'explicit-name (tab-bar--current-tab)))
+   (should (equal (alist-get 'name (tab-bar--current-tab)) "named"))))
+
 (ert-deftest my/workflow-save-as-transfers-lock ()
   (my/with-workflow-test
    (switch-to-buffer (my/workflow-test-file "one.txt"))
