@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Oct 29 01:04:17 2026
+;; Created Thu Oct 29 01:53:05 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -13,7 +13,7 @@
 (setq tags-table-list nil)
 (setq search-ring nil)
 (setq regexp-search-ring nil)
-(setq register-alist '((97 . [escape])))
-(setq file-name-history '("~/.config/jose-emacs/config.org" "~/.config/jose-emacs/init.el"))
+(setq register-alist nil)
+(setq file-name-history nil)
 
 ;; Buffer section -- buffers listed in same order as in buffer list:

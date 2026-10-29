@@ -108,6 +108,9 @@
   (defvar my/last-session-file
     (expand-file-name "var/last-session" user-emacs-directory)
     "File recording the last loaded workflow, restored at startup.")
+  (defvar my/session-autosave nil
+    "Non-nil to save the loaded workflow automatically.
+Saves then happen when idle, when the last frame closes, and on exit.")
   (defvar my/session-autosave-interval 300
     "Idle seconds before the loaded workflow is saved again, or nil.")
 
@@ -153,6 +156,62 @@
                     desktop-clear-preserve-buffers)))))
      (buffer-list)))
 
+  (defun my/session-tab-buffer-names (tabs)
+    "Return the names of the buffers shown in the saved TABS."
+    (let (names)
+      (cl-labels ((walk (state)
+                    (while (consp state)
+                      (let ((item (car state)))
+                        (if (and (eq (car-safe item) 'buffer)
+                                 (stringp (car-safe (cdr item))))
+                            (push (cadr item) names)
+                          (walk item)))
+                      (setq state (cdr state)))))
+        (if (eq (car tabs) :version)
+            (dolist (tab (plist-get tabs :tabs))
+              (walk (plist-get tab :state)))
+          ;; Older tabs.el files contain buffer names rather than window states.
+          (setq names (seq-filter #'stringp tabs))))
+      names))
+
+  (defun my/read-desktop-lazily (dir eager)
+    "Read the desktop in DIR, creating only the buffers named in EAGER now.
+The others are queued for creation when Emacs is idle, so their modes
+and packages load after startup.  `desktop-save' fixes which entries are
+eager, so redirect both kinds of entry while the desktop file loads."
+    (let* ((create (symbol-function 'desktop-create-buffer))
+           (queue (symbol-function 'desktop-append-buffer-args))
+           (dispatch (lambda (&rest args)
+                       (if (member (nth 2 args) eager)
+                           (apply create args)
+                         (apply queue args)))))
+      (cl-letf (((symbol-function 'desktop-create-buffer) dispatch)
+                ((symbol-function 'desktop-append-buffer-args) dispatch))
+        (desktop-read dir))))
+
+  (defun my/save-pending-desktop-buffers (desktop-file)
+    "Append buffers still queued for lazy creation to DESKTOP-FILE.
+`desktop-save' writes live buffers only, which would drop them."
+    (when-let* ((pending
+                 (seq-remove (lambda (args)
+                               (if (nth 1 args)
+                                   (find-buffer-visiting (nth 1 args))
+                                 (get-buffer (nth 2 args))))
+                             desktop-buffer-args-list)))
+      (with-temp-buffer
+        (let ((print-length nil)
+              (print-level nil))
+          (dolist (args pending)
+            (prin1 (cons 'desktop-append-buffer-args
+                         (mapcar (lambda (arg) (list 'quote arg)) args))
+                   (current-buffer))
+            (insert "\n")))
+        (let ((coding-system-for-write 'utf-8-emacs))
+          (write-region nil nil desktop-file t 'silent)))
+      ;; Keep the next save from mistaking this append for a newer desktop.
+      (setq desktop-file-modtime (file-attribute-modification-time
+                                  (file-attributes desktop-file)))))
+
   (defun my-save-session (name)
     "Save the current workflow's desktop and tab window layouts under NAME."
     (interactive
@@ -182,6 +241,7 @@
             desktop-file-modtime (file-attribute-modification-time
                                   (file-attributes desktop-file)))
       (desktop-save dir t)
+      (my/save-pending-desktop-buffers desktop-file)
       (with-temp-file tab-file
         (let ((print-length nil)
               (print-level nil))
@@ -220,7 +280,9 @@ This runs on every mode-line update, so it compares strings only."
 
   (defun my/clear-session ()
     "Close the current workflow's buffers and tabs and release its lock.
-Abort if any workflow buffer remains modified or refuses to close.
+Abort if any workflow buffer remains modified or refuses to close.  Once
+buffers start closing the workflow is detached even if closing fails, so
+a later save cannot overwrite it with the buffers that survived.
 Desktop locks owned by other Emacs processes are never removed."
     (save-some-buffers)
     (when (seq-some (lambda (buffer)
@@ -229,21 +291,23 @@ Desktop locks owned by other Emacs processes are never removed."
                      (my/workflow-buffers))
       (user-error "Save modified workflow buffers before switching"))
     (let ((buffers (my/workflow-buffers)))
-      ;; Also drop globals that desktop saves but does not clear by default.
-      (let ((desktop-globals-to-clear
-             (append '(register-alist tags-file-name tags-table-list
-                       file-name-history)
-                     desktop-globals-to-clear)))
-        (desktop-clear))
-      (when-let* ((alive (seq-filter #'buffer-live-p buffers)))
-        (user-error "Buffer(s) refused to close: %s; workflow was not replaced"
-                    (mapconcat #'buffer-name alive ", "))))
-    (tab-bar-close-other-tabs)
-    ;; Release only our own previous lock using the desktop API.
-    (when (and desktop-dirname
-               (equal (desktop-owner desktop-dirname) (emacs-pid)))
-      (desktop-release-lock desktop-dirname))
-    (setq desktop-dirname nil))
+      (unwind-protect
+          (progn
+            ;; Also drop globals that desktop saves but does not clear by default.
+            (let ((desktop-globals-to-clear
+                   (append '(register-alist tags-file-name tags-table-list
+                             file-name-history)
+                           desktop-globals-to-clear)))
+              (desktop-clear))
+            (when-let* ((alive (seq-filter #'buffer-live-p buffers)))
+              (user-error "Buffer(s) refused to close: %s; workflow was not replaced"
+                          (mapconcat #'buffer-name alive ", "))))
+        ;; Release only our own previous lock using the desktop API.
+        (when (and desktop-dirname
+                   (equal (desktop-owner desktop-dirname) (emacs-pid)))
+          (desktop-release-lock desktop-dirname))
+        (setq desktop-dirname nil)))
+    (tab-bar-close-other-tabs))
 
   (defun my-load-session (name)
     "Replace the current workflow with the saved desktop and tabs of NAME.
@@ -266,9 +330,9 @@ Desktop locks owned by other Emacs processes are never removed."
       ;; desktop-read otherwise skips a desktop already owned by this process.
       (when (equal (desktop-owner dir) (emacs-pid))
         (desktop-release-lock dir))
-      (let ((desktop-restore-eager t)
-            (desktop-load-locked-desktop nil))
-        (unless (desktop-read dir)
+      ;; Create the buffers the tabs show now; the rest follow when idle.
+      (let ((desktop-load-locked-desktop nil))
+        (unless (my/read-desktop-lazily dir (my/session-tab-buffer-names tabs))
           (user-error "Workflow %s could not be loaded" name)))
       (if (eq (car tabs) :version)
           (progn
@@ -385,13 +449,19 @@ A daemon's hidden initial frame has no layout worth saving or restoring."
     (not (equal (terminal-name (frame-terminal frame)) "initial_terminal")))
 
   (defun my/autosave-session ()
-    "Save the loaded workflow quietly; errors are only logged."
+    "Save the loaded workflow quietly; errors are only logged.
+Skip a workflow with no file buffers left, so buffers closed by accident
+never replace its saved desktop; `my/save-current-session' still saves it."
     (when (and (my/current-session)
                (my/session-frame-p)
                (not (active-minibuffer-window)))
       (let ((inhibit-message t))
-        (with-demoted-errors "Workflow autosave failed: %S"
-          (my/save-current-session)))))
+        (if (not (or desktop-buffer-args-list
+                     (seq-some #'buffer-file-name (buffer-list))))
+            (message "Workflow %s has no file buffers; autosave skipped"
+                     (my/current-session))
+          (with-demoted-errors "Workflow autosave failed: %S"
+            (my/save-current-session))))))
 
   (defun my/autosave-session-from-last-frame (frame)
     "Save the workflow from FRAME when it is the last real frame.
@@ -405,18 +475,27 @@ and `kill-emacs-hook' later runs with only the hidden frame left."
       (with-selected-frame frame
         (my/autosave-session))))
 
+  (defvar my/start-new-session (getenv "EMACS_NEW_SESSION")
+    "Non-nil to start a new workflow at startup instead of the last one.
+Set from EMACS_NEW_SESSION, which the `rej' shell function exports.")
+  ;; Keep processes started from Emacs from inheriting the request.
+  (setenv "EMACS_NEW_SESSION" nil)
+
   (defun my/restore-last-session ()
     "Load the workflow recorded in `my/last-session-file', if it exists.
+When `my/start-new-session' is non-nil, start a new workflow instead.
 Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
     (when-let* (((not noninteractive))
                 ((my/session-frame-p))
-                ((not (seq-some #'buffer-file-name (buffer-list))))
-                (name (my/last-session))
-                ((member name (my/session-names))))
-      (condition-case err
-          (my-load-session name)
-        (user-error
-         (message "Workflow %s was not restored: %s" name (cadr err))))))
+                ((not (seq-some #'buffer-file-name (buffer-list)))))
+      (if my/start-new-session
+          (my-new-session)
+        (when-let* ((name (my/last-session))
+                    ((member name (my/session-names))))
+          (condition-case err
+              (my-load-session name)
+            (user-error
+             (message "Workflow %s was not restored: %s" name (cadr err))))))))
 
   (defun my/restore-last-session-in-first-frame ()
     "Restore the last workflow once, in a daemon's first client frame."
@@ -424,16 +503,17 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
                  #'my/restore-last-session-in-first-frame)
     (my/restore-last-session))
 
-  (add-hook 'kill-emacs-hook #'my/autosave-session)
-  (add-hook 'delete-frame-functions #'my/autosave-session-from-last-frame)
   (if (daemonp)
       (add-hook 'server-after-make-frame-hook
                 #'my/restore-last-session-in-first-frame)
     ;; Run late so the dashboard and command-line files already exist.
     (add-hook 'emacs-startup-hook #'my/restore-last-session 90))
-  (when my/session-autosave-interval
-    (run-with-idle-timer my/session-autosave-interval t
-                         #'my/autosave-session)))
+  (when my/session-autosave
+    (add-hook 'kill-emacs-hook #'my/autosave-session)
+    (add-hook 'delete-frame-functions #'my/autosave-session-from-last-frame)
+    (when my/session-autosave-interval
+      (run-with-idle-timer my/session-autosave-interval t
+                           #'my/autosave-session))))
 
 ;; early-init.el disables GC during startup; restore a moderate threshold.
 (add-hook 'emacs-startup-hook
@@ -1159,7 +1239,31 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
      (python . t)
      (gnuplot . t)))
 
-  (push '("conf-unix" . conf-unix) org-src-lang-modes))
+  (push '("conf-unix" . conf-unix) org-src-lang-modes)
+
+  ;; ob-jupyter runs `jupyter' to list kernels when it loads, so load it
+  ;; when the first jupyter-* block runs rather than with Org.
+  (dolist (lang '(("jupyter-python" . python)
+                  ("jupyter-Wolfram-Language" . wolfram)))
+    (add-to-list 'org-src-lang-modes lang))
+
+  (defun my/load-ob-jupyter (&optional _arg info &rest _)
+    "Load `ob-jupyter' before the first jupyter-* block INFO runs."
+    (when (string-prefix-p
+           "jupyter" (car (or info (org-babel-get-src-block-info t))))
+      (advice-remove 'org-babel-execute-src-block #'my/load-ob-jupyter)
+      (org-babel-do-load-languages
+       'org-babel-load-languages
+       (append org-babel-load-languages '((jupyter . t))))
+      ;; ob-jupyter sets up Org buffers from `org-mode-hook', which already
+      ;; ran in the open ones: define jupyter-LANG and enable its keys.
+      (org-babel-jupyter-make-local-aliases)
+      (dolist (buffer (buffer-list))
+        (with-current-buffer buffer
+          (when (derived-mode-p 'org-mode)
+            (jupyter-org-interaction-mode 1))))))
+
+  (advice-add 'org-babel-execute-src-block :before #'my/load-ob-jupyter))
 
 (defun my/org-breadcrumbs ()
   "Show the Org heading hierarchy at point in the window header."
@@ -1755,6 +1859,22 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   :after python-mode
   :config
   (pyvenv-mode 1))
+
+(use-package jupyter
+  :defer t
+  :init
+  (defun my/jupyter-locate-python (locate)
+    "Return the Python that runs the local `jupyter' command.
+Homebrew's python3 can be newer than the Python Jupyter is installed in,
+and LOCATE finds that python3 first.  Remote directories use LOCATE."
+    (or (and (not (file-remote-p default-directory))
+             (when-let* ((jupyter (executable-find "jupyter")))
+               (with-temp-buffer
+                 (insert-file-contents jupyter nil 0 256)
+                 (and (looking-at "#!\\(/\\S-+\\)") (match-string 1)))))
+        (funcall locate)))
+  (with-eval-after-load 'jupyter-env
+    (advice-add 'jupyter-locate-python :around #'my/jupyter-locate-python)))
 
 (use-package maplev
   :straight (maplev :type git
