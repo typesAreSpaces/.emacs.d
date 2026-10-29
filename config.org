@@ -31,11 +31,15 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
   			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
   			 ("melpa" . "https://melpa.org/packages/")))
 
-  (package-initialize)
-  (unless package-archive-contents
-    (package-refresh-contents))
+  ;; Activate installed autoloads without parsing the package archive indexes.
+  ;; Installation/update commands initialize and refresh metadata when needed.
+  (if (fboundp 'package-activate-all)
+      (package-activate-all)
+    (package-initialize))
 
   (unless (package-installed-p 'use-package)
+    (unless package-archive-contents
+      (package-refresh-contents))
     (package-install 'use-package))
 
   (require 'use-package)
@@ -51,6 +55,8 @@ You can also use =M-x auto-package-update-now= to update right now!
 
 #+begin_src emacs-lisp
   (use-package auto-package-update
+    :commands (auto-package-update-now auto-package-update-maybe
+               auto-package-update-at-time)
     :custom
     (auto-package-update-hide-results t)
     (auto-package-update-delete-old-versions t))
@@ -552,6 +558,16 @@ The content of .emacs-daemon.plist is
 
   (require 'server)
 
+  (defun my/load-org-protocol-for-client (_process files &rest _)
+    "Install Org URL handling before the first client file request."
+    (when files
+      (require 'org-protocol)
+      (advice-remove 'server-execute #'my/load-org-protocol-for-client)))
+
+  ;; Org used to load during init, installing its protocol handler eagerly.
+  ;; A client request must install that handler before server-visit-files runs.
+  (advice-add 'server-execute :before #'my/load-org-protocol-for-client)
+
   (unless (daemonp)
     (setq server-name "jose")
     (unless (server-running-p)
@@ -972,7 +988,8 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 #+end_src
 ** Flx
 #+begin_src emacs-lisp
-  (use-package flx)
+  (use-package flx
+    :defer t)
 #+end_src
 ** Marginalia
 #+begin_src emacs-lisp
@@ -1214,6 +1231,7 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
 ** Zoom
 #+begin_src emacs-lisp
   (use-package zoom
+    :defer t
     :config
     (setq zoom-size '(0.618 . 0.618)))
 #+end_src
@@ -1260,8 +1278,8 @@ Org Mode's [[https://orgmode.org/manual/Structure-Templates.html][structure temp
 You can add more =src= block templates below by copying one of the lines and changing the two strings at the end, the first to be the template name and the second to contain the name of the language [[https://orgmode.org/worg/org-contrib/babel/languages.html][as it is known by Org Babel]].
 
 #+begin_src emacs-lisp
-  (when (not (version< (org-version) "9.2"))
-    (with-eval-after-load 'org
+  (with-eval-after-load 'org
+    (when (not (version< (org-version) "9.2"))
       ;; This is needed as of Org 9.2
       (require 'org-tempo)
 
@@ -1892,6 +1910,7 @@ Use `CMD + shift + click` on a pdf section to back forward.
 #+begin_src emacs-lisp
   (when (not (version< emacs-version "26.3"))
     (use-package tex
+      :defer t
       :ensure auctex
       :config
       (setq compilation-scroll-output t)
@@ -1953,6 +1972,7 @@ Use `CMD + shift + click` on a pdf section to back forward.
 *** Typst
 #+begin_src emacs-lisp
   (use-package typst-mode
+    :mode "\\.typ\\'"
     :straight
     (:type git
            :host github
@@ -2064,7 +2084,8 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
     (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
     ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
     )
-  (use-package lsp-haskell)
+  (use-package lsp-haskell
+    :after lsp-mode)
 #+end_src
 *** Pairinfer
 #+begin_src emacs-lisp
@@ -2088,9 +2109,11 @@ Install a language server to enable lsp. For example, [[https://formulae.brew.sh
 #+end_src
 *** Typst
 #+begin_src emacs-lisp
-  (use-package websocket)
+  (use-package websocket
+    :defer t)
 
   (use-package typst-preview
+    :commands (typst-preview-mode typst-preview-start)
     :init
     ;; start preview automatically when typst-preview-mode is activated
     (setq typst-preview-autostart t)
@@ -2267,7 +2290,8 @@ Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=)
 ** Rainbow mode
 #+begin_src emacs-lisp
   (when (not (version< emacs-version "26.3"))
-    (use-package rainbow-mode))
+    (use-package rainbow-mode
+      :defer t))
 #+end_src
 ** Rainbow delimiters
 [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] is useful in programming modes because it colorizes nested parentheses and brackets according to their nesting depth.  This makes it a lot easier to visually match parentheses in Emacs Lisp code without having to count them yourself.
@@ -2279,6 +2303,7 @@ Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=)
 ** FZF
 #+begin_src emacs-lisp
   (use-package fzf
+    :defer t
     :bind
     ;; Don't forget to set keybinds!
     :config
@@ -2296,6 +2321,7 @@ Emacs' built in commenting functionality =comment-dwim= (usually bound to =M-;=)
 ** LLM client
 #+begin_src emacs-lisp 
   (use-package gptel
+    :defer t
     :straight
     (:type git
            :host github
@@ -2592,7 +2618,8 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
 #+end_src
 ** Presentation mode with org-tree-slide
 #+begin_src emacs-lisp
-  (use-package hide-mode-line)
+  (use-package hide-mode-line
+    :defer t)
 
   (defun my/presentation-setup ()
     (setq text-scale-mode-amount 3)
@@ -2630,7 +2657,8 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
 #+end_src
 ** Markdown-EWW preview
 #+begin_src emacs-lisp
-  (use-package markdown-preview-eww)
+  (use-package markdown-preview-eww
+    :commands markdown-preview-eww)
 #+end_src
 ** sqlite3
 #+begin_src emacs-lisp
@@ -2778,11 +2806,11 @@ mu4e comes included with mu. Search the path your package manager used to instal
 ** Spell checker
 #+begin_src emacs-lisp
   (use-package jinx
+    :defer t
     :init
     (setenv "PKG_CONFIG_PATH"
             (concat "/opt/homebrew/opt/glib/lib/pkgconfig/:"
                     (getenv "PKG_CONFIG_PATH")))
-    :config
     (add-to-list 'vertico-multiform-categories
                  '(jinx grid (vertico-grid-annotate . 20)))
     (vertico-multiform-mode 1))

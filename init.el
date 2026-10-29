@@ -20,11 +20,15 @@
 			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
 			 ("melpa" . "https://melpa.org/packages/")))
 
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
+;; Activate installed autoloads without parsing the package archive indexes.
+;; Installation/update commands initialize and refresh metadata when needed.
+(if (fboundp 'package-activate-all)
+    (package-activate-all)
+  (package-initialize))
 
 (unless (package-installed-p 'use-package)
+  (unless package-archive-contents
+    (package-refresh-contents))
   (package-install 'use-package))
 
 (require 'use-package)
@@ -34,6 +38,8 @@
 (setq package-enable-at-startup nil)
 
 (use-package auto-package-update
+  :commands (auto-package-update-now auto-package-update-maybe
+             auto-package-update-at-time)
   :custom
   (auto-package-update-hide-results t)
   (auto-package-update-delete-old-versions t))
@@ -483,6 +489,16 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
 
 (require 'server)
 
+(defun my/load-org-protocol-for-client (_process files &rest _)
+  "Install Org URL handling before the first client file request."
+  (when files
+    (require 'org-protocol)
+    (advice-remove 'server-execute #'my/load-org-protocol-for-client)))
+
+;; Org used to load during init, installing its protocol handler eagerly.
+;; A client request must install that handler before server-visit-files runs.
+(advice-add 'server-execute :before #'my/load-org-protocol-for-client)
+
 (unless (daemonp)
   (setq server-name "jose")
   (unless (server-running-p)
@@ -869,7 +885,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   (setq which-key-idle-delay 1)
   (setq which-key-idle-secondary-delay 0.05))
 
-(use-package flx)
+(use-package flx
+  :defer t)
 
 (when (not (version< emacs-version "27.1"))
   (use-package marginalia
@@ -1091,6 +1108,7 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   "tf" '(hydra-text-scale/body :which-key "change (f)ont size"))
 
 (use-package zoom
+  :defer t
   :config
   (setq zoom-size '(0.618 . 0.618)))
 
@@ -1125,8 +1143,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   (when (not (version< emacs-version "26.3"))
     (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)))
 
-(when (not (version< (org-version) "9.2"))
-  (with-eval-after-load 'org
+(with-eval-after-load 'org
+  (when (not (version< (org-version) "9.2"))
     ;; This is needed as of Org 9.2
     (require 'org-tempo)
 
@@ -1655,6 +1673,7 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
 
 (when (not (version< emacs-version "26.3"))
   (use-package tex
+    :defer t
     :ensure auctex
     :config
     (setq compilation-scroll-output t)
@@ -1710,6 +1729,7 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
      '("~/Documents/My-Library/references.bib"))))
 
 (use-package typst-mode
+  :mode "\\.typ\\'"
   :straight
   (:type git
          :host github
@@ -1781,7 +1801,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
   )
-(use-package lsp-haskell)
+(use-package lsp-haskell
+  :after lsp-mode)
 
 (use-package parinfer
   :disabled
@@ -1801,9 +1822,11 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
 (my/leader-keys
   "tp" 'parinfer-toggle-mode)
 
-(use-package websocket)
+(use-package websocket
+  :defer t)
 
 (use-package typst-preview
+  :commands (typst-preview-mode typst-preview-start)
   :init
   ;; start preview automatically when typst-preview-mode is activated
   (setq typst-preview-autostart t)
@@ -1966,12 +1989,14 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (when (not (version< emacs-version "26.3"))
-  (use-package rainbow-mode))
+  (use-package rainbow-mode
+    :defer t))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package fzf
+  :defer t
   :bind
   ;; Don't forget to set keybinds!
   :config
@@ -1987,6 +2012,7 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
         fzf/window-height 15))
 
 (use-package gptel
+  :defer t
   :straight
   (:type git
          :host github
@@ -2158,7 +2184,8 @@ The file name is passed as a shell-quoted argument."
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode))
 
-(use-package hide-mode-line)
+(use-package hide-mode-line
+  :defer t)
 
 (defun my/presentation-setup ()
   (setq text-scale-mode-amount 3)
@@ -2192,7 +2219,8 @@ The file name is passed as a shell-quoted argument."
   :config
   (simpleclip-mode 1))
 
-(use-package markdown-preview-eww)
+(use-package markdown-preview-eww
+  :commands markdown-preview-eww)
 
 (use-package sqlite3
   :defer t)
@@ -2313,11 +2341,11 @@ The file name is passed as a shell-quoted argument."
         user-emacs-directory)))))
 
 (use-package jinx
+  :defer t
   :init
   (setenv "PKG_CONFIG_PATH"
           (concat "/opt/homebrew/opt/glib/lib/pkgconfig/:"
                   (getenv "PKG_CONFIG_PATH")))
-  :config
   (add-to-list 'vertico-multiform-categories
                '(jinx grid (vertico-grid-annotate . 20)))
   (vertico-multiform-mode 1))
