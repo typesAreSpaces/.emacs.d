@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Oct 29 00:45:08 2026
+;; Created Thu Oct 29 01:04:00 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -18,18 +18,6 @@
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260426111709-projects.org"
-  "20260426111709-projects.org"
-  'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  270
-  '(335 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 60275 271829 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (335 335 1))))
-
-(desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260819135302-postdoc_tasks.org"
   "20260819135302-postdoc_tasks.org"
   'org-mode
@@ -38,8 +26,20 @@
   '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 60268 172482 0) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 61407 305692 0) (buffer-file-coding-system . undecided-unix) (truncate-lines))
   '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260426111709-projects.org"
+  "20260426111709-projects.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  270
+  '(335 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 61397 744325 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (335 335 1))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
@@ -50,7 +50,7 @@
   '(198 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 59582 792810 338000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 60703 633992 20000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
   '((mark-ring (198 198))))
 
 (desktop-create-buffer 208
@@ -62,6 +62,6 @@
   '(109 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 59583 212297 338000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 60704 183459 20000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
   '((mark-ring (109))))
 
