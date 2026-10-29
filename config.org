@@ -180,20 +180,65 @@ You can also use =M-x auto-package-update-now= to update right now!
                     tabs))
              (current-buffer))))))
 
-    (defun my-load-session ()
-      "Replace the current workflow with a saved desktop and its tabs.
+    (defun my/read-session (prompt &optional exclude)
+      "Read the name of a saved workflow with PROMPT, omitting EXCLUDE."
+      (completing-read
+       prompt
+       (remove exclude
+               (mapcar #'file-name-nondirectory
+                       (seq-filter #'file-directory-p
+                                   (directory-files workflow-dir t
+                                                    directory-files-no-dot-files-regexp))))
+       nil t))
+
+    (defun my/current-session ()
+      "Return the name of the loaded workflow, or nil if none is loaded."
+      (when (and desktop-dirname
+                 (file-equal-p (file-name-directory
+                                (directory-file-name desktop-dirname))
+                               workflow-dir))
+        (file-name-nondirectory (directory-file-name desktop-dirname))))
+
+    (defun my/save-current-session ()
+      "Save the loaded workflow, if any."
+      (if-let* ((current (my/current-session)))
+          (my-save-session current)
+        (message "No workflow loaded; nothing saved")))
+
+    (defun my/clear-session ()
+      "Close the current workflow's buffers and tabs and release its lock.
   Abort if any workflow buffer remains modified or refuses to close.
   Desktop locks owned by other Emacs processes are never removed."
-      (interactive)
-      (let* ((sessions
-              (seq-filter #'file-directory-p
-                          (directory-files workflow-dir t
-                                           directory-files-no-dot-files-regexp)))
-             (name (completing-read
-                    "Session: " (mapcar #'file-name-nondirectory sessions) nil t))
-             (dir (file-name-as-directory (expand-file-name name workflow-dir)))
+      (save-some-buffers)
+      (when (seq-some (lambda (buffer)
+                         (and (buffer-file-name buffer)
+                              (buffer-modified-p buffer)))
+                       (my/workflow-buffers))
+        (user-error "Save modified workflow buffers before switching"))
+      (let ((buffers (my/workflow-buffers)))
+        ;; Also drop globals that desktop saves but does not clear by default.
+        (let ((desktop-globals-to-clear
+               (append '(register-alist tags-file-name tags-table-list
+                         file-name-history)
+                       desktop-globals-to-clear)))
+          (desktop-clear))
+        (when-let* ((alive (seq-filter #'buffer-live-p buffers)))
+          (user-error "Buffer(s) refused to close: %s; workflow was not replaced"
+                      (mapconcat #'buffer-name alive ", "))))
+      (tab-bar-close-other-tabs)
+      ;; Release only our own previous lock using the desktop API.
+      (when (and desktop-dirname
+                 (equal (desktop-owner desktop-dirname) (emacs-pid)))
+        (desktop-release-lock desktop-dirname))
+      (setq desktop-dirname nil))
+
+    (defun my-load-session (name)
+      "Replace the current workflow with the saved desktop and tabs of NAME.
+  Abort if any workflow buffer remains modified or refuses to close.
+  Desktop locks owned by other Emacs processes are never removed."
+      (interactive (list (my/read-session "Session: ")))
+      (let* ((dir (file-name-as-directory (expand-file-name name workflow-dir)))
              (tab-file (expand-file-name "tabs.el" dir))
-             (old-dir desktop-dirname)
              (owner (desktop-owner dir))
              (tabs (when (file-exists-p tab-file)
                      (with-temp-buffer
@@ -204,30 +249,10 @@ You can also use =M-x auto-package-update-now= to update right now!
           (user-error "No desktop saved for workflow %s" name))
         (when (and owner (/= owner (emacs-pid)))
           (user-error "Workflow %s is locked by Emacs process %s" name owner))
-        (save-some-buffers)
-        (when (seq-some (lambda (buffer)
-                           (and (buffer-file-name buffer)
-                                (buffer-modified-p buffer)))
-                         (my/workflow-buffers))
-          (user-error "Save modified workflow buffers before switching"))
-        (let ((buffers (my/workflow-buffers)))
-          ;; Also drop globals that desktop saves but does not clear by default.
-          (let ((desktop-globals-to-clear
-                 (append '(register-alist tags-file-name tags-table-list
-                           file-name-history)
-                         desktop-globals-to-clear)))
-            (desktop-clear))
-          (when-let* ((alive (seq-filter #'buffer-live-p buffers)))
-            (user-error "Buffer(s) refused to close: %s; workflow was not loaded"
-                        (mapconcat #'buffer-name alive ", "))))
-        (tab-bar-close-other-tabs)
-        ;; Release only our own previous lock using the desktop API.
-        (when (and old-dir (equal (desktop-owner old-dir) (emacs-pid)))
-          (desktop-release-lock old-dir))
+        (my/clear-session)
+        ;; desktop-read otherwise skips a desktop already owned by this process.
         (when (equal (desktop-owner dir) (emacs-pid))
           (desktop-release-lock dir))
-        ;; desktop-read otherwise skips a desktop already owned by this process.
-        (setq desktop-dirname nil)
         (let ((desktop-restore-eager t)
               (desktop-load-locked-desktop nil))
           (unless (desktop-read dir)
@@ -249,7 +274,72 @@ You can also use =M-x auto-package-update-now= to update right now!
               (when (get-buffer tab)
                 (unless first (tab-bar-new-tab))
                 (setq first nil)
-                (switch-to-buffer tab))))))))
+                (switch-to-buffer tab)))))))
+
+    (defun my-change-session (name)
+      "Save the current workflow, then replace it with the saved workflow NAME.
+  Nothing is saved when no workflow is loaded."
+      (interactive
+       (list (my/read-session "Change to session: " (my/current-session))))
+      (my/save-current-session)
+      (my-load-session name))
+
+    (defvar my/session-counter 0
+      "Number used by the last automatically named workflow.")
+
+    (defun my/next-session-name ()
+      "Return an unused workflow name of the form session-N."
+      (let (name)
+        (while (file-exists-p
+                (expand-file-name
+                 (setq name (format "session-%d" (cl-incf my/session-counter)))
+                 workflow-dir)))
+        name))
+
+    (defun my-new-session (&optional name discard)
+      "Save the current workflow, then start a blank one named NAME.
+  The blank workflow has one tab showing the dashboard, plus *scratch*.
+  When NAME is nil or empty, use the next unused name session-N.
+  When DISCARD is non-nil, close the current workflow without saving it."
+      (interactive
+       (list (read-string "New session name (empty for automatic): ")))
+      (let ((name (if (or (null name) (string-empty-p name))
+                      (my/next-session-name)
+                    name)))
+        (when (string-match-p "/" name)
+          (user-error "Workflow name %s must not contain /" name))
+        (when (file-exists-p (expand-file-name name workflow-dir))
+          (user-error "Workflow %s already exists" name))
+        (unless discard
+          (my/save-current-session))
+        (my/clear-session)
+        (get-scratch-buffer-create)
+        (delete-other-windows)
+        (switch-to-buffer (or (get-buffer "*dashboard*") "*scratch*"))
+        ;; An empty name restores the tab's automatic name.
+        (tab-bar-rename-tab "")
+        (my-save-session name)
+        (message "Started workflow %s" name)))
+
+    (defun my-delete-session (name)
+      "Delete the saved workflow NAME after confirmation.
+  When NAME is the loaded workflow, first switch to a new automatically
+  named blank workflow, without saving the one being deleted."
+      (interactive (list (my/read-session "Delete session: ")))
+      (let* ((dir (file-name-as-directory (expand-file-name name workflow-dir)))
+             (owner (desktop-owner dir)))
+        ;; An empty or relative name would expand to workflow-dir itself.
+        (unless (member name (directory-files workflow-dir nil
+                                              directory-files-no-dot-files-regexp))
+          (user-error "No workflow named %s" name))
+        (when (and owner (/= owner (emacs-pid)))
+          (user-error "Workflow %s is locked by Emacs process %s" name owner))
+        (unless (yes-or-no-p (format "Delete workflow %s? " name))
+          (user-error "Workflow %s was not deleted" name))
+        (when (equal name (my/current-session))
+          (my-new-session nil t))
+        (delete-directory dir t t)
+        (message "Deleted workflow %s" name))))
 #+end_src
 ** Runtime Performance
 Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
@@ -556,9 +646,12 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
       "es" '(insert-snake :which-key "insert (s)nake")
       "ep" '(simpleclip-paste :which-key "clipboard (p)aste")
       "f" '(hydra-jump-files/body :which-key "edit (f)iles")
-      "j" '(:ignore t :whick-key "sessions")
+      "j" '(:ignore t :which-key "sessions")
       "js" '(my-save-session :which-key "Save session")
       "jl" '(my-load-session :which-key "Load session")
+      "jc" '(my-change-session :which-key "Change session")
+      "jn" '(my-new-session :which-key "New session")
+      "jd" '(my-delete-session :which-key "Delete session")
       "s"  '(shell-command :which-key "(s)hell command")
       "S"  '(async-shell-command :which-key "async (S)hell command")
       "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
@@ -725,10 +818,17 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
   (when (not (version< emacs-version "26.3"))
     (use-package doom-modeline
       :config
+      ;; Left: what is being edited.  Right: where point is, then the
+      ;; workspace and tooling context, ending with the major mode.
+      (doom-modeline-def-modeline 'main
+        '(bar modals buffer-info matches selection-info)
+        '(buffer-position word-count misc-info persp-name vcs check lsp major-mode))
       (doom-modeline-mode 1)
       (setq mode-line-right-align-edge 'right-fringe)
       :custom (
                (doom-modeline-height 15)
+               ;; The tab bar already shows the tab name.
+               (doom-modeline-workspace-name nil)
                (doom-modeline-enable-word-count t)
                (doom-modeline-continuous-word-count-modes
                 '(markdown-mode gfm-mode org-mode text-mode)))))
