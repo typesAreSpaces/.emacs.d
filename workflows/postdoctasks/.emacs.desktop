@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Oct 28 17:35:28 2026
+;; Created Thu Oct 29 00:23:27 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -22,11 +22,11 @@
   "20260426111709-projects.org"
   'org-mode
   '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  335
+  270
   '(335 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 34495 576234 0) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 58969 822450 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
   '((mark-ring (335 335 1))))
 
 (desktop-create-buffer 208
@@ -38,7 +38,7 @@
   '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 34490 535185 0) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 58908 254754 0) (buffer-file-coding-system . undecided-unix) (truncate-lines))
   '((mark-ring (1))))
 
 (desktop-create-buffer 208
@@ -50,7 +50,7 @@
   '(198 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 34469 633189 42000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 58289 883854 660000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
   '((mark-ring (198 198))))
 
 (desktop-create-buffer 208
@@ -62,6 +62,6 @@
   '(109 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 34469 550322 42000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 58290 182623 660000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
   '((mark-ring (109))))
 

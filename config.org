@@ -2688,7 +2688,6 @@ mu4e comes included with mu. Search the path your package manager used to instal
 #+begin_src emacs-lisp
   (use-package chess)
 #+end_src
-
 ** Gnuplot
 #+begin_src emacs-lisp
   (use-package gnuplot
@@ -2697,7 +2696,6 @@ mu4e comes included with mu. Search the path your package manager used to instal
      'org-babel-load-languages
      '((gnuplot . t))))
 #+end_src
-
 ** Zotxt
 #+begin_src emacs-lisp
   (use-package pdf-tools
