@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Oct 29 00:39:02 2026
+;; Created Thu Oct 29 00:54:55 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -17,51 +17,3 @@
 (setq file-name-history '("~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/mmwa/main.tex" "~/Documents/Org-Files/20260930165052-uwaterloo_seminar.org" "~/Documents/Org-Files/20260527180853-performance_and_contributions.org" "~/Documents/Org-Files/20260724112641-todolater.org" "~/Documents/Org-Files/20260520164631-weight_control.org" "~/Documents/Org-Files/weight.png" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Library/texmf/tex/latex/symbols.sty" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/presentationQ.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/terminology.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/algorithm.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/terminology.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/preliminaries.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260423174506-current_work.org"
-  "20260423174506-current_work.org"
-  'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  1996
-  '(90 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 59908 692771 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (533 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20261023184453-learning_automata_switch_linear_systems.org"
-  "20261023184453-learning_automata_switch_linear_systems.org"
-  'org-mode
-  '(font-lock-mode org-zotxt-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
-  460
-  '(454 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 59896 63372 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (454 456 456 885 885 885 847 935 935 996 1591 1591 1591 1591 1591 1591))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/LearningAutomataSLS/writing/Learning Switched Linear Systems/main.tex"
-  "main.tex"
-  'LaTeX-mode
-  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  3231
-  '(853 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 27362 59896 62882 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
-  '((mark-ring (853 2431 2431 2404 2404 1))))
-
-(desktop-create-buffer 208
-  "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
-  "20260423173343-main_agenda.org"
-  'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  142
-  '(142 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 58158 580972 222000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
-  '((mark-ring (142 198))))
-

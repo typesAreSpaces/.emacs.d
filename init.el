@@ -18,8 +18,7 @@
 
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-			 ("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")))
+			 ("melpa" . "https://melpa.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -38,8 +37,6 @@
   :custom
   (auto-package-update-hide-results t)
   (auto-package-update-delete-old-versions t))
-
-(setq gc-cons-threshold (* 50 1000 1000))
 
 (defun my/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
@@ -432,7 +429,9 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
     (run-with-idle-timer my/session-autosave-interval t
                          #'my/autosave-session)))
 
-(setq gc-cons-threshold (* 2 1000 1000))
+;; early-init.el disables GC during startup; restore a moderate threshold.
+(add-hook 'emacs-startup-hook
+          (lambda () (setq gc-cons-threshold (* 64 1024 1024))))
 
 (when (not (version< emacs-version "26.3"))
   (use-package no-littering))
@@ -484,12 +483,11 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
 
 (require 'server)
 
-(setq server-name "jose")
+(unless (daemonp)
+  (setq server-name "jose")
+  (unless (server-running-p)
+    (server-start)))
 
-(unless (server-running-p)
-  (server-start))
-
-(server-start)                     ;; Start server
 (setq process-connection-type nil) ;; Use pipes
 (setq history-length 25)
 (savehist-mode 1)
@@ -528,7 +526,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   dashboard-logo-path
   "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
 
-(use-package all-the-icons)
+(use-package all-the-icons
+  :defer t)
 
 (when (not (version< emacs-version "26.1"))
   (use-package dashboard
@@ -1064,13 +1063,10 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
 
 (use-package helpful
   :commands (helpful-callable helpful-variable helpful-command helpful-key)
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
   :bind
-  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-function] . helpful-callable)
   ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-variable] . helpful-variable)
   ([remap describe-key] . helpful-key))
 
 (use-package hydra
@@ -1142,7 +1138,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
-     (python . t)))
+     (python . t)
+     (gnuplot . t)))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
@@ -1179,7 +1176,6 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
       (replace-match "[ ]"))))
 
 (use-package org
-  :pin org
   :commands (org-capture org-agenda)
   :hook (org-mode . my/org-mode-setup)
   :config
@@ -1298,7 +1294,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   )
 
 (use-package org-mime
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (defun org-sort-buffer ()
   "Sort all entries in the current buffer, recursively."
@@ -1343,7 +1340,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-(use-package org-download)
+(use-package org-download
+  :after org)
 
 (use-package org-roam
   :init
@@ -1373,7 +1371,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   :config
   (org-roam-setup))
 
-(use-package ox-reveal)
+(use-package ox-reveal
+  :after ox)
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
@@ -1429,7 +1428,6 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   :after orderless
   :diminish projectile-mode
   :config (projectile-mode)
-  :custom ((projectile-completion-system 'orderless))
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
@@ -1591,7 +1589,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   :config
   (setq typescript-indent-level 2))
 
-(use-package rustic)
+(use-package rustic
+  :defer t)
 
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
@@ -1667,8 +1666,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
     (setq reftex-ref-macro-prompt nil)
     (setq font-latex-fontify-script nil)))
 
-(eval-after-load 'tex-mode
-  '(define-key LaTeX-mode-map [f9] 'compile))
+(with-eval-after-load 'latex
+  (define-key LaTeX-mode-map [f9] #'compile))
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
@@ -1741,18 +1740,16 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   :straight (maplev :type git
                     :host github
                     :repo "JoeRiel/maplev")
-  :config
-  (add-to-list 'auto-mode-alist '("\\.mpl\\'" . maplev-mode))
-  (add-to-list 'auto-mode-alist '("\\.mm\\'" . maplev-mode)))
+  :mode ("\\.mpl\\'" "\\.mm\\'"))
 
 (use-package wolfram-mode
+  :mode ("\\.m\\'" "\\.wl\\'")
   :config
   (setq wolfram-program "/usr/local/bin/MathKernel")
-  (setq wolfram-path "~/.Mathematica")
-  (add-to-list 'auto-mode-alist '("\\.m\\'" . wolfram-mode))
-  (add-to-list 'auto-mode-alist '("\\.wl\\'" . wolfram-mode)))
+  (setq wolfram-path "~/.Mathematica"))
 
-(use-package toml-mode)
+(use-package toml-mode
+  :defer t)
 
 (setq scheme-program-name "racket")
 (setq auto-mode-alist
@@ -2197,7 +2194,8 @@ The file name is passed as a shell-quoted argument."
 
 (use-package markdown-preview-eww)
 
-(use-package sqlite3)
+(use-package sqlite3
+  :defer t)
 
 (defvar my/mu4e-path "/opt/homebrew/share/emacs/site-lisp/mu/mu4e/")
 
@@ -2205,7 +2203,8 @@ The file name is passed as a shell-quoted argument."
   (use-package mu4e
     :ensure nil
     :load-path (lambda () (expand-file-name my/mu4e-path))
-    ;; :defer 20 ;; Wait until 20 seconds after startup
+    :commands mu4e
+    :defer 20 ;; Wait until 20 seconds after startup
     :init
     (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
     :config
@@ -2331,31 +2330,36 @@ The file name is passed as a shell-quoted argument."
         '(("github\\.com" . poly-markdown+r-mode)
           ("overleaf\\.com" . latex-mode))))
 
-(use-package try)
+(use-package try
+  :defer t)
 
-(use-package zoxide)
+(use-package zoxide
+  :defer t)
 
-(use-package lorem-ipsum)
+(use-package lorem-ipsum
+  :defer t)
 
-(use-package chess)
+(use-package chess
+  :defer t)
 
 (use-package gnuplot
-  :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((gnuplot . t))))
+  :defer t)
 
 (use-package pdf-tools
-  :config
-  (pdf-tools-install :no-query))
+  :defer t
+  ;; Installs pdf-tools on the first PDF opened, not at startup.
+  :init
+  (pdf-loader-install :no-query))
 
 (use-package org-noter
+  :defer t
   :init
   ;; Only load the PDF backend; skip nov (epub) and djvu modules.
   (setq org-noter-supported-modes (quote (doc-view-mode pdf-view-mode))))
 
 (use-package zotxt
-  :after org-noter
+  ;; Defined in :config below; calling it loads zotxt.
+  :commands zotero-export-bibtex-at-point
   :config
 
   (setq org-zotxt-link-description-style :title)

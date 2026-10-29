@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Oct 29 00:45:39 2026
+;; Created Thu Oct 29 00:54:50 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -26,8 +26,8 @@
   '(525 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 60306 726124 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (119091 119091 119091 119091 38 38 32397 32397 32513))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 60849 241168 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (118995 118995 118995 118995 38 38 32397 32397 32513))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/.config/jose-emacs/init.el"
@@ -38,6 +38,6 @@
   '(1 nil)
   nil
   nil
-  '((buffer-display-time 27362 60298 59319 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((buffer-display-time 27362 60839 24309 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
   '((mark-ring (1 85715 85715 639 639 690 690 690 690 3761 3761 3798 3798))))
 

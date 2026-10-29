@@ -29,8 +29,7 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
 
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
   			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-  			 ("melpa" . "https://melpa.org/packages/")
-                           ("org" . "https://orgmode.org/elpa/")))
+  			 ("melpa" . "https://melpa.org/packages/")))
 
   (package-initialize)
   (unless package-archive-contents
@@ -58,8 +57,6 @@ You can also use =M-x auto-package-update-now= to update right now!
 #+end_src
 * Startup Performance
 #+begin_src emacs-lisp
-  (setq gc-cons-threshold (* 50 1000 1000))
-
   (defun my/display-startup-time ()
     (message "Emacs loaded in %s with %d garbage collections."
              (format "%.2f seconds"
@@ -455,10 +452,12 @@ You can also use =M-x auto-package-update-now= to update right now!
                            #'my/autosave-session)))
 #+end_src
 ** Runtime Performance
-Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
+=early-init.el= turns garbage collection off while Emacs loads. Once startup finishes, restore a moderate threshold so collections stay short.
 
 #+begin_src emacs-lisp
-  (setq gc-cons-threshold (* 2 1000 1000))
+  ;; early-init.el disables GC during startup; restore a moderate threshold.
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold (* 64 1024 1024))))
 #+end_src
 * Keep Folders Clean
 We use the [[https://github.com/emacscollective/no-littering/blob/master/no-littering.el][no-littering]] package to keep folders where we edit files and the Emacs configuration folder clean!  It knows about a wide variety of variables for built in Emacs features as well as those from community packages so it can be much easier than finding and setting these variables yourself.
@@ -553,12 +552,11 @@ The content of .emacs-daemon.plist is
 
   (require 'server)
 
-  (setq server-name "jose")
+  (unless (daemonp)
+    (setq server-name "jose")
+    (unless (server-running-p)
+      (server-start)))
 
-  (unless (server-running-p)
-    (server-start))
-
-  (server-start)                     ;; Start server
   (setq process-connection-type nil) ;; Use pipes
   (setq history-length 25)
   (savehist-mode 1)
@@ -599,7 +597,8 @@ The content of .emacs-daemon.plist is
     dashboard-logo-path
     "~/Pictures/Wallpapers/figures/480px-EmacsIcon.svg.png")
 
-  (use-package all-the-icons)
+  (use-package all-the-icons
+    :defer t)
 
   (when (not (version< emacs-version "26.1"))
     (use-package dashboard
@@ -1181,13 +1180,10 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
 #+begin_src emacs-lisp
   (use-package helpful
     :commands (helpful-callable helpful-variable helpful-command helpful-key)
-    :custom
-    (counsel-describe-function-function #'helpful-callable)
-    (counsel-describe-variable-function #'helpful-variable)
     :bind
-    ([remap describe-function] . counsel-describe-function)
+    ([remap describe-function] . helpful-callable)
     ([remap describe-command] . helpful-command)
-    ([remap describe-variable] . counsel-describe-variable)
+    ([remap describe-variable] . helpful-variable)
     ([remap describe-key] . helpful-key))
 #+end_src
 ** Text Scaling
@@ -1281,7 +1277,8 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((emacs-lisp . t)
-       (python . t)))
+       (python . t)
+       (gnuplot . t)))
 
     (push '("conf-unix" . conf-unix) org-src-lang-modes))
 #+end_src
@@ -1322,7 +1319,6 @@ This section contains the basic configuration for =org-mode= plus the configurat
         (replace-match "[ ]"))))
 
   (use-package org
-    :pin org
     :commands (org-capture org-agenda)
     :hook (org-mode . my/org-mode-setup)
     :config
@@ -1441,7 +1437,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
     )
 
   (use-package org-mime
-    :ensure t)
+    :ensure t
+    :defer t)
 
   (defun org-sort-buffer ()
     "Sort all entries in the current buffer, recursively."
@@ -1492,7 +1489,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
 #+end_src
 *** Org download
 #+begin_src emacs-lisp
-  (use-package org-download)
+  (use-package org-download
+    :after org)
 #+end_src
 *** Org roam
 #+begin_src emacs-lisp
@@ -1526,7 +1524,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
 #+end_src
 *** Ox Reveal
 #+begin_src emacs-lisp
-  (use-package ox-reveal)
+  (use-package ox-reveal
+    :after ox)
 #+end_src
 *** Nicer Heading Bullets
 [[https://github.com/sabof/org-bullets][org-bullets]] replaces the heading stars in =org-mode= buffers with nicer looking characters that you can control.  Another option for this is [[https://github.com/integral-dw/org-superstar-mode][org-superstar-mode]] which we may cover in a later video.
@@ -1597,7 +1596,6 @@ This snippet adds a hook to =org-mode= buffers so that =my/org-babel-tangle-conf
     :after orderless
     :diminish projectile-mode
     :config (projectile-mode)
-    :custom ((projectile-completion-system 'orderless))
     :bind-keymap
     ("C-c p" . projectile-command-map)
     :init
@@ -1815,7 +1813,8 @@ This is a basic configuration for the TypeScript language so that =.ts= files ac
 This will install the [[https://github.com/theia-ide/typescript-language-server][typescript-language-server]] and the TypeScript compiler package.
 *** Rust
 #+begin_src emacs-lisp
-  (use-package rustic)
+  (use-package rustic
+    :defer t)
 #+end_src
 *** C/C++
 #+begin_src emacs-lisp
@@ -1904,8 +1903,8 @@ Use `CMD + shift + click` on a pdf section to back forward.
       (setq reftex-ref-macro-prompt nil)
       (setq font-latex-fontify-script nil)))
 
-  (eval-after-load 'tex-mode
-    '(define-key LaTeX-mode-map [f9] 'compile))
+  (with-eval-after-load 'latex
+    (define-key LaTeX-mode-map [f9] #'compile))
 
   (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
@@ -2002,22 +2001,20 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
     :straight (maplev :type git
                       :host github
                       :repo "JoeRiel/maplev")
-    :config
-    (add-to-list 'auto-mode-alist '("\\.mpl\\'" . maplev-mode))
-    (add-to-list 'auto-mode-alist '("\\.mm\\'" . maplev-mode)))
+    :mode ("\\.mpl\\'" "\\.mm\\'"))
 #+end_src
 *** Mathematica mode
 #+begin_src emacs-lisp
   (use-package wolfram-mode
+    :mode ("\\.m\\'" "\\.wl\\'")
     :config
     (setq wolfram-program "/usr/local/bin/MathKernel")
-    (setq wolfram-path "~/.Mathematica")
-    (add-to-list 'auto-mode-alist '("\\.m\\'" . wolfram-mode))
-    (add-to-list 'auto-mode-alist '("\\.wl\\'" . wolfram-mode)))
+    (setq wolfram-path "~/.Mathematica"))
 #+end_src
 *** TOML mode
 #+begin_src emacs-lisp
-  (use-package toml-mode)
+  (use-package toml-mode
+    :defer t)
 #+end_src
 *** Z3 mode
 #+begin_src emacs-lisp :tangle no
@@ -2637,7 +2634,8 @@ Dired is a built-in file manager for Emacs that does some pretty amazing things!
 #+end_src
 ** sqlite3
 #+begin_src emacs-lisp
-  (use-package sqlite3)
+  (use-package sqlite3
+    :defer t)
 #+end_src
 ** Managing mail with mu4e
 Follow the following [[https://macowners.club/posts/email-emacs-mu4e-macos/][post]] to setup credential file in ~/.maildir/certificates. It is necessary to install isync. Use the brew package manager and follow xukai92 suggestion in this [[https://github.com/moriyoshi/cyrus-sasl-xoauth2/issues/9][git issue]], i.e. use
@@ -2668,7 +2666,8 @@ mu4e comes included with mu. Search the path your package manager used to instal
     (use-package mu4e
       :ensure nil
       :load-path (lambda () (expand-file-name my/mu4e-path))
-      ;; :defer 20 ;; Wait until 20 seconds after startup
+      :commands mu4e
+      :defer 20 ;; Wait until 20 seconds after startup
       :init
       (setq mu4e-mu-binary "/opt/homebrew/bin/mu")
       :config
@@ -2800,41 +2799,46 @@ mu4e comes included with mu. Search the path your package manager used to instal
 #+end_src
 ** Try
 #+begin_src emacs-lisp
-  (use-package try)
+  (use-package try
+    :defer t)
 #+end_src
 ** Zoxide
 #+begin_src emacs-lisp
-  (use-package zoxide)
+  (use-package zoxide
+    :defer t)
 #+end_src
 ** Lorem Ipsum
 #+begin_src emacs-lisp
-  (use-package lorem-ipsum)
+  (use-package lorem-ipsum
+    :defer t)
 #+end_src
 ** Chess
 #+begin_src emacs-lisp
-  (use-package chess)
+  (use-package chess
+    :defer t)
 #+end_src
 ** Gnuplot
 #+begin_src emacs-lisp
   (use-package gnuplot
-    :config
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((gnuplot . t))))
+    :defer t)
 #+end_src
 ** Zotxt
 #+begin_src emacs-lisp
   (use-package pdf-tools
-    :config
-    (pdf-tools-install :no-query))
+    :defer t
+    ;; Installs pdf-tools on the first PDF opened, not at startup.
+    :init
+    (pdf-loader-install :no-query))
 
   (use-package org-noter
+    :defer t
     :init
     ;; Only load the PDF backend; skip nov (epub) and djvu modules.
     (setq org-noter-supported-modes (quote (doc-view-mode pdf-view-mode))))
 
   (use-package zotxt
-    :after org-noter
+    ;; Defined in :config below; calling it loads zotxt.
+    :commands zotero-export-bibtex-at-point
     :config
 
     (setq org-zotxt-link-description-style :title)
