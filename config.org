@@ -2145,7 +2145,7 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
     (pyvenv-mode 1))
 #+end_src
 *** Jupyter
-[[https://github.com/emacs-jupyter/jupyter][emacs-jupyter]] runs Jupyter kernels from Emacs: =M-x jupyter-run-repl= opens a REPL, and Org blocks such as =jupyter-python= or =jupyter-Wolfram-Language= run in a kernel (see the Babel languages section).  Every block needs a =:session= header argument.  REPL buffers start in insert state, and =RET= sends input in normal state too.
+[[https://github.com/emacs-jupyter/jupyter][emacs-jupyter]] runs Jupyter kernels from Emacs: =M-x jupyter-run-repl= opens a REPL, and Org blocks such as =jupyter-python= or =jupyter-Wolfram-Language= run in a kernel (see the Babel languages section).  Every block needs a =:session= header argument.  REPL buffers start in insert state.  In normal state, =RET= on an earlier cell's code copies it into the prompt to edit and run again; at the prompt it sends the input.
 
 #+begin_src emacs-lisp
   (use-package jupyter
@@ -2163,10 +2163,20 @@ You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =
           (funcall locate)))
     (with-eval-after-load 'jupyter-env
       (advice-add 'jupyter-locate-python :around #'my/jupyter-locate-python))
+    (defun my/jupyter-repl-ret ()
+      "Copy the code of the earlier cell at point into the prompt.
+  At the prompt, or outside a cell's code, call `jupyter-repl-ret'."
+      (interactive)
+      (if (and (jupyter-repl-cell-line-p) (jupyter-repl-cell-finalized-p))
+          (let ((code (substring-no-properties (jupyter-repl-cell-code))))
+            (goto-char (point-max))
+            (jupyter-repl-replace-cell-code code)
+            (goto-char (point-max)))
+        (jupyter-repl-ret)))
     ;; Evil's normal state shadows the REPL's RET with `evil-ret'.
     (with-eval-after-load 'jupyter-repl
       (evil-define-key 'normal jupyter-repl-mode-map
-        (kbd "RET") #'jupyter-repl-ret)
+        (kbd "RET") #'my/jupyter-repl-ret)
       (evil-set-initial-state 'jupyter-repl-mode 'insert)))
 #+end_src
 *** Maple mode

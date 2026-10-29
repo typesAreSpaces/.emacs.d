@@ -1900,10 +1900,20 @@ and LOCATE finds that python3 first.  Remote directories use LOCATE."
         (funcall locate)))
   (with-eval-after-load 'jupyter-env
     (advice-add 'jupyter-locate-python :around #'my/jupyter-locate-python))
+  (defun my/jupyter-repl-ret ()
+    "Copy the code of the earlier cell at point into the prompt.
+At the prompt, or outside a cell's code, call `jupyter-repl-ret'."
+    (interactive)
+    (if (and (jupyter-repl-cell-line-p) (jupyter-repl-cell-finalized-p))
+        (let ((code (substring-no-properties (jupyter-repl-cell-code))))
+          (goto-char (point-max))
+          (jupyter-repl-replace-cell-code code)
+          (goto-char (point-max)))
+      (jupyter-repl-ret)))
   ;; Evil's normal state shadows the REPL's RET with `evil-ret'.
   (with-eval-after-load 'jupyter-repl
     (evil-define-key 'normal jupyter-repl-mode-map
-      (kbd "RET") #'jupyter-repl-ret)
+      (kbd "RET") #'my/jupyter-repl-ret)
     (evil-set-initial-state 'jupyter-repl-mode 'insert)))
 
 (use-package maplev
