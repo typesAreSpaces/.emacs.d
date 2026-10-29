@@ -123,6 +123,42 @@ You can also use =M-x auto-package-update-now= to update right now!
     ;; Keep the dashboard across workflow switches: it is the buffer for new
     ;; tabs, and perspective.el refuses to kill the last buffer of a perspective.
     (add-to-list 'desktop-clear-preserve-buffers "\\*dashboard\\*")
+    ;; Kept outside workflow-dir, which is tracked by git.
+    (defvar my/last-session-file
+      (expand-file-name "var/last-session" user-emacs-directory)
+      "File recording the last loaded workflow, restored at startup.")
+    (defvar my/session-autosave-interval 300
+      "Idle seconds before the loaded workflow is saved again, or nil.")
+
+    (defun my/session-names ()
+      "Return the names of the saved workflows."
+      (mapcar #'file-name-nondirectory
+              (seq-filter #'file-directory-p
+                          (directory-files workflow-dir t
+                                           directory-files-no-dot-files-regexp))))
+
+    (defun my/last-session ()
+      "Return the workflow name recorded in `my/last-session-file', or nil."
+      (when (file-readable-p my/last-session-file)
+        (with-temp-buffer
+          (insert-file-contents my/last-session-file)
+          (let ((name (string-trim (buffer-string))))
+            (unless (string-empty-p name) name)))))
+
+    (defun my/remember-session (name)
+      "Record NAME as the workflow to restore at startup."
+      (make-directory (file-name-directory my/last-session-file) t)
+      (let ((inhibit-message t))
+        (write-region name nil my/last-session-file)))
+
+    (defun my/check-new-session-name (name)
+      "Signal an error unless NAME can name a new workflow."
+      (when (or (string-empty-p name)
+                (member name '("." ".."))
+                (string-match-p "/" name))
+        (user-error "Invalid workflow name %S" name))
+      (when (file-exists-p (expand-file-name name workflow-dir))
+        (user-error "Workflow %s already exists" name)))
 
     (defun my/workflow-buffers ()
       "Return buffers which must be closed before replacing a workflow."
@@ -178,25 +214,21 @@ You can also use =M-x auto-package-update-now= to update right now!
                                        (window-state-get (frame-root-window) t)
                                      (alist-get 'ws tab))))
                     tabs))
-             (current-buffer))))))
+             (current-buffer))))
+        (my/remember-session name)))
 
     (defun my/read-session (prompt &optional exclude)
       "Read the name of a saved workflow with PROMPT, omitting EXCLUDE."
-      (completing-read
-       prompt
-       (remove exclude
-               (mapcar #'file-name-nondirectory
-                       (seq-filter #'file-directory-p
-                                   (directory-files workflow-dir t
-                                                    directory-files-no-dot-files-regexp))))
-       nil t))
+      (completing-read prompt (remove exclude (my/session-names)) nil t))
 
     (defun my/current-session ()
-      "Return the name of the loaded workflow, or nil if none is loaded."
+      "Return the name of the loaded workflow, or nil if none is loaded.
+  This runs on every mode-line update, so it compares strings only."
       (when (and desktop-dirname
-                 (file-equal-p (file-name-directory
-                                (directory-file-name desktop-dirname))
-                               workflow-dir))
+                 (string= (file-name-directory
+                           (directory-file-name desktop-dirname))
+                          (file-name-as-directory
+                           (expand-file-name workflow-dir))))
         (file-name-nondirectory (directory-file-name desktop-dirname))))
 
     (defun my/save-current-session ()
@@ -274,7 +306,8 @@ You can also use =M-x auto-package-update-now= to update right now!
               (when (get-buffer tab)
                 (unless first (tab-bar-new-tab))
                 (setq first nil)
-                (switch-to-buffer tab)))))))
+                (switch-to-buffer tab)))))
+        (my/remember-session name)))
 
     (defun my-change-session (name)
       "Save the current workflow, then replace it with the saved workflow NAME.
@@ -306,10 +339,7 @@ You can also use =M-x auto-package-update-now= to update right now!
       (let ((name (if (or (null name) (string-empty-p name))
                       (my/next-session-name)
                     name)))
-        (when (string-match-p "/" name)
-          (user-error "Workflow name %s must not contain /" name))
-        (when (file-exists-p (expand-file-name name workflow-dir))
-          (user-error "Workflow %s already exists" name))
+        (my/check-new-session-name name)
         (unless discard
           (my/save-current-session))
         (my/clear-session)
@@ -329,8 +359,7 @@ You can also use =M-x auto-package-update-now= to update right now!
       (let* ((dir (file-name-as-directory (expand-file-name name workflow-dir)))
              (owner (desktop-owner dir)))
         ;; An empty or relative name would expand to workflow-dir itself.
-        (unless (member name (directory-files workflow-dir nil
-                                              directory-files-no-dot-files-regexp))
+        (unless (member name (my/session-names))
           (user-error "No workflow named %s" name))
         (when (and owner (/= owner (emacs-pid)))
           (user-error "Workflow %s is locked by Emacs process %s" name owner))
@@ -339,7 +368,91 @@ You can also use =M-x auto-package-update-now= to update right now!
         (when (equal name (my/current-session))
           (my-new-session nil t))
         (delete-directory dir t t)
-        (message "Deleted workflow %s" name))))
+        (message "Deleted workflow %s" name)))
+
+    (defun my-rename-session (name new-name)
+      "Rename the saved workflow NAME to NEW-NAME.
+  Renaming the loaded workflow keeps it loaded under NEW-NAME."
+      (interactive
+       (let ((name (my/read-session "Rename session: ")))
+         (list name (read-string (format "Rename %s to: " name)))))
+      (let* ((dir (file-name-as-directory (expand-file-name name workflow-dir)))
+             (new-dir (file-name-as-directory
+                       (expand-file-name new-name workflow-dir)))
+             (owner (desktop-owner dir)))
+        (unless (member name (my/session-names))
+          (user-error "No workflow named %s" name))
+        (my/check-new-session-name new-name)
+        (when (and owner (/= owner (emacs-pid)))
+          (user-error "Workflow %s is locked by Emacs process %s" name owner))
+        (when (equal name (my/last-session))
+          (my/remember-session new-name))
+        ;; Move our own lock with the directory.
+        (when owner
+          (desktop-release-lock dir))
+        (rename-file (directory-file-name dir) (directory-file-name new-dir))
+        (when owner
+          (desktop-claim-lock new-dir))
+        (when (equal name (my/current-session))
+          (setq desktop-dirname new-dir))
+        (force-mode-line-update t)
+        (message "Renamed workflow %s to %s" name new-name)))
+
+    (defun my/session-frame-p (&optional frame)
+      "Return non-nil if FRAME is a real frame that can hold a workflow.
+  A daemon's hidden initial frame has no layout worth saving or restoring."
+      (not (equal (terminal-name (frame-terminal frame)) "initial_terminal")))
+
+    (defun my/autosave-session ()
+      "Save the loaded workflow quietly; errors are only logged."
+      (when (and (my/current-session)
+                 (my/session-frame-p)
+                 (not (active-minibuffer-window)))
+        (let ((inhibit-message t))
+          (with-demoted-errors "Workflow autosave failed: %S"
+            (my/save-current-session)))))
+
+    (defun my/autosave-session-from-last-frame (frame)
+      "Save the workflow from FRAME when it is the last real frame.
+  With a daemon, closing the last client frame is the effective quit,
+  and `kill-emacs-hook' later runs with only the hidden frame left."
+      (when (and (my/session-frame-p frame)
+                 (not (seq-some (lambda (other)
+                                  (and (not (eq other frame))
+                                       (my/session-frame-p other)))
+                                (frame-list))))
+        (with-selected-frame frame
+          (my/autosave-session))))
+
+    (defun my/restore-last-session ()
+      "Load the workflow recorded in `my/last-session-file', if it exists.
+  Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
+      (when-let* (((not noninteractive))
+                  ((my/session-frame-p))
+                  ((not (seq-some #'buffer-file-name (buffer-list))))
+                  (name (my/last-session))
+                  ((member name (my/session-names))))
+        (condition-case err
+            (my-load-session name)
+          (user-error
+           (message "Workflow %s was not restored: %s" name (cadr err))))))
+
+    (defun my/restore-last-session-in-first-frame ()
+      "Restore the last workflow once, in a daemon's first client frame."
+      (remove-hook 'server-after-make-frame-hook
+                   #'my/restore-last-session-in-first-frame)
+      (my/restore-last-session))
+
+    (add-hook 'kill-emacs-hook #'my/autosave-session)
+    (add-hook 'delete-frame-functions #'my/autosave-session-from-last-frame)
+    (if (daemonp)
+        (add-hook 'server-after-make-frame-hook
+                  #'my/restore-last-session-in-first-frame)
+      ;; Run late so the dashboard and command-line files already exist.
+      (add-hook 'emacs-startup-hook #'my/restore-last-session 90))
+    (when my/session-autosave-interval
+      (run-with-idle-timer my/session-autosave-interval t
+                           #'my/autosave-session)))
 #+end_src
 ** Runtime Performance
 Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
@@ -652,6 +765,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
       "jc" '(my-change-session :which-key "Change session")
       "jn" '(my-new-session :which-key "New session")
       "jd" '(my-delete-session :which-key "Delete session")
+      "jr" '(my-rename-session :which-key "Rename session")
       "s"  '(shell-command :which-key "(s)hell command")
       "S"  '(async-shell-command :which-key "async (S)hell command")
       "t"  '(:ignore t :which-key "(t)oggles/(t)abs")
@@ -818,11 +932,23 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
   (when (not (version< emacs-version "26.3"))
     (use-package doom-modeline
       :config
+      ;; Name of the workflow loaded by the session manager.
+      (doom-modeline-def-segment session-name
+        (when-let* ((name (and (fboundp 'my/current-session)
+                               (my/current-session))))
+          (let* ((face (doom-modeline-face 'doom-modeline-persp-name))
+                 (icon (doom-modeline-icon 'mdicon "nf-md-briefcase" "" ""
+                                           :face face)))
+            (concat " "
+                    (unless (string-empty-p icon) (concat icon " "))
+                    (propertize name 'face face)
+                    " "))))
       ;; Left: what is being edited.  Right: where point is, then the
       ;; workspace and tooling context, ending with the major mode.
       (doom-modeline-def-modeline 'main
         '(bar modals buffer-info matches selection-info)
-        '(buffer-position word-count misc-info persp-name vcs check lsp major-mode))
+        '(buffer-position word-count misc-info session-name persp-name
+          vcs check lsp major-mode))
       (doom-modeline-mode 1)
       (setq mode-line-right-align-edge 'right-fringe)
       :custom (
