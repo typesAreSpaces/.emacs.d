@@ -105,15 +105,7 @@ You can also use =M-x auto-package-update-now= to update right now!
           "/Users/typesarespaces/.opam/system/bin"
           )))
     (setenv "PATH" (mapconcat 'identity paths ":"))
-    (setq exec-path (append paths (list "." exec-directory))))
-
-  (let
-      ((paths
-        '(
-          "/opt/homebrew/lib/gcc/14"
-          "/opt/homebrew/lib/gcc/14/gcc/aarch64-apple-darwin23/14"
-          )))
-    (setenv "LIBRARY_PATH" (mapconcat 'identity paths ":")))
+    (setq exec-path (append paths (list "." exec-directory)))) 
 #+end_src
 
 ** Desktop save/restore
@@ -126,6 +118,8 @@ You can also use =M-x auto-package-update-now= to update right now!
     ;; Keep the dashboard across workflow switches: it is the buffer for new
     ;; tabs, and perspective.el refuses to kill the last buffer of a perspective.
     (add-to-list 'desktop-clear-preserve-buffers "\\*dashboard\\*")
+    ;; Native compilation stalls if its log buffer dies while jobs are running.
+    (add-to-list 'desktop-clear-preserve-buffers "\\*Async-native-compile-log\\*")
     ;; Kept outside workflow-dir, which is tracked by git.
     (defvar my/last-session-file
       (expand-file-name "var/last-session" user-emacs-directory)
@@ -577,14 +571,13 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 ** GUI settings
 This section configures basic UI settings that remove unneeded elements to make Emacs look a lot more minimal and modern.  If you're just getting started in Emacs, the menu bar might be helpful so you can remove the =(menu-bar-mode -1)= line if you'd like to still see that.
 
-In order to start up a daemon, use the following command
+The daemon starts at login through a LaunchAgent. To load it now, or to stop it, use the following commands
 #+begin_src
-  launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist
-  launchctl unload -w ~/Library/LaunchAgents/.emacs-daemon.plist
-  launchctl load -w ~/Library/LaunchAgents/.emacs-daemon.plist
+  launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/gnu.emacs.daemon.plist
+  launchctl bootout gui/$(id -u)/gnu.emacs.daemon
 #+end_src
 
-The content of .emacs-daemon.plist is
+The content of gnu.emacs.daemon.plist is below. launchd does not read the zsh files, so =MACOSX_DEPLOYMENT_TARGET= must be set here for native compilation to work.
 
 #+begin_src
   <?xml version="1.0" encoding="UTF-8"?>
@@ -599,11 +592,19 @@ The content of .emacs-daemon.plist is
   <string>/opt/homebrew/bin/emacs</string>
   <string>--init-directory</string>
   <string>/Users/typesarespaces/.config/jose-emacs/</string>
-  <string>jose</string>
-  <string>&</string>
+  <string>--fg-daemon=jose</string>
   </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+  <key>MACOSX_DEPLOYMENT_TARGET</key>
+  <string>27.0</string>
+  </dict>
   <key>RunAtLoad</key>
   <true/>
+  <key>WorkingDirectory</key>
+  <string>/Users/typesarespaces</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/typesarespaces/Library/Logs/emacs-jose.log</string>
   <key>ServiceDescription</key>
   <string>Gnu Emacs Daemon</string>
   </dict>

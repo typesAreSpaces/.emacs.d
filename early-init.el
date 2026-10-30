@@ -15,6 +15,4 @@
 ;; threshold in `emacs-startup-hook'.
 (setq gc-cons-threshold most-positive-fixnum)
 
-(setq native-comp-deferred-compilation nil)
-(setq native-comp-jit-compilation nil)
-(setq comp-enable-subr-trampolines nil)
+(setq native-comp-async-report-warnings-errors 'silent)

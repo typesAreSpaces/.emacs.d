@@ -88,14 +88,6 @@
   (setenv "PATH" (mapconcat 'identity paths ":"))
   (setq exec-path (append paths (list "." exec-directory))))
 
-(let
-    ((paths
-      '(
-        "/opt/homebrew/lib/gcc/14"
-        "/opt/homebrew/lib/gcc/14/gcc/aarch64-apple-darwin23/14"
-        )))
-  (setenv "LIBRARY_PATH" (mapconcat 'identity paths ":")))
-
 (use-package desktop
   :config
   (defvar workflow-dir "~/.config/jose-emacs/workflows/")
@@ -104,6 +96,8 @@
   ;; Keep the dashboard across workflow switches: it is the buffer for new
   ;; tabs, and perspective.el refuses to kill the last buffer of a perspective.
   (add-to-list 'desktop-clear-preserve-buffers "\\*dashboard\\*")
+  ;; Native compilation stalls if its log buffer dies while jobs are running.
+  (add-to-list 'desktop-clear-preserve-buffers "\\*Async-native-compile-log\\*")
   ;; Kept outside workflow-dir, which is tracked by git.
   (defvar my/last-session-file
     (expand-file-name "var/last-session" user-emacs-directory)
