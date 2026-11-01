@@ -1781,14 +1781,20 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
     :config
     ;; (setq lsp-completion-provider :none)
     ;; (setq auto-complete-mode -1)
-    (setq lsp-latex-build-executable "latexmk")
-    (setq lsp-latex-build-args
-          '("-pvc" "-pdf" "-interaction=nonstopmode" "-synctex=1" "-cd" "%f"))
-    (setq lsp-latex-forward-search-after t)
-    (setq lsp-latex-build-on-save t)
-    (setq lsp-latex-forward-search-executable
-          "/Applications/Skim.app/Contents/SharedSupport/displayline")
-    (setq lsp-latex-forward-search-args '("%l" "%p" "%f"))))
+    (setq
+     lsp-latex-build-executable "latexmk"
+     lsp-latex-build-args
+     '("-pdf"
+       "-interaction=nonstopmode"
+       "-file-line-error"
+       "-synctex=1"
+       "-cd"
+       "%f")
+     lsp-latex-build-on-save t
+     lsp-latex-forward-search-after t
+     lsp-latex-forward-search-executable
+     "/Applications/Skim.app/Contents/SharedSupport/displayline"
+     lsp-latex-forward-search-args '("-r" "%l" "%p" "%f"))))
 
 (defun get-bibtex-from-doi (doi)
   "Get a BibTeX entry from the DOI"
@@ -2615,17 +2621,17 @@ The file name is passed as a shell-quoted argument."
     ;; a deferred type error in the installed zotxt build.
     (if (eq org-zotxt-link-description-style :title)
         (deferred:nextc
-          (zotxt--request-deferred
-           (format "%s/items" zotxt-url-base)
-           :params `(("key" . ,(plist-get item :key)) ("format" . "full"))
-           :parser #'zotxt--json-read)
-          (apply-partially
-           (lambda (item response)
-             (let ((data (elt (request-response-data response) 0)))
-               (plist-put (copy-tree item) :title
-                          (or (cdr (assq 'title-short data))
-                              (cdr (assq 'title data))))))
-           item))
+         (zotxt--request-deferred
+          (format "%s/items" zotxt-url-base)
+          :params `(("key" . ,(plist-get item :key)) ("format" . "full"))
+          :parser #'zotxt--json-read)
+         (apply-partially
+          (lambda (item response)
+            (let ((data (elt (request-response-data response) 0)))
+              (plist-put (copy-tree item) :title
+                         (or (cdr (assq 'title-short data))
+                             (cdr (assq 'title data))))))
+          item))
       (funcall original item)))
   (advice-add 'org-zotxt-get-item-link-text-deferred :around
               #'my/org-zotxt-title-deferred))
