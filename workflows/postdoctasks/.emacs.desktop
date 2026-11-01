@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Oct 29 01:47:56 2026
+;; Created Sat Oct 31 16:30:28 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -13,7 +13,7 @@
 (setq tags-table-list nil)
 (setq search-ring nil)
 (setq regexp-search-ring nil)
-(setq register-alist nil)
+(setq register-alist '((48 . #("** TODO Present L^{*} variant related to Prof. Pavithra's paper\n" 0 1 (yank-handler (evil-yank-line-handler nil t) keymap (keymap) face org-hide fontified t) 1 2 (yank-handler (evil-yank-line-handler nil t) face org-level-2 keymap (keymap) composition (2 1 [9675]) fontified t) 2 3 (yank-handler (evil-yank-line-handler nil t) face org-level-2 keymap (keymap) fontified t) 3 7 (yank-handler (evil-yank-line-handler nil t) face (org-todo org-level-2) fontified t) 7 17 (yank-handler (evil-yank-line-handler nil t) face org-level-2 fontified t) 17 63 (yank-handler (evil-yank-line-handler nil t) face org-level-2 fontified t) 63 64 (yank-handler (evil-yank-line-handler nil t) fontified t)))))
 (setq file-name-history '("~/Documents/Org-Files/20260626124850-pavithra_prabhakar_postdoc_discussion.org" "~/Documents/Org-Files/20260819135302-postdoc_tasks.org" "~/Documents/Org-Files/20260426111709-projects.org" "~/Documents/Org-Files/20260423173343-main_agenda.org" "~/.config/jose-emacs/config.org" "~/Documents/Org-Files/20261008091120-quantumspeedup_project.org" "~/Documents/Org-Files/20260930165052-uwaterloo_seminar.org" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/algorithm.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/presentationQ.sty" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Library/texmf/tex/latex/symbols.sty" "~/Documents/Org-Files/20260721081408-quantum_research.org" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/mmwa/main.tex" "~/Documents/Org-Files/20231115200616-qm_seminar.org" "~/Documents/Org-Files/20260724112641-todolater.org" "~/Documents/Org-Files/20261023184453-learning_automata_switch_linear_systems.org" "~/Documents/Org-Files/20260511204944-general_case_univariate_quadratic_modules.org" "~/Documents/Org-Files/20260428165645-monogenic_quadratic_module_certificates.org" "~/Documents/Org-Files/20260428165951-saturated_quadratic_module.org" "~/Documents/Org-Files/20260423174626-algebraic_combinatorics_seminar.org" "~/Documents/Org-Files/20260423174506-current_work.org" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/Quantum Automata Certificates/main.tex"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
@@ -22,12 +22,12 @@
   "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
   'org-mode
   '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  1414
-  '(109 nil)
+  654
+  '(719 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 64042 162032 0) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring (109 109))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27366 27651 359153 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (615 615 480 480 449 804 1772 109 109 109))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
@@ -38,6 +38,6 @@
   '(198 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27362 61178 408137 730000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27366 24540 801159 501000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
   '((mark-ring (198 198))))
 

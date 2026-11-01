@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Oct 29 02:53:45 2026
+;; Created Thu Oct 29 11:07:06 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -12,32 +12,20 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring nil)
+(setq regexp-search-ring '(#("Jupy" 0 4 (isearch-case-fold-search nil))))
 (setq register-alist nil)
 (setq file-name-history '("~/.config/jose-emacs/config.org" "~/.config/jose-emacs/init.el"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/typesarespaces/.config/jose-emacs/init.el"
-  "init.el"
-  'emacs-lisp-mode
-  '(eldoc-mode font-lock-mode rainbow-delimiters-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  1
-  '(1 nil)
-  nil
-  nil
-  '((buffer-display-time 27363 2455 119819 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (1 85715 85715 639 639 690 690 690 690 3761 3761 3798 3798))))
-
-(desktop-create-buffer 208
   "/Users/typesarespaces/.config/jose-emacs/config.org"
   "config.org"
   'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
-  526
-  '(525 nil)
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode jupyter-org-interaction-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  91573
+  '(895 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27363 2455 119412 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (118995 118995 118995 118995 38 38 32397 32397 32513))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27363 32056 876440 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (895 895 525 118995 118995 118995 118995 38 38 32397 32397 32513))))
 
