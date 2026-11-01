@@ -720,7 +720,8 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   (unless (assoc 'font default-frame-alist)
     (let* ((font-family (catch 'break
                           (dolist (font-family
-                                   '("Fira Code"
+                                   '("JetBrains Mono"
+                                     "Fira Code"
                                      "Hack"
                                      "Consolas"))
                             (when (member font-family (font-family-list))
@@ -731,6 +732,14 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
         (set-frame-font font t t)))))
 
 (add-hook 'focus-in-hook #'frame-font-setup)
+
+(use-package ligature
+  :config
+  (ligature-set-ligatures
+   'prog-mode
+   '("!=" "!==" "==" "===" "=>" "->" "<-"
+     "<=" ">=" "&&" "||" "::" ":="))
+  (global-ligature-mode 1))
 
 (defun change-font-size (size)
   (interactive "n")
@@ -1226,7 +1235,7 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Hack" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font "JetBrains Mono" :weight 'regular :height (cdr face)))
 
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
@@ -1919,7 +1928,8 @@ At the prompt, or outside a cell's code, call `jupyter-repl-ret'."
   :straight (maplev :type git
                     :host github
                     :repo "JoeRiel/maplev")
-  :mode ("\\.mpl\\'" "\\.mm\\'"))
+  :mode (("\\.mpl\\'" . maplev-mode)
+         ("\\.mm\\'" . maplev-mode)))
 
 (use-package wolfram-mode
   :mode ("\\.m\\'" "\\.wl\\'")
@@ -2549,8 +2559,6 @@ The file name is passed as a shell-quoted argument."
   :commands zotero-export-bibtex-at-point
   :config
 
-  (setq org-zotxt-link-description-style :title)
-
   (defun zotero-export-bibtex-at-point ()
     "Export the Zotero item whose link is at or around point as BibTeX."
     (interactive)
@@ -2592,6 +2600,35 @@ The file name is passed as a shell-quoted argument."
               (message "BibTeX for %s copied to clipboard" item-key)))
         (user-error "No Zotero link found on this line"))))
   )
+
+(use-package org-zotxt
+  :ensure nil                         ; Provided by the zotxt package.
+  :after org
+  :commands (org-zotxt-insert-reference-link org-zotxt-open-attachment)
+  :hook (org-mode . org-zotxt-mode)
+  :custom
+  (org-zotxt-link-description-style :title)
+  :config
+  (defun my/org-zotxt-title-deferred (original item)
+    "Fetch ITEM's title asynchronously, or call ORIGINAL for other styles."
+    ;; Bypass zotxt-key-to-title's synchronous helper, which fails with
+    ;; a deferred type error in the installed zotxt build.
+    (if (eq org-zotxt-link-description-style :title)
+        (deferred:nextc
+          (zotxt--request-deferred
+           (format "%s/items" zotxt-url-base)
+           :params `(("key" . ,(plist-get item :key)) ("format" . "full"))
+           :parser #'zotxt--json-read)
+          (apply-partially
+           (lambda (item response)
+             (let ((data (elt (request-response-data response) 0)))
+               (plist-put (copy-tree item) :title
+                          (or (cdr (assq 'title-short data))
+                              (cdr (assq 'title data))))))
+           item))
+      (funcall original item)))
+  (advice-add 'org-zotxt-get-item-link-text-deferred :around
+              #'my/org-zotxt-title-deferred))
 
 (defun my/org-zotxt-open-at-point ()
   "Open the attachment of the Zotero link at point via `org-zotxt'.
