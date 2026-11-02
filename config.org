@@ -2029,11 +2029,13 @@ Use `CMD + shift + click` on a pdf section to back forward.
        '("-pdf"
          "-interaction=nonstopmode"
          "-file-line-error"
+         "-halt-on-error"
          "-synctex=1"
          "-cd"
          "%f")
+       ;; Disable with M-x set-variable while running make watch; re-enable after.
        lsp-latex-build-on-save t
-       lsp-latex-forward-search-after t
+       lsp-latex-build-forward-search-after t
        lsp-latex-forward-search-executable
        "/Applications/Skim.app/Contents/SharedSupport/displayline"
        lsp-latex-forward-search-args '("-r" "%l" "%p" "%f"))))
