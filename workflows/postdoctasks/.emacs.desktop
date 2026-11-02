@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Oct 31 16:30:28 2026
+;; Created Mon Nov  2 02:14:25 2026
 ;; Desktop file format version 208
 ;; Emacs version 31.1
 
@@ -21,23 +21,23 @@
   "/Users/typesarespaces/Documents/Org-Files/20260626124850-pavithra_prabhakar_postdoc_discussion.org"
   "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
   'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode org-zotxt-mode display-line-numbers-mode ligature-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   654
-  '(719 nil)
+  '(654 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27366 27651 359153 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
-  '((mark-ring (615 615 480 480 449 804 1772 109 109 109))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27368 21616 160438 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (719 615 615 480 480 449 804 1772 109 109 109))))
 
 (desktop-create-buffer 208
   "/Users/typesarespaces/Documents/Org-Files/20260423173343-main_agenda.org"
   "20260423173343-main_agenda.org"
   'org-mode
-  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode display-line-numbers-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode org-zotxt-mode display-line-numbers-mode ligature-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
   198
   '(198 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27366 24540 801159 501000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27368 18501 379921 35000) (buffer-file-coding-system . undecided-unix) (truncate-lines))
   '((mark-ring (198 198))))
 
