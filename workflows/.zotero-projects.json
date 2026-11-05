@@ -1,0 +1,27 @@
+{
+  "format": 1,
+  "library": "users/0",
+  "root_key": "H6WD5SG9",
+  "projects": {
+    "DA8QN7EZ": {
+      "name": "BQRLG",
+      "title": "BQRLG"
+    },
+    "KDE4TELS": {
+      "name": "LearningSwitchedLinearSystems",
+      "title": "LearningSwitchedLinearSystems"
+    },
+    "JBTD94W4": {
+      "name": "QMSeminar",
+      "title": "QMSeminar"
+    },
+    "4QJF5WST": {
+      "name": "QuantumCircuit",
+      "title": "QuantumCircuit"
+    },
+    "V5W5TBR4": {
+      "name": "QuantumSpeedUp",
+      "title": "QuantumSpeedUp"
+    }
+  }
+}
