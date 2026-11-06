@@ -1793,7 +1793,7 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
        "%f")
      ;; Disable with M-x set-variable while running make watch; re-enable after.
      lsp-latex-build-on-save t
-     lsp-latex-build-forward-search-after t
+     lsp-latex-build-forward-search-after nil
      lsp-latex-forward-search-executable
      "/Applications/Skim.app/Contents/SharedSupport/displayline"
      lsp-latex-forward-search-args '("-r" "%l" "%p" "%f"))))
