@@ -39,7 +39,7 @@
 
 (use-package auto-package-update
   :commands (auto-package-update-now auto-package-update-maybe
-             auto-package-update-at-time)
+				     auto-package-update-at-time)
   :custom
   (auto-package-update-hide-results t)
   (auto-package-update-delete-old-versions t))
@@ -269,9 +269,9 @@ a later save cannot overwrite it with the buffers that survived.
 Desktop locks owned by other Emacs processes are never removed."
     (save-some-buffers)
     (when (seq-some (lambda (buffer)
-                       (and (buffer-file-name buffer)
-                            (buffer-modified-p buffer)))
-                     (my/workflow-buffers))
+                      (and (buffer-file-name buffer)
+                           (buffer-modified-p buffer)))
+                    (my/workflow-buffers))
       (user-error "Save modified workflow buffers before switching"))
     ;; Every perspective needs a preserved buffer: otherwise its last file
     ;; refuses to close, even when another perspective contains the dashboard.
@@ -289,7 +289,7 @@ Desktop locks owned by other Emacs processes are never removed."
             ;; Also drop globals that desktop saves but does not clear by default.
             (let ((desktop-globals-to-clear
                    (append '(register-alist tags-file-name tags-table-list
-                             file-name-history)
+					    file-name-history)
                            desktop-globals-to-clear)))
               (desktop-clear))
             (when-let* ((alive (seq-filter #'buffer-live-p buffers)))
@@ -974,7 +974,7 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
     (doom-modeline-def-modeline 'main
       '(bar modals buffer-info matches selection-info)
       '(buffer-position word-count misc-info session-name persp-name
-        vcs check lsp major-mode))
+			vcs check lsp major-mode))
     (doom-modeline-mode 1)
     (setq mode-line-right-align-edge 'right-fringe)
     :custom (
@@ -1372,7 +1372,7 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
     (let* ((archive-dir (expand-file-name "~/Documents/Org-Files/archive/"))
            (file (buffer-file-name)))
       (unless file
-	(user-error "Current buffer is not visiting a file"))
+  	(user-error "Current buffer is not visiting a file"))
       (make-directory archive-dir t)
       (rename-visited-file
        (expand-file-name (file-name-nondirectory file) archive-dir))))
@@ -1399,6 +1399,12 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
 
   ;; Use find-file instead of file-find-other-window
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
+
+  (org-link-set-parameters
+   "pdf-tools"
+   :follow (lambda (path _)
+             (find-file (expand-file-name path))
+             (pdf-view-mode)))
 
   (setq org-tag-alist
         '((:startgroup)
