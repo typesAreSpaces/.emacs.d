@@ -1550,12 +1550,6 @@ This section contains the basic configuration for =org-mode= plus the configurat
     ;; Use find-file instead of file-find-other-window
     (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
-    (org-link-set-parameters
-     "pdf-tools"
-     :follow (lambda (path _)
-               (find-file (expand-file-name path))
-               (pdf-view-mode)))
-
     (setq org-tag-alist
           '((:startgroup)
             ("seminar" . ?s)

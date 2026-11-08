@@ -1400,12 +1400,6 @@ Skip it in batch Emacs, in a daemon's hidden frame, or when files are open."
   ;; Use find-file instead of file-find-other-window
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
-  (org-link-set-parameters
-   "pdf-tools"
-   :follow (lambda (path _)
-             (find-file (expand-file-name path))
-             (pdf-view-mode)))
-
   (setq org-tag-alist
         '((:startgroup)
           ("seminar" . ?s)
