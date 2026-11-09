@@ -7,6 +7,10 @@
       "name": "BQRLG",
       "title": "BQRLG"
     },
+    "GA9K8UCP": {
+      "name": "LearningQuantumAutomata",
+      "title": "LearningQuantumAutomata"
+    },
     "KDE4TELS": {
       "name": "LearningSwitchedLinearSystems",
       "title": "LearningSwitchedLinearSystems"
@@ -18,6 +22,10 @@
     "4QJF5WST": {
       "name": "QuantumCircuit",
       "title": "QuantumCircuit"
+    },
+    "YK5MQ784": {
+      "name": "QuantumSensing",
+      "title": "QuantumSensing"
     },
     "V5W5TBR4": {
       "name": "QuantumSpeedUp",

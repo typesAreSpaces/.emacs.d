@@ -1,0 +1,67 @@
+;; -*- mode: emacs-lisp; lexical-binding:t; coding: utf-8-emacs; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Sun Nov  8 23:42:14 2026
+;; Desktop file format version 208
+;; Emacs version 31.1
+
+;; Global section:
+(setq desktop-saved-frameset nil)
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring '(#("global-display" 0 14 (isearch-case-fold-search t)) #("lear" 0 4 (isearch-case-fold-search t)) #("postdoc_tas" 0 11 (isearch-case-fold-search t)) #("org-link" 0 8 (isearch-case-fold-search t)) #("REview" 0 6 (isearch-case-fold-search nil)) #("post" 0 4 (isearch-case-fold-search t)) #("User;" 0 5 (isearch-case-fold-search nil)) #("doom-mode" 0 9 (isearch-case-fold-search t)) #("Rere" 0 4 (isearch-case-fold-search nil)) #("refere" 0 6 (isearch-case-fold-search t)) #("ref" 0 3 (isearch-case-fold-search t)) #("\\cite" 0 5 (isearch-case-fold-search t)) #("cite" 0 4 (isearch-case-fold-search t)) #("\\\\ref" 0 5 (isearch-case-fold-search t))))
+(setq register-alist '((97 . [escape escape]) (48 . #("* TODO Review [[pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf][paper]]\n" 0 1 (yank-handler (evil-yank-line-handler nil t) face org-level-1 keymap (keymap) composition (0 1 [9673]) fontified t) 1 2 (yank-handler (evil-yank-line-handler nil t) face org-level-1 keymap (keymap) fontified t) 2 6 (yank-handler (evil-yank-line-handler nil t) face (org-todo org-level-1) fontified t) 6 14 (yank-handler (evil-yank-line-handler nil t) face org-level-1 fontified t) 14 16 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-1) htmlize-link (:uri "pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf") help-echo "LINK: pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf" fontified t) 16 128 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-1) htmlize-link (:uri "pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf") help-echo "LINK: pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf" fontified t) 128 129 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-1) rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf") help-echo "LINK: pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf" fontified t) 129 130 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-1) htmlize-link (:uri "pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf") help-echo "LINK: pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf" fontified t) 130 131 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-1) rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf") help-echo "LINK: pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf" fontified t) 131 135 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-link org-level-1) htmlize-link (:uri "pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf") help-echo "LINK: pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf" fontified t) 135 136 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight face (org-link org-level-1) rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) htmlize-link (:uri "pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf") help-echo "LINK: pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf" fontified t) 136 137 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-1) htmlize-link (:uri "pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf") help-echo "LINK: pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf" fontified t) 137 138 (yank-handler (evil-yank-line-handler nil t) font-lock-multiline t keymap (keymap (follow-link . mouse-face) (mouse-3 . org-find-file-at-mouse) (mouse-2 . org-open-at-mouse)) mouse-face highlight invisible org-link face (org-link org-level-1) htmlize-link (:uri "pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf") help-echo "LINK: pdf-tools:~/Documents/Projects/writing/PostdocPrabhakar/PostdocTasks/ReviewTACAS27-2/Jose_TACAS27_paper__1844.pdf" rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link) fontified t) 138 139 (yank-handler (evil-yank-line-handler nil t) fontified t)))))
+(setq file-name-history '("~/Documents/Projects/dev/AALpy/aalpy/__init__.py" "~/Documents/ChatGPT/LearningSwitchedSystems/paper-aliases.md" "/Users/typesarespaces/Documents/ChatGPT/LearningSwitchedSystems/outputs/paper10-beamer/discussion-guide.md" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/mmwa/main.tex" "~/Documents/Org-Files/20260930165052-uwaterloo_seminar.org" "~/Documents/Org-Files/20260527180853-performance_and_contributions.org" "~/Documents/Org-Files/20260724112641-todolater.org" "~/Documents/Org-Files/20260520164631-weight_control.org" "~/Documents/Org-Files/weight.png" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Library/texmf/tex/latex/symbols.sty" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/mwa.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Library/texmf/tex/latex/quantumsymbols.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/presentationQ.sty" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/main.vrb" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/terminology.tex" "~/Documents/Projects/writing/PostdocPrabhakar/QuantumResearch/writing/UWaterloo Seminar/quantum_speedup_sdp_basics/algorithm.tex"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260626124850-pavithra_prabhakar_postdoc_discussion.org"
+  "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
+  'org-mode
+  '(font-lock-mode text-scale-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode org-zotxt-mode display-line-numbers-mode ligature-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  702
+  '(432 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27377 27460 892034 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (7043 1177 701 701 602 602 499 499 431 431 449 449 899 899 525 551))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20261023184453-learning_automata_switch_linear_systems.org"
+  "20261023184453-learning_automata_switch_linear_systems.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode org-zotxt-mode display-line-numbers-mode ligature-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode)
+  309
+  '(309 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27377 27457 649254 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (1569 1569 1608 680 680 448 299 748 691 691 701 701 691 691 707 225))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Org-Files/20260819135302-postdoc_tasks.org"
+  "20260819135302-postdoc_tasks.org"
+  'org-mode
+  '(font-lock-mode buffer-face-mode org-indent-mode org-bullets-mode visual-line-mode olivetti-mode org-zotxt-mode display-line-numbers-mode ligature-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  401
+  '(534 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27377 27403 569806 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (534 534 534 534 534 536 535 535 535 535 537 537 537 537 401 401))))
+
+(desktop-create-buffer 208
+  "/Users/typesarespaces/Documents/Projects/writing/PostdocPrabhakar/LearningAutomataSLS/writing/Learning Switched Linear Systems/main.tex"
+  "main.tex"
+  'LaTeX-mode
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-managed-mode lsp-modeline-workspace-status-mode eldoc-mode font-lock-mode visual-line-mode olivetti-mode outline-minor-mode lsp-headerline-breadcrumb-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode reftex-mode display-fill-column-indicator-mode display-line-numbers-mode ligature-mode better-jumper-local-mode evil-local-mode evil-collection-unimpaired-mode evil-matchit-mode anzu-mode yas-minor-mode corfu-mode auto-revert-mode)
+  3232
+  '(3232 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 27375 48446 218842 13000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines) (TeX-master . "/Users/typesarespaces/Documents/GithubProjects/phd-thesis/Documents/Seminars/BeihangUniversity-Fall2021/Reports/2023/monogenic_certificates_compact_case/main.tex"))
+  '((mark-ring (853 853 2431 2431 2404 2404 1))))
+
