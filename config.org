@@ -617,6 +617,7 @@ The content of gnu.emacs.daemon.plist is below. launchd does not read the zsh fi
   (setq inhibit-startup-message t)
 
   (scroll-bar-mode -1)               ;; Disable visible scrollbar
+  (setq mouse-wheel-tilt-scroll t)    ;; Scroll horizontally with trackpad/tilt wheel
   (tool-bar-mode -1)                 ;; Disable the toolbar
   (tooltip-mode -1)                  ;; Disable tooltips
   (set-fringe-mode 10)               ;; Give some breathing room
@@ -697,6 +698,7 @@ The content of gnu.emacs.daemon.plist is below. launchd does not read the zsh fi
                   mu4e-main-mode-hook
                   mu4e-org-mode-hook
                   mu4e-compose-mode-hook
+                  pdf-view-mode-hook
                   treemacs-mode-hook
                   eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
@@ -3044,7 +3046,58 @@ mu4e comes included with mu. Search the path your package manager used to instal
     :defer t
     ;; Installs pdf-tools on the first PDF opened, not at startup.
     :init
-    (pdf-loader-install :no-query))
+    (pdf-loader-install :no-query)
+    :config
+    ;; Vertical wheel/two-finger scrolling advances pages at their edges.
+    (setq-default pdf-view-continuous t)
+
+    (defun my/pdf-view-mouse-zoom (event)
+      "Zoom the PDF under the mouse with Ctrl+wheel EVENT."
+      (interactive "@e")
+      (call-interactively
+       (if (memq (event-basic-type event) '(wheel-up mouse-4))
+           #'pdf-view-enlarge
+         #'pdf-view-shrink)))
+
+    (defun my/pdf-view-mouse-horizontal-scroll (event)
+      "Scroll the PDF horizontally using mouse wheel EVENT."
+      (interactive "@e")
+      (if (memq (event-basic-type event)
+                '(wheel-up mouse-4 wheel-right mouse-7))
+          (image-scroll-right 4)
+        (image-scroll-left 4)))
+
+    (defun my/pdf-view-scroll-left (&optional count)
+      "Move the PDF viewport left by 20 columns, repeated COUNT times."
+      (interactive "p")
+      (image-backward-hscroll (* 20 (or count 1))))
+
+    (defun my/pdf-view-scroll-right (&optional count)
+      "Move the PDF viewport right by 20 columns, repeated COUNT times."
+      (interactive "p")
+      (image-forward-hscroll (* 20 (or count 1))))
+
+    ;; Use a visible step: the built-in commands move just one column.
+    (define-key pdf-view-mode-map [left] #'my/pdf-view-scroll-left)
+    (define-key pdf-view-mode-map [right] #'my/pdf-view-scroll-right)
+    (with-eval-after-load 'evil
+      (evil-define-key* '(normal motion) pdf-view-mode-map
+        [left] #'my/pdf-view-scroll-left
+        [right] #'my/pdf-view-scroll-right))
+
+    ;; Bind both modern wheel events and older mouse-4/mouse-5 events.
+    (dolist (key '("<C-wheel-up>" "<C-wheel-down>"
+                   "<C-mouse-4>" "<C-mouse-5>"))
+      (define-key pdf-view-mode-map (kbd key) #'my/pdf-view-mouse-zoom))
+    ;; Shift + vertical wheel scrolls horizontally.  Also handle native
+    ;; horizontal trackpad gestures, including shifted events on macOS.
+    (dolist (key '("<S-wheel-up>" "<S-wheel-down>"
+                   "<S-mouse-4>" "<S-mouse-5>"
+                   "<wheel-left>" "<wheel-right>" "<mouse-6>" "<mouse-7>"
+                   "<S-wheel-left>" "<S-wheel-right>"
+                   "<S-mouse-6>" "<S-mouse-7>"))
+      (define-key pdf-view-mode-map (kbd key)
+                  #'my/pdf-view-mouse-horizontal-scroll)))
 
   (use-package org-noter
     :defer t
