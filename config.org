@@ -3006,14 +3006,22 @@ mu4e comes included with mu. Search the path your package manager used to instal
     (vertico-multiform-mode 1))
 #+end_src
 ** Atomic chrome
+Overleaf uses AUCTeX's =LaTeX-mode=, just like local =.tex= files, so it
+inherits the existing LaTeX hooks and keybindings.  The URL rule accepts both
+full Atomic Chrome URLs and GhostText hostnames, including subdomains.
+Browser buffers do not visit local files; compilation, SyncTeX, and
+project-wide RefTeX/LSP features require a local copy of the Overleaf project.
+
 #+begin_src emacs-lisp
   (use-package atomic-chrome
     :config
-    (atomic-chrome-start-server)
     (setq atomic-chrome-buffer-open-style 'full)
     (setq atomic-chrome-url-major-mode-alist
           '(("github\\.com" . poly-markdown+r-mode)
-            ("overleaf\\.com" . latex-mode))))
+            ;; Use the same AUCTeX mode as local .tex files.
+            ("\\`\\(?:https?://\\)?\\(?:[[:alnum:]-]+\\.\\)*overleaf\\.com\\(?::[0-9]+\\)?\\(?:[/?#]\\|\\'\\)"
+             . LaTeX-mode)))
+    (atomic-chrome-start-server))
 #+end_src
 ** Try
 #+begin_src emacs-lisp

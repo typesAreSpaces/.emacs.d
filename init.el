@@ -2531,11 +2531,13 @@ The file name is passed as a shell-quoted argument."
 
 (use-package atomic-chrome
   :config
-  (atomic-chrome-start-server)
   (setq atomic-chrome-buffer-open-style 'full)
   (setq atomic-chrome-url-major-mode-alist
         '(("github\\.com" . poly-markdown+r-mode)
-          ("overleaf\\.com" . latex-mode))))
+          ;; Use the same AUCTeX mode as local .tex files.
+          ("\\`\\(?:https?://\\)?\\(?:[[:alnum:]-]+\\.\\)*overleaf\\.com\\(?::[0-9]+\\)?\\(?:[/?#]\\|\\'\\)"
+           . LaTeX-mode)))
+  (atomic-chrome-start-server))
 
 (use-package try
   :defer t)
