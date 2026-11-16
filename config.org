@@ -1506,6 +1506,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
         "20260423174506-current_work.org"
         "20260626124850-pavithra_prabhakar_postdoc_discussion.org"
         "20260819135302-postdoc_tasks.org"
+        "20261116084413-postdoct_paper_reviews.org"
         "20260721081408-quantum_research.org"
         "20260930165052-uwaterloo_seminar.org"
         "20261008091120-quantumspeedup_project.org"
