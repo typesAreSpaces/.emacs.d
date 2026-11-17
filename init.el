@@ -2216,6 +2216,24 @@ At the prompt, or outside a cell's code, call `jupyter-repl-ret'."
   :bind-keymap
   ("C-c x" . codex-command-map))
 
+(defun claude-grammar-check ()
+  "Ask Claude to proofread the current file and list the issues in *compilation*."
+  (interactive)
+  (unless buffer-file-name (user-error "Buffer is not visiting a file"))
+  (save-buffer)
+  (let* ((file (file-relative-name buffer-file-name))
+         (prompt
+          (concat
+           "The text on stdin is the file " file ", with line numbers prefixed. "
+           "Proofread it for grammar, spelling, punctuation and awkward phrasing. "
+           "Ignore markup and commands (LaTeX, Org, Markdown, code). "
+           "For each problem print exactly one line:\n"
+           file ":LINE: \"ORIGINAL\" -> \"SUGGESTION\" (short reason)\n"
+           "Print nothing else.")))
+    (compile (format "nl -ba %s | claude -p %s"
+                     (shell-quote-argument file)
+                     (shell-quote-argument prompt)))))
+
 (use-package term
   :commands term
   :config

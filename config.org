@@ -2552,6 +2552,26 @@ This is an example of configuring another non-Emacs application using org-mode. 
 #+begin_src conf :tangle no :noweb yes
   value=<<the-value()>>
 #+end_src
+** Claude scripts
+#+begin_src emacs-lisp
+  (defun claude-grammar-check ()
+    "Ask Claude to proofread the current file and list the issues in *compilation*."
+    (interactive)
+    (unless buffer-file-name (user-error "Buffer is not visiting a file"))
+    (save-buffer)
+    (let* ((file (file-relative-name buffer-file-name))
+           (prompt
+            (concat
+             "The text on stdin is the file " file ", with line numbers prefixed. "
+             "Proofread it for grammar, spelling, punctuation and awkward phrasing. "
+             "Ignore markup and commands (LaTeX, Org, Markdown, code). "
+             "For each problem print exactly one line:\n"
+             file ":LINE: \"ORIGINAL\" -> \"SUGGESTION\" (short reason)\n"
+             "Print nothing else.")))
+      (compile (format "nl -ba %s | claude -p %s"
+                       (shell-quote-argument file)
+                       (shell-quote-argument prompt)))))
+#+end_src
 ** Terminals
 *** term-mode
 =term-mode= is a built-in terminal emulator in Emacs.  Because it is written in Emacs Lisp, you can start using it immediately with very little configuration.  If you are on Linux or macOS, =term-mode= is a great choice to get started because it supports fairly complex terminal applications (=htop=, =vim=, etc) and works pretty reliably.  However, because it is written in Emacs Lisp, it can be slower than other options like =vterm=.  The speed will only be an issue if you regularly run console apps with a lot of output.
