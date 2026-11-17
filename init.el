@@ -189,8 +189,7 @@ handle both entry points, including files saved by older configurations."
     (interactive
      (list (completing-read
             "Session name: "
-            (directory-files workflow-dir nil
-                             directory-files-no-dot-files-regexp)
+            (my/session-names)
             nil nil)))
     ;; Finish a queue left by an older configuration before taking a snapshot.
     (when desktop-buffer-args-list (desktop-lazy-complete))

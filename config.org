@@ -211,8 +211,7 @@ You can also use =M-x auto-package-update-now= to update right now!
       (interactive
        (list (completing-read
               "Session name: "
-              (directory-files workflow-dir nil
-                               directory-files-no-dot-files-regexp)
+              (my/session-names)
               nil nil)))
       ;; Finish a queue left by an older configuration before taking a snapshot.
       (when desktop-buffer-args-list (desktop-lazy-complete))

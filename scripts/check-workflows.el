@@ -62,6 +62,21 @@
     (write-region "first line\nsecond line\nthird line\n" nil file nil 'silent)
     (find-file-noselect file)))
 
+(ert-deftest my/workflow-save-completion-excludes-files ()
+  (my/with-workflow-test
+   (make-directory (expand-file-name "learning" workflow-dir))
+   (write-region "{}" nil (expand-file-name ".zotero-projects.json" workflow-dir)
+                 nil 'silent)
+   (write-region "notes" nil (expand-file-name "notes.txt" workflow-dir)
+                 nil 'silent)
+   (cl-letf (((symbol-function 'completing-read)
+              (lambda (_prompt collection &rest _args)
+                (should (equal (all-completions "" collection) '("learning")))
+                "new-workflow")))
+     (call-interactively #'my-save-session))
+   (should (equal (my/current-session) "new-workflow"))
+   (should (file-exists-p (expand-file-name ".zotero-projects.json" workflow-dir)))))
+
 (ert-deftest my/workflow-roundtrip-all-buffers-and-layouts ()
   (my/with-workflow-test
    (let ((one (my/workflow-test-file "one.txt"))
